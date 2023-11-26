@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  font-style: normal;
+  line-height: normal;
+}
+
+@media (max-width: 800px) {
+  * {
+    margin: 0 auto;
+  }
+}
+
+/* color */
+:root {
+  --black1: #000000;
+  --black2: #202329;
+  --gray: #D9D9D9;
+  --white: #ffffff;
+  --yellow: #FFF500;
+}
+
+/* font */
+@font-face {
+  font-family: 'Hack Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Hack-Regular.woff') format('woff');
+}
