@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
+import RecommendResultPage from "./RecommendResultPage";
 
 const RecommendSearchPage = () => {
   const [inputText, setInputText] = useState("");
@@ -22,7 +23,7 @@ const RecommendSearchPage = () => {
       <TopBar navBtnOn={true} titleText="Search" />
       <Wrapper>
         <form onSubmit={handleSubmit}>
-          <GrayBox placeholder="검색어를 탭해서 장소 검색하기. . ." onChange={onChange} value={inputText} />
+          <GrayBox type="text" placeholder="검색어를 탭해서 장소 검색하기. . ." onChange={onChange} value={inputText} />
           <SearchBox
             type="submit"
             style={{
@@ -34,6 +35,7 @@ const RecommendSearchPage = () => {
           </SearchBox>
         </form>
       </Wrapper>
+      {searchText && <RecommendResultPage searchText={searchText} setSearchText={setSearchText} />}
     </>
   );
 };
@@ -68,7 +70,11 @@ const GrayBox = styled.input`
   font-weight: 400;
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
-  opacity: 0.3;
+
+  &::placeholder {
+    color: var(--black2);
+    opacity: 0.3;
+  }
 `;
 
 const SearchBox = styled.button`
