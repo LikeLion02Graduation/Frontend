@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line1, Line2, MapNameBox, YellowBox } from "../../components/_common/CommonExport";
+import { Line2, MapNameBox, YellowBox } from "../../components/_common/CommonExport";
 
 import xBtn1 from "../../assets/images/x-btn-1.svg";
 import xBtn2 from "../../assets/images/x-btn-2.svg";
@@ -25,7 +25,7 @@ const RecommendMainPage = () => {
           <ListContainer>
             <ListBox>
               <img src={xBtn1} alt="del btn" />
-              <img src={xBtn2} alt="del btn" />
+              <img src={xBtn2} alt="del btn" style={{ top: "-0.6px" }} />
               <div>
                 <span>수변최고돼지국밥 민락본점</span>
                 <span>
@@ -33,7 +33,6 @@ const RecommendMainPage = () => {
                 </span>
               </div>
             </ListBox>
-            <Line1 />
             <ListText>충격.복수 추천도 가능하다 ? !</ListText>
           </ListContainer>
         ) : (
@@ -42,7 +41,6 @@ const RecommendMainPage = () => {
             남기고 싶은 장소를 픽해주세요
           </BlankContainer>
         )}
-
         <SearchContainer>
           <GrayBox>탭해서 장소 검색하기. . .</GrayBox>
           <SearchBox>Search</SearchBox>
@@ -69,12 +67,13 @@ const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 414px; //임시
+  height: 410.5px; //임시
   overflow: scroll;
 `;
 
 const ListBox = styled.div`
   position: relative;
+  border-bottom: 1.5px solid var(--black1);
 
   color: var(--black2);
   font-family: Apple SD Gothic Neo;
@@ -132,7 +131,7 @@ const BlankContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 414px; //임시
+  height: 410.5px; //임시
 
   color: var(--black2);
   text-align: center;
@@ -145,8 +144,8 @@ const BlankContainer = styled.div`
 `;
 
 const SearchContainer = styled.div`
-  position: absolute;
-  bottom: 0;
+  /* position: absolute;
+  bottom: 0; */
   width: 393px;
   height: 212px;
   font-family: "Hack Regular";
@@ -194,7 +193,6 @@ const NextBox = styled.div`
   width: 100%;
   height: 55px;
   background-color: var(--black1);
-  border: 1.5px solid var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
 
   color: var(--white);
