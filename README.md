@@ -59,9 +59,17 @@
 ⎪  ⎪   └─ 📂 recommend                   ▶︎ 프로세스 별로 파일 정리
 ├─ 📂 pages                              
 ⎪  ⎪   └─ 📂 recommend                   ▶︎ 프로세스 별로 파일 정리
-⎪  ⎪      └─ RecommendMainPage
+⎪  ⎪      └─ RecommendMainPage.jsx
+⎪  ⎪      └─ RecommendResultPage.jsx
+⎪  ⎪      └─ RecommendSearchPage.jsx
+⎪  ⎪      └─ RecommendKeywordPage.jsx
 ⎪  ⎪   └─ 📂 mapmaking                    
-⎪  ⎪      └─ MakingMainPage   
+⎪  ⎪      └─ DonePage.jsx
+⎪  ⎪      └─ ImagePage.jsx
+⎪  ⎪      └─ NamePage.jsx
+⎪  ⎪      └─ PlacePage.jsx
+⎪  ⎪      └─ SharePage.jsx
+⎪  ⎪      └─ ThemePage.jsx
 ⎪  ⎪   └─ 📂 mymap                    
 ⎪  ⎪      └─ MapMainPage              
 ├─ 📂 assets
