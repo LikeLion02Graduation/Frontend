@@ -6,11 +6,11 @@
   line-height: normal;
 }
 
-/* @media (max-width: 800px) {
-  * {
+@media (max-width: 800px) {
+  body {
     margin: 0 auto;
   }
-} */
+}
 
 /* color */
 :root {
