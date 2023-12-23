@@ -3,8 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //pages
 import RecommendMainPage from "./pages/recommend/RecommendMainPage";
-import RecommendResultPage from "./pages/recommend/RecommendResultPage";
 import RecommendSearchPage from "./pages/recommend/RecommendSearchPage";
+import RecommendResultPage from "./pages/recommend/RecommendResultPage";
+import RecommendKeywordPage from "./pages/recommend/RecommendKeywordPage";
+import MapMainPage from "./pages/mymap/MapMainPage";
+import MapAllRecommendPage from "./pages/mymap/MapAllRecommendPage";
+import MapRecommendPage from "./pages/mymap/MapRecommendPage";
+import MapCommendPage from "./pages/mymap/MapCommendPage";
 import PlacePage from "./pages/mapmaking/PlacePage";
 import ThemePage from "./pages/mapmaking/ThemePage";
 import NamePage from "./pages/mapmaking/NamePage";
@@ -16,9 +21,19 @@ function App() {
   return (
     <Router>
       <Routes>
-        <RecommendMainPage />
-        <RecommendSearchPage />
-        <RecommendResultPage />
+        {/* recommend */}
+        <Route path={"/recommend/main"} element={<RecommendMainPage />} />
+        <Route path={"/recommend/search"} element={<RecommendSearchPage />} />
+        <Route path={"/recommend/result"} element={<RecommendResultPage />} />
+        <Route path={"/recommend/keyword"} element={<RecommendKeywordPage />} />
+
+        {/* mymap */}
+        <Route path={"/map/:id"} element={<MapMainPage />} />
+        <Route path={"/map/:id/all"} element={<MapAllRecommendPage />} />
+        <Route path={"/map/:id/:recomId"} element={<MapRecommendPage />} />
+        <Route path={"/map/:id/:recomId/commend"} element={<MapCommendPage />} />
+
+        {/* mapmaking */}
         <Route path={"/mapmaking/main"} element={<PlacePage />} />
         <Route path={"/mapmaking/theme"} element={<ThemePage />} />
         <Route path={"/mapmaking/name"} element={<NamePage />} />

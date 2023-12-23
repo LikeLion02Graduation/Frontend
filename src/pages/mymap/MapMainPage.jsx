@@ -23,6 +23,7 @@ const MapMainPage = () => {
             </div>
           </MapInfo>
         </TitleContainer>
+
         <TagContainer>
           <WTag>
             <div>edit</div>
@@ -34,9 +35,9 @@ const MapMainPage = () => {
             <div>#food</div>
           </YTag>
         </TagContainer>
+
         <ListTitle>recommend (6)</ListTitle>
         <Line1 />
-        {/* 높이 조정 필요 */}
         {isSelected ? (
           <ListContainer>
             <ListBox>
@@ -45,7 +46,7 @@ const MapMainPage = () => {
                 <span>From. 핑핑이</span>
                 <span>
                   <span>여기 안가면 평생 후회하게 될 것입니다.</span>
-                  {/* <img src={triangle} alt="go to " /> */}
+                  <img src={triangle} alt="go to" />
                 </span>
                 <span>23.11.19 03:06</span>
               </Content>
@@ -57,7 +58,8 @@ const MapMainPage = () => {
             남기고 싶은 장소를 픽해주세요
           </BlankContainer>
         )}
-        {/* all recommend */}
+
+        <BlackBoxBtn>all recommend</BlackBoxBtn>
       </Wrapper>
     </>
   );
@@ -68,18 +70,21 @@ export default MapMainPage;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 393px;
-  height: 100%;
+  align-items: center;
+  height: calc(100vh - 106px);
   background: var(--white);
+  font-family: "Hack Regular";
 `;
 
 const TitleContainer = styled.div`
-  margin: 44px auto 20px 31px;
+  margin-top: 44px;
+  margin-bottom: 20px;
+  padding-left: 31px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  width: 393px;
   height: 87px;
-  font-family: "Hack Regular";
 `;
 
 const Title = styled.div`
@@ -117,9 +122,11 @@ const MapInfo = styled.div`
 `;
 
 const TagContainer = styled.div`
-  margin-left: 29px;
+  padding-left: 31px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  width: 393px;
   gap: 12.5px;
 
   font-size: 10px;
@@ -138,7 +145,7 @@ const WTag = styled.div`
     align-items: center;
     justify-content: center;
 
-    background: var(--white); //이미지로 바꾸기
+    background: var(--white); //나중에 이미지로 바꾸기
   }
 `;
 
@@ -160,7 +167,11 @@ const YTag = styled.div`
 `;
 
 const ListTitle = styled.div`
-  margin: 44px auto 12px 31px;
+  margin-top: 44px;
+  margin-bottom: 12px;
+  padding-left: 31px;
+  box-sizing: border-box;
+  width: 390px;
 
   font-feature-settings: "clig" off, "liga" off;
   font-size: 25px;
@@ -169,10 +180,10 @@ const ListTitle = styled.div`
 `;
 
 const ListContainer = styled.div`
-  margin: 12px 22px 10px 28px;
+  margin: 12px 22px 10px 21px;
   display: flex;
   flex-direction: column;
-  /* height: auto; */
+  height: calc(100vh - 497px);
   overflow: scroll;
 `;
 
@@ -188,7 +199,7 @@ const ListBox = styled.div`
 const Profile = styled.div`
   width: 69px;
   height: 69px;
-  border: 1.5px solid #000;
+  border: 1.5px solid var(--black1);
   background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 `;
 
@@ -208,13 +219,15 @@ const Content = styled.div`
   span:nth-child(2) {
     display: flex;
     flex-direction: row;
-    width: 207px;
-    overflow: hidden;
+    width: 234px;
   }
 
   span:nth-child(2) > span {
+    margin-right: 12px;
+    max-width: 207px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 1.4px;
@@ -236,10 +249,28 @@ const BlankContainer = styled.div`
 
   color: var(--black2);
   text-align: center;
-  font-family: "Hack Regular";
   font-size: 14px;
   font-weight: 400;
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
   opacity: 0.3;
+`;
+
+const BlackBoxBtn = styled.div`
+  position: fixed;
+  bottom: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 342.222px;
+  height: 55px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--black1);
+  background: var(--black1);
+  box-shadow: 0px 0px 6.978px 0.997px rgba(0, 0, 0, 0.03);
+
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
 `;
