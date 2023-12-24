@@ -8,6 +8,28 @@ import triangle from "../../assets/images/triangle.svg";
 // import wtagBack from "../../assets/images/wtag-background.svg";
 
 const MapRecommendPage = () => {
+  const [recommendData, setRecommendData] = useState({
+    id: "1", // 추천 id
+    title: "여기 안가면 평생 후회할 것입니다...",
+    content: "수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
+    username: "혜지",
+    hashtag: ["카페"],
+    place: [
+      {
+        id: 23,
+        name: "수원왕족발",
+        address: "경기도 수원시 어쩌구",
+        link: "[카카오 url]",
+      },
+    ],
+    react: {
+      id: 12,
+      emoji: 2,
+      content: "와 너무 고마워!! 진짜 맛있더라",
+      user: 1,
+    },
+  });
+
   return (
     <>
       <TopBar navBtnOn={true} titleText="recommend" />
@@ -15,9 +37,9 @@ const MapRecommendPage = () => {
         <TitleContainer>
           <Col>
             <Title>
-              <div>여기 안가면 평생 후회할 것입니다.</div>
+              <div>{recommendData.title}</div>
             </Title>
-            <From>From.핑핑이</From>
+            <From>From.{recommendData.username}</From>
             <WTag>
               <div>link</div>
               <div>edit</div>
@@ -31,20 +53,21 @@ const MapRecommendPage = () => {
 
         <ContentContainer>
           {/* 추후 수정 필요 */}
-          <UnderlinedContent>
-            수변국밥? 이걸먹은뒤로 내인생이바뀌변국밥? 이걸먹은뒤로 내인생이바뀌었틈 꼭거거라 시은아!!!!변국밥?
-            이걸먹은뒤로 내인생이바뀌었틈 꼭거거라 시은아!!!!었틈 꼭거거라 시은아!!!!🔥🔥🔥🔥🔥
-          </UnderlinedContent>
-          <PlaceContainer>
-            <PlaceInfo>
-              <div className="placename">수변최고돼지국밥</div>
-              <div className="roadaddress">부산광역시 광안리 수변로 330번지</div>
-            </PlaceInfo>
-            <PlaceGoBtn>
-              <span>go!</span>
-              <img src={triangle} alt="go!" />
-            </PlaceGoBtn>
-          </PlaceContainer>
+          <UnderlinedContent>{recommendData.content}</UnderlinedContent>
+          {recommendData.place.map((item) => (
+            <>
+              <PlaceContainer key={item}>
+                <PlaceInfo>
+                  <div className="placename">{item.name}</div>
+                  <div className="roadaddress">{item.address}</div>
+                </PlaceInfo>
+                <PlaceGoBtn>
+                  <span>go!</span>
+                  <img src={triangle} alt="go!" />
+                </PlaceGoBtn>
+              </PlaceContainer>
+            </>
+          ))}
         </ContentContainer>
 
         <NextBtnWhite text="commend" number={"96px"} />
