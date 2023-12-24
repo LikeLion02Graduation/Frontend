@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //pages
 import RecommendMainPage from "./pages/recommend/RecommendMainPage";
 import RecommendSearchPage from "./pages/recommend/RecommendSearchPage";
-import RecommendResultPage from "./pages/recommend/RecommendResultPage";
 import RecommendKeywordPage from "./pages/recommend/RecommendKeywordPage";
+import RecommendContentPage from "./pages/recommend/RecommendContentPage";
 import MapMainPage from "./pages/mymap/MapMainPage";
 import MapAllRecommendPage from "./pages/mymap/MapAllRecommendPage";
 import MapRecommendPage from "./pages/mymap/MapRecommendPage";
@@ -25,6 +25,7 @@ function App() {
         <Route path={"/recommend/main"} element={<RecommendMainPage />} />
         <Route path={"/recommend/search"} element={<RecommendSearchPage />} />
         <Route path={"/recommend/keyword"} element={<RecommendKeywordPage />} />
+        <Route path={"/recommend/content"} element={<RecommendContentPage />} />
 
         {/* mymap */}
         <Route path={"/map/:id"} element={<MapMainPage />} />
