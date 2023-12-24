@@ -1,66 +1,114 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line1, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
-
-import triangle from "../../assets/images/triangle.svg";
+import { Line1, Line2, MapNameBox, Wrapper } from "../../components/_common/CommonExport";
+import linkbg from "../../assets/images/link-background.svg";
+import linkcopy from "../../assets/images/link-copy.svg";
+import linkig from "../../assets/images/link-ig.svg";
+import MapTitleText from "../../components/mymap/MapTitleText";
 
 const MapMainPage = () => {
+  const navigate = useNavigate();
+  const currentUserId = 2; //임시
   // 임시 코드
   const [isSelected, setSelected] = useState(true);
+  const [mapData, setMapData] = useState({
+    id: 1, // MAP 아이디
+    name: "부산 갈거야",
+    location: "부산",
+    img: "[이미지url]",
+    description: "2023 12 30 떠난다 추천 부탁해~~",
+    created_at: "2023-11-11 12:12:11",
+    hashtag: ["카페", "국밥"],
+    user: 1, // 작성자 id
+    do_buy: true, // 현재 사용자가 이 map을 구매했는지 -> 이에 따라 추천 detail 페이지 url on/off
+    recommend: [
+      {
+        id: 1, // RECOMMEND 아이디
+        user: {
+          id: 12,
+          username: "혜지",
+          profile: "[이미지url]",
+        },
+        created_at: "2023-11-11 12:12:11",
+        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
+        exist_react: true,
+      },
+      {
+        id: 2, // RECOMMEND 아이디
+        user: {
+          id: 12,
+          username: "채린",
+          profile: "[이미지url]",
+        },
+        created_at: "2023-11-11 12:12:11",
+        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
+        exist_react: true,
+      },
+    ],
+  });
+
+  const getPostitStyle = () => {
+    const styles = [{ backgroundColor: "#ff9dd8" }, { backgroundColor: "#FFF615" }, { backgroundColor: "#00F0FF" }];
+
+    const randomIndex = Math.floor(Math.random() * styles.length);
+
+    return styles[randomIndex];
+  };
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText="부산에 가자" />
+      <TopBar navBtnOn={true} titleText={"Map"} />
       <Wrapper>
+        <MapNameBox place={mapData.location} user={"시은이"} />
+        <Line2 />
         <TitleContainer>
-          <Title>부산에 가자</Title>
-          <MapInfo>
-            <div>
-              얘들아 난 국밥은 항정살로 만얘들아 난 국밥은 항정살로 만든 돼지고기가 들어간.. 국밥이여야만 해든
-              돼지고기가 들어간.. 국밥이여야만 해
-            </div>
-          </MapInfo>
+          <TitleBox>
+            <MapTitleText mapData={mapData} />
+            <LinkContainer>
+              <div>
+                <img src={linkcopy} />
+                <img src={linkbg} />
+              </div>
+              <div>
+                <img src={linkig} />
+                <img src={linkbg} />
+              </div>
+            </LinkContainer>
+          </TitleBox>
+          <MapNameText>{mapData.name}</MapNameText>
         </TitleContainer>
 
         <TagContainer>
-          <WTag>
-            <div>edit</div>
-            <div>link</div>
-            <div>edit</div>
-          </WTag>
-          <YTag>
-            <div>#cafe</div>
-            <div>#food</div>
-          </YTag>
+          {mapData.hashtag.map((item) => (
+            <span key={item}>#{item}</span>
+          ))}
         </TagContainer>
 
-        <ListTitle>recommend (6)</ListTitle>
+        <Description>
+          <div>{mapData.description}</div>
+        </Description>
         <Line1 />
-        {isSelected ? (
-          <ListContainer>
-            <ListBox>
-              <Profile>이미지</Profile>
-              <Content>
-                <span>From. 핑핑이</span>
-                <span>
-                  <span>여기 안가면 평생 후회하게 될 것입니다.</span>
-                  <img src={triangle} alt="go to" />
-                </span>
-                <span>23.11.19 03:06</span>
-              </Content>
-            </ListBox>
-          </ListContainer>
-        ) : (
-          <BlankContainer>
-            아래 회색깔 검색 바를 탭해서 <br />
-            남기고 싶은 장소를 픽해주세요
-          </BlankContainer>
-        )}
 
-        {/* 임시 링크 */}
-        <NextBtnBlack where={"/map/1/all"} text={"all recommend"} number={"28px"} />
+        <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
+        <GridContainer>
+          <AddPostit>+</AddPostit>
+          {mapData.recommend.map((item) => (
+            <Postit
+              key={item}
+              onClick={() => {
+                navigate(`/map/${mapData.id}/${item.id}`);
+              }}
+              style={getPostitStyle()}
+            >
+              From.
+              <br />
+              {item.user.username}
+            </Postit>
+          ))}
+        </GridContainer>
       </Wrapper>
     </>
   );
@@ -69,181 +117,130 @@ const MapMainPage = () => {
 export default MapMainPage;
 
 const TitleContainer = styled.div`
-  margin-top: 44px;
+  margin-top: 43px;
   margin-bottom: 20px;
-  padding-left: 31px;
+  padding-left: 21px;
+  padding-right: 21px;
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 34px;
   width: 393px;
-  height: 87px;
 `;
 
-const Title = styled.div`
-  width: 168px;
-  height: 87px;
-  flex-shrink: 0;
-
-  font-feature-settings: "clig" off, "liga" off;
-  font-size: 40px;
-  font-weight: 700;
-  letter-spacing: 5px;
+const TitleBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 `;
 
-const MapInfo = styled.div`
-  width: 174px;
-  height: 87px;
-  border: 1.5px solid var(--black1);
-  background: var(--yellow);
-  padding: 13px 12px 10px 16px;
-  box-sizing: border-box;
+const LinkContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 41px;
 
   div {
-    display: -webkit-box;
-    white-space: normal;
-    overflow: hidden;
-    -webkit-line-clamp: 3; /*보여줄 줄의 수를 정함*/
-    -webkit-box-orient: vertical; /*box의 배열 방향을 정함*/
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 41px;
+    height: 41px;
 
-    color: var(--black2);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 145%; /* 20.3px */
-    letter-spacing: 1.4px;
+    img {
+      position: absolute;
+    }
   }
+`;
+
+const MapNameText = styled.div`
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.75px;
 `;
 
 const TagContainer = styled.div`
   padding-left: 31px;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   width: 393px;
-  gap: 12.5px;
+  height: 60px;
+  gap: 47px;
+  background: var(--yellow);
+  border-top: 1.5px solid var(--black1);
+  border-bottom: 1.5px solid var(--black1);
 
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-`;
-
-const WTag = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  div {
-    width: 86px;
-    height: 19px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: var(--white); //나중에 이미지로 바꾸기
-  }
-`;
-
-const YTag = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  div {
-    width: 86px;
-    height: 19px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 30px;
-    border: 1.5px solid var(--black1);
-    background: var(--yellow);
-  }
-`;
-
-const ListTitle = styled.div`
-  margin-top: 44px;
-  margin-bottom: 12px;
-  padding-left: 31px;
-  box-sizing: border-box;
-  width: 390px;
-
-  font-feature-settings: "clig" off, "liga" off;
-  font-size: 25px;
-  font-weight: 700;
-  letter-spacing: 5px;
-`;
-
-const ListContainer = styled.div`
-  margin: 12px 22px 10px 21px;
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 497px);
-  overflow: scroll;
-`;
-
-const ListBox = styled.div`
-  padding: 9px 12px 10px 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 25px;
+  color: var(--black2);
   font-family: Apple SD Gothic Neo;
-`;
-
-const Profile = styled.div`
-  width: 69px;
-  height: 69px;
-  border: 1.5px solid var(--black1);
-  background: url(<path-to-image>), lightgray 50% / cover no-repeat;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  color: var(--black2);
-
-  span:nth-child(1) {
-    color: var(--black1);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 5px;
-  }
-
-  span:nth-child(2) {
-    display: flex;
-    flex-direction: row;
-    width: 234px;
-  }
-
-  span:nth-child(2) > span {
-    margin-right: 12px;
-    max-width: 207px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1.4px;
-  }
-
-  span:nth-child(3) {
-    font-family: "Hack Regular";
-    font-size: 12px;
-    font-weight: 400;
-  }
-`;
-
-const BlankContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 410.5px; //임시
-
-  color: var(--black2);
-  text-align: center;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
-  opacity: 0.3;
+`;
+
+const Description = styled.div`
+  margin-top: 34px;
+  margin-bottom: 20px;
+  padding-left: 21px;
+  box-sizing: border-box;
+  width: 393px;
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px; /* 133.333% */
+  letter-spacing: 0.75px;
+`;
+
+const GridTitle = styled.div`
+  margin: 34px auto 28px auto;
+  padding-left: 21px;
+  box-sizing: border-box;
+  width: 393px;
+
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.75px;
+`;
+
+const GridContainer = styled.div`
+  margin: 12px 22px 10px 21px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 351px;
+  row-gap: 36.84px;
+  column-gap: 23.42px;
+`;
+
+const AddPostit = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 92.442px;
+  height: 88.744px;
+  flex-shrink: 0;
+  background: var(--yellow);
+
+  color: var(--black2);
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 18.488px;
+  font-weight: 500;
+`;
+
+const Postit = styled.div`
+  width: 92.442px;
+  height: 88.744px;
+  flex-shrink: 0;
+  padding-top: 11px;
+  padding-left: 11px;
+  box-sizing: border-box;
+  border: 1.165px solid rgba(0, 0, 0, 0.1);
+
+  color: var(--black2);
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 18.488px;
+  font-weight: 400;
+  letter-spacing: 2.329px;
 `;

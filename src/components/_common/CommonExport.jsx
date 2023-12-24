@@ -48,7 +48,7 @@ const NextBtnBlack = ({ where, text, number }) => {
   );
 };
 
-const NextBtnWhite = ({ where, text, number }) => {
+const NextBtnWhite = ({ where, text, number, position }) => {
   const navigate = useNavigate();
   return (
     <BoxW
@@ -56,7 +56,7 @@ const NextBtnWhite = ({ where, text, number }) => {
         console.log("버튼 클릭 시 어디로:", where);
         navigate(where);
       }}
-      style={{ bottom: number }}
+      style={{ bottom: number, position: position }}
     >
       {text}
     </BoxW>
@@ -77,6 +77,18 @@ const LongBtnBlack = ({ where, text }) => {
   );
 };
 
+const MainWebBox = ({ children }) => {
+  return (
+    <MainBox>
+      <TopBlackBar>
+        <WhiteSmallBox />
+        <WhiteSmallBox />
+      </TopBlackBar>
+      {children}
+    </MainBox>
+  );
+};
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -86,7 +98,7 @@ const Wrapper = styled.div`
   font-family: "Hack Regular";
 `;
 
-export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, Wrapper };
+export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, MainWebBox, Wrapper };
 
 const Box = styled.div`
   display: flex;
@@ -196,4 +208,33 @@ const LongBtnB = styled.div`
 const LineStyle = styled.div`
   width: 100%;
   height: 1.5px;
+`;
+
+const MainBox = styled.div`
+  margin-top: 49px;
+  margin-bottom: 22px;
+  width: 319px;
+  border: 1px solid var(--black1);
+  background-color: #f9f9f9;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 60px);
+  }
+`;
+
+const TopBlackBar = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  height: 37px;
+  flex-shrink: 0;
+  background: var(--black1);
+`;
+
+const WhiteSmallBox = styled.div`
+  margin: 7px 7px 7px 0;
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
+  background: var(--white);
 `;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line2, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
+import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
 
@@ -29,18 +29,14 @@ const RecommendContentPage = () => {
       <Wrapper>
         <WhiteBox text="Q. 남겨질 추천에 들어갈 내용을 작성해보아요~.~" />
         <Line2 />
-        <MainBox>
-          <TopBlackBar>
-            <WhiteSmallBox />
-            <WhiteSmallBox />
-          </TopBlackBar>
+        <MainWebBox>
           <TextBox>
             <span>
               <BlackBackGround>예원이</BlackBackGround>가 남긴
             </span>
             <BlackBackGround>추천!!</BlackBackGround>
           </TextBox>
-        </MainBox>
+        </MainWebBox>
         <InputContainer>
           <InputTitle
             placeholder="제목을 입력하세요..."
