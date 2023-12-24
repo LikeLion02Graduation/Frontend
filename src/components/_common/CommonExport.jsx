@@ -20,7 +20,7 @@ const MapNameBox = ({ place, user }) => {
 const YellowBox = ({ text, font, weight }) => {
   return (
     <Box2 font={font} weight={weight}>
-      {text}
+      <div>{text}</div>
     </Box2>
   );
 };
@@ -62,21 +62,13 @@ const NextBtnWhite = ({ where, text, number }) => {
   );
 };
 
-export {
-  WhiteBox,
-  MapNameBox,
-  YellowBox,
-  Line1,
-  Line2,
-  NextBtnBlack,
-  NextBtnWhite,
-};
+export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite };
 
 const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 390px;
   height: 61px;
 
   span {
@@ -93,11 +85,10 @@ const Box = styled.div`
 const Box2 = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 61px;
   background-color: var(--yellow);
-  padding-left: 30px;
-  box-sizing: border-box;
 
   color: var(--Black2);
   font-family: ${(props) => props.font || "Apple SD Gothic Neo"};
@@ -105,6 +96,12 @@ const Box2 = styled.div`
   font-weight: ${(props) => props.weight || "600"};
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
+
+  div {
+    width: 390px;
+    padding-left: 30px;
+    box-sizing: border-box;
+  }
 `;
 
 const Box3 = styled.div`

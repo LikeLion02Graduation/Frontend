@@ -24,7 +24,6 @@ function App() {
         {/* recommend */}
         <Route path={"/recommend/main"} element={<RecommendMainPage />} />
         <Route path={"/recommend/search"} element={<RecommendSearchPage />} />
-        <Route path={"/recommend/result"} element={<RecommendResultPage />} />
         <Route path={"/recommend/keyword"} element={<RecommendKeywordPage />} />
 
         {/* mymap */}

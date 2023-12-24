@@ -20,7 +20,6 @@ const RecommendMainPage = () => {
         <Line2 />
         <YellowBox text=". .에 남기는 나의 추천은 ? ! !" />
 
-        {/* 높이 조정 필요 */}
         {isSelected ? (
           <ListContainer>
             <ListBox>
@@ -33,6 +32,7 @@ const RecommendMainPage = () => {
                 </span>
               </div>
             </ListBox>
+            {/* 선택된 장소가 2개 이상이면 뜨지 않게 */}
             <ListText>충격.복수 추천도 가능하다 ? !</ListText>
           </ListContainer>
         ) : (
@@ -42,7 +42,9 @@ const RecommendMainPage = () => {
           </BlankContainer>
         )}
         <SearchContainer>
-          <GrayBox>탭해서 장소 검색하기. . .</GrayBox>
+          <GrayBox>
+            <div>탭해서 장소 검색하기. . .</div>
+          </GrayBox>
           <SearchBox>Search</SearchBox>
           {/* 선택한 장소가 있을 때만 띄우기 */}
           <NextBox>Next</NextBox>
@@ -58,21 +60,25 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 393px;
-  height: 100%;
+  height: calc(100vh - 106px);
   background: var(--white);
+  font-family: "Hack Regular";
 `;
 
 const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 410.5px; //임시
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 438px);
   overflow: scroll;
 `;
 
 const ListBox = styled.div`
   position: relative;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
   border-bottom: 1.5px solid var(--black1);
 
   color: var(--black2);
@@ -92,6 +98,7 @@ const ListBox = styled.div`
   div {
     display: flex;
     flex-direction: column;
+    width: 393px;
     margin: 39px 31px;
     gap: 4px;
 
@@ -114,11 +121,10 @@ const ListText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; //임시
+  height: 100%;
 
   color: var(--black2);
   text-align: center;
-  font-family: "Hack Regular";
   font-size: 14px;
   font-weight: 400;
   line-height: 145%; /* 20.3px */
@@ -131,11 +137,10 @@ const BlankContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 410.5px; //임시
+  height: calc(100vh - 438px);
 
   color: var(--black2);
   text-align: center;
-  font-family: "Hack Regular";
   font-size: 14px;
   font-weight: 400;
   line-height: 145%; /* 20.3px */
@@ -144,20 +149,21 @@ const BlankContainer = styled.div`
 `;
 
 const SearchContainer = styled.div`
-  /* position: absolute;
-  bottom: 0; */
-  width: 393px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
   height: 212px;
-  font-family: "Hack Regular";
 `;
 
 const GrayBox = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  width: 100vw;
   height: 60px;
-  padding-left: 30px;
-  box-sizing: border-box;
   background-color: var(--gray);
 
   color: var(--black2);
@@ -166,13 +172,19 @@ const GrayBox = styled.div`
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
   opacity: 0.3;
+
+  div {
+    width: 393px;
+    padding-left: 30px;
+    box-sizing: border-box;
+  }
 `;
 
 const SearchBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 55px;
   background-color: var(--white);
   border-top: 1.5px solid var(--black1);
@@ -190,7 +202,7 @@ const NextBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 55px;
   background-color: var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);

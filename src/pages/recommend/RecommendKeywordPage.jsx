@@ -25,13 +25,19 @@ const RecommendKeywordPage = () => {
       <Wrapper>
         <WhiteBox text="Q. 지금 요 추천을 설명할 수 있는 키워드! 를 알려주세요" />
         <KeywordGrid>
-          {keywords.map((keyword) => (
+          {keywords.map((keyword, index) => (
             <Keyword
               key={keyword}
               onClick={() => handleKeywordClick(keyword)}
               selected={selectedKeywords.includes(keyword)}
+              className={index % 2 === 0 ? "left-column" : "right-column"}
             >
-              #{keyword}
+              <span>#{keyword}</span>
+              {/* {index % 2 === 0 ? (
+                <span className="left-column">#{keyword}</span>
+              ) : (
+                <span className="right-column">#{keyword}</span>
+              )} */}
             </Keyword>
           ))}
         </KeywordGrid>
@@ -48,15 +54,15 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 393px;
-  height: 746px;
+  height: calc(100vh - 106px);
   background: var(--white);
+  font-family: "Hack Regular";
 `;
 
 const KeywordGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 393px;
+  width: 100vw;
   background-color: var(--black1);
   gap: 1.5px;
   padding: 1.5px 0;
@@ -67,11 +73,22 @@ const KeywordGrid = styled.div`
   font-weight: 500;
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
+
+  .left-column {
+    display: flex;
+    justify-content: end;
+    padding-right: 81px;
+    box-sizing: border-box;
+  }
+
+  .right-column {
+    padding-left: 81px;
+    box-sizing: border-box;
+  }
 `;
 
 const Keyword = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 61px;
   background-color: ${(props) => (props.selected ? "var(--yellow)" : "var(--white)")};

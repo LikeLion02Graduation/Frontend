@@ -51,6 +51,7 @@ const RecommendResultPage = ({ searchText, setSearchText }) => {
     }
 
     displayMarker(mapState.selectedPlace);
+    console.log(mapState.reseultPlaces);
   }, [searchText, mapState.selectedPlace]);
 
   function savePlace(data) {
@@ -69,14 +70,14 @@ const RecommendResultPage = ({ searchText, setSearchText }) => {
       <Wrapper>
         <SearchAgain>탭해서 [다시] 장소 검색하기. . .</SearchAgain>
         <Line2 />
-        <div style={{ width: "100%", display: mapState.isSelected ? "block" : "none" }}>
-          <div id="myMap" style={{ height: "474px" }} />
-          <YellowBox text="이 장소가 맞나요?" font={"Hack Regular"} weight={"400"} />
-          <Buttons>
-            <div onClick={selectPlace}>y</div>
-            <div style={{ background: "var(--white)", color: "var(--black1)" }}>N</div>
-          </Buttons>
-        </div>
+        <MapContainer id="myMap" mapState={mapState} />
+        <YellowBox text="이 장소가 맞나요?" font={"Hack Regular"} weight={"400"} />
+        <Buttons>
+          <div onClick={selectPlace} style={{ background: "var(--black1)", color: "var(--white)" }}>
+            y
+          </div>
+          <div style={{ background: "var(--white)", color: "var(--black1)" }}>N</div>
+        </Buttons>
         {!mapState.isSelected && (
           <ResultList id="result-list">
             {mapState.reseultPlaces.map((item, i) => (
@@ -112,9 +113,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 393px;
-  height: 746px;
+  height: calc(100vh - 106px);
   background: var(--white);
+  font-family: "Hack Regular";
 `;
 
 const SearchAgain = styled.div`
@@ -126,7 +127,6 @@ const SearchAgain = styled.div`
   box-sizing: border-box;
 
   color: var(--Black2);
-  font-family: "Hack Regular";
   font-size: 14px;
   font-weight: 400;
   line-height: 145%; /* 20.3px */
@@ -137,7 +137,7 @@ const SearchAgain = styled.div`
 const ListBox = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 393px;
   height: 145px;
   padding-top: 31px;
   box-sizing: border-box;
@@ -159,14 +159,18 @@ const Index = styled.div`
   height: 27px;
   flex-shrink: 0;
   border: 1.2px solid var(--black1);
-
-  font-family: "Hack Regular";
 `;
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+`;
+
+const MapContainer = styled.div`
+  display: ${(props) => (props.mapState.isSelected ? "flex" : "none")};
+  width: 393px;
+  height: 474px;
 `;
 
 const Buttons = styled.div`
@@ -183,18 +187,16 @@ const Buttons = styled.div`
     height: 41px;
     flex-shrink: 0;
     border: 1.5px solid var(--black1);
-    background: var(--black1);
     box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
-    color: var(--white);
   }
 `;
 
 const ResultList = styled.div`
   position: absolute;
-  left: 0;
   z-index: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100vw;
   background-color: var(--white);
-  width: 393px;
 `;
