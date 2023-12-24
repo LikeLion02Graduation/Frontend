@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { WhiteBox, Line2 } from "../../components/_common/CommonExport";
+import { Line2, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
 
@@ -40,7 +40,7 @@ const RecommendContentPage = () => {
             </span>
             <BlackBackGround>추천!!</BlackBackGround>
           </TextBox>
-        </MainBox>{" "}
+        </MainBox>
         <InputContainer>
           <InputTitle
             placeholder="제목을 입력하세요..."
@@ -63,23 +63,13 @@ const RecommendContentPage = () => {
             </div>
           ))}
         </SelectedPlaces>
-        <NextBox>Next</NextBox>
+        <NextBtnWhite text="next" number={"28px"} />
       </Wrapper>
     </>
   );
 };
 
 export default RecommendContentPage;
-
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
-`;
 
 const MainBox = styled.div`
   margin-top: 49px;
@@ -89,7 +79,7 @@ const MainBox = styled.div`
   background-color: #f9f9f9;
 
   @media (max-width: 393px) {
-    width: calc(100% - 40px);
+    width: calc(100% - 60px);
   }
 `;
 
@@ -159,8 +149,6 @@ const InputContainer = styled.div`
 
 const InputTitle = styled.input`
   width: 333px;
-  border: none;
-  outline: none;
   background: var(--gray);
 
   color: var(--black2);
@@ -181,8 +169,6 @@ const InputTitle = styled.input`
 
 const InputContent = styled.textarea`
   width: 333px;
-  border: none;
-  outline: none;
   background: var(--gray);
 
   color: var(--black2);
@@ -228,22 +214,4 @@ const SelectedPlaces = styled.div`
   @media (max-width: 393px) {
     width: calc(100% - 50px);
   }
-`;
-
-const NextBox = styled.div`
-  position: absolute;
-  bottom: 81px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 342.222px;
-  height: 55px;
-  flex-shrink: 0;
-  border: 1.5px solid var(--black1);
-  background: var(--white);
-  box-shadow: 0px 0px 6.978px 0.997px rgba(0, 0, 0, 0.03);
-
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.75px;
 `;

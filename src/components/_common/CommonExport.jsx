@@ -33,36 +33,60 @@ const Line2 = () => {
   return <LineStyle style={{ background: "var(--black2)" }} />;
 };
 
-const NextBtnBlack = ({ where }) => {
+const NextBtnBlack = ({ where, text, number }) => {
   const navigate = useNavigate();
   return (
-    <Box3
+    <BoxB
       onClick={() => {
         console.log("버튼 클릭 시 어디로:", where);
         navigate(where);
       }}
+      style={{ bottom: number }}
     >
-      Next
-    </Box3>
+      {text ? text : "next"}
+    </BoxB>
   );
 };
 
 const NextBtnWhite = ({ where, text, number }) => {
   const navigate = useNavigate();
   return (
-    <Box4
+    <BoxW
       onClick={() => {
         console.log("버튼 클릭 시 어디로:", where);
         navigate(where);
       }}
-      style={{ marginBottom: number }}
+      style={{ bottom: number }}
     >
       {text}
-    </Box4>
+    </BoxW>
   );
 };
 
-export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite };
+const LongBtnBlack = ({ where, text }) => {
+  const navigate = useNavigate();
+  return (
+    <LongBtnB
+      onClick={() => {
+        console.log("버튼 클릭 시 어디로:", where);
+        navigate(where);
+      }}
+    >
+      {text}
+    </LongBtnB>
+  );
+};
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 106px);
+  background: var(--white);
+  font-family: "Hack Regular";
+`;
+
+export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, Wrapper };
 
 const Box = styled.div`
   display: flex;
@@ -104,8 +128,9 @@ const Box2 = styled.div`
   }
 `;
 
-const Box3 = styled.div`
-  margin-bottom: 81px;
+const BoxB = styled.div`
+  position: fixed;
+  bottom: 81px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,17 +140,22 @@ const Box3 = styled.div`
   text-align: center;
   font-family: "Hack Regular";
   font-size: 15px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
+
   letter-spacing: 0.75px;
   border: 1.5px solid var(--black1);
   background: var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
   cursor: pointer;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 50px);
+  }
 `;
 
-const Box4 = styled.div`
+const BoxW = styled.div`
+  position: fixed;
+  bottom: 81px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -135,14 +165,32 @@ const Box4 = styled.div`
   text-align: center;
   font-family: "Hack Regular";
   font-size: 15px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
   letter-spacing: 0.75px;
   border: 1.5px solid var(--black1);
   background: var(--white);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
   cursor: pointer;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 50px);
+  }
+`;
+
+const LongBtnB = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 55px;
+  background-color: var(--black1);
+  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
+
+  color: var(--white);
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
 `;
 
 const LineStyle = styled.div`

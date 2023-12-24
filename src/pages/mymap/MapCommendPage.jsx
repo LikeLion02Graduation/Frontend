@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line1, Line2 } from "../../components/_common/CommonExport";
+import { Line1, Line2, NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 
 const MapCommendPage = () => {
   const [inputValue, setInputValue] = useState("");
@@ -30,7 +30,7 @@ const MapCommendPage = () => {
           <>
             <Commend>아..... 진짜 너무 맛있고 눈물만 나는 엄청난 맛입니다.</Commend>
             <Line1 />
-            <WhtieBoxBtn>edit</WhtieBoxBtn>
+            <NextBtnWhite text={"edit"} number={"96px"} />
           </>
         ) : (
           <>
@@ -41,37 +41,28 @@ const MapCommendPage = () => {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                ></InputBox>
+                />
                 <Line1 />
                 {/* 이모지 */}
-                <WhtieBoxBtn onClick={saveInputValue}>save</WhtieBoxBtn>
+                <NextBtnWhite onClick={saveInputValue} text={"save"} number={"96px"} />
               </>
             ) : (
               <>
                 <Commend style={{ opacity: "0.3", paddingLeft: "47px" }}>아직 남겨진 반응이...</Commend>
                 <Line1 />
-                <WhtieBoxBtn onClick={() => setIsWriting(true)}>write</WhtieBoxBtn>
+                <NextBtnWhite onClick={() => setIsWriting(true)} text={"write"} number={"96px"} />
               </>
             )}
           </>
         )}
 
-        <BlackBoxBtn>back</BlackBoxBtn>
+        <NextBtnBlack text={"back"} number={"28px"} />
       </Wrapper>
     </>
   );
 };
 
 export default MapCommendPage;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
-`;
 
 const Title = styled.div`
   display: flex;
@@ -121,8 +112,6 @@ const InputBox = styled.input`
   width: 390px;
   padding: 21px 47px 20px 47px;
   box-sizing: border-box;
-  outline: none;
-  border: none;
 
   color: var(--Black2);
   font-size: 14px;
@@ -134,44 +123,4 @@ const InputBox = styled.input`
   ::placeholder {
     opacity: 0.3;
   }
-`;
-
-const WhtieBoxBtn = styled.div`
-  position: fixed;
-  bottom: 96px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 342.222px;
-  height: 55px;
-  flex-shrink: 0;
-  border: 1.5px solid var(--black1);
-  background: var(--white);
-  box-shadow: 0px 0px 6.978px 0.997px rgba(0, 0, 0, 0.03);
-  cursor: pointer;
-
-  color: var(--black1);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.75px;
-`;
-
-const BlackBoxBtn = styled.div`
-  position: fixed;
-  bottom: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 342.222px;
-  height: 55px;
-  flex-shrink: 0;
-  border: 1.5px solid var(--black1);
-  background: var(--black1);
-  box-shadow: 0px 0px 6.978px 0.997px rgba(0, 0, 0, 0.03);
-  cursor: pointer;
-
-  color: var(--white);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.75px;
 `;

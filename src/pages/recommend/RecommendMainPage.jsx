@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line2, MapNameBox, YellowBox } from "../../components/_common/CommonExport";
+import { Line2, LongBtnBlack, MapNameBox, Wrapper, YellowBox } from "../../components/_common/CommonExport";
 
 import xBtn1 from "../../assets/images/x-btn-1.svg";
 import xBtn2 from "../../assets/images/x-btn-2.svg";
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendMainPage = () => {
+  const navigate = useNavigate();
   // 임시 코드
-  const [isSelected, setSelected] = useState(false);
+  const [isSelected, setSelected] = useState(true);
 
   return (
     <>
@@ -42,12 +44,21 @@ const RecommendMainPage = () => {
           </BlankContainer>
         )}
         <SearchContainer>
-          <GrayBox>
+          <GrayBox
+            onClick={() => {
+              navigate("/recommend/search");
+            }}
+          >
             <div>탭해서 장소 검색하기. . .</div>
           </GrayBox>
-          <SearchBox>Search</SearchBox>
-          {/* 선택한 장소가 있을 때만 띄우기 */}
-          <NextBox>Next</NextBox>
+          <SearchBox
+            onClick={() => {
+              navigate("/recommend/search");
+            }}
+          >
+            Search
+          </SearchBox>
+          {isSelected && <LongBtnBlack where={"/recommend/keyword"} text={"next"} />}
         </SearchContainer>
       </Wrapper>
     </>
@@ -55,15 +66,6 @@ const RecommendMainPage = () => {
 };
 
 export default RecommendMainPage;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
-`;
 
 const ListContainer = styled.div`
   display: flex;
@@ -195,21 +197,5 @@ const SearchBox = styled.div`
   text-align: center;
   font-size: 15px;
   font-weight: 400;
-  letter-spacing: 0.75px;
-`;
-
-const NextBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 55px;
-  background-color: var(--black1);
-  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
-
-  color: var(--white);
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
   letter-spacing: 0.75px;
 `;

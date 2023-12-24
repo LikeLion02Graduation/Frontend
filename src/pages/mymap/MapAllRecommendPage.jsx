@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
+import { Line1, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
-import { Line1 } from "../../components/_common/CommonExport";
 
 const MapAllRecommendPage = () => {
   return (
@@ -24,7 +24,7 @@ const MapAllRecommendPage = () => {
         <TagContainer></TagContainer>
 
         <Line1 />
-        {/* 높이 조정 필요 */}
+        {/* 페이지네이션 필요 */}
         <ListContainer>
           <ListBox>
             <Profile>이미지</Profile>
@@ -61,22 +61,13 @@ const MapAllRecommendPage = () => {
           </ListBox>
         </ListContainer>
 
-        <BlackBoxBtn>back</BlackBoxBtn>
+        <NextBtnBlack where={-1} text={"back"} number={"28px"} />
       </Wrapper>
     </>
   );
 };
 
 export default MapAllRecommendPage;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
-`;
 
 const TitleContainer = styled.div`
   margin: 44px 22px 28px 31px;
@@ -200,23 +191,4 @@ const Content = styled.div`
     font-size: 12px;
     font-weight: 400;
   }
-`;
-
-const BlackBoxBtn = styled.div`
-  position: fixed;
-  bottom: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 342.222px;
-  height: 55px;
-  flex-shrink: 0;
-  border: 1.5px solid var(--black1);
-  background: var(--black1);
-  box-shadow: 0px 0px 6.978px 0.997px rgba(0, 0, 0, 0.03);
-
-  color: var(--white);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.75px;
 `;

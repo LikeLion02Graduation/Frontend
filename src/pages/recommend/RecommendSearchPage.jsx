@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
 import RecommendResultPage from "./RecommendResultPage";
+import { Wrapper } from "../../components/_common/CommonExport";
 
 const RecommendSearchPage = () => {
   const [inputText, setInputText] = useState("");
@@ -44,15 +45,6 @@ const RecommendSearchPage = () => {
 
 export default RecommendSearchPage;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
-`;
-
 const SearchForm = styled.form`
   width: 100vw;
 `;
@@ -70,8 +62,6 @@ const GrayBox = styled.div`
     padding: 0 30px;
     box-sizing: border-box;
     background-color: var(--gray);
-    border: none;
-    outline: none;
 
     color: var(--black2);
     font-family: "Hack Regular";
@@ -84,6 +74,10 @@ const GrayBox = styled.div`
       color: var(--black2);
       opacity: 0.3;
     }
+
+    @media (max-width: 393px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -93,7 +87,6 @@ const SearchBox = styled.button`
   align-items: center;
   width: 100%;
   height: 55px;
-  border: none;
   border-top: 1.5px solid var(--black1);
   border-bottom: 1.5px solid var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);

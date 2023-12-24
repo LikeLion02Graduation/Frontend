@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
+import { NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
 // import wtagBack from "../../assets/images/wtag-background.svg";
@@ -46,23 +47,14 @@ const MapRecommendPage = () => {
           </PlaceContainer>
         </ContentContainer>
 
-        <WhtieBoxBtn>commend</WhtieBoxBtn>
-        <BlackBoxBtn>all recommend</BlackBoxBtn>
+        <NextBtnWhite text="commend" number={"96px"} />
+        <NextBtnBlack text="all recommend" number={"28px"} />
       </Wrapper>
     </>
   );
 };
 
 export default MapRecommendPage;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
-`;
 
 const TitleContainer = styled.div`
   margin: 44px 22px 0px 31px;
@@ -210,42 +202,4 @@ const PlaceGoBtn = styled.div`
     height: 8.115px;
     flex-shrink: 0;
   }
-`;
-
-const WhtieBoxBtn = styled.div`
-  position: fixed;
-  bottom: 96px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 342.222px;
-  height: 55px;
-  flex-shrink: 0;
-  border: 1.5px solid var(--black1);
-  background: var(--white);
-  box-shadow: 0px 0px 6.978px 0.997px rgba(0, 0, 0, 0.03);
-
-  color: var(--black1);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.75px;
-`;
-
-const BlackBoxBtn = styled.div`
-  position: fixed;
-  bottom: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 342.222px;
-  height: 55px;
-  flex-shrink: 0;
-  border: 1.5px solid var(--black1);
-  background: var(--black1);
-  box-shadow: 0px 0px 6.978px 0.997px rgba(0, 0, 0, 0.03);
-
-  color: var(--white);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.75px;
 `;

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line2, YellowBox } from "../../components/_common/CommonExport";
+import { Line2, Wrapper, YellowBox } from "../../components/_common/CommonExport";
 
 const { kakao } = window;
 
 const RecommendResultPage = ({ searchText, setSearchText }) => {
+  const navigate = useNavigate();
   const [mapState, setMapState] = useState({
     isSelected: false,
     reseultPlaces: [],
@@ -59,9 +61,19 @@ const RecommendResultPage = ({ searchText, setSearchText }) => {
     console.log(data);
   }
 
-  function selectPlace() {
+  function initSelectPlace() {
     setSearchText("");
-    //네비게이트 -> 추천 메인 페이지
+    setMapState({ isSelected: false, reseultPlaces: [], selectedPlace: [] });
+  }
+
+  function selectPlace() {
+    initSelectPlace();
+    navigate("/recommend/main");
+  }
+
+  function notSelectPlace() {
+    initSelectPlace();
+    navigate("/recommend/search");
   }
 
   return (
@@ -76,7 +88,9 @@ const RecommendResultPage = ({ searchText, setSearchText }) => {
           <div onClick={selectPlace} style={{ background: "var(--black1)", color: "var(--white)" }}>
             y
           </div>
-          <div style={{ background: "var(--white)", color: "var(--black1)" }}>N</div>
+          <div onClick={notSelectPlace} style={{ background: "var(--white)", color: "var(--black1)" }}>
+            N
+          </div>
         </Buttons>
         {!mapState.isSelected && (
           <ResultList id="result-list">
@@ -107,15 +121,6 @@ const Fix = styled.div`
   position: absolute;
   z-index: 1;
   top: 0;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
 `;
 
 const SearchAgain = styled.div`

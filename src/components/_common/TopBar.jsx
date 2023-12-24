@@ -1,12 +1,23 @@
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import arrow from "../../assets/images/arrow-left.svg";
 
 const TopBar = ({ navBtnOn = false, titleText }) => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <div>
-        {navBtnOn && <img src={arrow} alt="go to previous page" />}
+        {navBtnOn && (
+          <img
+            onClick={() => {
+              console.log("이전 페이지로");
+              navigate(-1);
+            }}
+            src={arrow}
+            alt="go to previous page"
+          />
+        )}
         <Title>{titleText}</Title>
       </div>
     </Wrapper>
@@ -26,12 +37,20 @@ const Wrapper = styled.div`
     position: absolute;
     top: 0;
     width: 393px;
+
+    @media (max-width: 393px) {
+      width: 100%;
+    }
   }
 
   div > img {
     position: relative;
     top: 50px;
     left: 25px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 1;
   }
 `;
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { WhiteBox } from "../../components/_common/CommonExport";
+import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 
 const RecommendKeywordPage = () => {
   const [selectedKeywords, setSelectedKeywords] = useState([]);
@@ -33,31 +33,16 @@ const RecommendKeywordPage = () => {
               className={index % 2 === 0 ? "left-column" : "right-column"}
             >
               <span>#{keyword}</span>
-              {/* {index % 2 === 0 ? (
-                <span className="left-column">#{keyword}</span>
-              ) : (
-                <span className="right-column">#{keyword}</span>
-              )} */}
             </Keyword>
           ))}
         </KeywordGrid>
-        <NextBox>Next</NextBox>
+        <NextBtnBlack where={"/recommend/content"} />
       </Wrapper>
     </>
   );
 };
 
 export default RecommendKeywordPage;
-
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
-`;
 
 const KeywordGrid = styled.div`
   display: grid;
@@ -92,23 +77,4 @@ const Keyword = styled.div`
   align-items: center;
   height: 61px;
   background-color: ${(props) => (props.selected ? "var(--yellow)" : "var(--white)")};
-`;
-
-const NextBox = styled.div`
-  position: absolute;
-  bottom: 81px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 55px;
-  background-color: var(--black1);
-  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
-
-  color: var(--white);
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.75px;
 `;

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
+import { Line1, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
-import { Line1 } from "../../components/_common/CommonExport";
 
 const MapMainPage = () => {
   // 임시 코드
@@ -59,22 +59,14 @@ const MapMainPage = () => {
           </BlankContainer>
         )}
 
-        <BlackBoxBtn>all recommend</BlackBoxBtn>
+        {/* 임시 링크 */}
+        <NextBtnBlack where={"/map/1/all"} text={"all recommend"} number={"28px"} />
       </Wrapper>
     </>
   );
 };
 
 export default MapMainPage;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 106px);
-  background: var(--white);
-  font-family: "Hack Regular";
-`;
 
 const TitleContainer = styled.div`
   margin-top: 44px;
@@ -254,23 +246,4 @@ const BlankContainer = styled.div`
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
   opacity: 0.3;
-`;
-
-const BlackBoxBtn = styled.div`
-  position: fixed;
-  bottom: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 342.222px;
-  height: 55px;
-  flex-shrink: 0;
-  border: 1.5px solid var(--black1);
-  background: var(--black1);
-  box-shadow: 0px 0px 6.978px 0.997px rgba(0, 0, 0, 0.03);
-
-  color: var(--white);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.75px;
 `;
