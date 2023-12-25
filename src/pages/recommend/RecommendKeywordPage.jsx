@@ -1,20 +1,31 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
+import { useDispatch, useSelector } from "react-redux";
+import { addKeyword, deleteKeyword } from "../../redux/recommendSlice";
+
 import TopBar from "../../components/_common/TopBar";
 import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 
 const RecommendKeywordPage = () => {
-  const [selectedKeywords, setSelectedKeywords] = useState([]);
+  const dispatch = useDispatch();
+  const initSelectedKeywords = useSelector((state) => state.recommend.hashtag);
+  const [selectedKeywords, setSelectedKeywords] = useState(initSelectedKeywords);
 
-  const handleKeywordClick = (clickedKeyword) => {
-    if (selectedKeywords.includes(clickedKeyword)) {
-      setSelectedKeywords((prevKeywords) => prevKeywords.filter((keyword) => keyword !== clickedKeyword));
-    } else {
-      setSelectedKeywords((prevKeywords) => [...prevKeywords, clickedKeyword]);
-    }
+  const handleKeywordClick = (keyword) => {
+    const isSelected = selectedKeywords.includes(keyword);
+    const updatedSelectedKeywords = isSelected
+      ? selectedKeywords.filter((selectedKeyword) => selectedKeyword !== keyword)
+      : [...selectedKeywords, keyword];
 
+    setSelectedKeywords(updatedSelectedKeywords);
     console.log(selectedKeywords);
+
+    if (isSelected) {
+      dispatch(deleteKeyword(keyword));
+    } else {
+      dispatch(addKeyword(keyword));
+    }
   };
 
   const keywords = ["맛집", "명소", "카페", "자연", "산책", "빵", "국밥", "브런치"];
@@ -29,7 +40,9 @@ const RecommendKeywordPage = () => {
             <Keyword
               key={keyword}
               onClick={() => handleKeywordClick(keyword)}
-              selected={selectedKeywords.includes(keyword)}
+              style={{
+                backgroundColor: selectedKeywords?.includes(keyword) ? "var(--yellow)" : "var(--white)",
+              }}
               className={index % 2 === 0 ? "left-column" : "right-column"}
             >
               <span>#{keyword}</span>
@@ -76,5 +89,4 @@ const Keyword = styled.div`
   display: flex;
   align-items: center;
   height: 61px;
-  background-color: ${(props) => (props.selected ? "var(--yellow)" : "var(--white)")};
 `;

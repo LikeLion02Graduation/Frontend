@@ -1,27 +1,42 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setTitleContent } from "../../redux/recommendSlice";
+
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendContentPage = () => {
+  const dispatch = useDispatch();
+
+  const savedPlaces = useSelector((state) => state.recommend.place);
+
   const [inputValue, setInputValue] = useState({ title: "", content: "" });
-  const [selectedPlaces, setSelectedPlaces] = useState([
-    {
-      address_name: "경기 성남시 분당구 판교동 588",
-      category_group_code: "CE7",
-      category_group_name: "카페",
-      category_name: "음식점 > 카페 > 커피전문점",
-      distance: "",
-      id: "710265643",
-      phone: "",
-      place_name: "테라로사커피 판교지점",
-      place_url: "http://place.map.kakao.com/710265643",
-      road_address_name: "경기 성남시 분당구 판교공원로2길 22",
-    },
-  ]);
+
+  const handleInputChange = (e) => {
+    setInputValue({
+      ...inputValue,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const saveData = () => {
+    const trimmedTitle = inputValue.title.trim();
+    const trimmedContent = inputValue.content.trim();
+
+    if (trimmedTitle === "" && trimmedContent === "") {
+      alert("제목과 내용을 작성해주세요");
+    } else if (trimmedTitle === "") {
+      alert("제목을 작성해주세요");
+    } else if (trimmedContent === "") {
+      alert("내용을 작성해주세요");
+    } else {
+      dispatch(setTitleContent({ title: trimmedTitle, content: trimmedContent }));
+    }
+  };
 
   return (
     <>
@@ -41,60 +56,35 @@ const RecommendContentPage = () => {
           <InputTitle
             placeholder="제목을 입력하세요..."
             type="text"
+            name="title"
             value={inputValue.title}
-            onChange={(e) => setInputValue({ ...inputValue, title: e.target.value })}
+            onChange={handleInputChange}
           />
           <InputContent
             placeholder="내용을 작성해주세요..."
             type="text"
+            name="content"
             value={inputValue.content}
-            onChange={(e) => setInputValue({ ...inputValue, content: e.target.value })}
+            onChange={handleInputChange}
           />
         </InputContainer>
         <SelectedPlaces>
-          {selectedPlaces.map((item) => (
+          {savedPlaces.map((item) => (
             <div key={item}>
-              <img src={triangle} />
-              <span>{item.place_name}</span>
+              <img src={triangle} alt="place" />
+              <span>{item.name}</span>
             </div>
           ))}
         </SelectedPlaces>
-        <NextBtnWhite text="next" number={"28px"} />
+        <div onClick={saveData}>
+          <NextBtnWhite text="next" number={"28px"} />
+        </div>
       </Wrapper>
     </>
   );
 };
 
 export default RecommendContentPage;
-
-const MainBox = styled.div`
-  margin-top: 49px;
-  margin-bottom: 22px;
-  width: 319px;
-  border: 1px solid var(--black1);
-  background-color: #f9f9f9;
-
-  @media (max-width: 393px) {
-    width: calc(100% - 60px);
-  }
-`;
-
-const TopBlackBar = styled.div`
-  display: flex;
-  justify-content: end;
-  width: 100%;
-  height: 37px;
-  flex-shrink: 0;
-  background: var(--black1);
-`;
-
-const WhiteSmallBox = styled.div`
-  margin: 7px 7px 7px 0;
-  width: 23px;
-  height: 23px;
-  flex-shrink: 0;
-  background: var(--white);
-`;
 
 const TextBox = styled.div`
   margin: 40px auto 39px 20px;

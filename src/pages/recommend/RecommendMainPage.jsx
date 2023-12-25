@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { deletePlace } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, LongBtnBlack, MapNameBox, Wrapper, YellowBox } from "../../components/_common/CommonExport";
@@ -11,8 +14,12 @@ import triangle from "../../assets/images/triangle.svg";
 
 const RecommendMainPage = () => {
   const navigate = useNavigate();
-  // 임시 코드
-  const [isSelected, setSelected] = useState(true);
+  const dispatch = useDispatch();
+  const savedPlaces = useSelector((state) => state.recommend?.place);
+
+  const handleDelete = (index) => {
+    dispatch(deletePlace(index));
+  };
 
   return (
     <>
@@ -22,20 +29,20 @@ const RecommendMainPage = () => {
         <Line2 />
         <YellowBox text=". .에 남기는 나의 추천은 ? ! !" />
 
-        {isSelected ? (
+        {savedPlaces?.length > 0 ? (
           <ListContainer>
-            <ListBox>
-              <img src={xBtn1} alt="del btn" />
-              <img src={xBtn2} alt="del btn" style={{ top: "-0.6px" }} />
-              <div>
-                <span>수변최고돼지국밥 민락본점</span>
+            {savedPlaces.map((p, index) => (
+              <ListBox key={p.name}>
+                <img src={xBtn1} alt="del btn" onClick={() => handleDelete(index)} />
+                <img src={xBtn2} alt="del btn" style={{ top: "-0.6px" }} onClick={() => handleDelete(index)} />
+                <span>{p.name}</span>
                 <span>
-                  부산 수영구 광안해변로370번길 9-32 <img src={triangle} alt="go to " />
+                  {p.address} <img src={triangle} alt="go to " />
                 </span>
-              </div>
-            </ListBox>
-            {/* 선택된 장소가 2개 이상이면 뜨지 않게 */}
-            <ListText>충격.복수 추천도 가능하다 ? !</ListText>
+              </ListBox>
+            ))}
+
+            {savedPlaces.length < 2 && <ListText>충격.복수 추천도 가능하다 ? !</ListText>}
           </ListContainer>
         ) : (
           <BlankContainer>
@@ -58,7 +65,7 @@ const RecommendMainPage = () => {
           >
             Search
           </SearchBox>
-          {isSelected && <LongBtnBlack where={"/recommend/keyword"} text={"next"} />}
+          {savedPlaces?.length > 0 && <LongBtnBlack where={"/recommend/keyword"} text={"next"} />}
         </SearchContainer>
       </Wrapper>
     </>
@@ -80,7 +87,11 @@ const ListBox = styled.div`
   position: relative;
   width: 100vw;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 39px 31px;
+  box-sizing: border-box;
+  gap: 4px;
   border-bottom: 1.5px solid var(--black1);
 
   color: var(--black2);
@@ -92,29 +103,22 @@ const ListBox = styled.div`
 
   img {
     position: absolute;
+    top: 0;
     right: 0;
     width: 27px;
     height: 27px;
   }
 
-  div {
+  span {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 393px;
-    margin: 39px 31px;
-    gap: 4px;
+    gap: 3px;
 
-    span {
-      display: flex;
-      flex-direction: row;
-      width: fit-content;
-      gap: 3px;
-
-      img {
-        position: static;
-        width: 15px;
-        height: 15px;
-      }
+    img {
+      position: static;
+      width: 15px;
+      height: 15px;
     }
   }
 `;

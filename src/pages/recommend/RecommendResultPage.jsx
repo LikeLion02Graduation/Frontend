@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { addPlace } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, Wrapper, YellowBox } from "../../components/_common/CommonExport";
@@ -9,69 +12,86 @@ const { kakao } = window;
 
 const RecommendResultPage = ({ searchText, setSearchText }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [mapState, setMapState] = useState({
     isSelected: false,
     reseultPlaces: [],
-    selectedPlace: [],
+    selectedPlace: null,
   });
 
+  // 장소 검색 결과 반환
   useEffect(() => {
-    var infowindow = new kakao.maps.InfoWindow();
-    const container = document.getElementById("myMap");
-    const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3,
-    };
-    const map = new kakao.maps.Map(container, options);
-
     const ps = new kakao.maps.services.Places();
-
     ps.keywordSearch(searchText, placesSearchCB);
 
     function placesSearchCB(data, status) {
       if (status === kakao.maps.services.Status.OK) {
-        let bounds = new kakao.maps.LatLngBounds();
-
-        for (let i = 0; i < data.length; i++) {
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }
-
-        map.setBounds(bounds);
-
         setMapState((prevState) => ({ ...prevState, reseultPlaces: data }));
+      } else {
+        alert("검색어를 정확히 입력해주세요. (임시)");
+        window.location.reload();
       }
     }
+  }, [searchText]);
 
-    function displayMarker(place) {
-      let marker = new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(place.y, place.x),
-      });
+  // 장소 선택 시 지도 생성
+  useEffect(() => {
+    if (mapState.selectedPlace) {
+      const container = document.getElementById("myMap");
+      const options = {
+        center: new kakao.maps.LatLng(mapState.selectedPlace.y, mapState.selectedPlace.x),
+        level: 3,
+      };
+      const map = new kakao.maps.Map(container, options);
+      const newInfowindow = new kakao.maps.InfoWindow();
 
-      infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + "</div>");
-      infowindow.open(map, marker);
+      displayMarker(mapState.selectedPlace, map, newInfowindow);
+
+      // return () => {
+      //   infowindow.close();
+      //   map.removeAllChildren();
+      // };
     }
+  }, [mapState.selectedPlace]);
 
-    displayMarker(mapState.selectedPlace);
-    console.log(mapState.reseultPlaces);
-  }, [searchText, mapState.selectedPlace]);
+  // 장소 선택 시 마커 생성 함수
+  function displayMarker(place, map, infowindow) {
+    let marker = new kakao.maps.Marker({
+      map: map,
+      position: new kakao.maps.LatLng(place.y, place.x),
+    });
 
-  function savePlace(data) {
-    setMapState({ isSelected: true, reseultPlaces: mapState.reseultPlaces, selectedPlace: data });
+    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + "</div>");
+    infowindow.open(map, marker);
+  }
+
+  // 장소 선택 함수
+  function selectPlace(data) {
+    setMapState((prevState) => ({ ...prevState, isSelected: true, selectedPlace: data }));
     console.log(data);
   }
 
+  // 장소 선택 초기화 함수
   function initSelectPlace() {
     setSearchText("");
-    setMapState({ isSelected: false, reseultPlaces: [], selectedPlace: [] });
+    setMapState({ isSelected: false, reseultPlaces: [], selectedPlace: null });
   }
 
-  function selectPlace() {
+  // 장소 저장 함수 (최종 선택)
+  async function savePlace() {
+    dispatch(
+      addPlace({
+        name: mapState.selectedPlace.place_name,
+        address: mapState.selectedPlace.address_name,
+        link: mapState.selectedPlace.place_url,
+      })
+    );
     initSelectPlace();
     navigate("/recommend/main");
   }
 
-  function notSelectPlace() {
+  // 장소 저장X 함수 (선택X)
+  function notSavePlace() {
     initSelectPlace();
     navigate("/recommend/search");
   }
@@ -80,23 +100,26 @@ const RecommendResultPage = ({ searchText, setSearchText }) => {
     <Fix>
       <TopBar navBtnOn={true} titleText="Result" />
       <Wrapper>
-        <SearchAgain>탭해서 [다시] 장소 검색하기. . .</SearchAgain>
-        <Line2 />
-        <MapContainer id="myMap" mapState={mapState} />
-        <YellowBox text="이 장소가 맞나요?" font={"Hack Regular"} weight={"400"} />
-        <Buttons>
-          <div onClick={selectPlace} style={{ background: "var(--black1)", color: "var(--white)" }}>
-            y
-          </div>
-          <div onClick={notSelectPlace} style={{ background: "var(--white)", color: "var(--black1)" }}>
-            N
-          </div>
-        </Buttons>
-        {!mapState.isSelected && (
+        {mapState.isSelected ? (
+          <>
+            <SearchAgain onClick={notSavePlace}>탭해서 [다시] 장소 검색하기. . .</SearchAgain>
+            <Line2 />
+            <MapContainer id="myMap" mapState={mapState} />
+            <YellowBox text="이 장소가 맞나요?" font={"Hack Regular"} weight={"400"} />
+            <Buttons>
+              <div onClick={savePlace} style={{ background: "var(--black1)", color: "var(--white)" }}>
+                y
+              </div>
+              <div onClick={notSavePlace} style={{ background: "var(--white)", color: "var(--black1)" }}>
+                N
+              </div>
+            </Buttons>
+          </>
+        ) : (
           <ResultList id="result-list">
             {mapState.reseultPlaces.map((item, i) => (
               <>
-                <ListBox key={i} onClick={() => savePlace(item)}>
+                <ListBox key={item.id} onClick={() => selectPlace(item)}>
                   <Index>{i + 1}</Index>
                   <Info>
                     <div>{item.place_name}</div>
