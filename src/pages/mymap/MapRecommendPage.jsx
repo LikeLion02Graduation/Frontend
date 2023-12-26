@@ -5,13 +5,14 @@ import TopBar from "../../components/_common/TopBar";
 import { NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
-// import wtagBack from "../../assets/images/wtag-background.svg";
+import wtagBack from "../../assets/images/wtag-background.svg";
 
 const MapRecommendPage = () => {
   const [recommendData, setRecommendData] = useState({
-    id: "1", // 추천 id
+    id: "1",
     title: "여기 안가면 평생 후회할 것입니다...",
-    content: "수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
+    content:
+      "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
     username: "혜지",
     hashtag: ["카페"],
     place: [
@@ -32,7 +33,7 @@ const MapRecommendPage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText="recommend" />
+      <TopBar navBtnOn={true} where={"/map/1"} titleText="recommend" />
       <Wrapper>
         <TitleContainer>
           <Col>
@@ -41,8 +42,14 @@ const MapRecommendPage = () => {
             </Title>
             <From>From.{recommendData.username}</From>
             <WTag>
-              <div>link</div>
-              <div>edit</div>
+              <div>
+                <img src={wtagBack} />
+                <span>link</span>
+              </div>
+              <div>
+                <img src={wtagBack} />
+                <span>instagram</span>
+              </div>
             </WTag>
           </Col>
           <Col>
@@ -52,8 +59,16 @@ const MapRecommendPage = () => {
         </TitleContainer>
 
         <ContentContainer>
-          {/* 추후 수정 필요 */}
-          <UnderlinedContent>{recommendData.content}</UnderlinedContent>
+          <UnderlinedContent>
+            <Content>{recommendData.content}</Content>
+            <Underline>
+              <div />
+              <div />
+              <div />
+              <div />
+            </Underline>
+          </UnderlinedContent>
+
           {recommendData.place.map((item) => (
             <>
               <PlaceContainer key={item}>
@@ -70,8 +85,8 @@ const MapRecommendPage = () => {
           ))}
         </ContentContainer>
 
-        <NextBtnWhite text="commend" number={"96px"} />
-        <NextBtnBlack text="all recommend" number={"28px"} />
+        <NextBtnWhite where={"/map/1/1/commend"} text={"commend"} number={"96px"} />
+        <NextBtnBlack where={"/map/1"} text={"all recommend"} number={"28px"} />
       </Wrapper>
     </>
   );
@@ -121,17 +136,27 @@ const From = styled.div`
 const WTag = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
 
   div {
-    height: 16.59px;
-    padding: 0px 10px;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
 
-    font-size: 8.967px;
-    font-weight: 700;
-    letter-spacing: 0.897px;
+    img {
+      height: 16.59px;
+      flex-shrink: 0;
+    }
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8.967px;
+      font-weight: 700;
+      letter-spacing: 0.897px;
+    }
   }
 `;
 
@@ -154,23 +179,47 @@ const SubTitle = styled.div`
 `;
 
 const ContentContainer = styled.div`
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 512px);
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 522px);
   overflow: scroll;
 `;
 
 const UnderlinedContent = styled.div`
-  margin-top: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 216px;
+  flex-shrink: 0;
+`;
+
+const Content = styled.div`
+  position: absolute;
+  top: 12px;
   width: 340px;
-  text-decoration: underline;
-  text-underline-offset: 10px;
-  white-space: pre-line;
   line-height: 50px;
 
   font-family: Pretendard;
   font-size: 14px;
   font-weight: 400;
+`;
+
+const Underline = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+
+  div {
+    margin-top: 50px;
+    height: 1px;
+    background: var(--black1);
+  }
 `;
 
 const PlaceContainer = styled.div`
