@@ -18,6 +18,7 @@ import ImagePage from "./pages/mapmaking/ImagePage";
 import DonePage from "./pages/mapmaking/DonePage";
 import SharePage from "./pages/mapmaking/SharePage";
 import MapSharePage from "./pages/mymap/MapSharePage";
+import MapRecommendSharePage from "./pages/mymap/MapRecommendSharePage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path={"/map/:id/:recomId/commend"} element={<MapCommendPage />} />
         <Route path={"/map/:id/:recomId/commend/w"} element={<MapCommendWritePage />} />
         <Route path={"/map/:id/share"} element={<MapSharePage />} />
+        <Route path={"/map/:id/:recomId/share"} element={<MapRecommendSharePage />} />
 
         {/* mapmaking */}
         <Route path={"/mapmaking/main"} element={<PlacePage />} />
