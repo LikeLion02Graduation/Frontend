@@ -16,9 +16,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <RecommendMainPage />
-        <RecommendSearchPage />
-        <RecommendResultPage />
+        <Route path="/recommend/main" element={<RecommendMainPage />} />
+        <Route path="/recommend/search" element={<RecommendSearchPage />} />
+        <Route path="/recommend/result" element={<RecommendResultPage />} />
         <Route path={"/mapmaking/main"} element={<PlacePage />} />
         <Route path={"/mapmaking/theme"} element={<ThemePage />} />
         <Route path={"/mapmaking/name"} element={<NamePage />} />

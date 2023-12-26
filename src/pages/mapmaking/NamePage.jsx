@@ -16,7 +16,9 @@ const NamePage = () => {
       <TopBar navBtnOn={true} titleText="Making" />
       <WhiteBox text={"Q. 새로 만들어질 지도의 이름을 붙여주세요!"} />
       <Line2 />
-      <InputBox placeholder="내 지도의 이름은..." />
+      <InputBox>
+        <input placeholder="내 지도의 이름은..." />
+      </InputBox>
       <Line1 />
       <div id="temporary" />
       <NextBtnWhite where={"/mapmaking/image"} text={"Next"} number={"96px"} />
@@ -36,18 +38,24 @@ const Wrapper = styled.div`
   }
 `;
 
-const InputBox = styled.input`
+const InputBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 61px;
-  border: none;
-  color: var(--black2);
-  font-family: "Hack Regular";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 145%;
-  letter-spacing: 1.4px;
+  input {
+    width: 15%;
+    display: flex;
+    justify-content: flex-start;
+    border: none;
+    color: var(--black2);
+    font-family: "Hack Regular";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 145%;
+    letter-spacing: 1.4px;
+    outline: none;
+  }
 `;

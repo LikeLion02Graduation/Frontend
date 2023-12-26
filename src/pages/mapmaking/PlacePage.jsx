@@ -15,7 +15,6 @@ const PlacePage = () => {
     <Wrapper>
       <TopBar navBtnOn={true} titleText="Making" />
       <WhiteBox text={"Q. 어디로 가시나요? 또는 어디에 관심이 있으신가요?"} />
-
       <PlaceFilter />
       <div id="temporary" />
       <NextBtnBlack where={"/mapmaking/theme"} />

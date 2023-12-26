@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Line1, Line2 } from "../../components/_common/CommonExport";
+// import axios from "axios";
 
 const PlaceFilter = () => {
-  const [siFilterActive, setSiFilterActive] = useState(false);
-  const [doFilterActive, setDoFilterActive] = useState(true);
+  const [MetroFilterActive, setMetroFilterActive] = useState(true);
+  const [doFilterActive, setDoFilterActive] = useState(false);
   const [selectedBtn, setSelectedBtn] = useState(null);
+  const [siLocations, setSiLocations] = useState(null);
 
-  const siLocations = [
+  const MetroLocations = [
     "서울",
     "부산",
     "인천",
@@ -29,67 +30,108 @@ const PlaceFilter = () => {
     "제주",
   ];
 
-  const handleSiFilterClick = () => {
-    setSiFilterActive(true);
+  const getSiLoc = async () => {
+    try {
+      //const response = await axios.get(`${BASE_URL}/`);
+      //setSiLocations(response.data);
+    } catch (error) {
+      console.error("데이터 받아오기 실패", error);
+    }
+  };
+
+  const handleMetroFilterClick = () => {
+    setMetroFilterActive(true);
     setDoFilterActive(false);
     setSelectedBtn(null);
   };
 
   const handleDoFilterClick = () => {
     setDoFilterActive(true);
-    setSiFilterActive(false);
+    setMetroFilterActive(false);
     setSelectedBtn(null);
+    setSiLocations(null);
   };
 
   const handleBtnClick = (location) => {
-    setSelectedBtn(location);
+    if (selectedBtn === location) {
+      console.log("선택 취소: ", location);
+      setSelectedBtn(null);
+      setSiLocations(null);
+    } else {
+      console.log("새로운 선택: ", location);
+      setSelectedBtn(location);
+      getSiLoc(location);
+    }
   };
 
   return (
     <>
-      <Line1 />
       <Filters>
-        <SiFilter onClick={handleSiFilterClick} active={siFilterActive}>
+        <MetroFilter
+          onClick={handleMetroFilterClick}
+          active={MetroFilterActive}
+        >
           광역시 및 특별시
-        </SiFilter>
-        <VerticalLine />
+        </MetroFilter>
         <DoFilter onClick={handleDoFilterClick} active={doFilterActive}>
           도 및 특별자치도
         </DoFilter>
       </Filters>
-      <Line2 />
       <Contents>
-        {siFilterActive && !doFilterActive && (
-          <SiContent>
-            {siLocations.map((location, index) => (
+        {MetroFilterActive && !doFilterActive && (
+          <MetroContent>
+            {MetroLocations.map((location, index) => (
               <button
                 key={index}
                 onClick={() => handleBtnClick(location)}
                 style={{
                   backgroundColor:
-                    selectedBtn === location ? "var(--yellow)" : "none",
+                    selectedBtn === location ? "var(--yellow)" : "var(--white)",
                 }}
               >
                 {location}
               </button>
             ))}
-          </SiContent>
+          </MetroContent>
         )}
         {doFilterActive && (
-          <DoContent>
-            {doLocations.map((location, index) => (
-              <button
-                key={index}
-                onClick={() => handleBtnClick(location)}
-                style={{
-                  backgroundColor:
-                    selectedBtn === location ? "var(--yellow)" : "none",
-                }}
-              >
-                {location}
-              </button>
-            ))}
-          </DoContent>
+          <>
+            {siLocations ? (
+              <SiContent>
+                {siLocations.map((location, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleBtnClick(location)}
+                    style={{
+                      backgroundColor:
+                        selectedBtn === location
+                          ? "var(--yellow)"
+                          : "var(--white)",
+                    }}
+                  >
+                    {location}
+                  </button>
+                ))}
+              </SiContent>
+            ) : (
+              <DoContent>
+                {doLocations.map((location, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleBtnClick(location)}
+                    style={{
+                      backgroundColor:
+                        selectedBtn === location
+                          ? "var(--yellow)"
+                          : "var(--white)",
+                    }}
+                  >
+                    {location}
+                  </button>
+                ))}
+              </DoContent>
+            )}
+          </>
         )}
       </Contents>
     </>
@@ -103,8 +145,7 @@ const Filters = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0px 46px 0px 46px;
-  gap: 30px;
+  width: 100%;
   color: var(--black2);
   text-align: center;
   font-family: Apple SD Gothic Neo;
@@ -115,18 +156,32 @@ const Filters = styled.div`
   letter-spacing: 1.4px;
 `;
 
-const VerticalLine = styled.div`
-  border-right: 1.5px solid var(--black1);
-  height: 61px;
-`;
-
 const FilterStyle = styled.div`
   cursor: pointer;
   background-color: ${(props) => (props.active ? "var(--yellow)" : "none")};
 `;
 
-const SiFilter = styled(FilterStyle)``;
-const DoFilter = styled(FilterStyle)``;
+const MetroFilter = styled(FilterStyle)`
+  border: 1.5px solid var(--black2);
+  border-left: none;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 48px;
+`;
+const DoFilter = styled(FilterStyle)`
+  border: 1.5px solid var(--black2);
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 47px;
+`;
 
 const Contents = styled.div`
   padding: 40px 23px 0px 23px;
@@ -140,7 +195,7 @@ const Contents = styled.div`
   }
 `;
 
-const SiContent = styled.div`
+const MetroContent = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -148,6 +203,13 @@ const SiContent = styled.div`
 `;
 
 const DoContent = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+`;
+
+const SiContent = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);

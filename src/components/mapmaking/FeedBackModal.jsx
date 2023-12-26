@@ -48,7 +48,7 @@ const Wrapper = styled.div`
 
 const Box1 = styled.div`
   margin-top: 125px;
-  width: 100%;
+  width: 300%;
   height: 61px;
   transform: rotate(15deg);
   flex-shrink: 0;
@@ -68,7 +68,7 @@ const Box1 = styled.div`
 `;
 const Box2 = styled.div`
   margin-top: 125px;
-  width: 100%;
+  width: 300%;
   height: 61px;
   transform: rotate(-15deg);
   flex-shrink: 0;
@@ -108,7 +108,7 @@ const OkBtn = styled.div`
 `;
 const Box3 = styled.div`
   margin-top: 125px;
-  width: 100%;
+  width: 300%;
   height: 61px;
   transform: rotate(15deg);
   flex-shrink: 0;
