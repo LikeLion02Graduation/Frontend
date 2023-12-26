@@ -12,7 +12,8 @@ const TopBar = ({ navBtnOn = false, where, titleText }) => {
           <img
             onClick={() => {
               console.log("이전 페이지로");
-              navigate(where);
+              if (where) navigate(where);
+              else navigate(-1);
             }}
             src={arrow}
             alt="go to previous page"
