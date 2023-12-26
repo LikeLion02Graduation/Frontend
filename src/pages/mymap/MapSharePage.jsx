@@ -4,11 +4,9 @@ import { styled } from "styled-components";
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 import MapTitleText from "../../components/mymap/MapTitleText";
+import ShareModal from "../../components/mymap/ShareModal";
 
 const MapSharePage = () => {
-  const currentUserId = 2; //임시
-  // 임시 코드
-  const [isSelected, setSelected] = useState(true);
   const [mapData, setMapData] = useState({
     id: 1, // MAP 아이디
     name: "부산 갈거야",
@@ -45,6 +43,13 @@ const MapSharePage = () => {
     ],
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleShareBtnClick = () => {
+    setIsModalOpen(true);
+    console.log(isModalOpen);
+  };
+
   return (
     <>
       <TopBar navBtnOn={true} titleText={"Making"} />
@@ -66,9 +71,10 @@ const MapSharePage = () => {
             <div>{mapData.description}</div>
           </Description>
         </MainWebBox>
-        <NextBtnWhite text={"Share to Instagram"} number={"96px"} />
+        <NextBtnWhite addClickHandler={handleShareBtnClick} text={"Share to Instagram"} number={"96px"} />
         <NextBtnWhite text={"Skip"} number={"28px"} />
       </Wrapper>
+      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} />}
     </>
   );
 };
