@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import TopBar from "../../components/_common/TopBar";
 import { Line1, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 
-import triangle from "../../assets/images/triangle.svg";
+import RecommendBox from "../../components/recommend/RecommendBox";
 
 const MapAllRecommendPage = () => {
   return (
@@ -23,42 +23,10 @@ const MapAllRecommendPage = () => {
         </TitleContainer>
         <TagContainer></TagContainer>
 
-        <Line1 />
         {/* 페이지네이션 필요 */}
         <ListContainer>
-          <ListBox>
-            <Profile>이미지</Profile>
-            <Content>
-              <span>From. 핑핑이</span>
-              <span>
-                <span>여기 안가면 평생 후회하게 될 것입니다.</span>
-                <img src={triangle} alt="go to " />
-              </span>
-              <span>23.11.19 03:06</span>
-            </Content>
-          </ListBox>
-          <ListBox>
-            <Profile>이미지</Profile>
-            <Content>
-              <span>From. 핑핑이</span>
-              <span>
-                <span>여기 안가면 평생 후회하게 될 것입니다.</span>
-                <img src={triangle} alt="go to " />
-              </span>
-              <span>23.11.19 03:06</span>
-            </Content>
-          </ListBox>
-          <ListBox>
-            <Profile>이미지</Profile>
-            <Content>
-              <span>From. 핑핑이</span>
-              <span>
-                <span>여기 안가면 평생 후회하게 될 것입니다.</span>
-                <img src={triangle} alt="go to " />
-              </span>
-              <span>23.11.19 03:06</span>
-            </Content>
-          </ListBox>
+          <Line1 />
+          <RecommendBox />
         </ListContainer>
 
         <NextBtnBlack where={-1} text={"back"} number={"28px"} />
@@ -138,57 +106,4 @@ const ListContainer = styled.div`
   flex-direction: column;
   /* height: auto; */
   overflow: scroll;
-`;
-
-const ListBox = styled.div`
-  padding: 9px 12px 10px 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 25px;
-  font-family: Apple SD Gothic Neo;
-`;
-
-const Profile = styled.div`
-  width: 69px;
-  height: 69px;
-  border: 1.5px solid #000;
-  background: url(<path-to-image>), lightgray 50% / cover no-repeat;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  color: var(--black2);
-
-  span:nth-child(1) {
-    color: var(--black1);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 5px;
-  }
-
-  span:nth-child(2) {
-    display: flex;
-    flex-direction: row;
-    width: 234px;
-  }
-
-  span:nth-child(2) > span {
-    margin-right: 12px;
-    max-width: 207px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1.4px;
-  }
-
-  span:nth-child(3) {
-    font-family: "Hack Regular";
-    font-size: 12px;
-    font-weight: 400;
-  }
 `;

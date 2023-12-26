@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line1, Line2, MapNameBox, Wrapper } from "../../components/_common/CommonExport";
-import linkbg from "../../assets/images/link-background.svg";
-import linkcopy from "../../assets/images/link-copy.svg";
-import linkig from "../../assets/images/link-ig.svg";
+import { Line1, Line2, MapNameBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 import MapTitleText from "../../components/mymap/MapTitleText";
+import Postit from "../../components/mymap/Postit";
+import { LinkContainer } from "../../components/mymap/LinkContainer";
 
 const MapMainPage = () => {
-  const navigate = useNavigate();
-  const currentUserId = 2; //임시
-  // 임시 코드
-  const [isSelected, setSelected] = useState(true);
+  const currentUserId = 1; //임시
+
   const [mapData, setMapData] = useState({
     id: 1, // MAP 아이디
     name: "부산 갈거야",
@@ -50,14 +46,6 @@ const MapMainPage = () => {
     ],
   });
 
-  const getPostitStyle = () => {
-    const styles = [{ backgroundColor: "#ff9dd8" }, { backgroundColor: "#FFF615" }, { backgroundColor: "#00F0FF" }];
-
-    const randomIndex = Math.floor(Math.random() * styles.length);
-
-    return styles[randomIndex];
-  };
-
   return (
     <>
       <TopBar navBtnOn={true} titleText={"Map"} />
@@ -67,23 +55,14 @@ const MapMainPage = () => {
         <TitleContainer>
           <TitleBox>
             <MapTitleText mapData={mapData} />
-            <LinkContainer>
-              <div>
-                <img src={linkcopy} />
-                <img src={linkbg} />
-              </div>
-              <div>
-                <img src={linkig} />
-                <img src={linkbg} />
-              </div>
-            </LinkContainer>
+            <LinkContainer />
           </TitleBox>
           <MapNameText>{mapData.name}</MapNameText>
         </TitleContainer>
 
         <TagContainer>
-          {mapData.hashtag.map((item) => (
-            <span key={item}>#{item}</span>
+          {mapData.hashtag.map((tag) => (
+            <span key={tag}>#{tag}</span>
           ))}
         </TagContainer>
 
@@ -92,23 +71,23 @@ const MapMainPage = () => {
         </Description>
         <Line1 />
 
-        <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
-        <GridContainer>
-          <AddPostit>+</AddPostit>
-          {mapData.recommend.map((item) => (
-            <Postit
-              key={item}
-              onClick={() => {
-                navigate(`/map/${mapData.id}/${item.id}`);
-              }}
-              style={getPostitStyle()}
-            >
-              From.
-              <br />
-              {item.user.username}
-            </Postit>
-          ))}
-        </GridContainer>
+        {mapData.user === currentUserId ? (
+          <>
+            <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
+            <GridContainer>
+              <AddPostit>+</AddPostit>
+              {mapData.recommend.map((item) => (
+                <Postit key={item.id} mapDataId={mapData.id} item={item} />
+              ))}
+            </GridContainer>
+          </>
+        ) : (
+          <>
+            <GrayBox style={{ marginTop: "50px", transform: "rotate(8.527de)" }}>원하는 태그를 찾지 못했나요?</GrayBox>
+            <GrayBox style={{ marginTop: "70px" }}>내친만에 직접 원하는 태그 추가 요청을 피드백 해보세요!</GrayBox>
+            <NextBtnBlack where={"/map/1/all"} text={"recommend"} />
+          </>
+        )}
       </Wrapper>
     </>
   );
@@ -126,32 +105,16 @@ const TitleContainer = styled.div`
   flex-direction: column;
   gap: 34px;
   width: 393px;
+
+  @media (max-width: 393px) {
+    width: 100%;
+  }
 `;
 
 const TitleBox = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-`;
-
-const LinkContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 41px;
-
-  div {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 41px;
-    height: 41px;
-
-    img {
-      position: absolute;
-    }
-  }
 `;
 
 const MapNameText = styled.div`
@@ -161,17 +124,15 @@ const MapNameText = styled.div`
 `;
 
 const TagContainer = styled.div`
-  padding-left: 31px;
+  padding: 0 110px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
-  width: 393px;
+  width: 541px;
   height: 60px;
-  gap: 47px;
   background: var(--yellow);
-  border-top: 1.5px solid var(--black1);
-  border-bottom: 1.5px solid var(--black1);
+  border: 1.5px solid var(--black1);
 
   color: var(--black2);
   font-family: Apple SD Gothic Neo;
@@ -179,6 +140,18 @@ const TagContainer = styled.div`
   font-weight: 500;
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
+
+  @media (max-width: 541px) {
+    width: 100%;
+    border: none;
+    border-top: 1.5px solid var(--black1);
+    border-bottom: 1.5px solid var(--black1);
+    padding: 0 90px;
+  }
+
+  @media (max-width: 393px) {
+    padding: 0 30px;
+  }
 `;
 
 const Description = styled.div`
@@ -192,6 +165,10 @@ const Description = styled.div`
   font-weight: 400;
   line-height: 20px; /* 133.333% */
   letter-spacing: 0.75px;
+
+  @media (max-width: 393px) {
+    width: 100%;
+  }
 `;
 
 const GridTitle = styled.div`
@@ -203,13 +180,16 @@ const GridTitle = styled.div`
   font-size: 15px;
   font-weight: 400;
   letter-spacing: 0.75px;
+
+  @media (max-width: 393px) {
+    width: 100%;
+  }
 `;
 
 const GridContainer = styled.div`
   margin: 12px 22px 10px 21px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  width: 351px;
   row-gap: 36.84px;
   column-gap: 23.42px;
 `;
@@ -222,6 +202,7 @@ const AddPostit = styled.div`
   height: 88.744px;
   flex-shrink: 0;
   background: var(--yellow);
+  cursor: pointer;
 
   color: var(--black2);
   font-feature-settings: "clig" off, "liga" off;
@@ -229,18 +210,22 @@ const AddPostit = styled.div`
   font-weight: 500;
 `;
 
-const Postit = styled.div`
-  width: 92.442px;
-  height: 88.744px;
+const GrayBox = styled.div`
+  margin-top: 125px;
+  width: 441px;
+  height: 61px;
   flex-shrink: 0;
-  padding-top: 11px;
-  padding-left: 11px;
-  box-sizing: border-box;
-  border: 1.165px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid var(--black1);
+  background: var(--gray);
 
-  color: var(--black2);
-  font-feature-settings: "clig" off, "liga" off;
-  font-size: 18.488px;
-  font-weight: 400;
-  letter-spacing: 2.329px;
+  color: var(--black3);
+  text-align: center;
+  font-family: Apple SD Gothic Neo;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 145%;
+  letter-spacing: 1.4px;
 `;

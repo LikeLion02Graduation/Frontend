@@ -3,9 +3,9 @@ import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
 import { NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
+import { WTagContainer } from "../../components/mymap/LinkContainer";
 
 import triangle from "../../assets/images/triangle.svg";
-import wtagBack from "../../assets/images/wtag-background.svg";
 
 const MapRecommendPage = () => {
   const [recommendData, setRecommendData] = useState({
@@ -35,64 +35,65 @@ const MapRecommendPage = () => {
     <>
       <TopBar navBtnOn={true} where={"/map/1"} titleText="recommend" />
       <Wrapper>
-        <TitleContainer>
-          <Col>
-            <Title>
-              <div>{recommendData.title}</div>
-            </Title>
-            <From>From.{recommendData.username}</From>
-            <WTag>
-              <div>
-                <img src={wtagBack} />
-                <span>link</span>
-              </div>
-              <div>
-                <img src={wtagBack} />
-                <span>instagram</span>
-              </div>
-            </WTag>
-          </Col>
-          <Col>
-            <MapProfile />
-            <SubTitle>부산에 가자</SubTitle>
-          </Col>
-        </TitleContainer>
+        <Scroll>
+          <TitleContainer>
+            <Col>
+              <Title>
+                <div>{recommendData.title}</div>
+              </Title>
+              <From>From.{recommendData.username}</From>
+              <WTagContainer />
+            </Col>
+            <Col>
+              <MapProfile />
+              <SubTitle>부산에 가자</SubTitle>
+            </Col>
+          </TitleContainer>
 
-        <ContentContainer>
-          <UnderlinedContent>
-            <Content>{recommendData.content}</Content>
-            <Underline>
-              <div />
-              <div />
-              <div />
-              <div />
-            </Underline>
-          </UnderlinedContent>
+          <ContentContainer>
+            <UnderlinedContent>
+              <Content>{recommendData.content}</Content>
+              <Underline>
+                <div />
+                <div />
+                <div />
+                <div />
+              </Underline>
+            </UnderlinedContent>
 
-          {recommendData.place.map((item) => (
-            <>
-              <PlaceContainer key={item}>
-                <PlaceInfo>
-                  <div className="placename">{item.name}</div>
-                  <div className="roadaddress">{item.address}</div>
-                </PlaceInfo>
-                <PlaceGoBtn>
-                  <span>go!</span>
-                  <img src={triangle} alt="go!" />
-                </PlaceGoBtn>
-              </PlaceContainer>
-            </>
-          ))}
-        </ContentContainer>
+            {recommendData.place.map((item) => (
+              <>
+                <PlaceContainer key={item}>
+                  <PlaceInfo>
+                    <div className="placename">{item.name}</div>
+                    <div className="roadaddress">{item.address}</div>
+                  </PlaceInfo>
+                  <PlaceGoBtn>
+                    <span>go!</span>
+                    <img src={triangle} alt="go!" />
+                  </PlaceGoBtn>
+                </PlaceContainer>
+              </>
+            ))}
+          </ContentContainer>
+        </Scroll>
 
         <NextBtnWhite where={"/map/1/1/commend"} text={"commend"} number={"96px"} />
-        <NextBtnBlack where={"/map/1"} text={"all recommend"} number={"28px"} />
+        <NextBtnBlack where={"/map/1"} text={"back"} number={"28px"} />
       </Wrapper>
     </>
   );
 };
 
 export default MapRecommendPage;
+
+const Scroll = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 272px);
+  overflow: scroll;
+`;
 
 const TitleContainer = styled.div`
   margin: 44px 22px 0px 31px;
@@ -133,33 +134,6 @@ const From = styled.div`
   letter-spacing: 5px;
 `;
 
-const WTag = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-
-  div {
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    img {
-      height: 16.59px;
-      flex-shrink: 0;
-    }
-
-    span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 8.967px;
-      font-weight: 700;
-      letter-spacing: 0.897px;
-    }
-  }
-`;
-
 const MapProfile = styled.div`
   width: 156.787px;
   height: 156.787px;
@@ -184,8 +158,6 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: calc(100vh - 522px);
-  overflow: scroll;
 `;
 
 const UnderlinedContent = styled.div`

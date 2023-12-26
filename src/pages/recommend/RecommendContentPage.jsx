@@ -45,40 +45,42 @@ const RecommendContentPage = () => {
         <WhiteBox text="Q. 남겨질 추천에 들어갈 내용을 작성해보아요~.~" />
         <Line2 />
 
-        <MainWebBox>
-          <TextBox>
-            <span>
-              <BlackBackGround>예원이</BlackBackGround>가 남긴
-            </span>
-            <BlackBackGround>추천!!</BlackBackGround>
-          </TextBox>
-        </MainWebBox>
+        <Scroll>
+          <MainWebBox>
+            <TextBox>
+              <span>
+                <BlackBackGround>예원이</BlackBackGround>가 남긴
+              </span>
+              <BlackBackGround>추천!!</BlackBackGround>
+            </TextBox>
+          </MainWebBox>
 
-        <InputContainer>
-          <InputTitle
-            placeholder="제목을 입력하세요..."
-            type="text"
-            name="title"
-            value={inputValue.title}
-            onChange={handleInputChange}
-          />
-          <InputContent
-            placeholder="내용을 작성해주세요..."
-            type="text"
-            name="content"
-            value={inputValue.content}
-            onChange={handleInputChange}
-          />
-        </InputContainer>
+          <InputContainer>
+            <InputTitle
+              placeholder="제목을 입력하세요..."
+              type="text"
+              name="title"
+              value={inputValue.title}
+              onChange={handleInputChange}
+            />
+            <InputContent
+              placeholder="내용을 작성해주세요..."
+              type="text"
+              name="content"
+              value={inputValue.content}
+              onChange={handleInputChange}
+            />
+          </InputContainer>
 
-        <SelectedPlaces>
-          {savedPlaces.map((item) => (
-            <div key={item}>
-              <img src={triangle} alt="place" />
-              <span>{item.name}</span>
-            </div>
-          ))}
-        </SelectedPlaces>
+          <SelectedPlaces>
+            {savedPlaces.map((item) => (
+              <div key={item}>
+                <img src={triangle} alt="place" />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </SelectedPlaces>
+        </Scroll>
 
         <NextBtnWhite addClickHandler={saveData} where={"/map/1/1"} text="next" number={"28px"} />
       </Wrapper>
@@ -87,6 +89,14 @@ const RecommendContentPage = () => {
 };
 
 export default RecommendContentPage;
+
+const Scroll = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 266px);
+  overflow: scroll;
+`;
 
 const TextBox = styled.div`
   margin: 40px auto 39px 20px;
