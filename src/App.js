@@ -10,6 +10,7 @@ import MapMainPage from "./pages/mymap/MapMainPage";
 import MapAllRecommendPage from "./pages/mymap/MapAllRecommendPage";
 import MapRecommendPage from "./pages/mymap/MapRecommendPage";
 import MapCommendPage from "./pages/mymap/MapCommendPage";
+import MapCommendWritePage from "./pages/mymap/MapCommendWritePage";
 import PlacePage from "./pages/mapmaking/PlacePage";
 import ThemePage from "./pages/mapmaking/ThemePage";
 import NamePage from "./pages/mapmaking/NamePage";
@@ -33,6 +34,7 @@ function App() {
         <Route path={"/map/:id/all"} element={<MapAllRecommendPage />} />
         <Route path={"/map/:id/:recomId"} element={<MapRecommendPage />} />
         <Route path={"/map/:id/:recomId/commend"} element={<MapCommendPage />} />
+        <Route path={"/map/:id/:recomId/commend/w"} element={<MapCommendWritePage />} />
         <Route path={"/map/:id/share"} element={<MapSharePage />} />
 
         {/* mapmaking */}
