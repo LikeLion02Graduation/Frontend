@@ -21,7 +21,7 @@ const RecommendSearchPage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText="Search" />
+      <TopBar navBtnOn={true} where={"/recommend/main"} titleText="Search" />
       <Wrapper>
         <SearchForm onSubmit={handleSubmit}>
           <GrayBox>

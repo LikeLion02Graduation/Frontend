@@ -44,6 +44,7 @@ const RecommendContentPage = () => {
       <Wrapper>
         <WhiteBox text="Q. 남겨질 추천에 들어갈 내용을 작성해보아요~.~" />
         <Line2 />
+
         <MainWebBox>
           <TextBox>
             <span>
@@ -52,6 +53,7 @@ const RecommendContentPage = () => {
             <BlackBackGround>추천!!</BlackBackGround>
           </TextBox>
         </MainWebBox>
+
         <InputContainer>
           <InputTitle
             placeholder="제목을 입력하세요..."
@@ -68,6 +70,7 @@ const RecommendContentPage = () => {
             onChange={handleInputChange}
           />
         </InputContainer>
+
         <SelectedPlaces>
           {savedPlaces.map((item) => (
             <div key={item}>
@@ -76,9 +79,8 @@ const RecommendContentPage = () => {
             </div>
           ))}
         </SelectedPlaces>
-        <div onClick={saveData}>
-          <NextBtnWhite text="next" number={"28px"} />
-        </div>
+
+        <NextBtnWhite addClickHandler={saveData} where={"/map/1/1"} text="next" number={"28px"} />
       </Wrapper>
     </>
   );
