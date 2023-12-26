@@ -16,9 +16,18 @@ const MapCommendPage = () => {
     }
   };
 
+  const editInputValue = () => {
+    setIsWriting(true);
+    setIsSaved(false);
+  };
+
+  const writeInputValue = () => {
+    setIsWriting(true);
+  };
+
   return (
     <>
-      <TopBar navBtnOn={true} titleText="recommend" />
+      <TopBar navBtnOn={true} where={"/map/1/1"} titleText="recommend" />
       <Wrapper>
         <Title>
           <span>여기 안가면 평생 후회할 것입니다.</span>
@@ -30,7 +39,7 @@ const MapCommendPage = () => {
           <>
             <Commend>아..... 진짜 너무 맛있고 눈물만 나는 엄청난 맛입니다.</Commend>
             <Line1 />
-            <NextBtnWhite text={"edit"} number={"96px"} />
+            <NextBtnWhite addClickHandler={editInputValue} text={"edit"} number={"96px"} />
           </>
         ) : (
           <>
@@ -44,19 +53,19 @@ const MapCommendPage = () => {
                 />
                 <Line1 />
                 {/* 이모지 */}
-                <NextBtnWhite onClick={saveInputValue} text={"save"} number={"96px"} />
+                <NextBtnWhite addClickHandler={saveInputValue} text={"save"} number={"96px"} />
               </>
             ) : (
               <>
                 <Commend style={{ opacity: "0.3", paddingLeft: "47px" }}>아직 남겨진 반응이...</Commend>
                 <Line1 />
-                <NextBtnWhite onClick={() => setIsWriting(true)} text={"write"} number={"96px"} />
+                <NextBtnWhite addClickHandler={writeInputValue} text={"writing"} number={"96px"} />
               </>
             )}
           </>
         )}
 
-        <NextBtnBlack text={"back"} number={"28px"} />
+        <NextBtnBlack where={"/map/1/1"} text={"back"} number={"28px"} />
       </Wrapper>
     </>
   );

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import arrow from "../../assets/images/arrow-left.svg";
 
-const TopBar = ({ navBtnOn = false, titleText }) => {
+const TopBar = ({ navBtnOn = false, where, titleText }) => {
   const navigate = useNavigate();
   return (
     <Wrapper>
@@ -12,7 +12,7 @@ const TopBar = ({ navBtnOn = false, titleText }) => {
           <img
             onClick={() => {
               console.log("이전 페이지로");
-              navigate(-1);
+              navigate(where);
             }}
             src={arrow}
             alt="go to previous page"

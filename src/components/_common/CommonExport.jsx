@@ -48,16 +48,22 @@ const NextBtnBlack = ({ where, text, number }) => {
   );
 };
 
-const NextBtnWhite = ({ where, text, number, position }) => {
+const NextBtnWhite = ({ addClickHandler, where, text, number }) => {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (where) {
+      console.log("버튼 클릭 시 어디로:");
+      navigate(where);
+    }
+
+    if (addClickHandler) {
+      addClickHandler();
+    }
+  };
+
   return (
-    <BoxW
-      onClick={() => {
-        console.log("버튼 클릭 시 어디로:", where);
-        navigate(where);
-      }}
-      style={{ bottom: number, position: position }}
-    >
+    <BoxW onClick={handleClick} style={{ bottom: number }}>
       {text}
     </BoxW>
   );
