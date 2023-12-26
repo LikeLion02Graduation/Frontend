@@ -20,7 +20,7 @@ const MapNameBox = ({ place, user }) => {
 const YellowBox = ({ text, font, weight }) => {
   return (
     <Box2 font={font} weight={weight}>
-      {text}
+      <div>{text}</div>
     </Box2>
   );
 };
@@ -33,50 +33,84 @@ const Line2 = () => {
   return <LineStyle style={{ background: "var(--black2)" }} />;
 };
 
-const NextBtnBlack = ({ where }) => {
+const NextBtnBlack = ({ where, text, number }) => {
   const navigate = useNavigate();
   return (
-    <Box3
+    <BoxB
       onClick={() => {
         console.log("버튼 클릭 시 어디로:", where);
         navigate(where);
       }}
+      style={{ bottom: number }}
     >
-      Next
-    </Box3>
+      {text ? text : "next"}
+    </BoxB>
   );
 };
 
-const NextBtnWhite = ({ where, text, number }) => {
+const NextBtnWhite = ({ addClickHandler, where, text, number }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (where) {
+      console.log("버튼 클릭 시 어디로:");
+      navigate(where);
+    }
+
+    if (addClickHandler) {
+      addClickHandler();
+    }
+  };
+
+  return (
+    <BoxW onClick={handleClick} style={{ bottom: number }}>
+      {text}
+    </BoxW>
+  );
+};
+
+const LongBtnBlack = ({ where, text }) => {
   const navigate = useNavigate();
   return (
-    <Box4
+    <LongBtnB
       onClick={() => {
         console.log("버튼 클릭 시 어디로:", where);
         navigate(where);
       }}
-      style={{ marginBottom: number }}
     >
       {text}
-    </Box4>
+    </LongBtnB>
   );
 };
 
-export {
-  WhiteBox,
-  MapNameBox,
-  YellowBox,
-  Line1,
-  Line2,
-  NextBtnBlack,
-  NextBtnWhite,
+const MainWebBox = ({ children }) => {
+  return (
+    <MainBox>
+      <TopBlackBar>
+        <WhiteSmallBox />
+        <WhiteSmallBox />
+      </TopBlackBar>
+      {children}
+    </MainBox>
+  );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 106px);
+  background: var(--white);
+  font-family: "Hack Regular";
+`;
+
+export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, MainWebBox, Wrapper };
 
 const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 390px;
   height: 61px;
 
   span {
@@ -93,11 +127,10 @@ const Box = styled.div`
 const Box2 = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 61px;
   background-color: var(--yellow);
-  padding-left: 30px;
-  box-sizing: border-box;
 
   color: var(--Black2);
   font-family: ${(props) => props.font || "Apple SD Gothic Neo"};
@@ -105,10 +138,17 @@ const Box2 = styled.div`
   font-weight: ${(props) => props.weight || "600"};
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
+
+  div {
+    width: 390px;
+    padding-left: 30px;
+    box-sizing: border-box;
+  }
 `;
 
-const Box3 = styled.div`
-  margin-bottom: 81px;
+const BoxB = styled.div`
+  position: fixed;
+  bottom: 81px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,17 +158,22 @@ const Box3 = styled.div`
   text-align: center;
   font-family: "Hack Regular";
   font-size: 15px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
+
   letter-spacing: 0.75px;
   border: 1.5px solid var(--black1);
   background: var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
   cursor: pointer;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 50px);
+  }
 `;
 
-const Box4 = styled.div`
+const BoxW = styled.div`
+  position: fixed;
+  bottom: 81px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,17 +183,64 @@ const Box4 = styled.div`
   text-align: center;
   font-family: "Hack Regular";
   font-size: 15px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
   letter-spacing: 0.75px;
   border: 1.5px solid var(--black1);
   background: var(--white);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
   cursor: pointer;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 50px);
+  }
+`;
+
+const LongBtnB = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 55px;
+  background-color: var(--black1);
+  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
+
+  color: var(--white);
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
 `;
 
 const LineStyle = styled.div`
   width: 100%;
   height: 1.5px;
+`;
+
+const MainBox = styled.div`
+  margin-top: 49px;
+  margin-bottom: 22px;
+  width: 319px;
+  border: 1px solid var(--black1);
+  background-color: #f9f9f9;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 60px);
+  }
+`;
+
+const TopBlackBar = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  height: 37px;
+  flex-shrink: 0;
+  background: var(--black1);
+`;
+
+const WhiteSmallBox = styled.div`
+  margin: 7px 7px 7px 0;
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
+  background: var(--white);
 `;

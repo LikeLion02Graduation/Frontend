@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { deletePlace } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line2, MapNameBox, YellowBox } from "../../components/_common/CommonExport";
+import { Line2, LongBtnBlack, MapNameBox, Wrapper, YellowBox } from "../../components/_common/CommonExport";
 
 import xBtn1 from "../../assets/images/x-btn-1.svg";
 import xBtn2 from "../../assets/images/x-btn-2.svg";
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendMainPage = () => {
-  // 임시 코드
-  const [isSelected, setSelected] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const savedPlaces = useSelector((state) => state.recommend?.place);
+
+  const handleDelete = (index) => {
+    dispatch(deletePlace(index));
+  };
 
   return (
     <>
@@ -20,20 +29,20 @@ const RecommendMainPage = () => {
         <Line2 />
         <YellowBox text=". .에 남기는 나의 추천은 ? ! !" />
 
-        {/* 높이 조정 필요 */}
-        {isSelected ? (
+        {savedPlaces?.length > 0 ? (
           <ListContainer>
-            <ListBox>
-              <img src={xBtn1} alt="del btn" />
-              <img src={xBtn2} alt="del btn" style={{ top: "-0.6px" }} />
-              <div>
-                <span>수변최고돼지국밥 민락본점</span>
+            {savedPlaces.map((p, index) => (
+              <ListBox key={p.name}>
+                <img src={xBtn1} alt="del btn" onClick={() => handleDelete(index)} />
+                <img src={xBtn2} alt="del btn" style={{ top: "-0.6px" }} onClick={() => handleDelete(index)} />
+                <span>{p.name}</span>
                 <span>
-                  부산 수영구 광안해변로370번길 9-32 <img src={triangle} alt="go to " />
+                  {p.address} <img src={triangle} alt="go to " />
                 </span>
-              </div>
-            </ListBox>
-            <ListText>충격.복수 추천도 가능하다 ? !</ListText>
+              </ListBox>
+            ))}
+
+            {savedPlaces.length < 2 && <ListText>충격.복수 추천도 가능하다 ? !</ListText>}
           </ListContainer>
         ) : (
           <BlankContainer>
@@ -42,10 +51,21 @@ const RecommendMainPage = () => {
           </BlankContainer>
         )}
         <SearchContainer>
-          <GrayBox>탭해서 장소 검색하기. . .</GrayBox>
-          <SearchBox>Search</SearchBox>
-          {/* 선택한 장소가 있을 때만 띄우기 */}
-          <NextBox>Next</NextBox>
+          <GrayBox
+            onClick={() => {
+              navigate("/recommend/search");
+            }}
+          >
+            <div>탭해서 장소 검색하기. . .</div>
+          </GrayBox>
+          <SearchBox
+            onClick={() => {
+              navigate("/recommend/search");
+            }}
+          >
+            Search
+          </SearchBox>
+          {savedPlaces?.length > 0 && <LongBtnBlack where={"/recommend/keyword"} text={"next"} />}
         </SearchContainer>
       </Wrapper>
     </>
@@ -54,25 +74,24 @@ const RecommendMainPage = () => {
 
 export default RecommendMainPage;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 393px;
-  height: 100%;
-  background: var(--white);
-`;
-
 const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 410.5px; //임시
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 438px);
   overflow: scroll;
 `;
 
 const ListBox = styled.div`
   position: relative;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 39px 31px;
+  box-sizing: border-box;
+  gap: 4px;
   border-bottom: 1.5px solid var(--black1);
 
   color: var(--black2);
@@ -84,28 +103,22 @@ const ListBox = styled.div`
 
   img {
     position: absolute;
+    top: 0;
     right: 0;
     width: 27px;
     height: 27px;
   }
 
-  div {
+  span {
     display: flex;
-    flex-direction: column;
-    margin: 39px 31px;
-    gap: 4px;
+    flex-direction: row;
+    width: 393px;
+    gap: 3px;
 
-    span {
-      display: flex;
-      flex-direction: row;
-      width: fit-content;
-      gap: 3px;
-
-      img {
-        position: static;
-        width: 15px;
-        height: 15px;
-      }
+    img {
+      position: static;
+      width: 15px;
+      height: 15px;
     }
   }
 `;
@@ -114,11 +127,10 @@ const ListText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; //임시
+  height: 100%;
 
   color: var(--black2);
   text-align: center;
-  font-family: "Hack Regular";
   font-size: 14px;
   font-weight: 400;
   line-height: 145%; /* 20.3px */
@@ -131,11 +143,10 @@ const BlankContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 410.5px; //임시
+  height: calc(100vh - 438px);
 
   color: var(--black2);
   text-align: center;
-  font-family: "Hack Regular";
   font-size: 14px;
   font-weight: 400;
   line-height: 145%; /* 20.3px */
@@ -144,20 +155,21 @@ const BlankContainer = styled.div`
 `;
 
 const SearchContainer = styled.div`
-  /* position: absolute;
-  bottom: 0; */
-  width: 393px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
   height: 212px;
-  font-family: "Hack Regular";
 `;
 
 const GrayBox = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  width: 100vw;
   height: 60px;
-  padding-left: 30px;
-  box-sizing: border-box;
   background-color: var(--gray);
 
   color: var(--black2);
@@ -166,13 +178,19 @@ const GrayBox = styled.div`
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
   opacity: 0.3;
+
+  div {
+    width: 393px;
+    padding-left: 30px;
+    box-sizing: border-box;
+  }
 `;
 
 const SearchBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 55px;
   background-color: var(--white);
   border-top: 1.5px solid var(--black1);
@@ -183,21 +201,5 @@ const SearchBox = styled.div`
   text-align: center;
   font-size: 15px;
   font-weight: 400;
-  letter-spacing: 0.75px;
-`;
-
-const NextBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 55px;
-  background-color: var(--black1);
-  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
-
-  color: var(--white);
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
   letter-spacing: 0.75px;
 `;
