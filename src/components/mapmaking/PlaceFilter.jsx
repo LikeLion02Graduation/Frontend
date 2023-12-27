@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 // import axios from "axios";
 
-const PlaceFilter = () => {
+const PlaceFilter = ({ onPlaceSelect }) => {
   const [MetroFilterActive, setMetroFilterActive] = useState(true);
   const [doFilterActive, setDoFilterActive] = useState(false);
   const [selectedBtn, setSelectedBtn] = useState(null);
-  const [siLocations, setSiLocations] = useState(null);
+  const [siLoc, setSiLoc] = useState(null);
 
-  const MetroLocations = [
+  const MetroLoc = [
     "서울",
     "부산",
     "인천",
@@ -18,7 +18,7 @@ const PlaceFilter = () => {
     "대전",
     "세종",
   ];
-  const doLocations = [
+  const doLoc = [
     "경기도",
     "경상북도",
     "경상남도",
@@ -30,10 +30,11 @@ const PlaceFilter = () => {
     "제주",
   ];
 
+  // 백 연동 관련 임시 코드
   const getSiLoc = async () => {
     try {
       //const response = await axios.get(`${BASE_URL}/`);
-      //setSiLocations(response.data);
+      //setSiLoc(response.data);
     } catch (error) {
       console.error("데이터 받아오기 실패", error);
     }
@@ -49,18 +50,19 @@ const PlaceFilter = () => {
     setDoFilterActive(true);
     setMetroFilterActive(false);
     setSelectedBtn(null);
-    setSiLocations(null);
+    setSiLoc(null);
   };
 
   const handleBtnClick = (location) => {
     if (selectedBtn === location) {
       console.log("선택 취소: ", location);
       setSelectedBtn(null);
-      setSiLocations(null);
+      setSiLoc(null);
     } else {
       console.log("새로운 선택: ", location);
       setSelectedBtn(location);
       getSiLoc(location);
+      onPlaceSelect(location);
     }
   };
 
@@ -80,7 +82,7 @@ const PlaceFilter = () => {
       <Contents>
         {MetroFilterActive && !doFilterActive && (
           <MetroContent>
-            {MetroLocations.map((location, index) => (
+            {MetroLoc.map((location, index) => (
               <button
                 key={index}
                 onClick={() => handleBtnClick(location)}
@@ -96,9 +98,9 @@ const PlaceFilter = () => {
         )}
         {doFilterActive && (
           <>
-            {siLocations ? (
+            {siLoc ? (
               <SiContent>
-                {siLocations.map((location, index) => (
+                {siLoc.map((location, index) => (
                   <button
                     key={index}
                     onClick={() => handleBtnClick(location)}
@@ -115,7 +117,7 @@ const PlaceFilter = () => {
               </SiContent>
             ) : (
               <DoContent>
-                {doLocations.map((location, index) => (
+                {doLoc.map((location, index) => (
                   <button
                     key={index}
                     onClick={() => handleBtnClick(location)}
