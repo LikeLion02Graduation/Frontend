@@ -12,7 +12,7 @@ import {
   Line2,
   Wrapper,
 } from "../../components/_common/CommonExport";
-import MapTitleText from "../../components/mymap/MapTitleText";
+import { MapTitleText } from "../../components/mymap/MapTitleText";
 
 const SharePage = () => {
   const mapName = useSelector((state) => state.mapmaking.name);

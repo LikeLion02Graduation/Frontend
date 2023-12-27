@@ -127,8 +127,9 @@ const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 390px;
+  width: 100%;
   height: 61px;
+  flex-shrink: 0;
 
   span {
     color: var(--Black2);
@@ -147,6 +148,7 @@ const Box2 = styled.div`
   justify-content: center;
   width: 100%;
   height: 61px;
+  flex-shrink: 0;
   background-color: var(--yellow);
 
   color: var(--Black2);
@@ -231,6 +233,7 @@ const LongBtnB = styled.div`
 const LineStyle = styled.div`
   width: 100%;
   height: 1.5px;
+  flex-shrink: 0;
 `;
 
 const MainBox = styled.div`

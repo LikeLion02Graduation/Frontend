@@ -10,7 +10,7 @@ import { Line2, Wrapper, YellowBox } from "../../components/_common/CommonExport
 
 const { kakao } = window;
 
-const RecommendResultPage = ({ searchText, setSearchText }) => {
+const RecommendResultPage = ({ searchText, setSearchText, mapId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [mapState, setMapState] = useState({
@@ -87,13 +87,13 @@ const RecommendResultPage = ({ searchText, setSearchText }) => {
       })
     );
     initSelectPlace();
-    navigate("/recommend/main");
+    navigate(`/map/${mapId}/r/main`);
   }
 
   // 장소 저장X 함수 (선택X)
   function notSavePlace() {
     initSelectPlace();
-    navigate("/recommend/search");
+    navigate(`/map/${mapId}/r/search`);
   }
 
   return (
@@ -104,7 +104,7 @@ const RecommendResultPage = ({ searchText, setSearchText }) => {
           <>
             <SearchAgain onClick={notSavePlace}>탭해서 [다시] 장소 검색하기. . .</SearchAgain>
             <Line2 />
-            <MapContainer id="myMap" mapState={mapState} />
+            <MapContainer id="myMap" style={{ display: mapState.isSelected ? "flex" : "none" }} />
             <YellowBox text="이 장소가 맞나요?" font={"Hack Regular"} weight={"400"} />
             <Buttons>
               <div onClick={savePlace} style={{ background: "var(--black1)", color: "var(--white)" }}>
@@ -196,7 +196,6 @@ const Info = styled.div`
 `;
 
 const MapContainer = styled.div`
-  display: ${(props) => (props.mapState.isSelected ? "flex" : "none")};
   width: 393px;
   height: 474px;
 `;

@@ -167,20 +167,22 @@ const MetroFilter = styled(FilterStyle)`
   border: 1.5px solid var(--black2);
   border-left: none;
   width: 100%;
-  height: 61px;
+  height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  padding-right: 48px;
 `;
 const DoFilter = styled(FilterStyle)`
   border: 1.5px solid var(--black2);
   border-left: none;
   border-right: none;
   width: 100%;
-  height: 61px;
+  height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-left: 47px;
 `;
 
 const Contents = styled.div`

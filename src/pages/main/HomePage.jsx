@@ -4,54 +4,77 @@ import styled from "styled-components";
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, Wrapper } from "../../components/_common/CommonExport";
 import sort from "../../assets/images/sort.svg";
-import monkey_1 from "../../assets/images/monkey-1.svg";
-import monkey_2 from "../../assets/images/monkey-2.svg";
-import monkey_3 from "../../assets/images/monkey-3.svg";
-import monkey_4 from "../../assets/images/monkey-4.svg";
+import monkey_1 from "../../assets/images/monkey-1.png";
+import monkey_2 from "../../assets/images/monkey-2.png";
+import monkey_3 from "../../assets/images/monkey-3.png";
+import monkey_4 from "../../assets/images/monkey-4.png";
 
 const HomePage = () => {
+  const [myFilterActive, setMyFilterActive] = useState(true);
+  const [othersFilterActive, setOthersFilterActive] = useState(false);
+
   const MapData = [
-    { id: 1, img: { monkey_1 }, name: "부산에 가자", time: "23.11.19 03:06" },
-    { id: 2, img: { monkey_2 }, name: "서울에 가자", time: "23.11.19 03:06" },
+    { id: 1, img: monkey_1, name: "부산에 가자", time: "23.11.19 03:06" },
+    { id: 2, img: monkey_2, name: "서울에 가자", time: "23.11.19 03:06" },
     {
       id: 3,
-      img: { monkey_3 },
-      name: "국밥 추천 받습니다람쥐",
+      img: monkey_3,
+      name: "국밥 추천 받습니다",
       time: "23.11.19 03:06",
     },
     {
       id: 4,
-      img: { monkey_4 },
+      img: monkey_4,
       name: "저는 비빔면이 땡겨요",
       time: "23.11.19 03:06",
     },
   ];
+
+  const handleMyFilterClick = () => {
+    setMyFilterActive(true);
+    setOthersFilterActive(false);
+  };
+
+  const handleOthersFilterClick = () => {
+    setOthersFilterActive(true);
+    setMyFilterActive(false);
+  };
+
   return (
-    <Wrapper>
-      <TopBar navBtnOn={true} titleText="Main" />
-      <Filters>
-        <MyFilter>MY</MyFilter>
-        <OthersFilter>Others</OthersFilter>
-      </Filters>
-      <TotalSort>
-        <Total>Total {MapData.length}</Total>
-        <Sort>
-          <p>Earliest</p>
-          <img src={sort} />
-        </Sort>
-      </TotalSort>
-      <Content>
-        {MapData.map((box) => (
-          <Box key={box.id}>
-            <Img>
-              <img src={box.img} />
-            </Img>
-            <Name>{box.name}</Name>
-            <Time>{box.time} up</Time>
-          </Box>
-        ))}
-      </Content>
-    </Wrapper>
+    <>
+      <TopBar navBtnOn={false} newMapBtnOn={true} titleText="Main" />
+      <Wrapper>
+        <Filters>
+          <MyFilter onClick={handleMyFilterClick} active={myFilterActive}>
+            MY
+          </MyFilter>
+          <OthersFilter
+            onClick={handleOthersFilterClick}
+            active={othersFilterActive}
+          >
+            Others
+          </OthersFilter>
+        </Filters>
+        <TotalSort>
+          <Total>Total {MapData.length}</Total>
+          <Sort>
+            <p>Earliest</p>
+            <img src={sort} />
+          </Sort>
+        </TotalSort>
+        <BoxGrid>
+          {MapData.map((box) => (
+            <Box key={box.id}>
+              <Img>
+                <img src={box.img} />
+              </Img>
+              <Name>{box.name}</Name>
+              <Time>{box.time} up</Time>
+            </Box>
+          ))}
+        </BoxGrid>
+      </Wrapper>
+    </>
   );
 };
 
@@ -85,8 +108,9 @@ const MyFilter = styled(FilterStyle)`
   width: 100%;
   height: 61px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  padding-right: 8%;
 `;
 const OthersFilter = styled(FilterStyle)`
   border: 1.5px solid var(--black2);
@@ -95,20 +119,21 @@ const OthersFilter = styled(FilterStyle)`
   width: 100%;
   height: 61px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-left: 8%;
 `;
 
 const TotalSort = styled.div`
+  padding-bottom: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 335px;
 `;
 const Total = styled.div`
   padding-top: 33px;
-  padding-left: 29px;
   color: var(--black2);
   font-family: "Hack Regular";
   font-size: 14px;
@@ -123,7 +148,6 @@ const Sort = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 33px;
-  padding-right: 29px;
   gap: 10px;
   color: var(--black2);
   font-family: "Hack Regular";
@@ -132,15 +156,43 @@ const Sort = styled.div`
   font-weight: 400;
   line-height: normal;
 `;
-const Content = styled.div``;
-const Box = styled.div``;
+
+const BoxGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 21.21px;
+  grid-row-gap: 33.83px;
+`;
+const Box = styled.div`
+  width: 156.787px;
+`;
 const Img = styled.div`
+  width: 100%;
+  height: 156.787px;
+  flex-shrink: 0;
   border: 1.527px solid var(--black1);
   img {
-    width: 156.787px;
-    height: 156.787px;
-    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
-const Name = styled.div``;
-const Time = styled.div``;
+const Name = styled.div`
+  color: var(--black2);
+  font-family: Apple SD Gothic Neo;
+  font-size: 14.253px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.425px;
+  margin-top: 12.2px;
+  margin-bottom: 7.47px;
+`;
+const Time = styled.div`
+  color: var(--black2);
+  font-family: "Hack Regular";
+  font-size: 12.217px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;

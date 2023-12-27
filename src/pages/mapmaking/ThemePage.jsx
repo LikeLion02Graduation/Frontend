@@ -18,14 +18,6 @@ const ThemePage = () => {
   const initSelectedThemes = useSelector((state) => state.mapmaking.hashtag);
   const [selectedThemes, setSelectedThemes] = useState(initSelectedThemes);
 
-  const handleOpanModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   const handleThemeClick = (theme) => {
     const isSelected = selectedThemes.includes(theme);
     const updatedSelectedThemes = isSelected
@@ -74,9 +66,11 @@ const ThemePage = () => {
             </Button>
           ))}
         </ThemeGrid>
-        <FeedbackBtn onClick={handleOpanModal}>어 뭐야 왜없어??</FeedbackBtn>
+        <FeedbackBtn onClick={() => setIsModalOpen(true)}>
+          어 뭐야 왜없어??
+        </FeedbackBtn>
         <NextBtnBlack where={"/mapmaking/name"} text={"Next"} />
-        {isModalOpen && <FeedBackModal onClose={handleCloseModal} />}
+        {isModalOpen && <FeedBackModal onClose={() => setIsModalOpen(false)} />}
       </Wrapper>
     </>
   );
@@ -122,7 +116,7 @@ const Button = styled.div`
 const FeedbackBtn = styled.div`
   margin-top: 116px;
   margin-bottom: 80px; //임시 설정
-  width: 300%;
+  width: 110vw;
   height: 61px;
   transform: rotate(-15deg);
   flex-shrink: 0;
@@ -131,11 +125,11 @@ const FeedbackBtn = styled.div`
   align-items: center;
   border: 1.5px solid var(--black1);
   background: var(--yellow);
-  color: var(--Background_color, var(--black3));
+
+  color: var(--black3);
   text-align: center;
   font-family: Apple SD Gothic Neo;
   font-size: 14px;
-  font-style: normal;
   font-weight: 700;
   line-height: 145%;
   letter-spacing: 1.4px;
