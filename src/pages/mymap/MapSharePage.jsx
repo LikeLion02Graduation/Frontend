@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
+import {
+  Line2,
+  MainWebBox,
+  NextBtnWhite,
+  WhiteBox,
+  Wrapper,
+} from "../../components/_common/CommonExport";
 import { MapTitleText } from "../../components/mymap/MapTitleText";
 import ShareModal from "../../components/mymap/ShareModal";
 
@@ -57,7 +63,9 @@ const MapSharePage = () => {
     <>
       <TopBar navBtnOn={true} titleText={"Making"} />
       <Wrapper>
-        <WhiteBox text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"} />
+        <WhiteBox
+          text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"}
+        />
         <Line2 />
 
         <MainWebBox>
@@ -74,7 +82,11 @@ const MapSharePage = () => {
             <div>{mapData.description}</div>
           </Description>
         </MainWebBox>
-        <NextBtnWhite addClickHandler={handleShareBtnClick} text={"Share to Instagram"} number={"96px"} />
+        <NextBtnWhite
+          addClickHandler={handleShareBtnClick}
+          text={"Share to Instagram"}
+          number={"96px"}
+        />
         <NextBtnWhite text={"Skip"} number={"28px"} />
       </Wrapper>
       {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} />}
