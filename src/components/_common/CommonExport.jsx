@@ -33,17 +33,23 @@ const Line2 = () => {
   return <LineStyle style={{ background: "var(--black2)" }} />;
 };
 
-const NextBtnBlack = ({ where, text, number }) => {
+const NextBtnBlack = ({ addClickHandler, where, text, number }) => {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (where) {
+      console.log("버튼 클릭 시 어디로:", where);
+      navigate(where);
+    }
+
+    if (addClickHandler) {
+      addClickHandler();
+    }
+  };
+
   return (
-    <BoxB
-      onClick={() => {
-        console.log("버튼 클릭 시 어디로:", where);
-        navigate(where);
-      }}
-      style={{ bottom: number }}
-    >
-      {text ? text : "next"}
+    <BoxB onClick={handleClick} style={{ bottom: number }}>
+      {text}
     </BoxB>
   );
 };
@@ -53,7 +59,7 @@ const NextBtnWhite = ({ addClickHandler, where, text, number }) => {
 
   const handleClick = () => {
     if (where) {
-      console.log("버튼 클릭 시 어디로:");
+      console.log("버튼 클릭 시 어디로:", where);
       navigate(where);
     }
 
@@ -104,7 +110,18 @@ const Wrapper = styled.div`
   font-family: "Hack Regular";
 `;
 
-export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, MainWebBox, Wrapper };
+export {
+  WhiteBox,
+  MapNameBox,
+  YellowBox,
+  Line1,
+  Line2,
+  NextBtnBlack,
+  NextBtnWhite,
+  LongBtnBlack,
+  MainWebBox,
+  Wrapper,
+};
 
 const Box = styled.div`
   display: flex;
