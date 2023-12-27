@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setTitleContent } from "../../redux/recommendSlice";
+import { initRecommend, setTitleContent } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import {
-  Line2,
-  MainWebBox,
-  NextBtnWhite,
-  WhiteBox,
-  Wrapper,
-} from "../../components/_common/CommonExport";
+import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
+import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendContentPage = () => {
+  const mapId = 1;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const savedPlaces = useSelector((state) => state.recommend.place);
 
   const [inputValue, setInputValue] = useState({ title: "", content: "" });
@@ -40,9 +37,10 @@ const RecommendContentPage = () => {
     } else if (trimmedContent === "") {
       alert("내용을 작성해주세요");
     } else {
-      dispatch(
-        setTitleContent({ title: trimmedTitle, content: trimmedContent })
-      );
+      dispatch(setTitleContent({ title: trimmedTitle, content: trimmedContent }));
+
+      dispatch(initRecommend());
+      navigate(`/map/${mapId}/1`);
     }
   };
 
@@ -52,41 +50,44 @@ const RecommendContentPage = () => {
       <Wrapper>
         <WhiteBox text="Q. 남겨질 추천에 들어갈 내용을 작성해보아요~.~" />
         <Line2 />
-        <MainWebBox>
-          <TextBox>
-            <span>
-              <BlackBackGround>예원이</BlackBackGround>가 남긴
-            </span>
-            <BlackBackGround>추천!!</BlackBackGround>
-          </TextBox>
-        </MainWebBox>
-        <InputContainer>
-          <InputTitle
-            placeholder="제목을 입력하세요..."
-            type="text"
-            name="title"
-            value={inputValue.title}
-            onChange={handleInputChange}
-          />
-          <InputContent
-            placeholder="내용을 작성해주세요..."
-            type="text"
-            name="content"
-            value={inputValue.content}
-            onChange={handleInputChange}
-          />
-        </InputContainer>
-        <SelectedPlaces>
-          {savedPlaces.map((item) => (
-            <div key={item}>
-              <img src={triangle} alt="place" />
-              <span>{item.name}</span>
-            </div>
-          ))}
-        </SelectedPlaces>
-        <div onClick={saveData}>
-          <NextBtnWhite text="next" number={"28px"} />
-        </div>
+
+        <Scroll>
+          <MainWebBox>
+            <TitleContainer>
+              <RecommendTitleText username={"예원이"} />
+            </TitleContainer>
+          </MainWebBox>
+
+          <InputContainer>
+            <InputTitle
+              placeholder="제목을 입력하세요..."
+              type="text"
+              name="title"
+              value={inputValue.title}
+              onChange={handleInputChange}
+            />
+            <InputContent
+              placeholder="내용을 작성해주세요..."
+              type="text"
+              name="content"
+              value={inputValue.content}
+              onChange={handleInputChange}
+              rows={3}
+              maxLength={110}
+            />
+          </InputContainer>
+
+          <SelectedPlaces>
+            {savedPlaces.map((item) => (
+              <div key={item}>
+                <img src={triangle} alt="place" />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </SelectedPlaces>
+        </Scroll>
+
+        <NextBtnWhite addClickHandler={saveData} text="upload" number={"28px"} />
       </Wrapper>
     </>
   );
@@ -94,38 +95,22 @@ const RecommendContentPage = () => {
 
 export default RecommendContentPage;
 
-const TextBox = styled.div`
-  margin: 40px auto 39px 20px;
+const Scroll = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 266px);
+  overflow: scroll;
+`;
+
+const TitleContainer = styled.div`
+  margin-top: 40px;
+  margin-bottom: 39px;
+  padding-left: 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  flex-shrink: 0;
-
-  color: var(--black3);
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 145%; /* 43.5px */
-  letter-spacing: 1.5px;
-
-  span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-`;
-
-const BlackBackGround = styled.span`
-  padding: 1px 12px 0 11px;
-  width: fit-content;
-  flex-shrink: 0;
-  color: var(--white);
-  background: var(--black1);
-
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 145%; /* 43.5px */
-  letter-spacing: 1.5px;
+  gap: 28px;
 `;
 
 const InputContainer = styled.div`

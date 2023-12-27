@@ -6,8 +6,10 @@ import { addKeyword, deleteKeyword } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
+import FeedBackModal from "../../components/mapmaking/FeedBackModal";
 
 const RecommendKeywordPage = () => {
+  const mapId = 1;
   const dispatch = useDispatch();
   const initSelectedKeywords = useSelector((state) => state.recommend.hashtag);
   const [selectedKeywords, setSelectedKeywords] = useState(initSelectedKeywords);
@@ -30,6 +32,9 @@ const RecommendKeywordPage = () => {
 
   const keywords = ["맛집", "명소", "카페", "자연", "산책", "빵", "국밥", "브런치"];
 
+  //태그 추가 모달 관리
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <TopBar navBtnOn={true} titleText="giving" />
@@ -49,8 +54,10 @@ const RecommendKeywordPage = () => {
             </Keyword>
           ))}
         </KeywordGrid>
-        <NextBtnBlack where={"/recommend/content"} />
+        <FeedbackBtn onClick={() => setIsModalOpen(true)}>어 뭐야 왜없어??</FeedbackBtn>
+        <NextBtnBlack where={`/map/${mapId}/r/content`} />
       </Wrapper>
+      {isModalOpen && <FeedBackModal onClose={() => setIsModalOpen(false)} />}
     </>
   );
 };
@@ -89,4 +96,27 @@ const Keyword = styled.div`
   display: flex;
   align-items: center;
   height: 61px;
+`;
+
+const FeedbackBtn = styled.div`
+  margin-top: 116px;
+  margin-bottom: 80px; //임시 설정
+  width: 110vw;
+  height: 61px;
+  transform: rotate(-15deg);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid var(--black1);
+  background: var(--yellow);
+
+  color: var(--black3);
+  text-align: center;
+  font-family: Apple SD Gothic Neo;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 145%;
+  letter-spacing: 1.4px;
+  cursor: pointer;
 `;

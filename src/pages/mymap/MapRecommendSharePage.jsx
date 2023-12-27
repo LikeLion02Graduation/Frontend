@@ -3,86 +3,79 @@ import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
-import { MapTitleText } from "../../components/mymap/MapTitleText";
 import ShareModal from "../../components/mymap/ShareModal";
 
-const MapSharePage = () => {
-  const [mapData, setMapData] = useState({
-    id: 1, // MAP 아이디
-    name: "부산 갈거야",
-    location: "부산",
-    img: "[이미지url]",
-    description: "2023 12 30 떠난다 추천 부탁해~~",
-    created_at: "2023-11-11 12:12:11",
-    hashtag: ["카페", "국밥"],
-    user: {
-      id: 1,
-      nickname: "서연",
-    },
-    do_buy: true, // 현재 사용자가 이 map을 구매했는지 -> 이에 따라 추천 detail 페이지 url on/off
-    recommend: [
+import triangle from "../../assets/images/triangle.svg";
+import { RecommendTitleText } from "../../components/mymap/MapTitleText";
+
+const MapRecommendSharePage = () => {
+  const [recommendData, setRecommendData] = useState({
+    id: "1",
+    title: "여기 안가면 평생 후회할 것입니다...",
+    content:
+      "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
+    username: "혜지",
+    hashtag: ["카페"],
+    place: [
       {
-        id: 1, // RECOMMEND 아이디
-        user: {
-          id: 12,
-          username: "혜지",
-          profile: "[이미지url]",
-        },
-        created_at: "2023-11-11 12:12:11",
-        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
-        exist_react: true,
-      },
-      {
-        id: 2, // RECOMMEND 아이디
-        user: {
-          id: 12,
-          username: "채린",
-          profile: "[이미지url]",
-        },
-        created_at: "2023-11-11 12:12:11",
-        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
-        exist_react: true,
+        id: 23,
+        name: "수원왕족발",
+        address: "경기도 수원시 어쩌구",
+        link: "[카카오 url]",
       },
     ],
+    react: {
+      id: 12,
+      emoji: 2,
+      content: "와 너무 고마워!! 진짜 맛있더라",
+      user: 1,
+    },
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleShareBtnClick = () => {
     setIsModalOpen(true);
-    console.log(isModalOpen);
   };
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText={"Making"} />
+      <TopBar navBtnOn={true} titleText={"instagram"} />
       <Wrapper>
         <WhiteBox text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"} />
         <Line2 />
 
         <MainWebBox>
           <TitleContainer>
-            <MapTitleText mapData={mapData} />
-            <MapNameText>{mapData.name}</MapNameText>
+            <RecommendTitleText username={recommendData.username} />
+            <MapNameText>{recommendData.title}</MapNameText>
           </TitleContainer>
           <TagContainer>
-            {mapData.hashtag.map((item) => (
+            {recommendData.hashtag.map((item) => (
               <span key={item}>#{item}</span>
             ))}
           </TagContainer>
           <Description>
-            <div>{mapData.description}</div>
+            <div>{recommendData.content}</div>
           </Description>
+          <SelectedPlaces>
+            {recommendData.place.map((item) => (
+              <div key={item}>
+                <img src={triangle} alt="place" />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </SelectedPlaces>
         </MainWebBox>
-        <NextBtnWhite addClickHandler={handleShareBtnClick} text={"Share to Instagram"} number={"96px"} />
-        <NextBtnWhite text={"Skip"} number={"28px"} />
+
+        <NextBtnWhite addClickHandler={handleShareBtnClick} text={"Share to Instagram"} number={"28px"} />
       </Wrapper>
       {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} />}
     </>
   );
 };
 
-export default MapSharePage;
+export default MapRecommendSharePage;
 
 const TitleContainer = styled.div`
   margin-top: 43px;
@@ -124,12 +117,40 @@ const TagContainer = styled.div`
 
 const Description = styled.div`
   margin-top: 29px;
-  margin-bottom: 47px;
-  padding-left: 25px;
+  padding: 0 25px;
   box-sizing: border-box;
 
   font-size: 15px;
   font-weight: 400;
   line-height: 20px; /* 133.333% */
   letter-spacing: 0.75px;
+`;
+
+const SelectedPlaces = styled.div`
+  margin-top: 14px;
+  margin-bottom: 55px;
+  padding-left: 25px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px; /* 133.333% */
+  letter-spacing: 0.75px;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9px;
+  }
+
+  div > img {
+    width: 17px;
+    height: 17px;
+  }
 `;
