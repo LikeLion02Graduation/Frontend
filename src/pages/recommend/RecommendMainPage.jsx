@@ -13,12 +13,17 @@ import xBtn2 from "../../assets/images/x-btn-2.svg";
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendMainPage = () => {
+  const mapId = 1;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const savedPlaces = useSelector((state) => state.recommend?.place);
 
   const handleDelete = (index) => {
     dispatch(deletePlace(index));
+  };
+
+  const goToSearchPage = () => {
+    navigate(`/map/${mapId}/r/search`);
   };
 
   return (
@@ -51,21 +56,11 @@ const RecommendMainPage = () => {
           </BlankContainer>
         )}
         <SearchContainer>
-          <GrayBox
-            onClick={() => {
-              navigate("/recommend/search");
-            }}
-          >
+          <GrayBox onClick={goToSearchPage}>
             <div>탭해서 장소 검색하기. . .</div>
           </GrayBox>
-          <SearchBox
-            onClick={() => {
-              navigate("/recommend/search");
-            }}
-          >
-            Search
-          </SearchBox>
-          {savedPlaces?.length > 0 && <LongBtnBlack where={"/recommend/keyword"} text={"next"} />}
+          <SearchBox onClick={goToSearchPage}>Search</SearchBox>
+          {savedPlaces?.length > 0 && <LongBtnBlack where={`/map/${mapId}/r/keyword`} text={"next"} />}
         </SearchContainer>
       </Wrapper>
     </>

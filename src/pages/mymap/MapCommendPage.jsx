@@ -5,7 +5,15 @@ import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 
 const MapCommendPage = () => {
+  const currentUserId = 2; //임시
+  const [reactData, setReactData] = useState({
+    mapuserid: 1,
+    emoji: 1,
+    content: "여기 너무 가고 싶었던 곳!!! 추천해줘서 고마워~",
+  });
   const [isSaved, setIsSaved] = useState(false);
+
+  const emojis = ["🥰", "😔", "😢", "😭"];
 
   return (
     <>
@@ -21,13 +29,18 @@ const MapCommendPage = () => {
           <>
             <Commend>아..... 진짜 너무 맛있고 눈물만 나는 엄청난 맛입니다.</Commend>
             <Line1 />
-            <NextBtnWhite where={"/map/1/1/commend/w"} text={"edit"} number={"96px"} />
+            <Emoji>{emojis[reactData.emoji]}</Emoji>
+            {reactData.mapuserid === currentUserId && (
+              <NextBtnWhite where={"/map/1/1/commend/w"} text={"edit"} number={"96px"} />
+            )}
           </>
         ) : (
           <>
             <Commend style={{ opacity: "0.3", paddingLeft: "47px" }}>아직 남겨진 반응이...</Commend>
             <Line1 />
-            <NextBtnWhite where={"/map/1/1/commend/w"} text={"writing"} number={"96px"} />
+            {reactData.mapuserid === currentUserId && (
+              <NextBtnWhite where={"/map/1/1/commend/w"} text={"writing"} number={"96px"} />
+            )}
           </>
         )}
         <NextBtnBlack where={"/map/1/1"} text={"back"} number={"28px"} />
@@ -78,4 +91,19 @@ const Commend = styled.div`
   font-weight: 400;
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
+`;
+
+const Emoji = styled.button`
+  margin-top: 45px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid var(--black1);
+  border-radius: 50%;
+  background-color: var(--yellow);
+
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Apple SD Gothic Neo;
+  font-size: 30.732px;
+  font-weight: 500;
 `;

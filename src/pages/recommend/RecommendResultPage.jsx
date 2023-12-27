@@ -10,7 +10,7 @@ import { Line2, Wrapper, YellowBox } from "../../components/_common/CommonExport
 
 const { kakao } = window;
 
-const RecommendResultPage = ({ searchText, setSearchText }) => {
+const RecommendResultPage = ({ searchText, setSearchText, mapId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [mapState, setMapState] = useState({
@@ -87,13 +87,13 @@ const RecommendResultPage = ({ searchText, setSearchText }) => {
       })
     );
     initSelectPlace();
-    navigate("/recommend/main");
+    navigate(`/map/${mapId}/r/main`);
   }
 
   // 장소 저장X 함수 (선택X)
   function notSavePlace() {
     initSelectPlace();
-    navigate("/recommend/search");
+    navigate(`/map/${mapId}/r/search`);
   }
 
   return (

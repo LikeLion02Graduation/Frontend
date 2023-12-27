@@ -6,6 +6,7 @@ import RecommendResultPage from "./RecommendResultPage";
 import { Wrapper } from "../../components/_common/CommonExport";
 
 const RecommendSearchPage = () => {
+  const mapId = 1;
   const [inputText, setInputText] = useState("");
   const [searchText, setSearchText] = useState("");
 
@@ -21,7 +22,7 @@ const RecommendSearchPage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} where={"/recommend/main"} titleText="Search" />
+      <TopBar navBtnOn={true} where={`/map/${mapId}/r/main`} titleText="Search" />
       <Wrapper>
         <SearchForm onSubmit={handleSubmit}>
           <GrayBox>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, MapNameBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
@@ -8,7 +9,8 @@ import Postit from "../../components/mymap/Postit";
 import { LinkContainer } from "../../components/mymap/LinkContainer";
 
 const MapMainPage = () => {
-  const currentUserId = 1; //임시
+  const navigate = useNavigate();
+  const currentUserId = 2; //임시
 
   const [mapData, setMapData] = useState({
     id: 1, // MAP 아이디
@@ -43,8 +45,34 @@ const MapMainPage = () => {
         content: "여기 안가면 평생", // 미리보기로 8글자만 제공
         exist_react: true,
       },
+      {
+        id: 3, // RECOMMEND 아이디
+        user: {
+          id: 12,
+          username: "채린",
+          profile: "[이미지url]",
+        },
+        created_at: "2023-11-11 12:12:11",
+        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
+        exist_react: true,
+      },
+      {
+        id: 4, // RECOMMEND 아이디
+        user: {
+          id: 12,
+          username: "채린",
+          profile: "[이미지url]",
+        },
+        created_at: "2023-11-11 12:12:11",
+        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
+        exist_react: true,
+      },
     ],
   });
+
+  const addPostit = () => {
+    navigate(`/map/${mapData.id}/r/main`);
+  };
 
   return (
     <>
@@ -52,41 +80,37 @@ const MapMainPage = () => {
       <Wrapper>
         <MapNameBox place={mapData.location} user={"시은이"} />
         <Line2 />
-        <TitleContainer>
-          <TitleBox>
-            <MapTitleText mapData={mapData} />
-            <LinkContainer />
-          </TitleBox>
-          <MapNameText>{mapData.name}</MapNameText>
-        </TitleContainer>
+        <Scroll>
+          <TitleContainer>
+            <TitleBox>
+              <MapTitleText mapData={mapData} />
+              <LinkContainer />
+            </TitleBox>
+            <MapNameText>{mapData.name}</MapNameText>
+          </TitleContainer>
 
-        <TagContainer>
-          {mapData.hashtag.map((tag) => (
-            <span key={tag}>#{tag}</span>
-          ))}
-        </TagContainer>
+          <TagContainer>
+            {mapData.hashtag.map((tag) => (
+              <span key={tag}>#{tag}</span>
+            ))}
+          </TagContainer>
 
-        <Description>
-          <div>{mapData.description}</div>
-        </Description>
-        <Line1 />
+          <Description>
+            <div>{mapData.description}</div>
+          </Description>
+          <Line1 />
 
-        {mapData.user === currentUserId ? (
-          <>
-            <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
-            <GridContainer>
-              <AddPostit>+</AddPostit>
-              {mapData.recommend.map((item) => (
-                <Postit key={item.id} mapDataId={mapData.id} item={item} />
-              ))}
-            </GridContainer>
-          </>
-        ) : (
-          <>
-            <GrayBox style={{ marginTop: "50px", transform: "rotate(8.527de)" }}>원하는 태그를 찾지 못했나요?</GrayBox>
-            <GrayBox style={{ marginTop: "70px" }}>내친만에 직접 원하는 태그 추가 요청을 피드백 해보세요!</GrayBox>
-            <NextBtnBlack where={"/map/1/all"} text={"recommend"} />
-          </>
+          <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
+          <GridContainer>
+            <AddPostit onClick={addPostit}>+</AddPostit>
+            {mapData.recommend.map((item) => (
+              <Postit key={item.id} mapDataId={mapData.id} item={item} />
+            ))}
+          </GridContainer>
+        </Scroll>
+
+        {mapData.user !== currentUserId && (
+          <NextBtnBlack where={`/map/${mapData.id}/r/main`} text={"giving"} number={"28px"} />
         )}
       </Wrapper>
     </>
@@ -94,6 +118,14 @@ const MapMainPage = () => {
 };
 
 export default MapMainPage;
+
+const Scroll = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 272px);
+  overflow: scroll;
+`;
 
 const TitleContainer = styled.div`
   margin-top: 43px;
@@ -131,6 +163,7 @@ const TagContainer = styled.div`
   align-items: center;
   width: 541px;
   height: 60px;
+  flex-shrink: 0;
   background: var(--yellow);
   border: 1.5px solid var(--black1);
 
@@ -208,24 +241,4 @@ const AddPostit = styled.div`
   font-feature-settings: "clig" off, "liga" off;
   font-size: 18.488px;
   font-weight: 500;
-`;
-
-const GrayBox = styled.div`
-  margin-top: 125px;
-  width: 441px;
-  height: 61px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1.5px solid var(--black1);
-  background: var(--gray);
-
-  color: var(--black3);
-  text-align: center;
-  font-family: Apple SD Gothic Neo;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 145%;
-  letter-spacing: 1.4px;
 `;

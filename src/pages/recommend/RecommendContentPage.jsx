@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setTitleContent } from "../../redux/recommendSlice";
+import { initRecommend, setTitleContent } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
@@ -10,8 +11,9 @@ import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../compon
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendContentPage = () => {
+  const mapId = 1;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const savedPlaces = useSelector((state) => state.recommend.place);
 
   const [inputValue, setInputValue] = useState({ title: "", content: "" });
@@ -35,6 +37,9 @@ const RecommendContentPage = () => {
       alert("내용을 작성해주세요");
     } else {
       dispatch(setTitleContent({ title: trimmedTitle, content: trimmedContent }));
+
+      dispatch(initRecommend());
+      navigate(`/map/${mapId}/1`);
     }
   };
 
@@ -69,6 +74,8 @@ const RecommendContentPage = () => {
               name="content"
               value={inputValue.content}
               onChange={handleInputChange}
+              rows={3}
+              maxLength={110}
             />
           </InputContainer>
 
@@ -82,7 +89,7 @@ const RecommendContentPage = () => {
           </SelectedPlaces>
         </Scroll>
 
-        <NextBtnWhite addClickHandler={saveData} where={"/map/1/1"} text="next" number={"28px"} />
+        <NextBtnWhite addClickHandler={saveData} text="upload" number={"28px"} />
       </Wrapper>
     </>
   );
