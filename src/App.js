@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //pages
+import HomePage from "./pages/main/HomePage";
 import RecommendMainPage from "./pages/recommend/RecommendMainPage";
 import RecommendSearchPage from "./pages/recommend/RecommendSearchPage";
 import RecommendKeywordPage from "./pages/recommend/RecommendKeywordPage";
@@ -22,6 +23,8 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* main */}
+        <Route path={"/home"} element={<HomePage />} />
         {/* recommend */}
         <Route path={"/recommend/main"} element={<RecommendMainPage />} />
         <Route path={"/recommend/search"} element={<RecommendSearchPage />} />
@@ -32,7 +35,10 @@ function App() {
         <Route path={"/map/:id"} element={<MapMainPage />} />
         <Route path={"/map/:id/all"} element={<MapAllRecommendPage />} />
         <Route path={"/map/:id/:recomId"} element={<MapRecommendPage />} />
-        <Route path={"/map/:id/:recomId/commend"} element={<MapCommendPage />} />
+        <Route
+          path={"/map/:id/:recomId/commend"}
+          element={<MapCommendPage />}
+        />
         <Route path={"/map/:id/share"} element={<MapSharePage />} />
 
         {/* mapmaking */}
