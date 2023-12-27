@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import {
-  Line1,
-  Line2,
-  WhiteBox,
-  NextBtnBlack,
-} from "../../components/_common/CommonExport";
+import { Line1, WhiteBox, NextBtnBlack } from "../../components/_common/CommonExport";
 import FeedBackModal from "../../components/mapmaking/FeedBackModal";
 
 const ThemePage = () => {
@@ -21,16 +16,7 @@ const ThemePage = () => {
     setIsModalOpen(false);
   };
 
-  const Themes = [
-    "#맛집",
-    "#명소",
-    "#카페",
-    "#자연",
-    "#산책",
-    "#빵",
-    "#국밥",
-    "#브런치",
-  ];
+  const Themes = ["#맛집", "#명소", "#카페", "#자연", "#산책", "#빵", "#국밥", "#브런치"];
 
   return (
     <Wrapper>
@@ -44,12 +30,7 @@ const ThemePage = () => {
       </Content>
       <FeedbackBtn onClick={handleOpanModal}>어 뭐야 왜없어??</FeedbackBtn>
       <NextBtnBlack where={"/mapmaking/name"} />
-      {isModalOpen && (
-        <>
-          <Overlay />
-          <FeedBackModal onClose={handleCloseModal} />
-        </>
-      )}
+      {isModalOpen && <FeedBackModal onClose={handleCloseModal} />}
     </Wrapper>
   );
 };
@@ -88,7 +69,7 @@ const Content = styled.div`
 const FeedbackBtn = styled.div`
   margin-top: 116px;
   margin-bottom: 80px; //임시 설정
-  width: 100%;
+  width: 110vw;
   height: 61px;
   transform: rotate(-15deg);
   flex-shrink: 0;
@@ -97,23 +78,13 @@ const FeedbackBtn = styled.div`
   align-items: center;
   border: 1.5px solid var(--black1);
   background: var(--yellow);
-  color: var(--Background_color, var(--black3));
+
+  color: var(--black3);
   text-align: center;
   font-family: Apple SD Gothic Neo;
   font-size: 14px;
-  font-style: normal;
   font-weight: 700;
   line-height: 145%;
   letter-spacing: 1.4px;
   cursor: pointer;
-`;
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 9;
 `;
