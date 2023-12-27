@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addTheme, deleteTheme } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import {
-  Line1,
-  Line2,
   WhiteBox,
   NextBtnBlack,
+  Wrapper,
 } from "../../components/_common/CommonExport";
 import FeedBackModal from "../../components/mapmaking/FeedBackModal";
 
 const ThemePage = () => {
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const initSelectedThemes = useSelector((state) => state.mapmaking.hashtag);
+  const [selectedThemes, setSelectedThemes] = useState(initSelectedThemes);
 
   const handleOpanModal = () => {
     setIsModalOpen(true);
@@ -21,74 +26,103 @@ const ThemePage = () => {
     setIsModalOpen(false);
   };
 
-  const Themes = [
-    "#맛집",
-    "#명소",
-    "#카페",
-    "#자연",
-    "#산책",
-    "#빵",
-    "#국밥",
-    "#브런치",
+  const handleThemeClick = (theme) => {
+    const isSelected = selectedThemes.includes(theme);
+    const updatedSelectedThemes = isSelected
+      ? selectedThemes.filter((selectedTheme) => selectedTheme !== theme)
+      : [...selectedThemes, theme];
+
+    setSelectedThemes(updatedSelectedThemes);
+    console.log(selectedThemes);
+
+    if (isSelected) {
+      dispatch(deleteTheme(theme));
+    } else {
+      dispatch(addTheme(theme));
+    }
+  };
+
+  const themes = [
+    "맛집",
+    "명소",
+    "카페",
+    "자연",
+    "산책",
+    "빵",
+    "국밥",
+    "브런치",
   ];
 
   return (
-    <Wrapper>
-      <TopBar navBtnOn={true} titleText="Making" />
-      <WhiteBox text={"Q. 당신의 지도는 어떤 테마인가요?"} />
-      <Line1 />
-      <Content>
-        {Themes.map((location, index) => (
-          <button key={index}>{location}</button>
-        ))}
-      </Content>
-      <FeedbackBtn onClick={handleOpanModal}>어 뭐야 왜없어??</FeedbackBtn>
-      <NextBtnBlack where={"/mapmaking/name"} />
-      {isModalOpen && (
-        <>
-          <Overlay />
-          <FeedBackModal onClose={handleCloseModal} />
-        </>
-      )}
-    </Wrapper>
+    <>
+      <TopBar navBtnOn={true} titleText="giving" />
+      <Wrapper>
+        <WhiteBox text="Q. 당신의 지도는 어떤 테마인가요?(최대 5개!!)" />
+        <ThemeGrid>
+          {themes.map((theme, index) => (
+            <Button
+              key={theme}
+              onClick={() => handleThemeClick(theme)}
+              style={{
+                backgroundColor: selectedThemes?.includes(theme)
+                  ? "var(--yellow)"
+                  : "var(--white)",
+              }}
+              className={index % 2 === 0 ? "left-column" : "right-column"}
+            >
+              <span>#{theme}</span>
+            </Button>
+          ))}
+        </ThemeGrid>
+        <FeedbackBtn onClick={handleOpanModal}>어 뭐야 왜없어??</FeedbackBtn>
+        <NextBtnBlack where={"/mapmaking/name"} text={"Next"} />
+        {isModalOpen && <FeedBackModal onClose={handleCloseModal} />}
+      </Wrapper>
+    </>
   );
 };
 
 export default ThemePage;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const ThemeGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100vw;
+  background-color: var(--black1);
+  gap: 1.5px;
+  padding: 1.5px 0;
+
+  color: var(--black2);
+  font-family: Apple SD Gothic Neo;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 145%; /* 20.3px */
+  letter-spacing: 1.4px;
+
+  .left-column {
+    display: flex;
+    justify-content: end;
+    padding-right: 81px;
+    box-sizing: border-box;
+  }
+
+  .right-column {
+    padding-left: 81px;
+    box-sizing: border-box;
+  }
 `;
 
-const Content = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-
-  button {
-    width: 196.5px;
-    height: 61px;
-    border: 1.5px solid var(--black2);
-    border-top: none;
-    background: none;
-    color: var(--black2);
-    text-align: center;
-    font-family: Apple SD Gothic Neo;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 145%;
-    letter-spacing: 1.4px;
-    cursor: pointer;
-  }
+const Button = styled.div`
+  display: flex;
+  align-items: center;
+  height: 61px;
+  cursor: pointer;
 `;
 
 const FeedbackBtn = styled.div`
   margin-top: 116px;
   margin-bottom: 80px; //임시 설정
-  width: 100%;
+  width: 300%;
   height: 61px;
   transform: rotate(-15deg);
   flex-shrink: 0;
@@ -106,14 +140,4 @@ const FeedbackBtn = styled.div`
   line-height: 145%;
   letter-spacing: 1.4px;
   cursor: pointer;
-`;
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 9;
 `;

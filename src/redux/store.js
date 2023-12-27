@@ -2,13 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage/index.js";
 import { persistReducer } from "redux-persist";
 
 import recommendReducer from "./recommendSlice";
+import mapmakingReducer from "./mapmakingSlice";
 
 const rootReducer = combineReducers({
   recommend: recommendReducer,
+  mapmaking: mapmakingReducer,
 });
 
 const persistConfig = {

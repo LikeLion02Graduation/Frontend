@@ -5,7 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTitleContent } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
+import {
+  Line2,
+  MainWebBox,
+  NextBtnWhite,
+  WhiteBox,
+  Wrapper,
+} from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
 
@@ -34,7 +40,9 @@ const RecommendContentPage = () => {
     } else if (trimmedContent === "") {
       alert("내용을 작성해주세요");
     } else {
-      dispatch(setTitleContent({ title: trimmedTitle, content: trimmedContent }));
+      dispatch(
+        setTitleContent({ title: trimmedTitle, content: trimmedContent })
+      );
     }
   };
 

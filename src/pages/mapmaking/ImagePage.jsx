@@ -1,25 +1,60 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setImage } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import {
   WhiteBox,
   NextBtnWhite,
   Line2,
+  Wrapper,
 } from "../../components/_common/CommonExport";
+import ImgUpload from "../../components/mapmaking/ImgUpload";
 
 const ImagePage = () => {
+  const dispatch = useDispatch();
+  const mapName = useSelector((state) => state.mapmaking.name);
+
+  const handleImgChange = (selectedImg) => {
+    dispatch(setImage({ img: selectedImg }));
+  };
+
+  const handlePostImg = () => {
+    /*axios({
+      baseURL: "",
+      url: "",
+      method: "POST",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });*/
+  };
+
   return (
     <Wrapper>
       <TopBar navBtnOn={true} titleText="Making" />
       <WhiteBox text={"Q. 지도에 들어갈 대표 이미지를 업로드 해보세요"} />
       <Line2 />
       <MapProfile>
-        <ImageBox />
-        <MapName>부산에 가자</MapName>
+        <ImgUpload onImageChange={handleImgChange} />
+        <MapName>{mapName}</MapName>
       </MapProfile>
-      <NextBtnWhite where={"/mapmaking/done"} text={"Next"} number={"13px"} />
+      <NextBtnWhite
+        addClickHandler={handlePostImg}
+        where={"/mapmaking/done"}
+        text={"Next"}
+        number={"96px"}
+      />
       <NextBtnWhite where={"/mapmaking/done"} text={"Skip"} number={"28px"} />
     </Wrapper>
   );
@@ -27,22 +62,8 @@ const ImagePage = () => {
 
 export default ImagePage;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const MapProfile = styled.div`
   margin-top: 44px;
-  margin-bottom: 265px; //나중에 next 버튼 고정 및 조정 필요
-`;
-
-const ImageBox = styled.div`
-  width: 156.787px;
-  height: 156.787px;
-  flex-shrink: 0;
-  border: 1.527px solid var(--black1);
 `;
 
 const MapName = styled.div`

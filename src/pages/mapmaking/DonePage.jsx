@@ -1,43 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setContent } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import {
   MapNameBox,
   NextBtnWhite,
   Line2,
+  Wrapper,
 } from "../../components/_common/CommonExport";
 
 const DonePage = () => {
+  const dispatch = useDispatch();
+
+  const [inputValue, setInputValue] = useState({ content: "" });
+
+  const handleInputChange = (e) => {
+    setInputValue({
+      ...inputValue,
+      content: e.target.value,
+    });
+  };
+
+  const saveData = () => {
+    const trimmedContent = inputValue.content.trim();
+
+    if (trimmedContent === "") {
+      alert("내용을 작성해주세요");
+    } else {
+      dispatch(setContent({ content: trimmedContent }));
+    }
+  };
+
+  const mapPlace = useSelector((state) => state.mapmaking.place);
+  const mapName = useSelector((state) => state.mapmaking.name);
+  const mapImg = useSelector((state) => state.mapmaking.img);
+  const mapTheme = useSelector((state) => state.mapmaking.hashtag);
+
   return (
     <Wrapper>
-      <TopBar navBtnOn={true} titleText="Making" />
-      <MapNameBox place="부산" user="시은" />
-      <Line2 />
-      <MapProfile>
-        <ImageBox />
-        <MapName>부산에 가자</MapName>
-      </MapProfile>
-      <ThemeBox>#맛집</ThemeBox>
-      <InputBox>
-        <textarea
-          type="text"
-          placeholder="이곳을 클릭해&#13;&#10; 나에게 여행 스팟을 추천해줄 친구들에게&#13;&#10; 남기고 싶은 한 마디를 작성해보세요...&#13;&#10; 친구들이 추천 시 참고하기 용이할거예요 !"
+      <Wrapper2>
+        <TopBar navBtnOn={true} titleText="Making" />
+        <MapNameBox place={mapPlace} user="시은" />
+        <Line2 />
+        <MapProfile>
+          <ImageBox>{mapImg}</ImageBox>
+          <MapName>{mapName}</MapName>
+        </MapProfile>
+        <ThemeBox>{mapTheme}</ThemeBox>
+        <InputBox>
+          <textarea
+            type="text"
+            name="content"
+            value={inputValue.content}
+            onChange={handleInputChange}
+            placeholder="이곳을 클릭해 나에게 여행 스팟을 추천해줄&#13;&#10;친구들에게 남기고 싶은&#13;&#10;한 마디를 작성해보세요..(공백 포함 110자)&#13;&#10;친구들이 추천 시 참고하기 용이할거예요 !"
+          />
+        </InputBox>
+        <NextBtnWhite
+          addClickHandler={saveData}
+          where={"/map/:id/share"}
+          text={"Next"}
+          number={"96px"}
         />
-      </InputBox>
-      <NextBtnWhite where={"/mapmaking/share"} text={"Next"} number={"13px"} />
-      <NextBtnWhite where={"/mapmaking/done"} text={"Skip"} number={"28px"} />
+        <NextBtnWhite where={"/map/:id/share"} text={"Skip"} number={"28px"} />
+      </Wrapper2>
     </Wrapper>
   );
 };
 
 export default DonePage;
 
-const Wrapper = styled.div`
+const Wrapper2 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 
 const MapProfile = styled.div`
@@ -70,11 +111,17 @@ const ThemeBox = styled.div`
   margin-top: 44px;
 `;
 const InputBox = styled.div`
-  margin-bottom: 5px; //차후 조정 필요
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 156px;
+  margin-bottom: 28px;
+
   textarea {
     width: 350px;
     height: 120px;
-    margin-top: 35px;
+    padding-top: 35px;
+    padding-bottom: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,10 +135,12 @@ const InputBox = styled.div`
     font-weight: 400;
     line-height: 145%;
     letter-spacing: 1.4px;
-    white-space: pre-line;
-  }
-
-  textarea::-webkit-scrollbar {
-    display: none;
+    ::placeholder {
+      opacity: 0.3;
+      white-space: pre-line;
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
