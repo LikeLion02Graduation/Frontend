@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, MapNameBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
-import MapTitleText from "../../components/mymap/MapTitleText";
+import { MapTitleText } from "../../components/mymap/MapTitleText";
 import Postit from "../../components/mymap/Postit";
 import { LinkContainer } from "../../components/mymap/LinkContainer";
 
@@ -20,7 +20,10 @@ const MapMainPage = () => {
     description: "2023 12 30 떠난다 추천 부탁해~~",
     created_at: "2023-11-11 12:12:11",
     hashtag: ["카페", "국밥"],
-    user: 1, // 작성자 id
+    user: {
+      id: 1,
+      nickname: "서연",
+    },
     do_buy: true, // 현재 사용자가 이 map을 구매했는지 -> 이에 따라 추천 detail 페이지 url on/off
     recommend: [
       {
@@ -45,28 +48,6 @@ const MapMainPage = () => {
         content: "여기 안가면 평생", // 미리보기로 8글자만 제공
         exist_react: true,
       },
-      {
-        id: 3, // RECOMMEND 아이디
-        user: {
-          id: 12,
-          username: "채린",
-          profile: "[이미지url]",
-        },
-        created_at: "2023-11-11 12:12:11",
-        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
-        exist_react: true,
-      },
-      {
-        id: 4, // RECOMMEND 아이디
-        user: {
-          id: 12,
-          username: "채린",
-          profile: "[이미지url]",
-        },
-        created_at: "2023-11-11 12:12:11",
-        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
-        exist_react: true,
-      },
     ],
   });
 
@@ -80,34 +61,33 @@ const MapMainPage = () => {
       <Wrapper>
         <MapNameBox place={mapData.location} user={"시은이"} />
         <Line2 />
-        <Scroll>
-          <TitleContainer>
-            <TitleBox>
-              <MapTitleText mapData={mapData} />
-              <LinkContainer />
-            </TitleBox>
-            <MapNameText>{mapData.name}</MapNameText>
-          </TitleContainer>
 
-          <TagContainer>
-            {mapData.hashtag.map((tag) => (
-              <span key={tag}>#{tag}</span>
-            ))}
-          </TagContainer>
+        <TitleContainer>
+          <TitleBox>
+            <MapTitleText mapData={mapData} />
+            <LinkContainer />
+          </TitleBox>
+          <MapNameText>{mapData.name}</MapNameText>
+        </TitleContainer>
 
-          <Description>
-            <div>{mapData.description}</div>
-          </Description>
-          <Line1 />
+        <TagContainer>
+          {mapData.hashtag.map((tag) => (
+            <span key={tag}>#{tag}</span>
+          ))}
+        </TagContainer>
 
-          <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
-          <GridContainer>
-            <AddPostit onClick={addPostit}>+</AddPostit>
-            {mapData.recommend.map((item) => (
-              <Postit key={item.id} mapDataId={mapData.id} item={item} />
-            ))}
-          </GridContainer>
-        </Scroll>
+        <Description>
+          <div>{mapData.description}</div>
+        </Description>
+        <Line1 />
+
+        <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
+        <GridContainer>
+          <AddPostit onClick={addPostit}>+</AddPostit>
+          {mapData.recommend.map((item) => (
+            <Postit key={item.id} mapDataId={mapData.id} item={item} />
+          ))}
+        </GridContainer>
 
         {mapData.user !== currentUserId && (
           <NextBtnBlack where={`/map/${mapData.id}/r/main`} text={"giving"} number={"28px"} />
@@ -118,14 +98,6 @@ const MapMainPage = () => {
 };
 
 export default MapMainPage;
-
-const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 272px);
-  overflow: scroll;
-`;
 
 const TitleContainer = styled.div`
   margin-top: 43px;
@@ -221,6 +193,7 @@ const GridTitle = styled.div`
 
 const GridContainer = styled.div`
   margin: 12px 22px 10px 21px;
+  padding-bottom: 120px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 36.84px;

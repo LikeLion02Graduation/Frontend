@@ -7,6 +7,7 @@ import { initRecommend, setTitleContent } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
+import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 
 import triangle from "../../assets/images/triangle.svg";
 
@@ -52,12 +53,9 @@ const RecommendContentPage = () => {
 
         <Scroll>
           <MainWebBox>
-            <TextBox>
-              <span>
-                <BlackBackGround>예원이</BlackBackGround>가 남긴
-              </span>
-              <BlackBackGround>추천!!</BlackBackGround>
-            </TextBox>
+            <TitleContainer>
+              <RecommendTitleText username={"예원이"} />
+            </TitleContainer>
           </MainWebBox>
 
           <InputContainer>
@@ -105,38 +103,14 @@ const Scroll = styled.div`
   overflow: scroll;
 `;
 
-const TextBox = styled.div`
-  margin: 40px auto 39px 20px;
+const TitleContainer = styled.div`
+  margin-top: 40px;
+  margin-bottom: 39px;
+  padding-left: 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  flex-shrink: 0;
-
-  color: var(--black3);
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 145%; /* 43.5px */
-  letter-spacing: 1.5px;
-
-  span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-`;
-
-const BlackBackGround = styled.span`
-  padding: 1px 12px 0 11px;
-  width: fit-content;
-  flex-shrink: 0;
-  color: var(--white);
-  background: var(--black1);
-
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 145%; /* 43.5px */
-  letter-spacing: 1.5px;
+  gap: 28px;
 `;
 
 const InputContainer = styled.div`

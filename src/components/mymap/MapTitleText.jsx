@@ -8,13 +8,24 @@ const MapTitleText = ({ mapData }) => {
         <BlackBackGround>{mapData.location}</BlackBackGround>에 가는
       </div>
       <div>
-        <BlackBackGround>예원이</BlackBackGround>의 지도
+        <BlackBackGround>{mapData.user.nickname}</BlackBackGround>의 지도
       </div>
     </TitleText>
   );
 };
 
-export default MapTitleText;
+const RecommendTitleText = ({ username }) => {
+  return (
+    <TextBox>
+      <span>
+        <BlackBackGround>{username}</BlackBackGround>가 남긴
+      </span>
+      <BlackBackGround>추천!!</BlackBackGround>
+    </TextBox>
+  );
+};
+
+export { MapTitleText, RecommendTitleText };
 
 const TitleText = styled.div`
   display: flex;
@@ -46,4 +57,24 @@ const BlackBackGround = styled.span`
   font-weight: 400;
   line-height: 145%; /* 43.5px */
   letter-spacing: 1.5px;
+`;
+
+const TextBox = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+
+  color: var(--black3);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 145%; /* 43.5px */
+  letter-spacing: 1.5px;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
 `;

@@ -46,7 +46,6 @@ const RecommendMainPage = () => {
                 </span>
               </ListBox>
             ))}
-
             {savedPlaces.length < 2 && <ListText>충격.복수 추천도 가능하다 ? !</ListText>}
           </ListContainer>
         ) : (
@@ -107,7 +106,7 @@ const ListBox = styled.div`
   span {
     display: flex;
     flex-direction: row;
-    width: 393px;
+    width: 331px;
     gap: 3px;
 
     img {

@@ -3,10 +3,10 @@ import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
-import MapTitleText from "../../components/mymap/MapTitleText";
 import ShareModal from "../../components/mymap/ShareModal";
 
 import triangle from "../../assets/images/triangle.svg";
+import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 
 const MapRecommendSharePage = () => {
   const [recommendData, setRecommendData] = useState({
@@ -47,7 +47,7 @@ const MapRecommendSharePage = () => {
 
         <MainWebBox>
           <TitleContainer>
-            <MapTitleText mapData={recommendData} />
+            <RecommendTitleText username={recommendData.username} />
             <MapNameText>{recommendData.title}</MapNameText>
           </TitleContainer>
           <TagContainer>

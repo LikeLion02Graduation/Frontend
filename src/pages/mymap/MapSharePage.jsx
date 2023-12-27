@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
-import MapTitleText from "../../components/mymap/MapTitleText";
+import { MapTitleText } from "../../components/mymap/MapTitleText";
 import ShareModal from "../../components/mymap/ShareModal";
 
 const MapSharePage = () => {
@@ -15,7 +15,10 @@ const MapSharePage = () => {
     description: "2023 12 30 떠난다 추천 부탁해~~",
     created_at: "2023-11-11 12:12:11",
     hashtag: ["카페", "국밥"],
-    user: 1, // 작성자 id
+    user: {
+      id: 1,
+      nickname: "서연",
+    },
     do_buy: true, // 현재 사용자가 이 map을 구매했는지 -> 이에 따라 추천 detail 페이지 url on/off
     recommend: [
       {
