@@ -112,7 +112,7 @@ const InputBox = styled.textarea`
   margin-top: 31px;
   padding: 18px 22px;
   box-sizing: border-box;
-  width: 456px;
+  width: 393px;
   height: 199px;
   border: 3px solid var(--yellow);
   background-color: var(--white);
@@ -130,7 +130,7 @@ const InputBox = styled.textarea`
 `;
 
 const BtnContainer = styled.div`
-  width: 456px;
+  width: 393px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

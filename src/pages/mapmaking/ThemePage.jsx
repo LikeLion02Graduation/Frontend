@@ -5,11 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTheme, deleteTheme } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import {
-  WhiteBox,
-  NextBtnBlack,
-  Wrapper,
-} from "../../components/_common/CommonExport";
+import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 import FeedBackModal from "../../components/mapmaking/FeedBackModal";
 
 const ThemePage = () => {
@@ -34,16 +30,7 @@ const ThemePage = () => {
     }
   };
 
-  const themes = [
-    "맛집",
-    "명소",
-    "카페",
-    "자연",
-    "산책",
-    "빵",
-    "국밥",
-    "브런치",
-  ];
+  const themes = ["맛집", "명소", "카페", "자연", "산책", "빵", "국밥", "브런치"];
 
   return (
     <>
@@ -56,9 +43,7 @@ const ThemePage = () => {
               key={theme}
               onClick={() => handleThemeClick(theme)}
               style={{
-                backgroundColor: selectedThemes?.includes(theme)
-                  ? "var(--yellow)"
-                  : "var(--white)",
+                backgroundColor: selectedThemes?.includes(theme) ? "var(--yellow)" : "var(--white)",
               }}
               className={index % 2 === 0 ? "left-column" : "right-column"}
             >
@@ -66,9 +51,7 @@ const ThemePage = () => {
             </Button>
           ))}
         </ThemeGrid>
-        <FeedbackBtn onClick={() => setIsModalOpen(true)}>
-          어 뭐야 왜없어??
-        </FeedbackBtn>
+        <FeedbackBtn onClick={() => setIsModalOpen(true)}>어 뭐야 왜없어??</FeedbackBtn>
         <NextBtnBlack where={"/mapmaking/name"} text={"Next"} />
         {isModalOpen && <FeedBackModal onClose={() => setIsModalOpen(false)} />}
       </Wrapper>
