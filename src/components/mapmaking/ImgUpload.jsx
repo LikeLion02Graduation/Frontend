@@ -4,15 +4,19 @@ import { styled } from "styled-components";
 
 const ImgUpload = ({ onImageUpload }) => {
   const [selectedImg, setSelectedImg] = useState(null);
+  const [imgUrl, setImgUrl] = useState(null);
 
   const handleImgChange = (e) => {
     const file = e.target.files[0];
     setSelectedImg(file);
+    setImgUrl(URL.createObjectURL(file));
+    onImageUpload(URL.createObjectURL(file));
   };
 
   const handleUpload = () => {
     if (!selectedImg) {
       console.log("No image selected");
+
       return;
     }
 
@@ -26,8 +30,8 @@ const ImgUpload = ({ onImageUpload }) => {
     <Wrapper>
       <label>
         <input type="file" onChange={handleImgChange} onClick={handleUpload} />
-        {selectedImg ? (
-          <StyledImg src={URL.createObjectURL(selectedImg)} alt="Preview" />
+        {imgUrl ? (
+          <StyledImg src={imgUrl} alt="Preview" />
         ) : (
           "Tap to add photo!"
         )}
