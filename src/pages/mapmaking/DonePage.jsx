@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setContent } from "../../redux/mapmakingSlice";
@@ -13,6 +14,7 @@ import {
 } from "../../components/_common/CommonExport";
 
 const DonePage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState({ content: "" });
@@ -31,6 +33,7 @@ const DonePage = () => {
       alert("내용을 작성해주세요");
     } else {
       dispatch(setContent({ content: trimmedContent }));
+      navigate(`/map/:id/share`);
     }
   };
 
@@ -40,34 +43,39 @@ const DonePage = () => {
   const mapTheme = useSelector((state) => state.mapmaking.hashtag);
 
   return (
-    <Wrapper>
-      <Wrapper2>
-        <TopBar navBtnOn={true} titleText="Making" />
-        <MapNameBox place={mapPlace} user="시은" />
-        <Line2 />
-        <MapProfile>
-          <ImageBox>{mapImg}</ImageBox>
-          <MapName>{mapName}</MapName>
-        </MapProfile>
-        <ThemeBox>{mapTheme}</ThemeBox>
-        <InputBox>
-          <textarea
-            type="text"
-            name="content"
-            value={inputValue.content}
-            onChange={handleInputChange}
-            placeholder="이곳을 클릭해 나에게 여행 스팟을 추천해줄&#13;&#10;친구들에게 남기고 싶은&#13;&#10;한 마디를 작성해보세요..(공백 포함 110자)&#13;&#10;친구들이 추천 시 참고하기 용이할거예요 !"
+    <>
+      <TopBar navBtnOn={true} titleText="Making" />
+      <Wrapper>
+        <Wrapper2>
+          <MapNameBox place={mapPlace} user="시은" />
+          <Line2 />
+          <MapProfile>
+            <ImageBox>{mapImg}</ImageBox>
+            <MapName>{mapName}</MapName>
+          </MapProfile>
+          <ThemeBox>{mapTheme}</ThemeBox>
+          <InputBox>
+            <textarea
+              type="text"
+              name="content"
+              value={inputValue.content}
+              onChange={handleInputChange}
+              placeholder="이곳을 클릭해 나에게 여행 스팟을 추천해줄&#13;&#10;친구들에게 남기고 싶은&#13;&#10;한 마디를 작성해보세요..(공백 포함 110자)&#13;&#10;친구들이 추천 시 참고하기 용이할거예요 !"
+            />
+          </InputBox>
+          <NextBtnWhite
+            addClickHandler={saveData}
+            text={"Next"}
+            number={"96px"}
           />
-        </InputBox>
-        <NextBtnWhite
-          addClickHandler={saveData}
-          where={"/map/:id/share"}
-          text={"Next"}
-          number={"96px"}
-        />
-        <NextBtnWhite where={"/map/:id/share"} text={"Skip"} number={"28px"} />
-      </Wrapper2>
-    </Wrapper>
+          <NextBtnWhite
+            where={"/map/:id/share"}
+            text={"Skip"}
+            number={"28px"}
+          />
+        </Wrapper2>
+      </Wrapper>
+    </>
   );
 };
 

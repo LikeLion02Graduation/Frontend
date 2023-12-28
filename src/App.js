@@ -37,10 +37,9 @@ function App() {
         <Route path={"/auth/signup"} element={<SignUpPage />} />
         <Route path={"/auth/profile"} element={<SignUpProfilePage />} />
         <Route path={"/auth/social"} element={<SocialProfilePage />} />
-          
+
         {/* main */}
-        <Route path={"/home"} element={<HomePage />} />
-          
+        <Route path={"/"} element={<HomePage />} />
         {/* recommend */}
         <Route path={"/map/:id/r/main"} element={<RecommendMainPage />} />
         <Route path={"/map/:id/r/search"} element={<RecommendSearchPage />} />

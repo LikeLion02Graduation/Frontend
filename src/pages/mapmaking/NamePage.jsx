@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setName } from "../../redux/mapmakingSlice";
@@ -14,6 +15,7 @@ import {
 } from "../../components/_common/CommonExport";
 
 const NamePage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState({ name: "" });
@@ -32,33 +34,35 @@ const NamePage = () => {
       alert("이름을 작성해주세요");
     } else {
       dispatch(setName({ name: trimmedName }));
+      navigate(`/mapmaking/image`);
     }
   };
 
   return (
-    <Wrapper>
+    <>
       <TopBar navBtnOn={true} titleText="Making" />
-      <WhiteBox text={"Q. 새로 만들어질 지도의 이름을 붙여주세요!"} />
-      <Line2 />
-      <InputBox>
-        <input
-          placeholder="내 지도의 이름은..."
-          type="text"
-          name="name"
-          value={inputValue.name}
-          onChange={handleInputChange}
-        />
-      </InputBox>
-      <Line1 />
-      <div id="temporary" />
+      <Wrapper>
+        <WhiteBox text={"Q. 새로 만들어질 지도의 이름을 붙여주세요!"} />
+        <Line2 />
+        <InputBox>
+          <input
+            placeholder="내 지도의 이름은..."
+            type="text"
+            name="name"
+            value={inputValue.name}
+            onChange={handleInputChange}
+          />
+        </InputBox>
+        <Line1 />
+        <div id="temporary" />
 
-      <NextBtnWhite
-        where={"/mapmaking/image"}
-        text={"Next"}
-        number={"96px"}
-        addClickHandler={saveData}
-      />
-    </Wrapper>
+        <NextBtnWhite
+          text={"Next"}
+          number={"96px"}
+          addClickHandler={saveData}
+        />
+      </Wrapper>
+    </>
   );
 };
 
@@ -82,5 +86,6 @@ const InputBox = styled.div`
     line-height: 145%;
     letter-spacing: 1.4px;
     outline: none;
+    background-color: var(--white);
   }
 `;
