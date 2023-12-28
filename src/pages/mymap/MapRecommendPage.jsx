@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
+import { NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 import { WTagContainer } from "../../components/mymap/LinkContainer";
 
 import triangle from "../../assets/images/triangle.svg";
 
 const MapRecommendPage = () => {
-  const currentUserId = 1;
+  // const currentUserId = 1;
 
   const [recommendData, setRecommendData] = useState({
     id: "1",
-    mapuser: 1, //임시
-    mapuserid: 1, //임시
     title: "여기 안가면 평생 후회할 것입니다...",
     content:
       "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
@@ -82,16 +80,7 @@ const MapRecommendPage = () => {
           </ContentContainer>
         </Scroll>
 
-        {recommendData.mapuserid === currentUserId ? (
-          <>
-            <NextBtnWhite where={"/map/1/1/commend"} text={"commend"} number={"96px"} />
-            <NextBtnBlack where={"/map/1"} text={"back"} number={"28px"} />
-          </>
-        ) : (
-          <>
-            <NextBtnWhite where={"/map/1/1/commend"} text={"남긴 반응 보기 !"} number={"28px"} />
-          </>
-        )}
+        <NextBtnWhite where={"/map/1/1/commend"} text={"남긴 반응 보기 !"} number={"28px"} />
       </Wrapper>
     </>
   );
@@ -103,7 +92,7 @@ const Scroll = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 272px);
+  height: calc(100vh - 208px);
   overflow: scroll;
 `;
 
