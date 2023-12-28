@@ -5,7 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import TopBar from "../../components/_common/TopBar";
-import { WhiteBox, MainWebBox, NextBtnWhite, Line2, Wrapper } from "../../components/_common/CommonExport";
+import {
+  WhiteBox,
+  MainWebBox,
+  NextBtnWhite,
+  Line2,
+  Wrapper,
+} from "../../components/_common/CommonExport";
 import { MapTitleText } from "../../components/mymap/MapTitleText";
 
 const SharePage = () => {

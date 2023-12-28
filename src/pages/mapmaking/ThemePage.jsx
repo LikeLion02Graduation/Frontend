@@ -18,14 +18,6 @@ const ThemePage = () => {
   const initSelectedThemes = useSelector((state) => state.mapmaking.hashtag);
   const [selectedThemes, setSelectedThemes] = useState(initSelectedThemes);
 
-  const handleOpanModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   const handleThemeClick = (theme) => {
     const isSelected = selectedThemes.includes(theme);
     const updatedSelectedThemes = isSelected
@@ -74,9 +66,11 @@ const ThemePage = () => {
             </Button>
           ))}
         </ThemeGrid>
-        <FeedbackBtn onClick={handleOpanModal}>어 뭐야 왜없어??</FeedbackBtn>
+        <FeedbackBtn onClick={() => setIsModalOpen(true)}>
+          어 뭐야 왜없어??
+        </FeedbackBtn>
         <NextBtnBlack where={"/mapmaking/name"} text={"Next"} />
-        {isModalOpen && <FeedBackModal onClose={handleCloseModal} />}
+        {isModalOpen && <FeedBackModal onClose={() => setIsModalOpen(false)} />}
       </Wrapper>
     </>
   );
