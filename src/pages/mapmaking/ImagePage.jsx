@@ -19,12 +19,19 @@ const ImagePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mapName = useSelector((state) => state.mapmaking.name);
+  const [isImageSelected, setIsImageSelected] = useState(false);
 
   const handleImgChange = (selectedImg) => {
+    setIsImageSelected(selectedImg !== null);
     dispatch(setImage({ img: selectedImg }));
   };
 
   const handlePostImg = () => {
+    if (!isImageSelected) {
+      alert("이미지를 업로드해주세요");
+    } else {
+      navigate(`/mapmaking/done`);
+    }
     /*axios({
       baseURL: "",
       url: "",
@@ -49,11 +56,10 @@ const ImagePage = () => {
         <WhiteBox text={"Q. 지도에 들어갈 대표 이미지를 업로드 해보세요"} />
         <Line2 />
         <MapProfile>
-          <ImgUpload onImageChange={handleImgChange} />
+          <ImgUpload onImageUpload={handleImgChange} />
           <MapName>{mapName}</MapName>
         </MapProfile>
         <NextBtnWhite
-          where={"/mapmaking/done"}
           addClickHandler={handlePostImg}
           text={"Next"}
           number={"96px"}

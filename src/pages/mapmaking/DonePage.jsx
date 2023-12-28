@@ -46,14 +46,18 @@ const DonePage = () => {
     <>
       <TopBar navBtnOn={true} titleText="Making" />
       <Wrapper>
+        <MapNameBox place={mapPlace} user="시은" />
+        <Line2 />
+
+        <MapProfile>
+          <ImageBox>
+            <StyledImg src={mapImg} alt="Map Preview" />
+          </ImageBox>
+          <MapName>{mapName}</MapName>
+        </MapProfile>
         <Wrapper2>
-          <MapNameBox place={mapPlace} user="시은" />
-          <Line2 />
-          <MapProfile>
-            <ImageBox>{mapImg}</ImageBox>
-            <MapName>{mapName}</MapName>
-          </MapProfile>
           <ThemeBox>{mapTheme}</ThemeBox>
+
           <InputBox>
             <textarea
               type="text"
@@ -82,6 +86,7 @@ const DonePage = () => {
 export default DonePage;
 
 const Wrapper2 = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,6 +103,12 @@ const ImageBox = styled.div`
   height: 156.787px;
   flex-shrink: 0;
   border: 1.527px solid var(--black1);
+`;
+
+const StyledImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const MapName = styled.div`
