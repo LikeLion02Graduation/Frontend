@@ -47,7 +47,7 @@ const ThemePage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText="giving" />
+      <TopBar navBtnOn={true} titleText="Making" />
       <Wrapper>
         <WhiteBox text="Q. 당신의 지도는 어떤 테마인가요?(최대 5개!!)" />
         <ThemeGrid>

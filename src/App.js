@@ -27,7 +27,7 @@ function App() {
     <Router>
       <Routes>
         {/* main */}
-        <Route path={"/home"} element={<HomePage />} />
+        <Route path={"/"} element={<HomePage />} />
         {/* recommend */}
         <Route path={"/map/:id/r/main"} element={<RecommendMainPage />} />
         <Route path={"/map/:id/r/search"} element={<RecommendSearchPage />} />

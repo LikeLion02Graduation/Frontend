@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import {
 import ImgUpload from "../../components/mapmaking/ImgUpload";
 
 const ImagePage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const mapName = useSelector((state) => state.mapmaking.name);
 
@@ -41,22 +43,24 @@ const ImagePage = () => {
   };
 
   return (
-    <Wrapper>
+    <>
       <TopBar navBtnOn={true} titleText="Making" />
-      <WhiteBox text={"Q. 지도에 들어갈 대표 이미지를 업로드 해보세요"} />
-      <Line2 />
-      <MapProfile>
-        <ImgUpload onImageChange={handleImgChange} />
-        <MapName>{mapName}</MapName>
-      </MapProfile>
-      <NextBtnWhite
-        addClickHandler={handlePostImg}
-        where={"/mapmaking/done"}
-        text={"Next"}
-        number={"96px"}
-      />
-      <NextBtnWhite where={"/mapmaking/done"} text={"Skip"} number={"28px"} />
-    </Wrapper>
+      <Wrapper>
+        <WhiteBox text={"Q. 지도에 들어갈 대표 이미지를 업로드 해보세요"} />
+        <Line2 />
+        <MapProfile>
+          <ImgUpload onImageChange={handleImgChange} />
+          <MapName>{mapName}</MapName>
+        </MapProfile>
+        <NextBtnWhite
+          where={"/mapmaking/done"}
+          addClickHandler={handlePostImg}
+          text={"Next"}
+          number={"96px"}
+        />
+        <NextBtnWhite where={"/mapmaking/done"} text={"Skip"} number={"28px"} />
+      </Wrapper>
+    </>
   );
 };
 
