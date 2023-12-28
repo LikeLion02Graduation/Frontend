@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
 
 const SignUpProfilePage = () => {
+  const navigate = useNavigate();
+
+  const signup = () => {
+    navigate("/auth/login");
+  };
+
   return (
     <>
       <TopBar navBtnOn={true} titleText="프로필 설정" />
@@ -17,7 +24,7 @@ const SignUpProfilePage = () => {
           <span>사용할 닉네임을 입력하세요.</span>
           <input type="text" placeholder="닉네임 입력" />
         </Container>
-        <LongBtn>가입 완료</LongBtn>
+        <LongBtn onClick={signup}>가입 완료</LongBtn>
       </Wrapper>
     </>
   );

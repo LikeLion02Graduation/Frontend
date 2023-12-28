@@ -3,12 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import arrow from "../../assets/images/arrow-left.svg";
 
-const TopBar = ({
-  navBtnOn = false,
-  newMapBtnOn = false,
-  where,
-  titleText,
-}) => {
+const TopBar = ({ navBtnOn = false, newMapBtnOn = false, where, titleText }) => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -24,17 +19,9 @@ const TopBar = ({
   return (
     <Wrapper>
       <div>
-        {navBtnOn && (
-          <img
-            onClick={handleBackClick}
-            src={arrow}
-            alt="go to previous page"
-          />
-        )}
+        {navBtnOn && <img onClick={handleBackClick} src={arrow} alt="go to previous page" />}
         <Title>{titleText}</Title>
-        {newMapBtnOn && (
-          <NewMapBtn onClick={handleNewMapClick}>새 지도</NewMapBtn>
-        )}
+        {newMapBtnOn && <button onClick={handleNewMapClick}>새 지도</button>}
       </div>
     </Wrapper>
   );
@@ -50,7 +37,7 @@ const Wrapper = styled.div`
   background: var(--black1);
 
   div {
-    position: absolute;
+    position: relative;
     top: 0;
     width: 393px;
 
@@ -60,7 +47,7 @@ const Wrapper = styled.div`
   }
 
   div > img {
-    position: relative;
+    position: absolute;
     top: 50px;
     left: 25px;
     width: 44px;
@@ -70,21 +57,20 @@ const Wrapper = styled.div`
   }
 
   div > button {
-    position: relative;
-    top: 25px;
-    left: 250px;
+    position: absolute;
+    top: 65px;
+    right: 25px;
+    background: none;
     cursor: pointer;
-    z-index: 1;
+
     color: var(--white);
     text-align: center;
     font-family: "Hack Regular";
     font-size: 14px;
-    font-style: normal;
     font-weight: 400;
     line-height: 145%;
     letter-spacing: 1.4px;
-    background: none;
-    border: none;
+    z-index: 1;
   }
 `;
 
@@ -99,20 +85,4 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 5px;
-`;
-
-const NewMapBtn = styled.div`
-  padding-top: 65px; // 피그마에선 62px인데 안 맞아서 일단 조금 더 내림
-  padding-left: 150px;
-  cursor: pointer;
-  z-index: 1;
-  color: var(--white);
-  text-align: center;
-  font-family: "Hack Regular";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 145%;
-  letter-spacing: 1.4px;
-  z-index: 1;
 `;
