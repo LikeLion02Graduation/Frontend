@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line1, Line2, Wrapper } from "../../components/_common/CommonExport";
+import { Wrapper } from "../../components/_common/CommonExport";
 import sort from "../../assets/images/sort.svg";
 import monkey_1 from "../../assets/images/monkey-1.png";
 import monkey_2 from "../../assets/images/monkey-2.png";
@@ -10,6 +11,7 @@ import monkey_3 from "../../assets/images/monkey-3.png";
 import monkey_4 from "../../assets/images/monkey-4.png";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [myFilterActive, setMyFilterActive] = useState(true);
   const [othersFilterActive, setOthersFilterActive] = useState(false);
 
@@ -48,10 +50,7 @@ const HomePage = () => {
           <MyFilter onClick={handleMyFilterClick} active={myFilterActive}>
             MY
           </MyFilter>
-          <OthersFilter
-            onClick={handleOthersFilterClick}
-            active={othersFilterActive}
-          >
+          <OthersFilter onClick={handleOthersFilterClick} active={othersFilterActive}>
             Others
           </OthersFilter>
         </Filters>
@@ -64,7 +63,7 @@ const HomePage = () => {
         </TotalSort>
         <BoxGrid>
           {MapData.map((box) => (
-            <Box key={box.id}>
+            <Box key={box.id} onClick={() => navigate(`/map/${box.id}`)}>
               <Img>
                 <img src={box.img} />
               </Img>

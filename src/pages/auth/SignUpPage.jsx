@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { LongBtnBlack, Wrapper } from "../../components/_common/CommonExport";
+import { Wrapper } from "../../components/_common/CommonExport";
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+
+  const next = () => {
+    navigate("/auth/profile");
+  };
+
   return (
     <>
       <TopBar navBtnOn={true} titleText="회원가입" />
@@ -18,7 +25,7 @@ const SignUpPage = () => {
           <input type="text" placeholder="비밀번호 입력" />
           <input type="text" placeholder="비밀번호 재입력" style={{ marginTop: "10px" }} />
         </Container>
-        <LongBtn>다음으로</LongBtn>
+        <LongBtn onClick={next}>다음으로</LongBtn>
       </Wrapper>
     </>
   );

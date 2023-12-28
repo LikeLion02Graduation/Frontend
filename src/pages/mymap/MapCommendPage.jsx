@@ -5,7 +5,7 @@ import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 
 const MapCommendPage = () => {
-  const currentUserId = 2; //임시
+  const currentUserId = 1; //임시
   const [reactData, setReactData] = useState({
     mapuserid: 1,
     emoji: 1,

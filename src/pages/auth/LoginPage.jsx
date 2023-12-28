@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import kakaologo from "../../assets/images/kakao-logo.svg";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const login = () => {
+    navigate("/");
+  };
+
+  const signup = () => {
+    navigate("/auth/signup");
+  };
+
   return (
     <Wrapper>
       <Main>
@@ -18,9 +29,9 @@ const LoginPage = () => {
           style={{ marginTop: "70px", marginBottom: "80px", transform: "rotate(-15deg)" }}
         />
       </Container>
-      <LongBtn>Login</LongBtn>
+      <LongBtn onClick={login}>Login</LongBtn>
       <OR>OR</OR>
-      <LongBtn>회원 가입</LongBtn>
+      <LongBtn onClick={signup}>회원 가입</LongBtn>
       <Kakao src={kakaologo} alt="kakao login" />
     </Wrapper>
   );

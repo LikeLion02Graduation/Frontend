@@ -57,7 +57,7 @@ const MapMainPage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText={"Map"} />
+      <TopBar navBtnOn={true} where={"/"} titleText={"Map"} />
       <Wrapper>
         <MapNameBox place={mapData.location} user={"시은이"} />
         <Line2 />
