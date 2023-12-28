@@ -2,6 +2,11 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //pages
+import LoginPage from "./pages/auth/LoginPage";
+import SignUpPage from "./pages/auth/SignUpPage";
+import SignUpProfilePage from "./pages/auth/SignUpProfilePage";
+import SocialProfilePage from "./pages/auth/SocialProfilePage";
+
 import RecommendMainPage from "./pages/recommend/RecommendMainPage";
 import RecommendSearchPage from "./pages/recommend/RecommendSearchPage";
 import RecommendKeywordPage from "./pages/recommend/RecommendKeywordPage";
@@ -25,6 +30,12 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* auth */}
+        <Route path={"/auth/login"} element={<LoginPage />} />
+        <Route path={"/auth/signup"} element={<SignUpPage />} />
+        <Route path={"/auth/profile"} element={<SignUpProfilePage />} />
+        <Route path={"/auth/social"} element={<SocialProfilePage />} />
+
         {/* recommend */}
         <Route path={"/map/:id/r/main"} element={<RecommendMainPage />} />
         <Route path={"/map/:id/r/search"} element={<RecommendSearchPage />} />
