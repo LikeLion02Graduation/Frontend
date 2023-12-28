@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
-import storage from "redux-persist/lib/storage/index.js";
+import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
 import recommendReducer from "./recommendSlice";
@@ -20,11 +20,9 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducer,
 });
-
-export default store;
 
 export const useAppDispatch = () => useDispatch();
 export const useAppSelector = useSelector;
