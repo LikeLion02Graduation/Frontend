@@ -72,7 +72,7 @@ const MapRecommendPage = () => {
                     <div className="placename">{item.name}</div>
                     <div className="roadaddress">{item.address}</div>
                   </PlaceInfo>
-                  <PlaceGoBtn>
+                  <PlaceGoBtn onClick={() => (window.location.href = item.link)}>
                     <span>go!</span>
                     <img src={triangle} alt="go!" />
                   </PlaceGoBtn>
