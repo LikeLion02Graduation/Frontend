@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
@@ -8,6 +9,7 @@ import { WTagContainer } from "../../components/mymap/LinkContainer";
 import triangle from "../../assets/images/triangle.svg";
 
 const MapRecommendPage = () => {
+  const { mapId, recomId } = useParams();
   // const currentUserId = 1;
 
   const [recommendData, setRecommendData] = useState({
@@ -35,7 +37,7 @@ const MapRecommendPage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} where={"/map/1"} titleText="recommend" />
+      <TopBar navBtnOn={true} where={`/map/${mapId}`} titleText="recommend" />
       <Wrapper>
         <Scroll>
           <TitleContainer>
@@ -44,7 +46,7 @@ const MapRecommendPage = () => {
                 <div>{recommendData.title}</div>
               </Title>
               <From>From.{recommendData.username}</From>
-              <WTagContainer />
+              <WTagContainer mapId={mapId} recomId={recomId} />
             </Col>
             <Col>
               <MapProfile />
@@ -80,7 +82,7 @@ const MapRecommendPage = () => {
           </ContentContainer>
         </Scroll>
 
-        <NextBtnWhite where={"/map/1/1/commend"} text={"남긴 반응 보기 !"} number={"28px"} />
+        <NextBtnWhite where={`/map/${mapId}/${recomId}/commend`} text={"남긴 반응 보기 !"} number={"28px"} />
       </Wrapper>
     </>
   );

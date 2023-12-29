@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setRecomInfo } from "../../redux/recommendSlice";
@@ -13,7 +13,7 @@ import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendContentPage = () => {
-  const mapId = 1; //params로 받기?
+  const { mapId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const savedPlaces = useSelector((state) => state.recommend.place);

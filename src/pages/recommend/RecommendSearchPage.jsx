@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import RecommendResultPage from "./RecommendResultPage";
 import { Wrapper } from "../../components/_common/CommonExport";
 
 const RecommendSearchPage = () => {
-  const mapId = 1;
+  const { mapId } = useParams();
+
   const [inputText, setInputText] = useState("");
   const [searchText, setSearchText] = useState("");
 
@@ -39,7 +41,7 @@ const RecommendSearchPage = () => {
           </SearchBox>
         </SearchForm>
       </Wrapper>
-      {searchText && <RecommendResultPage searchText={searchText} setSearchText={setSearchText} />}
+      {searchText && <RecommendResultPage searchText={searchText} setSearchText={setSearchText} mapId={mapId} />}
     </>
   );
 };

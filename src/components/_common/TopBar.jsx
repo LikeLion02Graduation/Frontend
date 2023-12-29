@@ -3,13 +3,17 @@ import { useNavigate } from "react-router-dom";
 
 import arrow from "../../assets/images/arrow-left.svg";
 
-const TopBar = ({ navBtnOn = false, newMapBtnOn = false, where, titleText }) => {
+const TopBar = ({ navBtnOn = false, newMapBtnOn = false, addClickHandler, where, titleText }) => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
     console.log("이전 페이지로");
     if (where) navigate(where);
     else navigate(-1);
+
+    if (addClickHandler) {
+      addClickHandler();
+    }
   };
 
   const handleNewMapClick = () => {

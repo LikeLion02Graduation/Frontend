@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, MapNameBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
@@ -9,8 +9,9 @@ import Postit from "../../components/mymap/Postit";
 import { LinkContainer } from "../../components/mymap/LinkContainer";
 
 const MapMainPage = () => {
-  const navigate = useNavigate();
+  const { mapId } = useParams();
   const currentUserId = 2; //임시
+  const navigate = useNavigate();
 
   const [mapData, setMapData] = useState({
     id: 1, // MAP 아이디
@@ -52,7 +53,7 @@ const MapMainPage = () => {
   });
 
   const addPostit = () => {
-    navigate(`/map/${mapData.id}/r/main`);
+    navigate(`/map/${mapId}/r/main`);
   };
 
   return (
@@ -65,7 +66,7 @@ const MapMainPage = () => {
         <TitleContainer>
           <TitleBox>
             <MapTitleText mapData={mapData} />
-            <LinkContainer />
+            <LinkContainer mapId={mapId} />
           </TitleBox>
           <MapNameText>{mapData.name}</MapNameText>
         </TitleContainer>
@@ -90,7 +91,7 @@ const MapMainPage = () => {
         </GridContainer>
 
         {mapData.user !== currentUserId && (
-          <NextBtnBlack where={`/map/${mapData.id}/r/main`} text={"giving"} number={"28px"} />
+          <NextBtnBlack where={`/map/${mapId}/r/main`} text={"giving"} number={"28px"} />
         )}
       </Wrapper>
     </>

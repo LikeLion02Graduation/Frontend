@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addKeyword, deleteKeyword } from "../../redux/recommendSlice";
@@ -9,7 +10,7 @@ import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/Common
 import FeedBackModal from "../../components/mapmaking/FeedBackModal";
 
 const RecommendKeywordPage = () => {
-  const mapId = 1;
+  const { mapId } = useParams();
   const dispatch = useDispatch();
   const initSelectedKeywords = useSelector((state) => state.recommend.hashtag);
   const [selectedKeywords, setSelectedKeywords] = useState(initSelectedKeywords);

@@ -8,7 +8,7 @@ import linkig from "../../assets/images/link-ig.svg";
 import wtagBack from "../../assets/images/wtag-background.svg";
 import LinkCopyModal from "./LinkCopyModal";
 
-const LinkContainer = () => {
+const LinkContainer = ({ mapId }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
   return (
@@ -18,7 +18,7 @@ const LinkContainer = () => {
           <img src={linkcopy} alt="link" />
           <img src={linkbg} alt="link" />
         </div>
-        <div onClick={() => navigate("/map/1/share")}>
+        <div onClick={() => navigate(`/map/${mapId}/share`)}>
           <img src={linkig} alt="instagram" />
           <img src={linkbg} alt="instagram" />
         </div>
@@ -28,7 +28,7 @@ const LinkContainer = () => {
   );
 };
 
-const WTagContainer = () => {
+const WTagContainer = ({ mapId, recomId }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
   return (
@@ -38,7 +38,7 @@ const WTagContainer = () => {
           <img src={wtagBack} alt="link" />
           <span>link</span>
         </div>
-        <div onClick={() => navigate("/map/1/1/share")}>
+        <div onClick={() => navigate(`/map/${mapId}/${recomId}/share`)}>
           <img src={wtagBack} alt="instagram" />
           <span>instagram</span>
         </div>

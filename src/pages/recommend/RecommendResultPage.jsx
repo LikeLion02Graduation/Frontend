@@ -98,7 +98,7 @@ const RecommendResultPage = ({ searchText, setSearchText, mapId }) => {
 
   return (
     <Fix>
-      <TopBar navBtnOn={true} titleText="Result" />
+      <TopBar navBtnOn={true} addClickHandler={initSelectPlace} where={`/map/${mapId}/r/search`} titleText="Result" />
       <Wrapper>
         {mapState.isSelected ? (
           <>
