@@ -6,7 +6,8 @@ const PlaceFilter = ({ onPlaceSelect }) => {
   const [MetroFilterActive, setMetroFilterActive] = useState(true);
   const [doFilterActive, setDoFilterActive] = useState(false);
   const [selectedBtn, setSelectedBtn] = useState(null);
-  const [siLoc, setSiLoc] = useState(null);
+  //const [siLoc, setSiLoc] = useState(null);
+  const [selectedDo, setSelectedDo] = useState(null);
 
   const MetroLoc = [
     "서울",
@@ -30,15 +31,141 @@ const PlaceFilter = ({ onPlaceSelect }) => {
     "제주",
   ];
 
+  const siLoc = {
+    경기도: [
+      "경기도",
+      "고양시",
+      "용인시",
+      "과천시",
+      "광명시",
+      "광주시",
+      "구리시",
+      "군포시",
+      "김포시",
+      "남양주시",
+      "동두천시",
+      "부천시",
+    ],
+    경상북도: [
+      "경상북도",
+      "포항시",
+      "경주시",
+      "김천시",
+      "안동시",
+      "구미시",
+      "영주시",
+    ],
+    경상남도: [
+      "경상남도",
+      "고양시",
+      "용인시",
+      "과천시",
+      "광명시",
+      "광주시",
+      "구리시",
+      "군포시",
+      "김포시",
+      "남양주시",
+      "동두천시",
+      "부천시",
+    ],
+    충청북도: [
+      "충청북도",
+      "고양시",
+      "용인시",
+      "과천시",
+      "광명시",
+      "광주시",
+      "구리시",
+      "군포시",
+      "김포시",
+      "남양주시",
+      "동두천시",
+      "부천시",
+    ],
+    충청남도: [
+      "충청남도",
+      "고양시",
+      "용인시",
+      "과천시",
+      "광명시",
+      "광주시",
+      "구리시",
+      "군포시",
+      "김포시",
+      "남양주시",
+      "동두천시",
+      "부천시",
+    ],
+    전라북도: [
+      "전라북도",
+      "고양시",
+      "용인시",
+      "과천시",
+      "광명시",
+      "광주시",
+      "구리시",
+      "군포시",
+      "김포시",
+      "남양주시",
+      "동두천시",
+      "부천시",
+    ],
+    전라남도: [
+      "전라남도",
+      "고양시",
+      "용인시",
+      "과천시",
+      "광명시",
+      "광주시",
+      "구리시",
+      "군포시",
+      "김포시",
+      "남양주시",
+      "동두천시",
+      "부천시",
+    ],
+    강원도: [
+      "강원도",
+      "고양시",
+      "용인시",
+      "과천시",
+      "광명시",
+      "광주시",
+      "구리시",
+      "군포시",
+      "김포시",
+      "남양주시",
+      "동두천시",
+      "부천시",
+    ],
+    제주: [
+      "제주",
+      "고양시",
+      "용인시",
+      "과천시",
+      "광명시",
+      "광주시",
+      "구리시",
+      "군포시",
+      "김포시",
+      "남양주시",
+      "동두천시",
+      "부천시",
+    ],
+  };
+
   // 백 연동 관련 임시 코드
-  const getSiLoc = async () => {
+  {
+    /* const getSiLoc = async () => {
     try {
       //const response = await axios.get(`${BASE_URL}/`);
       //setSiLoc(response.data);
     } catch (error) {
       console.error("데이터 받아오기 실패", error);
     }
-  };
+  }; */
+  }
 
   const handleMetroFilterClick = () => {
     setMetroFilterActive(true);
@@ -50,19 +177,39 @@ const PlaceFilter = ({ onPlaceSelect }) => {
     setDoFilterActive(true);
     setMetroFilterActive(false);
     setSelectedBtn(null);
-    setSiLoc(null);
+    //setSiLoc(null);
+    setSelectedDo(null);
   };
 
   const handleBtnClick = (location) => {
     if (selectedBtn === location) {
       console.log("선택 취소: ", location);
       setSelectedBtn(null);
-      setSiLoc(null);
+      //setSiLoc(null);
+      setSelectedDo(null);
     } else {
       console.log("새로운 선택: ", location);
       setSelectedBtn(location);
-      getSiLoc(location);
+      //getSiLoc(location);
+      setSelectedDo(siLoc[location]);
       onPlaceSelect(location);
+    }
+  };
+
+  const handleSiLocBtnClick = (location, index) => {
+    if (index === 0) {
+      console.log("뒤로 가기 선택: ", location);
+      setSelectedBtn(null);
+      setSelectedDo(null);
+    } else {
+      if (selectedBtn === location) {
+        console.log("선택 취소: ", location);
+        setSelectedBtn(null);
+      } else {
+        console.log("새로운 선택: ", location);
+        setSelectedBtn(location);
+        onPlaceSelect(location);
+      }
     }
   };
 
@@ -98,22 +245,26 @@ const PlaceFilter = ({ onPlaceSelect }) => {
         )}
         {doFilterActive && (
           <>
-            {siLoc ? (
+            {selectedDo ? (
               <SiContent>
-                {siLoc.map((location, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleBtnClick(location)}
-                    style={{
-                      backgroundColor:
-                        selectedBtn === location
-                          ? "var(--yellow)"
-                          : "var(--white)",
-                    }}
-                  >
-                    {location}
-                  </button>
-                ))}
+                {/*나중에 selectedDo를 siLoc로*/}
+                {selectedDo &&
+                  selectedDo.map((location, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleSiLocBtnClick(location, index)}
+                      style={{
+                        backgroundColor:
+                          index === 0
+                            ? "var(--yellow)"
+                            : selectedBtn === location
+                            ? "#D9D9D9"
+                            : "var(--white)",
+                      }}
+                    >
+                      {location}
+                    </button>
+                  ))}
               </SiContent>
             ) : (
               <DoContent>
@@ -125,6 +276,8 @@ const PlaceFilter = ({ onPlaceSelect }) => {
                       backgroundColor:
                         selectedBtn === location
                           ? "var(--yellow)"
+                          : selectedBtn
+                          ? "var(--grey)"
                           : "var(--white)",
                     }}
                   >
