@@ -9,7 +9,7 @@ import HotMapBox from "../../components/payment/HotMapBox";
 
 import goback from "../../assets/images/go-back.svg";
 import gofront from "../../assets/images/go-front.svg";
-import monkey_1 from "../../assets/images/monkey-1.png";
+import monkey_1 from "../../assets/images/monkey-1.png"; //임시이미지
 
 const HotMapPage = () => {
   const [BackBtnActive, setBackBtnActive] = useState(true);
@@ -27,6 +27,7 @@ const HotMapPage = () => {
 
   const mapPlace = useSelector((state) => state.mapmaking.place);
 
+  // 임시 목데이터
   const HotMapData = [
     {
       id: 1,
@@ -115,7 +116,7 @@ const WhiteBox = styled.div`
   span {
     color: var(--Black2);
     text-align: center;
-    font-family: Apple SD Gothic Neo;
+    font-family: "Apple SD Gothic Neo";
     font-size: 14px;
     font-weight: 600;
     line-height: 145%; /* 20.3px */
@@ -131,7 +132,7 @@ const Filters = styled.div`
   width: 100%;
   color: var(--black2);
   text-align: center;
-  font-family: Apple SD Gothic Neo;
+  font-family: "Apple SD Gothic Neo";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
