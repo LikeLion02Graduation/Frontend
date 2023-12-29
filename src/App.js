@@ -8,6 +8,7 @@ import SignUpProfilePage from "./pages/auth/SignUpProfilePage";
 import SocialProfilePage from "./pages/auth/SocialProfilePage";
 
 import HomePage from "./pages/main/HomePage";
+import MyPage from "./pages/main/MyPage";
 
 import RecommendMainPage from "./pages/recommend/RecommendMainPage";
 import RecommendSearchPage from "./pages/recommend/RecommendSearchPage";
@@ -29,6 +30,8 @@ import DonePage from "./pages/mapmaking/DonePage";
 import SharePage from "./pages/mapmaking/SharePage";
 import PaymentPage from "./pages/payment/PaymentPage";
 
+import HotMapPage from "./pages/payment/HotMapPage";
+
 function App() {
   return (
     <Router>
@@ -41,6 +44,8 @@ function App() {
 
         {/* main */}
         <Route path={"/"} element={<HomePage />} />
+        <Route path={"/my"} element={<MyPage />} />
+
         {/* recommend */}
         <Route path={"/map/:mapId/r/main"} element={<RecommendMainPage />} />
         <Route path={"/map/:mapId/r/search"} element={<RecommendSearchPage />} />
@@ -64,6 +69,7 @@ function App() {
         <Route path={"/mapmaking/share"} element={<SharePage />} />
 
         {/* payment */}
+        <Route path={"/payment/hotmap"} element={<HotMapPage />} />
         <Route path={"/map/:mapId/pay"} element={<PaymentPage />} />
       </Routes>
     </Router>

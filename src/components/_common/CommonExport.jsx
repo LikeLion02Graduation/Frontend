@@ -112,7 +112,18 @@ const Wrapper = styled.div`
   font-family: "Hack Regular";
 `;
 
-export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, MainWebBox, Wrapper };
+export {
+  WhiteBox,
+  MapNameBox,
+  YellowBox,
+  Line1,
+  Line2,
+  NextBtnBlack,
+  NextBtnWhite,
+  LongBtnBlack,
+  MainWebBox,
+  Wrapper,
+};
 
 const Box = styled.div`
   display: flex;
@@ -125,7 +136,7 @@ const Box = styled.div`
   span {
     color: var(--Black2);
     text-align: center;
-    font-family: Apple SD Gothic Neo;
+    font-family: "Apple SD Gothic Neo";
     font-size: 14px;
     font-weight: 600;
     line-height: 145%; /* 20.3px */

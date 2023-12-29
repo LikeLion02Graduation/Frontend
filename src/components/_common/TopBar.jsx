@@ -2,8 +2,16 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import arrow from "../../assets/images/arrow-left.svg";
+import ham from "../../assets/images/ham.svg";
 
-const TopBar = ({ navBtnOn = false, newMapBtnOn = false, addClickHandler, where, titleText }) => {
+const TopBar = ({
+  navBtnOn = false,
+  newMapBtnOn = false,
+  myPageBtnOn = false,
+  addClickHandler,
+  where,
+  titleText,
+}) => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -20,10 +28,27 @@ const TopBar = ({ navBtnOn = false, newMapBtnOn = false, addClickHandler, where,
     navigate("/mapmaking/main");
   };
 
+  const handleMyPageClick = () => {
+    navigate("/my");
+  };
+
   return (
     <Wrapper>
       <div>
-        {navBtnOn && <img onClick={handleBackClick} src={arrow} alt="go to previous page" />}
+        {navBtnOn && (
+          <img
+            onClick={handleBackClick}
+            src={arrow}
+            alt="go to previous page"
+          />
+        )}
+        {myPageBtnOn && (
+          <img
+            src={ham}
+            onClick={handleMyPageClick}
+            style={{ width: "25px" }}
+          />
+        )}
         <Title>{titleText}</Title>
         {newMapBtnOn && <button onClick={handleNewMapClick}>새 지도</button>}
       </div>
