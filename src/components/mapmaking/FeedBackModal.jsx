@@ -112,7 +112,7 @@ const InputBox = styled.textarea`
   margin-top: 31px;
   padding: 18px 22px;
   box-sizing: border-box;
-  width: 393px;
+  width: 399px;
   height: 199px;
   border: 3px solid var(--yellow);
   background-color: var(--white);

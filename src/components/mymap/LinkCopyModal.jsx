@@ -28,7 +28,6 @@ const Background = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-
   opacity: 0.8;
   background: var(--black1);
 `;
@@ -53,7 +52,7 @@ const Modal = styled.div`
 
 const Box = styled.div`
   margin-top: 125px;
-  width: 441px;
+  width: 110vw;
   height: 61px;
   flex-shrink: 0;
   display: flex;
