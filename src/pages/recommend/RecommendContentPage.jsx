@@ -3,7 +3,8 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { initRecommend, setTitleContent } from "../../redux/recommendSlice";
+import { setRecomInfo } from "../../redux/recommendSlice";
+import { persistor } from "../../index";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
@@ -12,7 +13,7 @@ import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendContentPage = () => {
-  const mapId = 1;
+  const mapId = 1; //params로 받기?
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const savedPlaces = useSelector((state) => state.recommend.place);
@@ -37,10 +38,13 @@ const RecommendContentPage = () => {
     } else if (trimmedContent === "") {
       alert("내용을 작성해주세요");
     } else {
-      dispatch(setTitleContent({ title: trimmedTitle, content: trimmedContent }));
+      dispatch(setRecomInfo({ map_id: mapId, user_id: 1, title: trimmedTitle, content: trimmedContent }));
 
-      dispatch(initRecommend());
-      navigate(`/map/${mapId}/1`);
+      setTimeout(async () => {
+        await persistor.purge();
+      }, 200);
+
+      navigate(`/map/${mapId}/1`); //recom_id 데이터 받아서 넣기
     }
   };
 
