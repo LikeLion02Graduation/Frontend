@@ -28,7 +28,7 @@ const MapCommendWritePage = () => {
 
   const closeModal = () => {
     setSavedEmoji(null);
-    navigate("/map/1/1/commend");
+    navigate(-1);
   };
 
   console.log(selectedEmoji, savedEmoji);
@@ -36,7 +36,7 @@ const MapCommendWritePage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} where={"/map/1/1/commend"} titleText="recommend" />
+      <TopBar navBtnOn={true} titleText="recommend" />
       <Wrapper>
         <Title>
           <span>받은 추천에 반응을 남겨 보세요 !</span>

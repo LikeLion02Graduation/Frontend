@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 
 const MapCommendPage = () => {
+  const { mapId, recomId } = useParams();
+  const previousUrl = `/map/${mapId}/${recomId}`;
+  const nextUrl = `/map/${mapId}/${recomId}/commend/w`;
   const currentUserId = 1; //임시
+
   const [reactData, setReactData] = useState({
     mapuserid: 1,
     emoji: 1,
@@ -17,7 +22,7 @@ const MapCommendPage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} where={"/map/1/1"} titleText="recommend" />
+      <TopBar navBtnOn={true} where={previousUrl} titleText="recommend" />
       <Wrapper>
         <Title>
           <span>여기 안가면 평생 후회할 것입니다.</span>
@@ -30,20 +35,16 @@ const MapCommendPage = () => {
             <Commend>아..... 진짜 너무 맛있고 눈물만 나는 엄청난 맛입니다.</Commend>
             <Line1 />
             <Emoji>{emojis[reactData.emoji]}</Emoji>
-            {reactData.mapuserid === currentUserId && (
-              <NextBtnWhite where={"/map/1/1/commend/w"} text={"edit"} number={"96px"} />
-            )}
+            {reactData.mapuserid === currentUserId && <NextBtnWhite where={nextUrl} text={"edit"} number={"96px"} />}
           </>
         ) : (
           <>
             <Commend style={{ opacity: "0.3", paddingLeft: "47px" }}>아직 남겨진 반응이...</Commend>
             <Line1 />
-            {reactData.mapuserid === currentUserId && (
-              <NextBtnWhite where={"/map/1/1/commend/w"} text={"writing"} number={"96px"} />
-            )}
+            {reactData.mapuserid === currentUserId && <NextBtnWhite where={nextUrl} text={"writing"} number={"96px"} />}
           </>
         )}
-        <NextBtnBlack where={"/map/1/1"} text={"back"} number={"28px"} />
+        <NextBtnBlack where={previousUrl} text={"back"} number={"28px"} />
       </Wrapper>
     </>
   );

@@ -8,6 +8,7 @@ const TopBar = ({
   navBtnOn = false,
   newMapBtnOn = false,
   myPageBtnOn = false,
+  addClickHandler,
   where,
   titleText,
 }) => {
@@ -17,6 +18,10 @@ const TopBar = ({
     console.log("이전 페이지로");
     if (where) navigate(where);
     else navigate(-1);
+
+    if (addClickHandler) {
+      addClickHandler();
+    }
   };
 
   const handleNewMapClick = () => {

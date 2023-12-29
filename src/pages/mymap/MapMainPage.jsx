@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, MapNameBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 import { MapTitleText } from "../../components/mymap/MapTitleText";
 import Postit from "../../components/mymap/Postit";
 import { LinkContainer } from "../../components/mymap/LinkContainer";
+import NoRecommendModal from "../../components/mymap/NoRecommendModal";
 
 const MapMainPage = () => {
-  const navigate = useNavigate();
+  const { mapId } = useParams();
   const currentUserId = 2; //임시
+  const navigate = useNavigate();
 
   const [mapData, setMapData] = useState({
     id: 1, // MAP 아이디
@@ -19,11 +21,19 @@ const MapMainPage = () => {
     img: "[이미지url]",
     description: "2023 12 30 떠난다 추천 부탁해~~",
     created_at: "2023-11-11 12:12:11",
-    hashtag: ["카페", "국밥"],
+    hashtag: [
+      {
+        tagname: "맛집",
+      },
+      {
+        tagname: "명소",
+      },
+    ],
     user: {
       id: 1,
       nickname: "서연",
     },
+    map_mine: true,
     do_buy: true, // 현재 사용자가 이 map을 구매했는지 -> 이에 따라 추천 detail 페이지 url on/off
     recommend: [
       {
@@ -40,7 +50,7 @@ const MapMainPage = () => {
       {
         id: 2, // RECOMMEND 아이디
         user: {
-          id: 12,
+          id: 2,
           username: "채린",
           profile: "[이미지url]",
         },
@@ -52,7 +62,7 @@ const MapMainPage = () => {
   });
 
   const addPostit = () => {
-    navigate(`/map/${mapData.id}/r/main`);
+    navigate(`/map/${mapId}/r/main`);
   };
 
   return (
@@ -65,14 +75,14 @@ const MapMainPage = () => {
         <TitleContainer>
           <TitleBox>
             <MapTitleText mapData={mapData} />
-            <LinkContainer />
+            <LinkContainer mapId={mapId} />
           </TitleBox>
           <MapNameText>{mapData.name}</MapNameText>
         </TitleContainer>
 
         <TagContainer>
           {mapData.hashtag.map((tag) => (
-            <span key={tag}>#{tag}</span>
+            <span key={tag.tagname}>#{tag.tagname}</span>
           ))}
         </TagContainer>
 
@@ -85,12 +95,13 @@ const MapMainPage = () => {
         <GridContainer>
           <AddPostit onClick={addPostit}>+</AddPostit>
           {mapData.recommend.map((item) => (
-            <Postit key={item.id} mapDataId={mapData.id} item={item} />
+            <Postit key={item.id} mapData={mapData} currentUserId={currentUserId} item={item} />
           ))}
         </GridContainer>
-
-        {mapData.user !== currentUserId && (
-          <NextBtnBlack where={`/map/${mapData.id}/r/main`} text={"giving"} number={"28px"} />
+        {!mapData.map_mine ? (
+          <NextBtnBlack where={`/map/${mapId}/r/main`} text={"giving"} number={"28px"} />
+        ) : (
+          mapData.recommend.length === 0 && <NoRecommendModal location={mapData.location} />
         )}
       </Wrapper>
     </>
@@ -146,16 +157,11 @@ const TagContainer = styled.div`
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
 
-  @media (max-width: 541px) {
-    width: 100%;
-    border: none;
-    border-top: 1.5px solid var(--black1);
-    border-bottom: 1.5px solid var(--black1);
-    padding: 0 90px;
-  }
-
   @media (max-width: 393px) {
-    padding: 0 30px;
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    padding: 0 36px;
   }
 `;
 
@@ -193,7 +199,7 @@ const GridTitle = styled.div`
 
 const GridContainer = styled.div`
   margin: 12px 22px 10px 21px;
-  padding-bottom: 120px;
+  /* padding-bottom: 120px; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 36.84px;

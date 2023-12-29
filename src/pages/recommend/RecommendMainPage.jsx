@@ -1,9 +1,10 @@
 import React from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { deletePlace } from "../../redux/recommendSlice";
+import { persistor } from "../../index";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, LongBtnBlack, MapNameBox, Wrapper, YellowBox } from "../../components/_common/CommonExport";
@@ -13,7 +14,7 @@ import xBtn2 from "../../assets/images/x-btn-2.svg";
 import triangle from "../../assets/images/triangle.svg";
 
 const RecommendMainPage = () => {
-  const mapId = 1;
+  const { mapId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const savedPlaces = useSelector((state) => state.recommend?.place);
@@ -26,9 +27,15 @@ const RecommendMainPage = () => {
     navigate(`/map/${mapId}/r/search`);
   };
 
+  const initRecommend = () => {
+    setTimeout(async () => {
+      await persistor.purge();
+    }, 200);
+  };
+
   return (
     <>
-      <TopBar navBtnOn={true} titleText="giving" />
+      <TopBar navBtnOn={true} addClickHandler={initRecommend} where={`/map/${mapId}`} titleText="giving" />
       <Wrapper>
         <MapNameBox place="부산" user="시은" />
         <Line2 />

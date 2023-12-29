@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { PURGE } from 'redux-persist';
+import { PURGE } from "redux-persist";
 
 const initialState = {
-  map_id: 1,
+  map_id: 0,
   title: "",
   content: "",
-  user_id: 1,
+  user_id: 0,
   place: [],
   hashtag: [],
 };
@@ -14,17 +14,9 @@ export const recommendSlice = createSlice({
   name: "RecommendSlice",
   initialState,
   reducers: {
-    initRecommend: (state) => {
-      state.map_id = initialState.map_id;
-      state.title = initialState.title;
-      state.content = initialState.content;
-      state.place = initialState.place;
-      state.hashtag = initialState.hashtag;
-    },
-    setMapId: (state, action) => {
+    setRecomInfo: (state, action) => {
       state.map_id = action.payload.map_id;
-    },
-    setTitleContent: (state, action) => {
+      state.user_id = action.payload.user_id;
       state.title = action.payload.title;
       state.content = action.payload.content;
     },
@@ -46,12 +38,11 @@ export const recommendSlice = createSlice({
       state.hashtag = state.hashtag.filter((keyword) => keyword !== keywordToDelete);
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(PURGE, () => initialState);
-  // },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
+  },
 });
 
-export const { initRecommend, setMapId, setTitleContent, addPlace, deletePlace, addKeyword, deleteKeyword } =
-  recommendSlice.actions;
+export const { setRecomInfo, addPlace, deletePlace, addKeyword, deleteKeyword } = recommendSlice.actions;
 
 export default recommendSlice.reducer;

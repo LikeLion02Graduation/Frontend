@@ -1,25 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
-const LinkCopyModal = ({ onClose }) => {
+const PaymentModal = () => {
   return (
     <>
-      <Background onClick={onClose} />
+      <Background />
       <Modal>
-        <Box style={{ transform: "rotate(15deg)" }}>내 지도 링크를 클립보드에 복사했어요</Box>
-        <Box style={{ transform: "rotate(-15deg)" }}>다양한 곳에 링크를 공유하고 받은 추천을 자랑하세요 🤭</Box>
+        <Box style={{ transform: "rotate(15deg)" }}>성공적으로 구매가 완료되었습니다 !</Box>
+        <Box style={{ transform: "rotate(-15deg)" }}>내 지도에서 확인하기</Box>
         <Box
-          style={{ marginTop: "150px", fontFamily: "Hack Regular", fontWeight: "700", cursor: "pointer" }}
-          onClick={onClose}
+          style={{
+            marginTop: "150px",
+            background: "var(--gray)",
+            fontFamily: "Hack Regular",
+            fontWeight: "700",
+            cursor: "pointer",
+          }}
         >
-          Ok
+          추천 콘텐츠 더 알아보기
         </Box>
       </Modal>
     </>
   );
 };
 
-export default LinkCopyModal;
+export default PaymentModal;
 
 const Background = styled.div`
   position: fixed;
@@ -62,4 +67,8 @@ const Box = styled.div`
   background: var(--yellow);
 
   font-family: Apple SD Gothic Neo;
+
+  span {
+    font-weight: 900;
+  }
 `;
