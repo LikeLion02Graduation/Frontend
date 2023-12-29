@@ -12,7 +12,7 @@ const PaymentModal = () => {
           style={{
             marginTop: "150px",
             background: "var(--gray)",
-            fontFamily: "Hack-Regular",
+            fontFamily: "Hack Regular",
             fontWeight: "700",
             cursor: "pointer",
           }}

@@ -2,36 +2,11 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line1, Line2, NextBtnBlack, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
+import { Line1, Line2, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 
 import triangle from "../../assets/images/triangle.svg";
 
 const PaymentPage = () => {
-  // const currentUserId = 1;
-
-  const [recommendData, setRecommendData] = useState({
-    id: "1",
-    title: "여기 안가면 평생 후회할 것입니다...",
-    content:
-      "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
-    username: "혜지",
-    hashtag: ["카페"],
-    place: [
-      {
-        id: 23,
-        name: "수원왕족발",
-        address: "경기도 수원시 어쩌구",
-        link: "[카카오 url]",
-      },
-    ],
-    react: {
-      id: 12,
-      emoji: 2,
-      content: "와 너무 고마워!! 진짜 맛있더라",
-      user: 1,
-    },
-  });
-
   return (
     <>
       <TopBar navBtnOn={true} titleText="recommend" />
@@ -128,7 +103,7 @@ const PayBtn = styled.div`
   background: var(--yellow);
 
   text-align: center;
-  font-family: "Hack-Regular";
+  font-family: "Hack Regular";
   font-size: 10.81px;
   font-weight: 700;
 

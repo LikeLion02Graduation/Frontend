@@ -23,7 +23,7 @@ const LockModal = () => {
         <Box style={{ transform: "rotate(-15deg)" }}>결제하고 자세히 보기..🫶</Box>
         <Box
           onClick={goBack}
-          style={{ marginTop: "150px", fontFamily: "Hack-Regular", fontWeight: "700", cursor: "pointer" }}
+          style={{ marginTop: "150px", fontFamily: "Hack Regular", fontWeight: "700", cursor: "pointer" }}
         >
           back
         </Box>
