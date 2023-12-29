@@ -44,13 +44,21 @@ const HomePage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={false} newMapBtnOn={true} titleText="Main" />
+      <TopBar
+        navBtnOn={false}
+        myPageBtnOn={true}
+        newMapBtnOn={true}
+        titleText="Main"
+      />
       <Wrapper>
         <Filters>
           <MyFilter onClick={handleMyFilterClick} active={myFilterActive}>
             MY
           </MyFilter>
-          <OthersFilter onClick={handleOthersFilterClick} active={othersFilterActive}>
+          <OthersFilter
+            onClick={handleOthersFilterClick}
+            active={othersFilterActive}
+          >
             Others
           </OthersFilter>
         </Filters>

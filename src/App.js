@@ -8,6 +8,7 @@ import SignUpProfilePage from "./pages/auth/SignUpProfilePage";
 import SocialProfilePage from "./pages/auth/SocialProfilePage";
 
 import HomePage from "./pages/main/HomePage";
+import MyPage from "./pages/main/MyPage";
 
 import RecommendMainPage from "./pages/recommend/RecommendMainPage";
 import RecommendSearchPage from "./pages/recommend/RecommendSearchPage";
@@ -42,6 +43,8 @@ function App() {
 
         {/* main */}
         <Route path={"/"} element={<HomePage />} />
+        <Route path={"/my"} element={<MyPage />} />
+
         {/* recommend */}
         <Route path={"/map/:id/r/main"} element={<RecommendMainPage />} />
         <Route path={"/map/:id/r/search"} element={<RecommendSearchPage />} />
