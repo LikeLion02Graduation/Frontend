@@ -28,6 +28,8 @@ import ImagePage from "./pages/mapmaking/ImagePage";
 import DonePage from "./pages/mapmaking/DonePage";
 import SharePage from "./pages/mapmaking/SharePage";
 
+import HotMapPage from "./pages/payment/HotMapPage";
+
 function App() {
   return (
     <Router>
@@ -70,6 +72,9 @@ function App() {
         <Route path={"/mapmaking/image"} element={<ImagePage />} />
         <Route path={"/mapmaking/done"} element={<DonePage />} />
         <Route path={"/mapmaking/share"} element={<SharePage />} />
+
+        {/* payment */}
+        <Route path={"/payment/hotmap"} element={<HotMapPage />} />
       </Routes>
     </Router>
   );
