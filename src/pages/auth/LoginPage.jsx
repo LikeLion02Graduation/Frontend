@@ -122,4 +122,5 @@ const Kakao = styled.img`
   width: 57px;
   height: 57px;
   flex-shrink: 0;
+  border-radius: 50%;
 `;
