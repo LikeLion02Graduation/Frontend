@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const Postit = ({ mapDataId, item }) => {
+const Postit = ({ mapData, item }) => {
   const navigate = useNavigate();
 
   const getPostitStyle = () => {
@@ -11,14 +11,13 @@ const Postit = ({ mapDataId, item }) => {
     return styles[randomIndex];
   };
 
+  const goToRecommendPage = () => {
+    if (mapData.map_mine || mapData.do_buy || item.mine) navigate(`/map/${mapData.id}/${item.id}`);
+    else alert("이 페이지를 열람할 수 없습니다.");
+  };
+
   return (
-    <Style
-      key={item.id}
-      onClick={() => {
-        navigate(`/map/${mapDataId}/${item.id}`);
-      }}
-      style={getPostitStyle()}
-    >
+    <Style key={item.id} onClick={goToRecommendPage} style={getPostitStyle()}>
       From.
       <br />
       {item.user.username}
