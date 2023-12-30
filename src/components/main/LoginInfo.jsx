@@ -7,13 +7,26 @@ const LoginInfo = () => {
       <Profile>프로필 사진</Profile>
       <Container>
         <Box>
-          <span>사용중인 아이디</span>
+          <Title>
+            <TextBox>
+              <span>사용중인 아이디</span>
+              <div />
+            </TextBox>
+          </Title>
           <UserId>
-            <div>tldms545</div>
+            <TextBox>
+              <div className="left"> tldms545</div>
+              <div />
+            </TextBox>
           </UserId>
         </Box>
         <Box>
-          <span>사용중인 닉네임</span>
+          <Title>
+            <TextBox>
+              <span>사용중인 닉네임</span>
+              <div />
+            </TextBox>
+          </Title>
           <UserName>
             <TextBox>
               <div className="left">이시은입니다람쥐</div>
@@ -79,19 +92,6 @@ const Box = styled.div`
   width: 100%;
   padding: 0;
   margin: 0;
-
-  span {
-    margin-bottom: 14px;
-    width: 393px;
-    padding-left: 28px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    color: var(--black1);
-    font-family: "Hack Regular";
-    font-size: 14px;
-    font-weight: 400;
-  }
 `;
 
 const UserId = styled.div`
@@ -103,22 +103,14 @@ const UserId = styled.div`
   border: 1.5px solid var(--black1);
   background: var(--gray);
   border-left: none;
-
-  div {
-    width: 393px;
-    padding-left: 28px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    color: var(--black3);
-    font-family: "Hack Regular";
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 145%; /* 20.3px */
-    letter-spacing: 1.4px;
-  }
 `;
 
+const Title = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+`;
 const TextBox = styled.div`
   width: 393px;
   padding-left: 28px;
@@ -127,17 +119,23 @@ const TextBox = styled.div`
   justify-content: space-between;
   align-items: center;
   font-family: "Hack Regular";
-  color: var(--black3);
   font-size: 14px;
   font-weight: 400;
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
 
+  span {
+    margin-bottom: 14px;
+    color: var(--black1);
+  }
+
   .left {
+    color: var(--black3);
   }
 
   .right {
     text-align: right;
+    color: var(--black3);
     opacity: 40%;
     cursor: pointer;
   }

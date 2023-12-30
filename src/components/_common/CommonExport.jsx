@@ -113,6 +113,7 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
   background: var(--white);
   font-family: "Hack Regular";
 `;
