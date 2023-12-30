@@ -13,19 +13,19 @@ const KeywordGrid = (props) => {
 
     const updatedSelectedKeywords = isSelected
       ? selectedKeywords.filter((selectedKeyword) => selectedKeyword !== keyword)
-      : currentSelectedCount < 4
+      : currentSelectedCount < 5
       ? [...selectedKeywords, keyword]
       : selectedKeywords;
 
     setSelectedKeywords(updatedSelectedKeywords);
 
-    if (!isSelected && currentSelectedCount >= 4) {
-      alert("최대 4개의 키워드까지만 선택할 수 있습니다.");
+    if (!isSelected && currentSelectedCount >= 5) {
+      alert("최대 5개의 키워드까지만 선택할 수 있습니다.");
     }
 
     if (isSelected) {
       dispatch(deleteReducer(keyword));
-    } else if (currentSelectedCount < 4) {
+    } else if (currentSelectedCount < 5) {
       dispatch(addReducer(keyword));
     }
   };
@@ -47,7 +47,7 @@ const KeywordGrid = (props) => {
           </Keyword>
         ))}
       </Grid>
-      <Noti>키워드 선택은 최대 4개까지..</Noti>
+      <Noti>키워드 선택은 최대 5개까지..</Noti>
     </>
   );
 };
