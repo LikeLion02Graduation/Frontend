@@ -101,6 +101,7 @@ const PayBtn = styled.div`
   height: 26px;
   flex-shrink: 0;
   background: var(--yellow);
+  cursor: pointer;
 
   text-align: center;
   font-family: "Hack Regular";

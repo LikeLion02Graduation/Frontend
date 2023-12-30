@@ -55,9 +55,7 @@ const MapRecommendSharePage = () => {
               <span key={item}>#{item}</span>
             ))}
           </TagContainer>
-          <Description>
-            <div>{recommendData.content}</div>
-          </Description>
+          <Description>{recommendData.content}</Description>
           <SelectedPlaces>
             {recommendData.place.map((item) => (
               <div key={item}>
@@ -124,6 +122,9 @@ const Description = styled.div`
   font-weight: 400;
   line-height: 20px; /* 133.333% */
   letter-spacing: 0.75px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const SelectedPlaces = styled.div`

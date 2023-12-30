@@ -80,6 +80,7 @@ const WTag = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     img {
       height: 16.59px;

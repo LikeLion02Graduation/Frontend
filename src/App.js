@@ -28,9 +28,10 @@ import NamePage from "./pages/mapmaking/NamePage";
 import ImagePage from "./pages/mapmaking/ImagePage";
 import DonePage from "./pages/mapmaking/DonePage";
 import SharePage from "./pages/mapmaking/SharePage";
-import PaymentPage from "./pages/payment/PaymentPage";
 
 import HotMapPage from "./pages/payment/HotMapPage";
+import PreviewPage from "./pages/payment/PreviewPage";
+import PaymentPage from "./pages/payment/PaymentPage";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
 
         {/* payment */}
         <Route path={"/payment/hotmap"} element={<HotMapPage />} />
+        <Route path={"/map/:mapId/preview"} element={<PreviewPage />} />
         <Route path={"/map/:mapId/pay"} element={<PaymentPage />} />
       </Routes>
     </Router>
