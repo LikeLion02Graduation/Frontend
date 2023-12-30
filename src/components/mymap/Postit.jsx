@@ -20,7 +20,7 @@ const Postit = ({ mapData, item }) => {
     <Style key={item.id} onClick={goToRecommendPage} style={getPostitStyle()}>
       From.
       <br />
-      {item.user.username}
+      {item.user.nickname}
     </Style>
   );
 };

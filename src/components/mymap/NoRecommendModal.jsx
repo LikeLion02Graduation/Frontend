@@ -25,6 +25,7 @@ const GrayBox = styled.div`
   border: 1.5px solid var(--black1);
   background: var(--gray);
   transform: rotate(8.527deg);
+  cursor: pointer;
 
   color: var(--black3);
   text-align: center;

@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line1, Line2, MapNameBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
+import { Line1, Line2, MapNameBox, Wrapper } from "../../components/_common/CommonExport";
 import { MapTitleText } from "../../components/mymap/MapTitleText";
 import Postit from "../../components/mymap/Postit";
 import { LinkContainer } from "../../components/mymap/LinkContainer";
-import NoRecommendModal from "../../components/mymap/NoRecommendModal";
+import LockModal from "../../components/payment/LockModal";
 
-const MapMainPage = () => {
-  const { mapId } = useParams();
-  const navigate = useNavigate();
-
+const PreviewPage = () => {
   const [mapData, setMapData] = useState({
     id: 1, // MAP 아이디
     name: "부산 갈거야",
@@ -32,31 +28,33 @@ const MapMainPage = () => {
       id: 1,
       nickname: "서연",
     },
-    map_mine: false,
-    do_buy: false,
+    map_mine: true,
+    do_buy: true, // 현재 사용자가 이 map을 구매했는지 -> 이에 따라 추천 detail 페이지 url on/off
     recommend: [
       {
-        id: 11,
+        id: 1, // RECOMMEND 아이디
         user: {
           id: 12,
-          nickname: "혜지",
+          username: "혜지",
+          profile: "[이미지url]",
         },
-        mine: false,
+        created_at: "2023-11-11 12:12:11",
+        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
+        exist_react: true,
       },
       {
-        id: 111,
+        id: 2, // RECOMMEND 아이디
         user: {
-          id: 13,
-          nickname: "채린",
+          id: 2,
+          username: "채린",
+          profile: "[이미지url]",
         },
-        mine: true,
+        created_at: "2023-11-11 12:12:11",
+        content: "여기 안가면 평생", // 미리보기로 8글자만 제공
+        exist_react: true,
       },
     ],
   });
-
-  const addPostit = () => {
-    navigate(`/map/${mapId}/r/main`);
-  };
 
   return (
     <>
@@ -68,7 +66,7 @@ const MapMainPage = () => {
         <TitleContainer>
           <TitleBox>
             <MapTitleText mapData={mapData} />
-            <LinkContainer mapId={mapId} />
+            <LinkContainer />
           </TitleBox>
           <MapNameText>{mapData.name}</MapNameText>
         </TitleContainer>
@@ -86,22 +84,18 @@ const MapMainPage = () => {
 
         <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
         <GridContainer>
-          <AddPostit onClick={addPostit}>+</AddPostit>
+          <AddPostit>+</AddPostit>
           {mapData.recommend.map((item) => (
             <Postit key={item.id} mapData={mapData} item={item} />
           ))}
         </GridContainer>
-        {!mapData.map_mine ? (
-          <NextBtnBlack where={`/map/${mapId}/r/main`} text={"giving"} number={"28px"} />
-        ) : (
-          mapData.recommend.length === 0 && <NoRecommendModal location={mapData.location} />
-        )}
       </Wrapper>
+      <LockModal />
     </>
   );
 };
 
-export default MapMainPage;
+export default PreviewPage;
 
 const TitleContainer = styled.div`
   margin-top: 43px;

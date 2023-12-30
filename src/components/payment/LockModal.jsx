@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const LockModal = () => {
+  const { mapId } = useParams();
   const navigate = useNavigate();
 
-  // const goPayment = () => {
-  //   navigate();
-  // };
+  const goPayment = () => {
+    navigate(`/map/${mapId}/pay`);
+  };
 
   const goBack = () => {
     navigate(-1);
@@ -20,7 +21,9 @@ const LockModal = () => {
         <Box style={{ transform: "rotate(15deg)", background: "var(--gray)" }}>
           <span>부산에 가다2</span>가 탐나신다면 ..
         </Box>
-        <Box style={{ transform: "rotate(-15deg)" }}>결제하고 자세히 보기..🫶</Box>
+        <Box onClick={goPayment} style={{ transform: "rotate(-15deg)", cursor: "pointer" }}>
+          결제하고 자세히 보기..🫶
+        </Box>
         <Box
           onClick={goBack}
           style={{ marginTop: "150px", fontFamily: "Hack Regular", fontWeight: "700", cursor: "pointer" }}

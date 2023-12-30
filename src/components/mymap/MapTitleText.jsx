@@ -1,16 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useSelector } from "react-redux";
-
 const MapTitleText = ({ mapData }) => {
-  const mapPlace = useSelector((state) => state.mapmaking.place);
-
   return (
     <TitleText>
       <div>
         <BlackBackGround>{mapData.location}</BlackBackGround>에 가는
-        {/*<BlackBackGround>{mapPlace}</BlackBackGround>에 가는*/}
       </div>
       <div>
         <BlackBackGround>{mapData.user.nickname}</BlackBackGround>의 지도

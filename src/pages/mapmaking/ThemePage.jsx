@@ -7,7 +7,7 @@ import { addTheme, deleteTheme } from "../../redux/mapmakingSlice";
 import TopBar from "../../components/_common/TopBar";
 import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 import FeedBackModal from "../../components/mapmaking/FeedBackModal";
-import KeywordGrid from "../../components/mapmaking/KeywordGrid";
+import KeywordGrid from "../../components/_common/KeywordGrid";
 
 const ThemePage = () => {
   const initSelectedThemes = useSelector((state) => state.mapmaking.hashtag);

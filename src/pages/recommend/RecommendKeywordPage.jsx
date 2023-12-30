@@ -8,7 +8,7 @@ import { addKeyword, deleteKeyword } from "../../redux/recommendSlice";
 import TopBar from "../../components/_common/TopBar";
 import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 import FeedBackModal from "../../components/mapmaking/FeedBackModal";
-import KeywordGrid from "../../components/mapmaking/KeywordGrid";
+import KeywordGrid from "../../components/_common/KeywordGrid";
 
 const RecommendKeywordPage = () => {
   const { mapId } = useParams();
