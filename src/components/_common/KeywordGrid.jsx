@@ -30,7 +30,7 @@ const KeywordGrid = (props) => {
     }
   };
 
-  const keywords = ["맛집", "명소", "카페", "자연", "산책", "빵", "국밥", "브런치"];
+  const keywords = ["맛집", "명소", "카페", "자연", "산책", "빵", "비건", "브런치"];
   return (
     <>
       <Grid>
