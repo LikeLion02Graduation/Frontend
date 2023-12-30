@@ -8,7 +8,11 @@ import gofront from "../../assets/images/go-front.svg";
 import xbtn1 from "../../assets/images/x-btn-1.svg";
 import xbtn2 from "../../assets/images/x-btn-2.svg";
 
-const NoticeBox = ({ children }) => {
+const NoticeBox = ({ children, onDelete }) => {
+  const handleDeleteClick = (itemId) => {
+    onDelete(itemId);
+  };
+
   return (
     <Wrapper>
       {children.map((item) => (
@@ -42,7 +46,7 @@ const NoticeBox = ({ children }) => {
               </Content>
             </Box2>
             <DeleteBtnContainer>
-              <DeleteBtn>
+              <DeleteBtn onClick={() => handleDeleteClick(item.id)}>
                 <img src={xbtn1} />
                 <img src={xbtn2} />
               </DeleteBtn>
@@ -144,6 +148,7 @@ const DeleteBtnContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  cursor: pointer;
 `;
 
 const DeleteBtn = styled.div`
