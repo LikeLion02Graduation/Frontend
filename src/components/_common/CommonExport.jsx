@@ -107,7 +107,12 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100vw;
   height: calc(100vh - 106px);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
   background: var(--white);
   font-family: "Hack Regular";
 `;

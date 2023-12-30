@@ -7,25 +7,15 @@ import {
   WhiteBox,
   Line2,
 } from "../../components/_common/CommonExport";
+import LoginInfo from "../../components/main/LoginInfo";
 import NoticeBox from "../../components/main/NoticeBox";
 import monkey_1 from "../../assets/images/monkey-1.png"; //임시이미지
 
 const MyPage = () => {
   const [MyBtnActive, setMyBtnActive] = useState(true);
   const [NoticeBtnActive, setNoticeBtnActive] = useState(false);
-
-  const handleMyBtnClick = () => {
-    setMyBtnActive(true);
-    setNoticeBtnActive(false);
-  };
-
-  const handleNoticeBtnClick = () => {
-    setNoticeBtnActive(true);
-    setMyBtnActive(false);
-  };
-
   // 임시 목데이터
-  const HotMapData = [
+  const [MockData, setMockData] = useState([
     {
       id: 1,
       type: "recommendation",
@@ -57,7 +47,22 @@ const MyPage = () => {
       name: "아니근데진짜",
       time: "23.11.19 03:06",
     },
-  ];
+  ]);
+
+  const handleMyBtnClick = () => {
+    setMyBtnActive(true);
+    setNoticeBtnActive(false);
+  };
+
+  const handleNoticeBtnClick = () => {
+    setNoticeBtnActive(true);
+    setMyBtnActive(false);
+  };
+
+  const handleDeleteItem = (itemId) => {
+    const updatedData = MockData.filter((item) => item.id !== itemId);
+    setMockData(updatedData);
+  };
 
   return (
     <>
@@ -80,8 +85,10 @@ const MyPage = () => {
         />
         <Line2 />
         <Content>
-          {MyBtnActive && <div>무슨 내용이 들어가야 할까욤</div>}
-          {NoticeBtnActive && <NoticeBox children={HotMapData} />}
+          {MyBtnActive && <LoginInfo />}
+          {NoticeBtnActive && (
+            <NoticeBox children={MockData} onDelete={handleDeleteItem} />
+          )}
         </Content>
       </Wrapper>
     </>
