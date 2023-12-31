@@ -26,7 +26,7 @@ const LoginPage = () => {
         <input
           type="text"
           placeholder="비밀번호를 입력하세요.."
-          style={{ marginTop: "70px", marginBottom: "80px", transform: "rotate(-15deg)" }}
+          style={{ marginTop: "10vh", marginBottom: "15vh", transform: "rotate(-15deg)" }}
         />
       </Container>
       <LongBtn onClick={login}>Login</LongBtn>
@@ -44,7 +44,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100vh;
   background: var(--white);
   font-family: "Hack Regular";
 `;
@@ -73,6 +72,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex-shrink: 0;
   overflow: hidden;
 
   input {
@@ -97,9 +97,11 @@ const LongBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 445px;
   height: 55px;
   flex-shrink: 0;
+  border: 1.5px solid var(--black1);
+  box-sizing: border-box;
   background-color: var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
 
@@ -108,6 +110,10 @@ const LongBtn = styled.div`
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.75px;
+
+  @media (max-width: 445px) {
+    width: 100%;
+  }
 `;
 
 const OR = styled.div`
@@ -119,6 +125,7 @@ const OR = styled.div`
 
 const Kakao = styled.img`
   margin-top: 36px;
+  margin-bottom: 25px;
   width: 57px;
   height: 57px;
   flex-shrink: 0;

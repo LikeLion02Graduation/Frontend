@@ -49,7 +49,7 @@ const NextBtnBlack = ({ addClickHandler, where, text, number }) => {
 
   return (
     <BoxB onClick={handleClick} style={{ bottom: number }}>
-      {text ? text : "next"}
+      {text ? text : "Next"}
     </BoxB>
   );
 };
@@ -117,18 +117,7 @@ const Wrapper = styled.div`
   font-family: "Hack Regular";
 `;
 
-export {
-  WhiteBox,
-  MapNameBox,
-  YellowBox,
-  Line1,
-  Line2,
-  NextBtnBlack,
-  NextBtnWhite,
-  LongBtnBlack,
-  MainWebBox,
-  Wrapper,
-};
+export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, MainWebBox, Wrapper };
 
 const Box = styled.div`
   display: flex;
@@ -180,12 +169,13 @@ const BoxB = styled.div`
   align-items: center;
   width: 342.222px;
   height: 55px;
+  flex-shrink: 0;
+
   color: var(--white);
   text-align: center;
   font-family: "Hack Regular";
   font-size: 15px;
   font-weight: 700;
-
   letter-spacing: 0.75px;
   border: 1.5px solid var(--black1);
   background: var(--black1);
@@ -205,6 +195,8 @@ const BoxW = styled.div`
   align-items: center;
   width: 342.222px;
   height: 55px;
+  flex-shrink: 0;
+
   color: var(--black1);
   text-align: center;
   font-family: "Hack Regular";
@@ -227,6 +219,7 @@ const LongBtnB = styled.div`
   align-items: center;
   width: 100vw;
   height: 55px;
+  flex-shrink: 0;
   background-color: var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
 

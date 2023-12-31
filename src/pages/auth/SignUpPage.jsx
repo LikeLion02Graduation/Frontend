@@ -48,6 +48,10 @@ const Container = styled.div`
     font-family: "Hack Regular";
     font-size: 14px;
     font-weight: 400;
+
+    @media (max-width: 393px) {
+      width: calc(100% - 62px);
+    }
   }
 
   input {
@@ -69,11 +73,13 @@ const Container = styled.div`
 
 const LongBtn = styled.div`
   margin-top: 92px;
+  margin-bottom: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 445.855px;
   height: 55px;
+  flex-shrink: 0;
   background-color: var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
 
@@ -83,4 +89,9 @@ const LongBtn = styled.div`
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.75px;
+
+  @media (min-height: 718px) {
+    position: fixed;
+    bottom: 28px;
+  }
 `;

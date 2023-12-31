@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { addKeyword, deleteKeyword } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
-import FeedBackModal from "../../components/mapmaking/FeedBackModal";
+import { WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 import KeywordGrid from "../../components/_common/KeywordGrid";
+import FeedBackBtn from "../../components/mapmaking/FeedBackModal";
 
 const RecommendKeywordPage = () => {
   const { mapId } = useParams();
+  const navigate = useNavigate();
   const initSelectedKeywords = useSelector((state) => state.recommend.hashtag);
   const [selectedKeywords, setSelectedKeywords] = useState(initSelectedKeywords);
 
@@ -28,35 +29,39 @@ const RecommendKeywordPage = () => {
           addReducer={addKeyword}
           deleteReducer={deleteKeyword}
         />
-        <FeedbackBtn onClick={() => setIsModalOpen(true)}>어 뭐야 왜없어??</FeedbackBtn>
-        <NextBtnBlack where={`/map/${mapId}/r/content`} />
+        <FeedBackBtn {...{ isModalOpen, setIsModalOpen }} />
+        <BoxB onClick={() => navigate(`/map/${mapId}/r/content`)}>Next</BoxB>
       </Wrapper>
-      {isModalOpen && <FeedBackModal onClose={() => setIsModalOpen(false)} />}
     </>
   );
 };
 
 export default RecommendKeywordPage;
 
-const FeedbackBtn = styled.div`
-  margin-top: 116px;
-  margin-bottom: 80px; //임시 설정
-  width: 110vw;
-  height: 61px;
-  transform: rotate(-15deg);
-  flex-shrink: 0;
+const BoxB = styled.div`
+  position: fixed;
+  bottom: 81px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1.5px solid var(--black1);
-  background: var(--yellow);
+  width: 342.222px;
+  height: 55px;
+  flex-shrink: 0;
 
-  color: var(--black3);
+  color: var(--white);
   text-align: center;
-  font-family: Apple SD Gothic Neo;
-  font-size: 14px;
+  font-family: "Hack Regular";
+  font-size: 15px;
   font-weight: 700;
-  line-height: 145%;
-  letter-spacing: 1.4px;
+  letter-spacing: 0.75px;
+  border: 1.5px solid var(--black1);
+  background: var(--black1);
+  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
   cursor: pointer;
+
+  @media (max-height: 852px) {
+    position: static;
+    margin-top: 80px;
+    margin-bottom: 81px;
+  }
 `;
