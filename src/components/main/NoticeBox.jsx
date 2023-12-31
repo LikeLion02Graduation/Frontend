@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router";
-import { Line1 } from "../../components/_common/CommonExport";
-
 import gofront from "../../assets/images/go-front.svg";
 import xbtn1 from "../../assets/images/x-btn-1.svg";
 import xbtn2 from "../../assets/images/x-btn-2.svg";
