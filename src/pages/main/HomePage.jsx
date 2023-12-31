@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
-import sort from "../../assets/images/sort.svg";
+
+import HomeMyContent from "../../components/main/HomeMyContent";
+import HomeOthersContent from "../../components/main/HomeOthersContent";
+
 import monkey_1 from "../../assets/images/monkey-1.png";
 import monkey_2 from "../../assets/images/monkey-2.png";
 import monkey_3 from "../../assets/images/monkey-3.png";
@@ -15,7 +18,7 @@ const HomePage = () => {
   const [myFilterActive, setMyFilterActive] = useState(true);
   const [othersFilterActive, setOthersFilterActive] = useState(false);
 
-  const MapData = [
+  const MapData1 = [
     { id: 1, img: monkey_1, name: "부산에 가자", time: "23.11.19 03:06" },
     { id: 2, img: monkey_2, name: "서울에 가자", time: "23.11.19 03:06" },
     {
@@ -29,6 +32,37 @@ const HomePage = () => {
       img: monkey_4,
       name: "저는 비빔면이 땡겨요",
       time: "23.11.19 03:06",
+    },
+  ];
+
+  const MapData2 = [
+    {
+      id: 1,
+      img: monkey_1,
+      name: "부산에 가자",
+      time: "23.11.19 03:06",
+      user: "손예원",
+    },
+    {
+      id: 2,
+      img: monkey_2,
+      name: "서울에 가자",
+      time: "23.11.19 03:06",
+      user: "손예원",
+    },
+    {
+      id: 3,
+      img: monkey_3,
+      name: "국밥 추천 받습니다",
+      time: "23.11.19 03:06",
+      user: "손예원",
+    },
+    {
+      id: 4,
+      img: monkey_4,
+      name: "저는 비빔면이 땡겨요",
+      time: "23.11.19 03:06",
+      user: "손예원",
     },
   ];
 
@@ -62,24 +96,10 @@ const HomePage = () => {
             Others
           </OthersFilter>
         </Filters>
-        <TotalSort>
-          <Total>Total {MapData.length}</Total>
-          <Sort>
-            <p>Earliest</p>
-            <img src={sort} />
-          </Sort>
-        </TotalSort>
-        <BoxGrid>
-          {MapData.map((box) => (
-            <Box key={box.id} onClick={() => navigate(`/map/${box.id}`)}>
-              <Img>
-                <img src={box.img} />
-              </Img>
-              <Name>{box.name}</Name>
-              <Time>{box.time} up</Time>
-            </Box>
-          ))}
-        </BoxGrid>
+        <Content>
+          {myFilterActive && <HomeMyContent children={MapData1} />}
+          {othersFilterActive && <HomeOthersContent children={MapData2} />}
+        </Content>
       </Wrapper>
     </>
   );
@@ -119,6 +139,7 @@ const MyFilter = styled(FilterStyle)`
   align-items: center;
   padding-right: 8%;
 `;
+
 const OthersFilter = styled(FilterStyle)`
   border: 1.5px solid var(--black2);
   border-left: none;
@@ -131,75 +152,6 @@ const OthersFilter = styled(FilterStyle)`
   padding-left: 8%;
 `;
 
-const TotalSort = styled.div`
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 335px;
-`;
-const Total = styled.div`
-  padding-top: 33px;
-  color: var(--black2);
-  font-family: "Hack Regular";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.7px;
-`;
-const Sort = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding-top: 33px;
-  gap: 10px;
-  color: var(--black2);
-  font-family: "Hack Regular";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-`;
-
-const BoxGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 21.21px;
-  grid-row-gap: 33.83px;
-`;
-const Box = styled.div`
-  width: 156.787px;
-`;
-const Img = styled.div`
-  width: 100%;
-  height: 156.787px;
-  flex-shrink: 0;
-  border: 1.527px solid var(--black1);
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-const Name = styled.div`
-  color: var(--black2);
-  font-family: Apple SD Gothic Neo;
-  font-size: 14.253px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: 1.425px;
-  margin-top: 12.2px;
-  margin-bottom: 7.47px;
-`;
-const Time = styled.div`
-  color: var(--black2);
-  font-family: "Hack Regular";
-  font-size: 12.217px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+const Content = styled.div`
+  margin-bottom: 100px;
 `;
