@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
+import { Wrapper } from "../../components/_common/CommonExport";
 import { WTagContainer } from "../../components/mymap/LinkContainer";
-
-import triangle from "../../assets/images/triangle.svg";
+import KeywordBox from "../../components/_common/KeywordBox";
+import UnderlinedContent from "../../components/mymap/UnderlinedContent";
+import PlaceContainer from "../../components/mymap/PlaceContainer";
 
 const MapRecommendPage = () => {
   const { mapId, recomId } = useParams();
-  // const currentUserId = 1;
+  const navigate = useNavigate();
 
   const [recommendData, setRecommendData] = useState({
     id: "1",
@@ -18,7 +19,7 @@ const MapRecommendPage = () => {
     content:
       "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
     username: "혜지",
-    hashtag: ["카페"],
+    hashtag: ["카페", "혜지", "혜지", "혜지", "혜지"],
     place: [
       {
         id: 23,
@@ -39,50 +40,27 @@ const MapRecommendPage = () => {
     <>
       <TopBar navBtnOn={true} where={`/map/${mapId}`} titleText="recommend" />
       <Wrapper>
-        <Scroll>
-          <TitleContainer>
-            <Col>
-              <Title>
-                <div>{recommendData.title}</div>
-              </Title>
-              <From>From.{recommendData.username}</From>
-              <WTagContainer mapId={mapId} recomId={recomId} />
-            </Col>
-            <Col>
-              <MapProfile />
-              <SubTitle>부산에 가자</SubTitle>
-            </Col>
-          </TitleContainer>
+        <KeywordBox keywords={recommendData.hashtag} />
+        <TitleContainer>
+          <Col>
+            <Title>
+              <div>{recommendData.title}</div>
+            </Title>
+            <From>From.{recommendData.username}</From>
+            <WTagContainer mapId={mapId} recomId={recomId} />
+          </Col>
+          <Col>
+            <MapProfile />
+            <SubTitle>부산에 가자</SubTitle>
+          </Col>
+        </TitleContainer>
 
-          <ContentContainer>
-            <UnderlinedContent>
-              <Content>{recommendData.content}</Content>
-              <Underline>
-                <div />
-                <div />
-                <div />
-                <div />
-              </Underline>
-            </UnderlinedContent>
+        <UnderlinedContent recommendData={recommendData} />
+        {recommendData.place.map((item) => (
+          <PlaceContainer key={item} item={item} />
+        ))}
 
-            {recommendData.place.map((item) => (
-              <>
-                <PlaceContainer key={item}>
-                  <PlaceInfo>
-                    <div className="placename">{item.name}</div>
-                    <div className="roadaddress">{item.address}</div>
-                  </PlaceInfo>
-                  <PlaceGoBtn onClick={() => (window.location.href = item.link)}>
-                    <span>go!</span>
-                    <img src={triangle} alt="go!" />
-                  </PlaceGoBtn>
-                </PlaceContainer>
-              </>
-            ))}
-          </ContentContainer>
-        </Scroll>
-
-        <NextBtnWhite where={`/map/${mapId}/${recomId}/commend`} text={"남긴 반응 보기 !"} number={"28px"} />
+        <BoxW onClick={() => navigate(`/map/${mapId}/${recomId}/commend`)}>남긴 반응 보기 !</BoxW>
       </Wrapper>
     </>
   );
@@ -90,16 +68,8 @@ const MapRecommendPage = () => {
 
 export default MapRecommendPage;
 
-const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: calc(100vh - 208px);
-  overflow: scroll;
-`;
-
 const TitleContainer = styled.div`
-  margin: 44px 22px 0px 31px;
+  margin-top: 44px;
   display: flex;
   flex-direction: row;
   gap: 15px;
@@ -155,98 +125,34 @@ const SubTitle = styled.div`
   letter-spacing: 1.425px;
 `;
 
-const ContentContainer = styled.div`
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-`;
-
-const UnderlinedContent = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  height: 216px;
-  flex-shrink: 0;
-`;
-
-const Content = styled.div`
-  position: absolute;
-  top: 12px;
-  width: 340px;
-  line-height: 50px;
-
-  font-family: "Pretendard-Regular";
-  font-size: 14px;
-  font-weight: 400;
-`;
-
-const Underline = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-
-  div {
-    margin-top: 50px;
-    height: 1px;
-    background: var(--black1);
-  }
-`;
-
-const PlaceContainer = styled.div`
-  margin-top: 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-`;
-
-const PlaceInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 340px;
-  gap: 7.65px;
-  border: 1.5px solid var(--yellow);
-  padding: 12px 16px 11.35px 16px;
-  box-sizing: border-box;
-
-  .placename {
-    font-size: 17.053px;
-    font-weight: 700;
-    letter-spacing: 1.705px;
-  }
-
-  .roadaddress {
-    color: #0c0404;
-    font-size: 12.79px;
-    font-weight: 400;
-    letter-spacing: 1.279px;
-    opacity: 0.7;
-  }
-`;
-
-const PlaceGoBtn = styled.div`
+const BoxW = styled.div`
+  position: fixed;
+  bottom: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 7.92px;
-  width: 66px;
-  height: 20.557px;
+  width: 342.222px;
+  height: 55px;
   flex-shrink: 0;
-  background: var(--yellow);
 
-  span {
-    text-align: center;
-    font-size: 7.574px;
-    font-weight: 700;
+  color: var(--black1);
+  text-align: center;
+  font-family: "Hack Regular";
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
+  border: 1.5px solid var(--black1);
+  background: var(--white);
+  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 50px);
   }
 
-  img {
-    width: 8.115px;
-    height: 8.115px;
-    flex-shrink: 0;
+  @media (max-height: 892px) {
+    position: static;
+    margin-top: 40px;
+    margin-bottom: 42px;
   }
 `;

@@ -191,12 +191,13 @@ const GridTitle = styled.div`
 `;
 
 const GridContainer = styled.div`
-  margin: 12px 22px 10px 21px;
-  /* padding-bottom: 120px; */
+  margin-top: 12px;
+  margin-bottom: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 36.84px;
   column-gap: 23.42px;
+  min-height: 200px;
 `;
 
 const AddPostit = styled.div`

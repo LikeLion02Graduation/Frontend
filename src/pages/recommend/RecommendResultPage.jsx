@@ -21,14 +21,20 @@ const RecommendResultPage = ({ searchText, setSearchText, mapId }) => {
 
   // 장소 검색 결과 반환
   useEffect(() => {
-    const ps = new kakao.maps.services.Places();
-    ps.keywordSearch(searchText, placesSearchCB);
+    try {
+      const ps = new kakao.maps.services.Places();
+      ps.keywordSearch(searchText, placesSearchCB);
+    } catch (error) {
+      console.log("Error initializing kakao.maps.services.Places():");
+      alert("지금은 장소를 검색할 수 없습니다. 나중에 다시 시도해 주세요.");
+      navigate(-1);
+    }
 
     function placesSearchCB(data, status) {
       if (status === kakao.maps.services.Status.OK) {
         setMapState((prevState) => ({ ...prevState, reseultPlaces: data }));
       } else {
-        alert("검색어를 정확히 입력해주세요. (임시)");
+        alert("검색어를 정확히 입력해주세요.");
         window.location.reload();
       }
     }
