@@ -113,7 +113,18 @@ const Wrapper = styled.div`
   font-family: "Hack Regular";
 `;
 
-export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, MainWebBox, Wrapper };
+export {
+  WhiteBox,
+  MapNameBox,
+  YellowBox,
+  Line1,
+  Line2,
+  NextBtnBlack,
+  NextBtnWhite,
+  LongBtnBlack,
+  MainWebBox,
+  Wrapper,
+};
 
 const Box = styled.div`
   display: flex;
