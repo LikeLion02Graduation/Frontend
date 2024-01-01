@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
+import { Line2, MainWebBox, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 import { MapTitleText } from "../../components/mymap/MapTitleText";
 import ShareModal from "../../components/mymap/ShareModal";
 
@@ -55,7 +55,7 @@ const MapSharePage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText={"Making"} />
+      <TopBar navBtnOn={true} titleText={"instagram"} />
       <Wrapper>
         <WhiteBox text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"} />
         <Line2 />
@@ -74,10 +74,10 @@ const MapSharePage = () => {
             <div>{mapData.description}</div>
           </Description>
         </MainWebBox>
-        <NextBtnWhite addClickHandler={handleShareBtnClick} text={"Share to Instagram"} number={"96px"} />
-        <NextBtnWhite where={"/"} text={"Skip"} number={"28px"} />
+
+        <BoxW onClick={handleShareBtnClick}>Share to Instagram</BoxW>
       </Wrapper>
-      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapData.id} />}
     </>
   );
 };
@@ -132,4 +132,36 @@ const Description = styled.div`
   font-weight: 400;
   line-height: 20px; /* 133.333% */
   letter-spacing: 0.75px;
+`;
+
+const BoxW = styled.div`
+  position: fixed;
+  bottom: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 342.222px;
+  height: 55px;
+  flex-shrink: 0;
+
+  color: var(--black1);
+  text-align: center;
+  font-family: "Hack Regular";
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
+  border: 1.5px solid var(--black1);
+  background: var(--white);
+  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 50px);
+  }
+
+  @media (max-height: 774px) {
+    position: static;
+    margin-top: 49px;
+    margin-bottom: 28px;
+  }
 `;

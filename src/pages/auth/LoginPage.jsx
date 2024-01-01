@@ -7,10 +7,34 @@ import kakaologo from "../../assets/images/kakao-logo.svg";
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const login = () => {
-    navigate("/");
+  //아이디/비밀번호 입력
+  const [formData, setFormData] = useState({
+    userid: "",
+    password: "",
+  });
+
+  const handleInputChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  //로그인 함수
+  const login = (event) => {
+    event.preventDefault();
+
+    if (formData.userid.trim() === "") {
+      alert("아이디를 입력해주세요.");
+    } else if (formData.password.trim() === "") {
+      alert("비밀번호를 입력해주세요.");
+    } //임시 코드
+    else if (formData.userid !== "user" || formData.password !== "password") {
+      alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+    } else {
+      alert("로그인에 성공했습니다!");
+      navigate("/");
+    }
+  };
+
+  //회원가입 하러 가기
   const signup = () => {
     navigate("/auth/signup");
   };
@@ -22,14 +46,24 @@ const LoginPage = () => {
         MAP
       </Main>
       <Container>
-        <input type="text" placeholder="아이디를 입력하세요.." />
         <input
           type="text"
+          placeholder="아이디를 입력하세요.."
+          name="userid"
+          value={formData.userid}
+          onChange={handleInputChange}
+        />
+        <input
+          type="password"
           placeholder="비밀번호를 입력하세요.."
-          style={{ marginTop: "70px", marginBottom: "80px", transform: "rotate(-15deg)" }}
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
         />
       </Container>
-      <LongBtn onClick={login}>Login</LongBtn>
+      <LongBtn onClick={login} style={{ background: "var(--white)", color: "var(--black1)" }}>
+        Login
+      </LongBtn>
       <OR>OR</OR>
       <LongBtn onClick={signup}>회원 가입</LongBtn>
       <Kakao src={kakaologo} alt="kakao login" />
@@ -44,7 +78,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  overflow-x: hidden;
   background: var(--white);
   font-family: "Hack Regular";
 `;
@@ -58,7 +92,9 @@ const Main = styled.div`
   align-items: center;
   width: 100%;
   height: 55px;
+  border-bottom: 1.5px solid var(--black1);
   background-color: var(--yellow);
+  z-index: 1;
 
   color: var(--black1);
   text-align: center;
@@ -73,14 +109,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  overflow: hidden;
+  flex-shrink: 0;
 
   input {
     width: 110%;
     height: 61px;
-    flex-shrink: 0;
-    overflow-x: hidden;
-    border: 1.5px solid var(--black1);
+    border-bottom: 1.5px solid var(--black1);
     background: var(--gray);
 
     color: var(--black3);
@@ -91,15 +125,28 @@ const Container = styled.div`
     line-height: 145%; /* 20.3px */
     letter-spacing: 1.4px;
   }
+
+  input:nth-child(2) {
+    border-top: 1.5px solid var(--black1);
+    margin-top: 10vh;
+    margin-bottom: 13.5vh;
+    transform: rotate(-15deg);
+
+    @media (min-width: 768px) {
+      transform: rotate(-10deg);
+    }
+  }
 `;
 
 const LongBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 445px;
   height: 55px;
   flex-shrink: 0;
+  border: 1.5px solid var(--black1);
+  box-sizing: border-box;
   background-color: var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
 
@@ -119,6 +166,7 @@ const OR = styled.div`
 
 const Kakao = styled.img`
   margin-top: 36px;
+  margin-bottom: 25px;
   width: 57px;
   height: 57px;
   flex-shrink: 0;

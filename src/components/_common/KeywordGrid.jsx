@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
@@ -55,7 +55,7 @@ const KeywordGrid = (props) => {
                 ? "var(--yellow)"
                 : "var(--white)",
             }}
-            className={index % 2 === 0 ? "left-column" : "right-column"}
+            className={index % 2 === 0 && "left-column"}
           >
             <span>#{keyword}</span>
           </Keyword>
@@ -86,13 +86,16 @@ const Grid = styled.div`
   .left-column {
     display: flex;
     justify-content: end;
-    padding-right: 81px;
-    box-sizing: border-box;
   }
 
-  .right-column {
-    padding-left: 81px;
-    box-sizing: border-box;
+  span {
+    display: flex;
+    justify-content: center;
+    width: 196px;
+
+    @media (max-width: 393px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -112,4 +115,5 @@ const Noti = styled.div`
   font-weight: 400;
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
+  opacity: 0.3;
 `;

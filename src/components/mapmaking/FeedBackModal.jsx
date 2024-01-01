@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+const FeedBackBtn = (props) => {
+  const { isModalOpen, setIsModalOpen } = props;
+  return (
+    <>
+      <FeedBack onClick={() => setIsModalOpen(true)}>어 뭐야 왜없어??</FeedBack>
+      {isModalOpen && <FeedBackModal onClose={() => setIsModalOpen(false)} />}
+    </>
+  );
+};
+
 const FeedBackModal = ({ onClose }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -45,7 +55,28 @@ const FeedBackModal = ({ onClose }) => {
   );
 };
 
-export default FeedBackModal;
+export default FeedBackBtn;
+
+const FeedBack = styled.div`
+  margin-top: 8vh;
+  width: 110vw;
+  height: 61px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid var(--black1);
+  background: var(--yellow);
+  transform: rotate(-15deg);
+
+  color: var(--black3);
+  text-align: center;
+  font-family: Apple SD Gothic Neo;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 145%;
+  letter-spacing: 1.4px;
+`;
 
 const Overlay = styled.div`
   position: fixed;

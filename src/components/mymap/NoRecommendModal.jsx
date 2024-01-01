@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const NoRecommendModal = ({ location }) => {
+  const navigate = useNavigate();
   return (
     <>
-      <GrayBox>{location}에 대한 더 많은 정보는 ?</GrayBox>
+      <GrayBox onClick={() => navigate("/payment/hotmap")}>{location}에 대한 더 많은 정보는 ?</GrayBox>
       <YellowBox>다양한 곳에 링크를 공유하고 받은 추천을 자랑하세요 🤭</YellowBox>
     </>
   );

@@ -6,12 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setContent, setDescription } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import {
-  MapNameBox,
-  NextBtnWhite,
-  Line2,
-  Wrapper,
-} from "../../components/_common/CommonExport";
+import { MapNameBox, NextBtnWhite, Line2, Wrapper } from "../../components/_common/CommonExport";
 
 const DonePage = () => {
   const navigate = useNavigate();
@@ -67,16 +62,8 @@ const DonePage = () => {
               placeholder="이곳을 클릭해 나에게 여행 스팟을 추천해줄&#13;&#10;친구들에게 남기고 싶은&#13;&#10;한 마디를 작성해보세요..(공백 포함 110자)&#13;&#10;친구들이 추천 시 참고하기 용이할거예요 !"
             />
           </InputBox>
-          <NextBtnWhite
-            addClickHandler={saveData}
-            text={"Next"}
-            number={"96px"}
-          />
-          <NextBtnWhite
-            where={"/map/:id/share"}
-            text={"Skip"}
-            number={"28px"}
-          />
+          <NextBtnWhite addClickHandler={saveData} text={"Next"} number={"96px"} />
+          <NextBtnWhite where={"/mapmaking/share"} text={"Skip"} number={"28px"} />
         </Wrapper2>
       </Wrapper>
     </>

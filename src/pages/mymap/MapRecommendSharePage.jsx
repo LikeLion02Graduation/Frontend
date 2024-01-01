@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
-import { Line2, MainWebBox, NextBtnWhite, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
+import { Line2, MainWebBox, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 import ShareModal from "../../components/mymap/ShareModal";
 
 import triangle from "../../assets/images/triangle.svg";
 import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 
 const MapRecommendSharePage = () => {
+  const { mapId } = useParams();
   const [recommendData, setRecommendData] = useState({
     id: "1",
-    title: "여기 안가면 평생 후회할 것입니다...",
+    title: "여기 안가면 평생 후회할 것입니다..",
     content:
       "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
     username: "혜지",
@@ -66,9 +68,9 @@ const MapRecommendSharePage = () => {
           </SelectedPlaces>
         </MainWebBox>
 
-        <NextBtnWhite addClickHandler={handleShareBtnClick} text={"Share to Instagram"} number={"28px"} />
+        <BoxW onClick={handleShareBtnClick}>Share to Instagram</BoxW>
       </Wrapper>
-      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapId} recomId={recommendData.id} />}
     </>
   );
 };
@@ -153,5 +155,37 @@ const SelectedPlaces = styled.div`
   div > img {
     width: 17px;
     height: 17px;
+  }
+`;
+
+const BoxW = styled.div`
+  position: fixed;
+  bottom: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 342.222px;
+  height: 55px;
+  flex-shrink: 0;
+
+  color: var(--black1);
+  text-align: center;
+  font-family: "Hack Regular";
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
+  border: 1.5px solid var(--black1);
+  background: var(--white);
+  box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+
+  @media (max-width: 393px) {
+    width: calc(100% - 50px);
+  }
+
+  @media (max-height: 816px) {
+    position: static;
+    margin-top: 49px;
+    margin-bottom: 28px;
   }
 `;

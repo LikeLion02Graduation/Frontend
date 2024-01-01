@@ -8,8 +8,30 @@ import { Wrapper } from "../../components/_common/CommonExport";
 const SignUpPage = () => {
   const navigate = useNavigate();
 
-  const next = () => {
-    navigate("/auth/profile");
+  //아이디/비밀번호 입력
+  const [formData, setFormData] = useState({
+    userid: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleInputChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  //아이디/비밀번호 조건 검사 후 페이지 이동 함수
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (formData.userid.trim() === "") {
+      alert("아이디를 입력해주세요.");
+    } else if (formData.password.trim() === "") {
+      alert("비밀번호를 입력해주세요.");
+    } else if (formData.password !== formData.confirmPassword) {
+      alert("비밀번호가 일치하지 않습니다.");
+    } else {
+      navigate("/auth/profile");
+    }
   };
 
   return (
@@ -18,14 +40,33 @@ const SignUpPage = () => {
       <Wrapper>
         <Container style={{ marginTop: "99px" }}>
           <span>사용하실 아이디를 입력해주세요.</span>
-          <input type="text" placeholder="아이디를 입력하세요.." />
+          <input
+            type="text"
+            placeholder="아이디를 입력하세요.."
+            name="userid"
+            value={formData.userid}
+            onChange={handleInputChange}
+          />
         </Container>
         <Container style={{ marginTop: "73px" }}>
           <span>사용하실 비밀번호를 입력해주세요.</span>
-          <input type="text" placeholder="비밀번호 입력" />
-          <input type="text" placeholder="비밀번호 재입력" style={{ marginTop: "10px" }} />
+          <input
+            type="password"
+            placeholder="비밀번호 입력"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          <input
+            type="password"
+            placeholder="비밀번호 재입력"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            style={{ marginTop: "10px" }}
+          />
         </Container>
-        <LongBtn onClick={next}>다음으로</LongBtn>
+        <LongBtn onClick={handleSubmit}>다음으로</LongBtn>
       </Wrapper>
     </>
   );
@@ -48,32 +89,22 @@ const Container = styled.div`
     font-family: "Hack Regular";
     font-size: 14px;
     font-weight: 400;
-  }
 
-  input {
-    width: 100%;
-    height: 61px;
-    flex-shrink: 0;
-    border: 1.5px solid var(--black1);
-    background: var(--gray);
-
-    color: var(--black3);
-    text-align: center;
-    font-family: "Hack Regular";
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 145%; /* 20.3px */
-    letter-spacing: 1.4px;
+    @media (max-width: 393px) {
+      width: calc(100% - 62px);
+    }
   }
 `;
 
 const LongBtn = styled.div`
   margin-top: 92px;
+  margin-bottom: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 445.855px;
   height: 55px;
+  flex-shrink: 0;
   background-color: var(--black1);
   box-shadow: 0px 0px 6.97764px 0.99681px rgba(0, 0, 0, 0.03);
 
@@ -83,4 +114,9 @@ const LongBtn = styled.div`
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.75px;
+
+  @media (min-height: 718px) {
+    position: fixed;
+    bottom: 28px;
+  }
 `;
