@@ -31,50 +31,62 @@ const HotMapPage = () => {
     {
       id: 1,
       img: monkey_1,
-      user: "허파게티",
+      user: {
+        nickname: "허파게티",
+      },
       name: "부산맛집추천받음",
       recom_num: 20,
-      hashtag: "카페 #맛집 #자연",
+      hashtag: ["카페", "맛집", "자연"],
     },
     {
       id: 2,
       img: monkey_1,
-      user: "허파게티",
+      user: {
+        nickname: "허파게티",
+      },
       name: "부산에 가자2",
       recom_num: 20,
-      hashtag: "카페 #맛집",
+      hashtag: ["카페", "맛집", "자연"],
     },
     {
       id: 3,
       img: monkey_1,
-      user: "핑핑이",
+      user: {
+        nickname: "허파게티",
+      },
       name: "힐링하러 갑니다 부산에서의 행복...",
       recom_num: 20,
-      hashtag: "카페 #산책 #자연",
+      hashtag: ["카페", "산책", "자연"],
     },
     {
       id: 4,
       img: monkey_1,
-      user: "빵친자",
+      user: {
+        nickname: "허파게티",
+      },
       name: "빵순이 부산에 가다",
       recom_num: 20,
-      hashtag: "카페 맛집 자연",
+      hashtag: ["카페", "맛집", "자연"],
     },
     {
       id: 5,
       img: monkey_1,
-      user: "빵친자",
+      user: {
+        nickname: "허파게티",
+      },
       name: "빵순이 부산에 가다",
       recom_num: 20,
-      hashtag: "카페 맛집 자연",
+      hashtag: ["카페", "자연"],
     },
     {
       id: 6,
       img: monkey_1,
-      user: "빵친자",
+      user: {
+        nickname: "허파게티",
+      },
       name: "빵순이 부산에 가다",
       recom_num: 20,
-      hashtag: "카페 맛집 자연",
+      hashtag: ["카페", "맛집", "자연"],
     },
   ];
 

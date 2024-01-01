@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setImage } from "../../redux/mapmakingSlice";
@@ -32,21 +31,6 @@ const ImagePage = () => {
     } else {
       navigate(`/mapmaking/done`);
     }
-    /*axios({
-      baseURL: "",
-      url: "",
-      method: "POST",
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });*/
   };
 
   return (
