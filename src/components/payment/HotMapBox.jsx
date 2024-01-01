@@ -8,15 +8,15 @@ import gofront from "../../assets/images/go-front.svg";
 const HotMapBox = ({ children }) => {
   const navigate = useNavigate();
 
-  const handleClickBox = () => {
-    navigate(`/map/:id/:recomId`);
+  const handleClickBox = (item) => {
+    navigate(`/payment/${item.id}/preview`);
   };
 
   return (
     <BoxContainer>
       {children.map((item) => (
         <Box key={item.id}>
-          <Box2 onClick={handleClickBox}>
+          <Box2 onClick={() => handleClickBox(item)}>
             <MapImg src={item.img} alt={item.name} />
             <Content>
               <User>by. {item.user}</User>

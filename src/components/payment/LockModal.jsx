@@ -7,7 +7,7 @@ const LockModal = () => {
   const navigate = useNavigate();
 
   const goPayment = () => {
-    navigate(`/map/${mapId}/pay`);
+    navigate(`/payment/${mapId}/pay`);
   };
 
   const goBack = () => {

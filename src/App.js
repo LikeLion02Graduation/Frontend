@@ -71,8 +71,8 @@ function App() {
 
         {/* payment */}
         <Route path={"/payment/hotmap"} element={<HotMapPage />} />
-        <Route path={"/map/:mapId/preview"} element={<PreviewPage />} />
-        <Route path={"/map/:mapId/pay"} element={<PaymentPage />} />
+        <Route path={"/payment/:mapId/preview"} element={<PreviewPage />} />
+        <Route path={"/payment/:mapId/pay"} element={<PaymentPage />} />
       </Routes>
     </Router>
   );
