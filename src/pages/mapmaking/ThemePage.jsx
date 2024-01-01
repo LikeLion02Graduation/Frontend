@@ -1,28 +1,52 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { addTheme, deleteTheme } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
+import {
+  WhiteBox,
+  NextBtnBlack,
+  Wrapper,
+} from "../../components/_common/CommonExport";
 import FeedBackModal from "../../components/mapmaking/FeedBackModal";
 import KeywordGrid from "../../components/_common/KeywordGrid";
 
 const ThemePage = () => {
+  const navigate = useNavigate();
   const initSelectedThemes = useSelector((state) => state.mapmaking.hashtag);
   const [selectedKeywords, setSelectedKeywords] = useState(initSelectedThemes);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isThemeSelected = () => {
+    return selectedKeywords.length > 0;
+  };
+
+  const handleNextBtn = () => {
+    if (isThemeSelected()) {
+      // Theme이 선택되어 있는 경우
+      navigate("/mapmaking/name");
+    } else {
+      // Theme 선택 안 한 경우
+      alert("테마를 최소 1개 이상 선택하세요.");
+    }
+  };
 
   return (
     <>
       <TopBar navBtnOn={true} titleText="Making" />
       <Wrapper>
         <WhiteBox text="Q. 당신의 지도는 어떤 테마인가요?(최대 5개!!)" />
-        <KeywordGrid {...{ selectedKeywords, setSelectedKeywords }} addReducer={addTheme} deleteReducer={deleteTheme} />
-        <FeedbackBtn onClick={() => setIsModalOpen(true)}>어 뭐야 왜없어??</FeedbackBtn>
-        <NextBtnBlack where={"/mapmaking/name"} text={"Next"} />
+        <KeywordGrid
+          {...{ selectedKeywords, setSelectedKeywords }}
+          addReducer={addTheme}
+          deleteReducer={deleteTheme}
+        />
+        <FeedbackBtn onClick={() => setIsModalOpen(true)}>
+          어 뭐야 왜없어??
+        </FeedbackBtn>
+        <NextBtnBlack addClickHandler={handleNextBtn} text={"Next"} />
         {isModalOpen && <FeedBackModal onClose={() => setIsModalOpen(false)} />}
       </Wrapper>
     </>

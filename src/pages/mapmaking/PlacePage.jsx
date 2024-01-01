@@ -1,32 +1,29 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setPlace } from "../../redux/mapmakingSlice";
+import { setLocation } from "../../redux/mapmakingSlice";
 
 import PlaceFilter from "../../components/mapmaking/PlaceFilter";
 import TopBar from "../../components/_common/TopBar";
-import {
-  WhiteBox,
-  NextBtnBlack,
-  Line1,
-} from "../../components/_common/CommonExport";
+import { WhiteBox, NextBtnBlack } from "../../components/_common/CommonExport";
 
 const PlacePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const handlePlaceSelect = (selectedPlace) => {
-    dispatch(setPlace(selectedPlace));
+    setSelectedPlace(selectedPlace);
+    // dispatch(setLocation(selectedPlace));
   };
 
   const handleNextBtn = () => {
     if (selectedPlace) {
-      dispatch(setPlace(selectedPlace));
+      dispatch(setLocation(selectedPlace));
+      navigate(`/mapmaking/theme`);
     } else {
-      // 사용자가 장소 선택 안 했을 경우
-      console.log("장소를 선택해주세요.");
+      alert("장소를 선택해주세요");
     }
   };
 
@@ -39,7 +36,7 @@ const PlacePage = () => {
         <div id="temporary" />
         <NextBtnBlack
           addClickHandler={handleNextBtn}
-          where={"/mapmaking/theme"}
+          //where={"/mapmaking/theme"}
           text={"Next"}
         />
       </Wrapper>
@@ -53,8 +50,4 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  #temporary {
-    margin-bottom: 221px;
-  }
 `;

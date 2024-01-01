@@ -5,14 +5,17 @@ import { useDispatch } from "react-redux";
 
 const KeywordGrid = (props) => {
   const dispatch = useDispatch();
-  const { selectedKeywords, setSelectedKeywords, addReducer, deleteReducer } = props;
+  const { selectedKeywords, setSelectedKeywords, addReducer, deleteReducer } =
+    props;
 
   const handleKeywordClick = (keyword) => {
     const isSelected = selectedKeywords.includes(keyword);
     const currentSelectedCount = selectedKeywords.length;
 
     const updatedSelectedKeywords = isSelected
-      ? selectedKeywords.filter((selectedKeyword) => selectedKeyword !== keyword)
+      ? selectedKeywords.filter(
+          (selectedKeyword) => selectedKeyword !== keyword
+        )
       : currentSelectedCount < 5
       ? [...selectedKeywords, keyword]
       : selectedKeywords;
@@ -30,7 +33,16 @@ const KeywordGrid = (props) => {
     }
   };
 
-  const keywords = ["맛집", "명소", "카페", "자연", "산책", "빵", "비건", "브런치"];
+  const keywords = [
+    "맛집",
+    "명소",
+    "카페",
+    "자연",
+    "산책",
+    "빵",
+    "비건",
+    "브런치",
+  ];
   return (
     <>
       <Grid>
@@ -39,7 +51,9 @@ const KeywordGrid = (props) => {
             key={keyword}
             onClick={() => handleKeywordClick(keyword)}
             style={{
-              backgroundColor: selectedKeywords?.includes(keyword) ? "var(--yellow)" : "var(--white)",
+              backgroundColor: selectedKeywords?.includes(keyword)
+                ? "var(--yellow)"
+                : "var(--white)",
             }}
             className={index % 2 === 0 ? "left-column" : "right-column"}
           >
@@ -86,6 +100,7 @@ const Keyword = styled.div`
   display: flex;
   align-items: center;
   height: 61px;
+  cursor: pointer;
 `;
 
 const Noti = styled.div`

@@ -1,22 +1,42 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { addKeyword, deleteKeyword } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import { WhiteBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
+import {
+  WhiteBox,
+  NextBtnBlack,
+  Wrapper,
+} from "../../components/_common/CommonExport";
 import FeedBackModal from "../../components/mapmaking/FeedBackModal";
 import KeywordGrid from "../../components/_common/KeywordGrid";
 
 const RecommendKeywordPage = () => {
+  const navigate = useNavigate();
   const { mapId } = useParams();
   const initSelectedKeywords = useSelector((state) => state.recommend.hashtag);
-  const [selectedKeywords, setSelectedKeywords] = useState(initSelectedKeywords);
+  const [selectedKeywords, setSelectedKeywords] =
+    useState(initSelectedKeywords);
 
   //태그 추가 모달 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isThemeSelected = () => {
+    return selectedKeywords.length > 0;
+  };
+
+  const handleNextBtn = () => {
+    if (isThemeSelected()) {
+      // Theme이 선택되어 있는 경우
+      navigate(`/map/${mapId}/r/content`);
+    } else {
+      // Theme 선택 안 한 경우
+      alert("테마를 최소 1개 이상 선택하세요.");
+    }
+  };
 
   return (
     <>
@@ -28,8 +48,10 @@ const RecommendKeywordPage = () => {
           addReducer={addKeyword}
           deleteReducer={deleteKeyword}
         />
-        <FeedbackBtn onClick={() => setIsModalOpen(true)}>어 뭐야 왜없어??</FeedbackBtn>
-        <NextBtnBlack where={`/map/${mapId}/r/content`} />
+        <FeedbackBtn onClick={() => setIsModalOpen(true)}>
+          어 뭐야 왜없어??
+        </FeedbackBtn>
+        <NextBtnBlack addClickHandler={handleNextBtn} />
       </Wrapper>
       {isModalOpen && <FeedBackModal onClose={() => setIsModalOpen(false)} />}
     </>
