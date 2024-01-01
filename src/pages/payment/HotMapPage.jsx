@@ -36,7 +36,7 @@ const HotMapPage = () => {
       },
       name: "부산맛집추천받음",
       recom_num: 20,
-      hashtag: "카페 #맛집 #자연",
+      hashtag: ["카페", "맛집", "자연"],
     },
     {
       id: 2,
@@ -46,7 +46,7 @@ const HotMapPage = () => {
       },
       name: "부산에 가자2",
       recom_num: 20,
-      hashtag: "카페 #맛집",
+      hashtag: ["카페", "맛집", "자연"],
     },
     {
       id: 3,
@@ -56,7 +56,7 @@ const HotMapPage = () => {
       },
       name: "힐링하러 갑니다 부산에서의 행복...",
       recom_num: 20,
-      hashtag: "카페 #산책 #자연",
+      hashtag: ["카페", "산책", "자연"],
     },
     {
       id: 4,
@@ -66,7 +66,7 @@ const HotMapPage = () => {
       },
       name: "빵순이 부산에 가다",
       recom_num: 20,
-      hashtag: "카페 맛집 자연",
+      hashtag: ["카페", "맛집", "자연"],
     },
     {
       id: 5,
@@ -76,7 +76,7 @@ const HotMapPage = () => {
       },
       name: "빵순이 부산에 가다",
       recom_num: 20,
-      hashtag: "카페 맛집 자연",
+      hashtag: ["카페", "자연"],
     },
     {
       id: 6,
@@ -86,7 +86,7 @@ const HotMapPage = () => {
       },
       name: "빵순이 부산에 가다",
       recom_num: 20,
-      hashtag: "카페 맛집 자연",
+      hashtag: ["카페", "맛집", "자연"],
     },
   ];
 

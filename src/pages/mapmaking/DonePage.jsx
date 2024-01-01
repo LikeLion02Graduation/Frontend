@@ -35,14 +35,11 @@ const DonePage = () => {
     } else {
       dispatch(setDescription({ description: trimmedContent }));
       navigate(`/mapmaking/share`);
-
-      setTimeout(async () => {
-        await persistor.purge();
-      }, 200);
     }
   };
 
   const mapLocation = useSelector((state) => state.mapmaking.location);
+  console.log("mapLocation from Redux:", mapLocation);
   const mapName = useSelector((state) => state.mapmaking.name);
   const mapImg = useSelector((state) => state.mapmaking.img);
   const mapHashtag = useSelector((state) => state.mapmaking.hashtag);

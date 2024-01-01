@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
 const initialState = {
-  location: [],
+  location: "",
   hashtag: [],
   name: "",
   img: "",
@@ -14,7 +14,7 @@ export const mapmakingSlice = createSlice({
   initialState,
   reducers: {
     setLocation: (state, action) => {
-      state.location = action.payload.location;
+      state.location = action.payload;
     },
     addTheme: (state, action) => {
       const newTheme = action.payload;
@@ -42,7 +42,6 @@ export const mapmakingSlice = createSlice({
 });
 
 export const {
-  setMapInfo,
   setLocation,
   addTheme,
   deleteTheme,

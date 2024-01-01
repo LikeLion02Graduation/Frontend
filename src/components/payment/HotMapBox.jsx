@@ -38,7 +38,11 @@ const HotMapBox = ({ children }) => {
                 </RecomNum>
                 <img src={gofront} style={{ width: "15px", height: "15px" }} />
               </div>
-              <Theme>#{item.hashtag}</Theme>
+              <Theme>
+                {item.hashtag.map((tag, index) => (
+                  <HashTag key={index}>#{tag}</HashTag>
+                ))}
+              </Theme>
             </Content>
           </Box2>
         </Box>
@@ -118,7 +122,12 @@ const RecomNum = styled.div`
   letter-spacing: 1.4px;
 `;
 const Theme = styled.div`
-  font-family: Hack;
+  display: flex;
+  flex-direction: row;
+  gap: 11px;
+`;
+
+const HashTag = styled.div`
   color: var(--black2);
   font-family: "Hack Regular";
   font-size: 12px;
