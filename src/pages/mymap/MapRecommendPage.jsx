@@ -19,7 +19,14 @@ const MapRecommendPage = () => {
     content:
       "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
     username: "혜지",
-    hashtag: ["카페", "혜지", "혜지", "혜지", "혜지"],
+    hashtag: [
+      {
+        tagname: "카페",
+      },
+      {
+        tagname: "비건",
+      },
+    ],
     place: [
       {
         id: 23,
@@ -40,7 +47,7 @@ const MapRecommendPage = () => {
     <>
       <TopBar navBtnOn={true} where={`/map/${mapId}`} titleText="recommend" />
       <Wrapper>
-        <KeywordBox keywords={recommendData.hashtag} />
+        <KeywordBox keywords={recommendData.hashtag} type={"tagname"} />
         <TitleContainer>
           <Col>
             <Title>

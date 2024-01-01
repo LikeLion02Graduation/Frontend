@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const KeywordBox = ({ keywords }) => {
+const KeywordBox = ({ keywords, type }) => {
   return (
     <TagContainer>
-      {keywords.map((tag, index) => (
-        <span key={index}>#{tag}</span>
-      ))}
+      {type === "tagname"
+        ? keywords.map((tag) => <span key={tag.tagname}>#{tag.tagname}</span>)
+        : keywords.map((tag, index) => <span key={index}>#{tag}</span>)}
     </TagContainer>
   );
 };
