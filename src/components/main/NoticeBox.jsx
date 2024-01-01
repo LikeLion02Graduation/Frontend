@@ -16,9 +16,9 @@ const NoticeBox = ({ children, onDelete }) => {
         <BoxContainer>
           <Box key={item.id}>
             <Box2>
-              <MapImg src={item.img} alt={item.name} />
+              <MapImg src={item.profile} alt={item.name} />
               <Content>
-                <User>{item.user} 님께서</User>
+                <User>{item.nickname} 님께서</User>
                 <div
                   style={{
                     display: "flex",
@@ -39,7 +39,7 @@ const NoticeBox = ({ children, onDelete }) => {
                     style={{ width: "15px", height: "15px" }}
                   />
                 </div>
-                <Time>{item.time}</Time>
+                <Time>{item.created_at}</Time>
               </Content>
             </Box2>
             <DeleteBtnContainer>

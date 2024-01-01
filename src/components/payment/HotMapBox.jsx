@@ -19,7 +19,7 @@ const HotMapBox = ({ children }) => {
           <Box2 onClick={() => handleClickBox(item)}>
             <MapImg src={item.img} alt={item.name} />
             <Content>
-              <User>by. {item.user}</User>
+              <User>by. {item.user.nickname}</User>
               <div
                 style={{
                   display: "flex",
