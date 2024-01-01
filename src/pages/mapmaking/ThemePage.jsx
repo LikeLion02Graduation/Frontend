@@ -6,11 +6,7 @@ import { useSelector } from "react-redux";
 import { addTheme, deleteTheme } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import {
-  WhiteBox,
-  NextBtnBlack,
-  Wrapper,
-} from "../../components/_common/CommonExport";
+import { WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 import KeywordGrid from "../../components/_common/KeywordGrid";
 import FeedBackBtn from "../../components/mapmaking/FeedBackModal";
 
@@ -20,12 +16,8 @@ const ThemePage = () => {
   const [selectedKeywords, setSelectedKeywords] = useState(initSelectedThemes);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const isThemeSelected = () => {
-    return selectedKeywords.length > 0;
-  };
-
   const handleNextBtn = () => {
-    if (isThemeSelected()) {
+    if (selectedKeywords.length > 0) {
       // Theme이 선택되어 있는 경우
       navigate("/mapmaking/name");
     } else {
@@ -39,13 +31,9 @@ const ThemePage = () => {
       <TopBar navBtnOn={true} titleText="Making" />
       <Wrapper>
         <WhiteBox text="Q. 당신의 지도는 어떤 테마인가요?(최대 5개!!)" />
-        <KeywordGrid
-          {...{ selectedKeywords, setSelectedKeywords }}
-          addReducer={addTheme}
-          deleteReducer={deleteTheme}
-        />
+        <KeywordGrid {...{ selectedKeywords, setSelectedKeywords }} addReducer={addTheme} deleteReducer={deleteTheme} />
         <FeedBackBtn {...{ isModalOpen, setIsModalOpen }} />
-        <NextBtnBlack addClickHandler={handleNextBtn} />
+        <BoxB onClick={handleNextBtn}>Next</BoxB>
       </Wrapper>
     </>
   );
