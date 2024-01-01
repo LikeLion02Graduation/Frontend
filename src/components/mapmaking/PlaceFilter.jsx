@@ -9,7 +9,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
   //const [siLoc, setSiLoc] = useState(null);
   const [selectedDo, setSelectedDo] = useState(null);
 
-  const MetroLoc = [
+  const metroLoc = [
     "서울",
     "부산",
     "인천",
@@ -55,104 +55,13 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       "구미시",
       "영주시",
     ],
-    경상남도: [
-      "경상남도",
-      "고양시",
-      "용인시",
-      "과천시",
-      "광명시",
-      "광주시",
-      "구리시",
-      "군포시",
-      "김포시",
-      "남양주시",
-      "동두천시",
-      "부천시",
-    ],
-    충청북도: [
-      "충청북도",
-      "고양시",
-      "용인시",
-      "과천시",
-      "광명시",
-      "광주시",
-      "구리시",
-      "군포시",
-      "김포시",
-      "남양주시",
-      "동두천시",
-      "부천시",
-    ],
-    충청남도: [
-      "충청남도",
-      "고양시",
-      "용인시",
-      "과천시",
-      "광명시",
-      "광주시",
-      "구리시",
-      "군포시",
-      "김포시",
-      "남양주시",
-      "동두천시",
-      "부천시",
-    ],
-    전라북도: [
-      "전라북도",
-      "고양시",
-      "용인시",
-      "과천시",
-      "광명시",
-      "광주시",
-      "구리시",
-      "군포시",
-      "김포시",
-      "남양주시",
-      "동두천시",
-      "부천시",
-    ],
-    전라남도: [
-      "전라남도",
-      "고양시",
-      "용인시",
-      "과천시",
-      "광명시",
-      "광주시",
-      "구리시",
-      "군포시",
-      "김포시",
-      "남양주시",
-      "동두천시",
-      "부천시",
-    ],
-    강원도: [
-      "강원도",
-      "고양시",
-      "용인시",
-      "과천시",
-      "광명시",
-      "광주시",
-      "구리시",
-      "군포시",
-      "김포시",
-      "남양주시",
-      "동두천시",
-      "부천시",
-    ],
-    제주: [
-      "제주",
-      "고양시",
-      "용인시",
-      "과천시",
-      "광명시",
-      "광주시",
-      "구리시",
-      "군포시",
-      "김포시",
-      "남양주시",
-      "동두천시",
-      "부천시",
-    ],
+    경상남도: ["경상남도", "고양시", "용인시", "과천시", "광명시"],
+    충청북도: ["충청북도", "고양시", "용인시", "과천시", "광명시", "광주시"],
+    충청남도: ["충청남도", "고양시", "용인시", "과천시", "광명시"],
+    전라북도: ["전라북도", "고양시", "용인시", "과천시"],
+    전라남도: ["전라남도", "고양시", "용인시", "과천시", "광명시"],
+    강원도: ["강원도", "고양시", "용인시"],
+    제주: ["제주", "고양시", "용인시", "과천시"],
   };
 
   // 백 연동 관련 임시 코드
@@ -187,6 +96,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       setSelectedBtn(null);
       //setSiLoc(null);
       setSelectedDo(null);
+      onPlaceSelect(null);
     } else {
       console.log("새로운 선택: ", location);
       setSelectedBtn(location);
@@ -201,6 +111,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       console.log("뒤로 가기 선택: ", location);
       setSelectedBtn(null);
       setSelectedDo(null);
+      onPlaceSelect(null);
     } else {
       if (selectedBtn === location) {
         console.log("선택 취소: ", location);
@@ -229,7 +140,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       <Contents>
         {MetroFilterActive && !doFilterActive && (
           <MetroContent>
-            {MetroLoc.map((location, index) => (
+            {metroLoc.map((location, index) => (
               <button
                 key={index}
                 onClick={() => handleBtnClick(location)}
@@ -247,7 +158,6 @@ const PlaceFilter = ({ onPlaceSelect }) => {
           <>
             {selectedDo ? (
               <SiContent>
-                {/*나중에 selectedDo를 siLoc로*/}
                 {selectedDo &&
                   selectedDo.map((location, index) => (
                     <button
@@ -276,8 +186,6 @@ const PlaceFilter = ({ onPlaceSelect }) => {
                       backgroundColor:
                         selectedBtn === location
                           ? "var(--yellow)"
-                          : selectedBtn
-                          ? "var(--grey)"
                           : "var(--white)",
                     }}
                   >

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setContent } from "../../redux/mapmakingSlice";
+import { setContent, setDescription } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import { MapNameBox, NextBtnWhite, Line2, Wrapper } from "../../components/_common/CommonExport";
@@ -22,26 +22,26 @@ const DonePage = () => {
   };
 
   const saveData = () => {
-    const trimmedContent = inputValue.content.trim();
+    const trimmedContent = inputValue.desciption.trim();
 
     if (trimmedContent === "") {
       alert("내용을 작성해주세요");
     } else {
-      dispatch(setContent({ content: trimmedContent }));
+      dispatch(setDescription({ content: trimmedContent }));
       navigate(`/map/:id/share`);
     }
   };
 
-  const mapPlace = useSelector((state) => state.mapmaking.place);
+  const mapLocation = useSelector((state) => state.mapmaking.location);
   const mapName = useSelector((state) => state.mapmaking.name);
   const mapImg = useSelector((state) => state.mapmaking.img);
-  const mapTheme = useSelector((state) => state.mapmaking.hashtag);
+  const mapHashtag = useSelector((state) => state.mapmaking.hashtag);
 
   return (
     <>
       <TopBar navBtnOn={true} titleText="Making" />
       <Wrapper>
-        <MapNameBox place={mapPlace} user="시은" />
+        <MapNameBox place={mapLocation} user="시은" />
         <Line2 />
 
         <MapProfile>
@@ -51,7 +51,7 @@ const DonePage = () => {
           <MapName>{mapName}</MapName>
         </MapProfile>
         <Wrapper2>
-          <ThemeBox>{mapTheme}</ThemeBox>
+          <ThemeBox>{mapHashtag}</ThemeBox>
 
           <InputBox>
             <textarea

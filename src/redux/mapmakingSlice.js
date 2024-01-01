@@ -2,12 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   map_id: 1,
-  place: [],
+  location: [],
   hashtag: [],
   name: "",
   img: "",
-  content: "",
-  user_id: 1,
+  description: "",
 };
 
 export const mapmakingSlice = createSlice({
@@ -17,16 +16,16 @@ export const mapmakingSlice = createSlice({
     initMap: (state) => {
       state.map_id = initialState.map_id;
       state.name = initialState.name;
-      state.content = initialState.content;
-      state.place = initialState.place;
+      state.description = initialState.description;
+      state.location = initialState.location;
       state.hashtag = initialState.hashtag;
       state.img = initialState.img;
     },
     setMapId: (state, action) => {
       state.map_id = action.payload.map_id;
     },
-    setPlace: (state, action) => {
-      state.place = action.payload.place;
+    setLocation: (state, action) => {
+      state.location = action.payload.location;
     },
     addTheme: (state, action) => {
       const newTheme = action.payload;
@@ -44,8 +43,8 @@ export const mapmakingSlice = createSlice({
     setImage: (state, action) => {
       state.img = action.payload.img;
     },
-    setContent: (state, action) => {
-      state.content = action.payload.content;
+    setDescription: (state, action) => {
+      state.description = action.payload.description;
     },
   },
 });
@@ -53,12 +52,12 @@ export const mapmakingSlice = createSlice({
 export const {
   initMap,
   setMapId,
-  setPlace,
+  setLocation,
   addTheme,
   deleteTheme,
   setName,
   setImage,
-  setContent,
+  setDescription,
 } = mapmakingSlice.actions;
 
 export default mapmakingSlice.reducer;

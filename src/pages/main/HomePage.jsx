@@ -19,19 +19,19 @@ const HomePage = () => {
   const [othersFilterActive, setOthersFilterActive] = useState(false);
 
   const MapData1 = [
-    { id: 1, img: monkey_1, name: "부산에 가자", time: "23.11.19 03:06" },
-    { id: 2, img: monkey_2, name: "서울에 가자", time: "23.11.19 03:06" },
+    { id: 1, img: monkey_1, name: "부산에 가자", created_at: "23.11.19 03:06" },
+    { id: 2, img: monkey_2, name: "서울에 가자", created_at: "23.11.19 03:06" },
     {
       id: 3,
       img: monkey_3,
       name: "국밥 추천 받습니다",
-      time: "23.11.19 03:06",
+      created_at: "23.11.19 03:06",
     },
     {
       id: 4,
       img: monkey_4,
       name: "저는 비빔면이 땡겨요",
-      time: "23.11.19 03:06",
+      created_at: "23.11.19 03:06",
     },
   ];
 
@@ -40,28 +40,28 @@ const HomePage = () => {
       id: 1,
       img: monkey_1,
       name: "부산에 가자",
-      time: "23.11.19 03:06",
+      created_at: "23.11.19 03:06",
       user: "손예원",
     },
     {
       id: 2,
       img: monkey_2,
       name: "서울에 가자",
-      time: "23.11.19 03:06",
+      created_at: "23.11.19 03:06",
       user: "손예원",
     },
     {
       id: 3,
       img: monkey_3,
       name: "국밥 추천 받습니다",
-      time: "23.11.19 03:06",
+      created_at: "23.11.19 03:06",
       user: "손예원",
     },
     {
       id: 4,
       img: monkey_4,
       name: "저는 비빔면이 땡겨요",
-      time: "23.11.19 03:06",
+      created_at: "23.11.19 03:06",
       user: "손예원",
     },
   ];

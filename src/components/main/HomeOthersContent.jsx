@@ -24,7 +24,7 @@ const HomeOthersContent = ({ children }) => {
         <Total>Total {children.length}</Total>
         <Sort onClick={handleSortClick} active={showSortBox}>
           <p>{sortType}</p>
-          <img src={sort} />
+          <img src={sort} alt="sort" />
           {showSortBox && (
             <SortOptions>
               <SortOption onClick={() => handleSortTypeSelect("Earliest")}>
@@ -41,10 +41,10 @@ const HomeOthersContent = ({ children }) => {
         {children.map((box) => (
           <Box key={box.id} onClick={() => navigate(`/map/${box.id}`)}>
             <Img>
-              <img src={box.img} />
+              <img src={box.img} alt={box.name} />
             </Img>
             <Name>{box.name}</Name>
-            <Time>{box.time} up</Time>
+            <Time>{box.created_at} up</Time>
             <User>{box.user}님의 지도</User>
           </Box>
         ))}

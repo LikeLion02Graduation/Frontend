@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import TopBar from "../../components/_common/TopBar";
@@ -34,48 +33,48 @@ const HotMapPage = () => {
       img: monkey_1,
       user: "허파게티",
       name: "부산맛집추천받음",
-      num: 20,
-      theme: "카페 #맛집 #자연",
+      recom_num: 20,
+      hashtag: "카페 #맛집 #자연",
     },
     {
       id: 2,
       img: monkey_1,
       user: "허파게티",
       name: "부산에 가자2",
-      num: 20,
-      theme: "카페 #맛집",
+      recom_num: 20,
+      hashtag: "카페 #맛집",
     },
     {
       id: 3,
       img: monkey_1,
       user: "핑핑이",
       name: "힐링하러 갑니다 부산에서의 행복...",
-      num: 20,
-      theme: "카페 #산책 #자연",
+      recom_num: 20,
+      hashtag: "카페 #산책 #자연",
     },
     {
       id: 4,
       img: monkey_1,
       user: "빵친자",
       name: "빵순이 부산에 가다",
-      num: 20,
-      theme: "카페 맛집 자연",
+      recom_num: 20,
+      hashtag: "카페 맛집 자연",
     },
     {
       id: 5,
       img: monkey_1,
       user: "빵친자",
       name: "빵순이 부산에 가다",
-      num: 20,
-      theme: "카페 맛집 자연",
+      recom_num: 20,
+      hashtag: "카페 맛집 자연",
     },
     {
       id: 6,
       img: monkey_1,
       user: "빵친자",
       name: "빵순이 부산에 가다",
-      num: 20,
-      theme: "카페 맛집 자연",
+      recom_num: 20,
+      hashtag: "카페 맛집 자연",
     },
   ];
 

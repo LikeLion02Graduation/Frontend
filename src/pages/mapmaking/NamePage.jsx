@@ -54,8 +54,6 @@ const NamePage = () => {
           />
         </InputBox>
         <Line1 />
-        <div id="temporary" />
-
         <NextBtnWhite
           text={"Next"}
           number={"96px"}

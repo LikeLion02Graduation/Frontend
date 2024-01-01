@@ -109,11 +109,6 @@ const Wrapper = styled.div`
   height: calc(100vh - 106px);
   overflow-x: hidden;
   overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
   background: var(--white);
   font-family: "Hack Regular";
 `;

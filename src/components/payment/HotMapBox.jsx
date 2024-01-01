@@ -33,12 +33,12 @@ const HotMapBox = ({ children }) => {
                 <MapName>{item.name}</MapName>
                 <RecomNum>
                   {"("}
-                  {item.num}
+                  {item.recom_num}
                   {")"}
                 </RecomNum>
                 <img src={gofront} style={{ width: "15px", height: "15px" }} />
               </div>
-              <Theme>#{item.theme}</Theme>
+              <Theme>#{item.hashtag}</Theme>
             </Content>
           </Box2>
         </Box>
