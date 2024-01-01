@@ -11,10 +11,23 @@ import LinkCopyModal from "./LinkCopyModal";
 const LinkContainer = ({ mapId }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const currentURL = window.location.href;
+
+  const copyURL = async () => {
+    try {
+      await navigator.clipboard.writeText(currentURL);
+      console.log("복사된 링크 :", currentURL);
+      setModalOpen(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <Container>
-        <div onClick={() => setModalOpen(true)}>
+        <div onClick={copyURL}>
           <img src={linkcopy} alt="link" />
           <img src={linkbg} alt="link" />
         </div>
@@ -31,10 +44,23 @@ const LinkContainer = ({ mapId }) => {
 const WTagContainer = ({ mapId, recomId }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const currentURL = window.location.href;
+
+  const copyURL = async () => {
+    try {
+      await navigator.clipboard.writeText(currentURL);
+      console.log("복사된 링크 :", currentURL);
+      setModalOpen(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <WTag>
-        <div onClick={() => setModalOpen(true)}>
+        <div onClick={copyURL}>
           <img src={wtagBack} alt="link" />
           <span>link</span>
         </div>

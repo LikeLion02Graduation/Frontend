@@ -1,25 +1,42 @@
 import React from "react";
 import styled from "styled-components";
 
-const ShareModal = ({ onClose }) => {
+const ShareModal = ({ onClose, mapId, recomId }) => {
+  const mapURL = () => {
+    if (recomId) return `/map/${mapId}/${recomId}`;
+    else return `/map/${mapId}`;
+  };
+
+  const copyURL = async () => {
+    try {
+      await navigator.clipboard.writeText(mapURL());
+      console.log("복사된 링크 :", mapURL());
+      alert("링크가 복사되었습니다!");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <Background onClick={onClose} />
       <Modal>
         <MainText>
           추천을 더 잘 받을
-          <br />수 있는 꿀팁을
+          <br />
+          수 있는 꿀팁을
           <br />
           大공개 !
         </MainText>
         <SubText>
-          추천을 더 잘 받을
-          <br />수 있는 꿀팁을
+          스토리 링크 스티커를 이용해
           <br />
-          大공개 !
+          바로가기 링크를 임베드 해 보세요.
         </SubText>
-        <LinkBox>http://naechinman.newmap.#2832129023</LinkBox>
-        <Btn style={{ marginTop: "12px", background: "var(--yellow)", color: "var(--black1)" }}>링크 복사하기</Btn>
+        <LinkBox>{mapURL()}</LinkBox>
+        <Btn style={{ marginTop: "12px", background: "var(--yellow)", color: "var(--black1)" }} onClick={copyURL}>
+          링크 복사하기
+        </Btn>
         <Btn style={{ marginTop: "9px", background: "var(--black2)", color: "var(--white)" }} onClick={onClose}>
           확인
         </Btn>

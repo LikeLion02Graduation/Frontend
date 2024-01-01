@@ -61,7 +61,7 @@ const SharePage = () => {
           <div onClick={() => navigate("/")}>Skip</div>
         </WhiteBtn>
       </Wrapper>
-      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapData.id} />}
     </>
   );
 };
