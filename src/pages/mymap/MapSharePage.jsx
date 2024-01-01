@@ -77,7 +77,7 @@ const MapSharePage = () => {
 
         <BoxW onClick={handleShareBtnClick}>Share to Instagram</BoxW>
       </Wrapper>
-      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapData.id} />}
     </>
   );
 };

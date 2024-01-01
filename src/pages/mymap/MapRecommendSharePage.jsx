@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
@@ -9,6 +10,7 @@ import triangle from "../../assets/images/triangle.svg";
 import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 
 const MapRecommendSharePage = () => {
+  const { mapId } = useParams();
   const [recommendData, setRecommendData] = useState({
     id: "1",
     title: "여기 안가면 평생 후회할 것입니다..",
@@ -68,7 +70,7 @@ const MapRecommendSharePage = () => {
 
         <BoxW onClick={handleShareBtnClick}>Share to Instagram</BoxW>
       </Wrapper>
-      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapId} recomId={recommendData.id} />}
     </>
   );
 };
