@@ -72,9 +72,11 @@ const PreviewPage = () => {
         </TitleContainer>
 
         <TagContainer>
-          {mapData.hashtag.map((tag) => (
-            <span key={tag.tagname}>#{tag.tagname}</span>
-          ))}
+          <div>
+            {mapData.hashtag.map((tag) => (
+              <span key={tag.tagname}>#{tag.tagname}</span>
+            ))}
+          </div>
         </TagContainer>
 
         <Description>
@@ -126,16 +128,14 @@ const MapNameText = styled.div`
 `;
 
 const TagContainer = styled.div`
-  padding: 0 110px;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  align-items: center;
-  width: 541px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   height: 60px;
   flex-shrink: 0;
   background: var(--yellow);
-  border: 1.5px solid var(--black1);
+  border-top: 1.5px solid var(--black1);
+  border-bottom: 1.5px solid var(--black1);
 
   color: var(--black2);
   font-family: Apple SD Gothic Neo;
@@ -144,11 +144,23 @@ const TagContainer = styled.div`
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
 
-  @media (max-width: 393px) {
-    width: 100%;
-    border-left: none;
-    border-right: none;
-    padding: 0 36px;
+  div {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    width: 393px;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    @media (max-width: 393px) {
+      width: 100%;
+      padding: 0 36px;
+    }
+
+    span {
+      display: flex;
+      justify-content: center;
+    }
   }
 `;
 

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
 const LockModal = () => {
-  const { mapId } = useParams();
+  const { location, mapId } = useParams();
   const navigate = useNavigate();
 
   const goPayment = () => {
-    navigate(`/payment/${mapId}/pay`);
+    navigate(`/payment/${location}/${mapId}/pay`);
   };
 
   const goBack = () => {
@@ -26,7 +26,13 @@ const LockModal = () => {
         </Box>
         <Box
           onClick={goBack}
-          style={{ marginTop: "150px", fontFamily: "Hack Regular", fontWeight: "700", cursor: "pointer" }}
+          style={{
+            width: "393px",
+            marginTop: "20vh",
+            fontFamily: "Hack Regular",
+            fontWeight: "700",
+            cursor: "pointer",
+          }}
         >
           back
         </Box>
@@ -67,7 +73,7 @@ const Modal = styled.div`
 `;
 
 const Box = styled.div`
-  margin-top: 125px;
+  margin-top: 15vh;
   width: 110vw;
   height: 61px;
   flex-shrink: 0;
@@ -80,6 +86,6 @@ const Box = styled.div`
   font-family: Apple SD Gothic Neo;
 
   span {
-    font-weight: 900;
+    font-family: Apple SD Gothic Neo SB;
   }
 `;

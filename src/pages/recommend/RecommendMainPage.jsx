@@ -3,8 +3,7 @@ import { styled } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { deletePlace } from "../../redux/recommendSlice";
-import { persistor } from "../../index";
+import { initRecommend, deletePlace } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line2, LongBtnBlack, MapNameBox, Wrapper, YellowBox } from "../../components/_common/CommonExport";
@@ -27,15 +26,13 @@ const RecommendMainPage = () => {
     navigate(`/map/${mapId}/r/search`);
   };
 
-  const initRecommend = () => {
-    setTimeout(async () => {
-      await persistor.purge();
-    }, 200);
+  const handleInit = () => {
+    dispatch(initRecommend());
   };
 
   return (
     <>
-      <TopBar navBtnOn={true} addClickHandler={initRecommend} where={`/map/${mapId}`} titleText="giving" />
+      <TopBar navBtnOn={true} addClickHandler={handleInit} where={`/map/${mapId}`} titleText="giving" />
       <Wrapper>
         <MapNameBox place="부산" user="시은" />
         <Line2 />

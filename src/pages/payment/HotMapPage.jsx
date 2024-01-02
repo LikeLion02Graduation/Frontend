@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
@@ -11,6 +11,8 @@ import gofront from "../../assets/images/go-front.svg";
 import monkey_1 from "../../assets/images/monkey-1.png"; //임시이미지
 
 const HotMapPage = () => {
+  const { location } = useParams();
+
   const [BackBtnActive, setBackBtnActive] = useState(true);
   const [FrontBtnActive, setFrontBtnActive] = useState(false);
 
@@ -23,8 +25,6 @@ const HotMapPage = () => {
     setFrontBtnActive(true);
     setBackBtnActive(false);
   };
-
-  const mapPlace = useSelector((state) => state.mapmaking.place);
 
   // 임시 목데이터
   const HotMapData = [
@@ -95,8 +95,7 @@ const HotMapPage = () => {
       <TopBar navBtnOn={true} titleText="추천 콘텐츠" />
       <Wrapper>
         <WhiteBox>
-          {/*<span>🔔 요즘 인기있는 {mapPlace} 지도</span>*/}
-          <span>🔔 요즘 인기있는 부산 지도</span>
+          <span>🔔 요즘 인기있는 {location} 지도</span>
         </WhiteBox>
         <Filters>
           <BackBtn onClick={handleBackBtnClick} $active={BackBtnActive}>
@@ -108,7 +107,7 @@ const HotMapPage = () => {
             <img src={gofront} />
           </FrontBtn>
         </Filters>
-        <HotMapBox children={HotMapData} />
+        <HotMapBox children={HotMapData} location={location} />
       </Wrapper>
     </>
   );

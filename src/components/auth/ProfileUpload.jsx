@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
+//api
+import { PostSignup } from "../../api/user";
+
 const ProfileUpload = () => {
   const navigate = useNavigate();
+
+  const signupInfo = useSelector((state) => state.signup);
 
   //프로필 사진 설정
   const [selectedImg, setSelectedImg] = useState(null);
@@ -32,11 +39,17 @@ const ProfileUpload = () => {
 
   //가입 완료 함수
   const signup = () => {
-    if (username.trim() == "") {
+    if (username.trim() === "") {
       alert("닉네임을 입력해주세요.");
     } else {
-      alert("가입이 완료되었습니다.");
-      navigate("/auth/login");
+      try {
+        PostSignup(signupInfo.user_id, signupInfo.password, username, imgUrl);
+        alert("가입이 완료되었습니다.");
+        navigate("/auth/login");
+      } catch (error) {
+        console.error("회원가입 실패 ", error);
+        // 오류 처리
+      }
     }
   };
 
@@ -55,7 +68,13 @@ const ProfileUpload = () => {
       )}
       <Container>
         <span>사용할 닉네임을 입력하세요.</span>
-        <input type="text" placeholder="닉네임 입력" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input
+          type="text"
+          placeholder="닉네임 입력"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          autocomplete="off"
+        />
       </Container>
       <LongBtn onClick={signup}>가입 완료</LongBtn>
     </>
@@ -100,6 +119,10 @@ const Container = styled.div`
     font-weight: 400;
     line-height: 145%; /* 20.3px */
     letter-spacing: 1.4px;
+
+    &::placeholder {
+      opacity: 0.4;
+    }
   }
 `;
 
@@ -132,6 +155,7 @@ const ProfileImg = styled.img`
   flex-shrink: 0;
   border-radius: 50%;
   border: 1px solid var(--black1);
+  object-fit: cover;
 `;
 
 const LongBtn = styled.div`

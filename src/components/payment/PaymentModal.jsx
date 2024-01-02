@@ -1,21 +1,38 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
 
 const PaymentModal = () => {
+  const { location } = useParams();
+  const navigate = useNavigate();
+
+  //추후 수정 필요
+  const goMain = () => {
+    navigate(`/`);
+  };
+
+  const goHotmap = () => {
+    navigate(`/hotmap/${location}`);
+  };
+
   return (
     <>
       <Background />
       <Modal>
         <Box style={{ transform: "rotate(15deg)" }}>성공적으로 구매가 완료되었습니다 !</Box>
-        <Box style={{ transform: "rotate(-15deg)" }}>내 지도에서 확인하기</Box>
+        <Box style={{ transform: "rotate(-15deg)", cursor: "pointer" }} onClick={goMain}>
+          내 지도에서 확인하기
+        </Box>
         <Box
           style={{
-            marginTop: "150px",
+            width: "393px",
+            marginTop: "20vh",
             background: "var(--gray)",
             fontFamily: "Hack Regular",
             fontWeight: "700",
             cursor: "pointer",
           }}
+          onClick={goHotmap}
         >
           추천 콘텐츠 더 알아보기
         </Box>
@@ -56,7 +73,7 @@ const Modal = styled.div`
 `;
 
 const Box = styled.div`
-  margin-top: 125px;
+  margin-top: 15vh;
   width: 110vw;
   height: 61px;
   flex-shrink: 0;
