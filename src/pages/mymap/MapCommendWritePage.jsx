@@ -13,19 +13,33 @@ const MapCommendWritePage = () => {
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [savedEmoji, setSavedEmoji] = useState(null);
 
+  //이모지 선택
+  const selectEmoji = (index) => {
+    setSelectedEmoji((prevSelectedEmoji) => (prevSelectedEmoji === index ? null : index));
+  };
+
+  //반응 남기기 함수
   const saveInputValue = () => {
-    if (inputValue.trim() !== "") {
-      console.log("Data saved:", inputValue);
+    const trimmedInputValue = inputValue.trim();
+
+    if (!trimmedInputValue) {
+      alert("반응을 작성해주세요.");
+    } else if (selectedEmoji === null) {
+      alert("이모지를 선택해주세요.");
+    } else {
+      console.log("Data saved:", trimmedInputValue);
       setSavedEmoji(selectedEmoji);
     }
   };
 
+  //이모지 배경 색 설정
   const emojiColor = (index) => {
     if (savedEmoji === index) return "black";
     else if (selectedEmoji === index) return "yellow";
     else return "white";
   };
 
+  //모달 닫기
   const closeModal = () => {
     setSavedEmoji(null);
     navigate(-1);
@@ -53,11 +67,7 @@ const MapCommendWritePage = () => {
 
         <EmojiContainer>
           {emojis.map((emoji, index) => (
-            <EmojiButton
-              key={index}
-              style={{ backgroundColor: emojiColor(index) }}
-              onClick={() => setSelectedEmoji(index)}
-            >
+            <EmojiButton key={index} style={{ backgroundColor: emojiColor(index) }} onClick={() => selectEmoji(index)}>
               {emoji}
             </EmojiButton>
           ))}
@@ -105,7 +115,7 @@ const InputBox = styled.input`
   letter-spacing: 1.4px;
   opacity: 1;
 
-  ::placeholder {
+  &::placeholder {
     opacity: 0.3;
   }
 
@@ -121,15 +131,12 @@ const EmojiContainer = styled.div`
   justify-content: center;
   width: 331px;
   gap: 17px;
-
-  @media (max-width: 393px) {
-    width: calc(100% - 60px);
-  }
 `;
 
 const EmojiButton = styled.button`
   width: 70px;
   height: 70px;
+  flex-shrink: 0;
   border: 1px solid var(--black1);
   border-radius: 50%;
   cursor: pointer;
@@ -140,8 +147,8 @@ const EmojiButton = styled.button`
   font-size: 30.732px;
   font-weight: 500;
 
-  /* @media (max-width: 393px) {
-    width: 50px;
-    height: 50px;
-  } */
+  @media (max-width: 330px) {
+    width: 60px;
+    height: 60px;
+  }
 `;

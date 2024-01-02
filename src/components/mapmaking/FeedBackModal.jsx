@@ -12,11 +12,17 @@ const FeedBackBtn = (props) => {
 };
 
 const FeedBackModal = ({ onClose }) => {
+  const [inputValue, setInputValue] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   const handleSubmit = () => {
-    // 서버에 데이터 전송
-    setIsSubmitted(true);
+    if (inputValue.trim() !== "") {
+      setIsSubmitted(true);
+    } else alert("피드백을 작성해주세요!");
   };
 
   return (
@@ -30,16 +36,16 @@ const FeedBackModal = ({ onClose }) => {
             <YellowBox style={{ transform: "rotate(-15deg)" }}>
               검토 후 빠른 시일 내에 반영하도록 하겠습니다 ^^
             </YellowBox>
-            <YellowBox onClick={onClose} style={{ marginTop: "150px" }}>
+            <YellowBox onClick={onClose} style={{ width: "393px", marginTop: "20vh" }}>
               Ok
             </YellowBox>
           </>
         ) : (
           <>
-            <GrayBox style={{ transform: "rotate(15deg)" }}>원하는 태그를 찾지 못했나요?</GrayBox>
-            <GrayBox style={{ marginTop: "70px" }}>내친만에 직접 원하는 태그 추가 요청을 피드백 해보세요!</GrayBox>
+            <GrayBox style={{ marginTop: "8vh", transform: "rotate(15deg)" }}>원하는 태그를 찾지 못했나요?</GrayBox>
+            <GrayBox style={{ marginTop: "15vh" }}>내친만에 직접 원하는 태그 추가 요청을 피드백 해보세요!</GrayBox>
 
-            <InputBox placeholder="요기에 입력 !" />
+            <InputBox placeholder="요기에 입력 !" type="text" value={inputValue} onChange={handleInputChange} />
             <BtnContainer>
               <Btn onClick={handleSubmit} style={{ background: "var(--yellow)" }}>
                 Submit
@@ -91,16 +97,13 @@ const Overlay = styled.div`
 const Wrapper = styled.div`
   position: fixed;
   z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
 const YellowBox = styled.div`
-  margin-top: 125px;
+  margin-top: 15vh;
   width: 110vw;
   height: 61px;
   flex-shrink: 0;
@@ -120,7 +123,6 @@ const YellowBox = styled.div`
 `;
 
 const GrayBox = styled.div`
-  margin-top: 125px;
   width: 110vw;
   height: 61px;
   flex-shrink: 0;
@@ -143,7 +145,7 @@ const InputBox = styled.textarea`
   margin-top: 31px;
   padding: 18px 22px;
   box-sizing: border-box;
-  width: 399px;
+  width: 393px;
   height: 199px;
   border: 3px solid var(--yellow);
   background-color: var(--white);
@@ -155,8 +157,12 @@ const InputBox = styled.textarea`
   line-height: 145%;
   letter-spacing: 1.496px;
 
-  ::placeholder {
+  &::placeholder {
     color: rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 393px) {
+    width: calc(100vw + 6px);
   }
 `;
 
@@ -165,6 +171,10 @@ const BtnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
+  @media (max-width: 393px) {
+    width: 100vw;
+  }
 `;
 
 const Btn = styled.div`

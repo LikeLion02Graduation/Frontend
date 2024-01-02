@@ -52,6 +52,7 @@ const LoginPage = () => {
           name="userid"
           value={formData.userid}
           onChange={handleInputChange}
+          autocomplete="off"
         />
         <input
           type="password"
@@ -84,14 +85,15 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  padding-top: 122px;
-  padding-bottom: 80px;
+  padding-top: 10vh;
+  padding-bottom: 7vh;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 55px;
+  height: 28vh;
+  max-height: 244px;
   border-bottom: 1.5px solid var(--black1);
   background-color: var(--yellow);
   z-index: 1;
@@ -124,16 +126,29 @@ const Container = styled.div`
     font-weight: 400;
     line-height: 145%; /* 20.3px */
     letter-spacing: 1.4px;
+
+    &::placeholder {
+      opacity: 0.4;
+    }
   }
 
   input:nth-child(2) {
     border-top: 1.5px solid var(--black1);
-    margin-top: 10vh;
-    margin-bottom: 13.5vh;
+    margin-top: 9vh;
+    margin-bottom: 11vh;
     transform: rotate(-15deg);
 
-    @media (min-width: 768px) {
+    @media (min-width: 820px) {
+      transform: rotate(-13deg);
+    }
+
+    @media (min-width: 1025px) {
       transform: rotate(-10deg);
+    }
+
+    @media (min-height: 1052px) {
+      margin-top: 16vh;
+      margin-bottom: 16vh;
     }
   }
 `;
@@ -158,15 +173,14 @@ const LongBtn = styled.div`
 `;
 
 const OR = styled.div`
-  margin: 36px auto;
+  margin: 4vh auto;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const Kakao = styled.img`
-  margin-top: 36px;
-  margin-bottom: 25px;
+  margin-top: 4vh;
   width: 57px;
   height: 57px;
   flex-shrink: 0;

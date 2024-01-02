@@ -132,7 +132,7 @@ const InputTitle = styled.input`
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
 
-  ::placeholder {
+  &::placeholder {
     opacity: 0.3;
   }
 
@@ -152,7 +152,7 @@ const InputContent = styled.textarea`
   line-height: 145%; /* 20.3px */
   letter-spacing: 1.4px;
 
-  ::placeholder {
+  &::placeholder {
     opacity: 0.3;
   }
 

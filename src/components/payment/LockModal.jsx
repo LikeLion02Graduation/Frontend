@@ -26,7 +26,13 @@ const LockModal = () => {
         </Box>
         <Box
           onClick={goBack}
-          style={{ marginTop: "150px", fontFamily: "Hack Regular", fontWeight: "700", cursor: "pointer" }}
+          style={{
+            width: "393px",
+            marginTop: "20vh",
+            fontFamily: "Hack Regular",
+            fontWeight: "700",
+            cursor: "pointer",
+          }}
         >
           back
         </Box>
@@ -67,7 +73,7 @@ const Modal = styled.div`
 `;
 
 const Box = styled.div`
-  margin-top: 125px;
+  margin-top: 15vh;
   width: 110vw;
   height: 61px;
   flex-shrink: 0;

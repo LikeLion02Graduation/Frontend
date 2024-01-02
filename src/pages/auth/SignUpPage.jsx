@@ -46,6 +46,7 @@ const SignUpPage = () => {
             name="userid"
             value={formData.userid}
             onChange={handleInputChange}
+            autocomplete="off"
           />
         </Container>
         <Container style={{ marginTop: "73px" }}>
@@ -92,6 +93,27 @@ const Container = styled.div`
 
     @media (max-width: 393px) {
       width: calc(100% - 62px);
+    }
+  }
+
+  input {
+    width: 100%;
+    height: 61px;
+    flex-shrink: 0;
+    border-top: 1.5px solid var(--black1);
+    border-bottom: 1.5px solid var(--black1);
+    background: var(--gray);
+
+    color: var(--black3);
+    text-align: center;
+    font-family: "Hack Regular";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 145%; /* 20.3px */
+    letter-spacing: 1.4px;
+
+    &::placeholder {
+      opacity: 0.4;
     }
   }
 `;
