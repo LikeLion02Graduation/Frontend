@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { initSignUp, setSignUp } from "../../redux/signupSlice";
+import { setSignUp } from "../../redux/signupSlice";
 
 //components
 import TopBar from "../../components/_common/TopBar";

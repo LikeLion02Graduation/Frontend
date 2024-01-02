@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
+//api
+import { PostSignup } from "../../api/user";
+
 const ProfileUpload = () => {
   const navigate = useNavigate();
 
@@ -39,8 +42,14 @@ const ProfileUpload = () => {
     if (username.trim() === "") {
       alert("닉네임을 입력해주세요.");
     } else {
-      alert("가입이 완료되었습니다.");
-      navigate("/auth/login");
+      try {
+        PostSignup(signupInfo.user_id, signupInfo.password, username, imgUrl);
+        alert("가입이 완료되었습니다.");
+        navigate("/auth/login");
+      } catch (error) {
+        console.error("회원가입 실패 ", error);
+        // 오류 처리
+      }
     }
   };
 

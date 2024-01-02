@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { initSignUp } from "../../redux/signupSlice";
 
+//images
 import kakaologo from "../../assets/images/kakao-logo.svg";
+
+//api
+import { PostLogin } from "../../api/user";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -29,12 +33,14 @@ const LoginPage = () => {
       alert("아이디를 입력해주세요.");
     } else if (formData.password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
-    } //임시 코드
-    else if (formData.userid !== "user" || formData.password !== "password") {
-      alert("아이디 또는 비밀번호가 올바르지 않습니다.");
     } else {
-      alert("로그인에 성공했습니다!");
-      navigate("/");
+      try {
+        PostLogin(formData.userid, formData.password);
+        alert("로그인에 성공했습니다!");
+        navigate("/");
+      } catch (error) {
+        console.error("로그인 실패 ", error);
+      }
     }
   };
 
@@ -57,7 +63,7 @@ const LoginPage = () => {
           name="userid"
           value={formData.userid}
           onChange={handleInputChange}
-          autocomplete="off"
+          autoComplete="off"
         />
         <input
           type="password"
