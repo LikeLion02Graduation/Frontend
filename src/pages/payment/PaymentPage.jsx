@@ -63,8 +63,8 @@ const Header = styled.div`
   letter-spacing: 1.4px;
 
   span {
+    font-family: Apple SD Gothic Neo SB;
     margin-right: 3px;
-    font-weight: 800;
   }
 `;
 

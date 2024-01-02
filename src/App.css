@@ -52,3 +52,10 @@ button {
   font-weight: normal;
   src: url("./assets/fonts/AppleSDGothicNeoR.woff") format("woff");
 }
+
+@font-face {
+  font-family: Apple SD Gothic Neo SB;
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/AppleSDGothicNeoSB.woff") format("woff");
+}

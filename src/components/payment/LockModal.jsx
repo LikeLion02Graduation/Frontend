@@ -86,6 +86,6 @@ const Box = styled.div`
   font-family: Apple SD Gothic Neo;
 
   span {
-    font-weight: 900;
+    font-family: Apple SD Gothic Neo SB;
   }
 `;

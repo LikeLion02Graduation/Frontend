@@ -32,26 +32,9 @@ const MapMainPage = () => {
       id: 1,
       nickname: "서연",
     },
-    map_mine: false,
+    map_mine: true,
     do_buy: false,
-    recommend: [
-      {
-        id: 11,
-        user: {
-          id: 12,
-          nickname: "혜지",
-        },
-        mine: false,
-      },
-      {
-        id: 111,
-        user: {
-          id: 13,
-          nickname: "채린",
-        },
-        mine: true,
-      },
-    ],
+    recommend: [],
   });
 
   const addPostit = () => {

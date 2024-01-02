@@ -6,8 +6,8 @@ const NoRecommendModal = ({ location }) => {
   const navigate = useNavigate();
   return (
     <>
-      <GrayBox onClick={() => navigate("/payment/hotmap")}>{location}에 대한 더 많은 정보는 ?</GrayBox>
-      <YellowBox>다양한 곳에 링크를 공유하고 받은 추천을 자랑하세요 🤭</YellowBox>
+      <GrayBox>{location}에 대한 더 많은 정보는 ?</GrayBox>
+      <YellowBox onClick={() => navigate("/payment/hotmap")}>추천 콘텐츠 보러 가기</YellowBox>
     </>
   );
 };
@@ -53,7 +53,7 @@ const YellowBox = styled.div`
 
   color: var(--black3);
   text-align: center;
-  font-family: Apple SD Gothic Neo;
+  font-family: Apple SD Gothic Neo SB;
   font-size: 14px;
   font-weight: 900;
   line-height: 145%; /* 20.3px */
