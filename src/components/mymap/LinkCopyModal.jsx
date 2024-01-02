@@ -9,7 +9,13 @@ const LinkCopyModal = ({ onClose }) => {
         <Box style={{ transform: "rotate(15deg)" }}>내 지도 링크를 클립보드에 복사했어요</Box>
         <Box style={{ transform: "rotate(-15deg)" }}>다양한 곳에 링크를 공유하고 받은 추천을 자랑하세요 🤭</Box>
         <Box
-          style={{ marginTop: "150px", fontFamily: "Hack Regular", fontWeight: "700", cursor: "pointer" }}
+          style={{
+            width: "393px",
+            marginTop: "20vh",
+            fontFamily: "Hack Regular",
+            fontWeight: "700",
+            cursor: "pointer",
+          }}
           onClick={onClose}
         >
           Ok
@@ -51,7 +57,7 @@ const Modal = styled.div`
 `;
 
 const Box = styled.div`
-  margin-top: 125px;
+  margin-top: 15vh;
   width: 110vw;
   height: 61px;
   flex-shrink: 0;

@@ -3,13 +3,22 @@ import { styled } from "styled-components";
 
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
+import PaymentModal from "../../components/payment/PaymentModal";
 
 import triangle from "../../assets/images/triangle.svg";
 
 const PaymentPage = () => {
+  //결제 완료 모달 관리
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  //결제하기 함수
+  const buyMap = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <>
-      <TopBar navBtnOn={true} titleText="recommend" />
+      <TopBar navBtnOn={true} titleText="Buy" />
       <Wrapper>
         <Header>
           <span>부산에 가자2</span>결제하기
@@ -23,7 +32,7 @@ const PaymentPage = () => {
 
         <Line1 />
         <Container>
-          <PayBtn onClick={() => (window.location.href = "")}>
+          <PayBtn onClick={buyMap}>
             <span>카카오페이로 결제</span>
             <img src={triangle} alt="카카오페이로 결제" />
           </PayBtn>
@@ -31,6 +40,8 @@ const PaymentPage = () => {
 
         <NextBtnBlack where={-1} text={"back"} number={"28px"} />
       </Wrapper>
+
+      {isModalOpen && <PaymentModal />}
     </>
   );
 };
@@ -52,8 +63,8 @@ const Header = styled.div`
   letter-spacing: 1.4px;
 
   span {
+    font-family: Apple SD Gothic Neo SB;
     margin-right: 3px;
-    font-weight: 800;
   }
 `;
 

@@ -21,12 +21,6 @@ button {
   border: none;
 }
 
-@media (max-width: 800px) {
-  body {
-    margin: 0 auto;
-  }
-}
-
 /* color */
 :root {
   --black1: #000000;
@@ -57,4 +51,11 @@ button {
   font-style: normal;
   font-weight: normal;
   src: url("./assets/fonts/AppleSDGothicNeoR.woff") format("woff");
+}
+
+@font-face {
+  font-family: Apple SD Gothic Neo SB;
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/AppleSDGothicNeoSB.woff") format("woff");
 }

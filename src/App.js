@@ -70,9 +70,9 @@ function App() {
         <Route path={"/mapmaking/share"} element={<SharePage />} />
 
         {/* payment */}
-        <Route path={"/payment/hotmap"} element={<HotMapPage />} />
-        <Route path={"/payment/:mapId/preview"} element={<PreviewPage />} />
-        <Route path={"/payment/:mapId/pay"} element={<PaymentPage />} />
+        <Route path={"/hotmap/:location"} element={<HotMapPage />} />
+        <Route path={"/payment/:location/:mapId"} element={<PreviewPage />} />
+        <Route path={"/payment/:location/:mapId/pay"} element={<PaymentPage />} />
       </Routes>
     </Router>
   );

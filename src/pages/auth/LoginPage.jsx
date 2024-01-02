@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { initSignUp } from "../../redux/signupSlice";
+
+//images
 import kakaologo from "../../assets/images/kakao-logo.svg";
+
+//api
+import { PostLogin } from "../../api/user";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //아이디/비밀번호 입력
   const [formData, setFormData] = useState({
@@ -25,17 +33,20 @@ const LoginPage = () => {
       alert("아이디를 입력해주세요.");
     } else if (formData.password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
-    } //임시 코드
-    else if (formData.userid !== "user" || formData.password !== "password") {
-      alert("아이디 또는 비밀번호가 올바르지 않습니다.");
     } else {
-      alert("로그인에 성공했습니다!");
-      navigate("/");
+      try {
+        PostLogin(formData.userid, formData.password);
+        alert("로그인에 성공했습니다!");
+        navigate("/");
+      } catch (error) {
+        console.error("로그인 실패 ", error);
+      }
     }
   };
 
   //회원가입 하러 가기
   const signup = () => {
+    dispatch(initSignUp());
     navigate("/auth/signup");
   };
 
@@ -52,6 +63,7 @@ const LoginPage = () => {
           name="userid"
           value={formData.userid}
           onChange={handleInputChange}
+          autoComplete="off"
         />
         <input
           type="password"
@@ -84,14 +96,15 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  padding-top: 122px;
-  padding-bottom: 80px;
+  padding-top: 10vh;
+  padding-bottom: 7vh;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 55px;
+  height: 28vh;
+  max-height: 244px;
   border-bottom: 1.5px solid var(--black1);
   background-color: var(--yellow);
   z-index: 1;
@@ -124,16 +137,29 @@ const Container = styled.div`
     font-weight: 400;
     line-height: 145%; /* 20.3px */
     letter-spacing: 1.4px;
+
+    &::placeholder {
+      opacity: 0.4;
+    }
   }
 
   input:nth-child(2) {
     border-top: 1.5px solid var(--black1);
-    margin-top: 10vh;
-    margin-bottom: 13.5vh;
+    margin-top: 9vh;
+    margin-bottom: 11vh;
     transform: rotate(-15deg);
 
-    @media (min-width: 768px) {
+    @media (min-width: 820px) {
+      transform: rotate(-13deg);
+    }
+
+    @media (min-width: 1025px) {
       transform: rotate(-10deg);
+    }
+
+    @media (min-height: 1052px) {
+      margin-top: 16vh;
+      margin-bottom: 16vh;
     }
   }
 `;
@@ -158,15 +184,14 @@ const LongBtn = styled.div`
 `;
 
 const OR = styled.div`
-  margin: 36px auto;
+  margin: 4vh auto;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const Kakao = styled.img`
-  margin-top: 36px;
-  margin-bottom: 25px;
+  margin-top: 4vh;
   width: 57px;
   height: 57px;
   flex-shrink: 0;
