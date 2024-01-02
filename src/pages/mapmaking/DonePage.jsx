@@ -111,6 +111,7 @@ const MapName = styled.div`
   line-height: normal;
   letter-spacing: 1.425px;
   text-align: left;
+  margin-top: 21.21px;
 `;
 
 const ThemeBoxContainer = styled.div`

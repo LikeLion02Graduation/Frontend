@@ -99,11 +99,11 @@ const HotMapPage = () => {
           <span>🔔 요즘 인기있는 부산 지도</span>
         </WhiteBox>
         <Filters>
-          <BackBtn onClick={handleBackBtnClick} active={BackBtnActive}>
+          <BackBtn onClick={handleBackBtnClick} $active={BackBtnActive}>
             <img src={goback} />
             <p>이전 거 볼래요</p>
           </BackBtn>
-          <FrontBtn onClick={handleFrontBtnClick} active={FrontBtnActive}>
+          <FrontBtn onClick={handleFrontBtnClick} $active={FrontBtnActive}>
             <p>다른 거 볼래요</p>
             <img src={gofront} />
           </FrontBtn>
@@ -153,7 +153,7 @@ const Filters = styled.div`
 
 const FilterStyle = styled.div`
   cursor: pointer;
-  background-color: ${(props) => (props.active ? "var(--yellow)" : "none")};
+  background-color: ${(props) => (props.$active ? "var(--yellow)" : "none")};
   width: 100%;
   height: 61px;
   gap: 11px;

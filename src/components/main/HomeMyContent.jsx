@@ -22,7 +22,7 @@ const HomeMyContent = ({ children }) => {
     <>
       <TotalSort>
         <Total>Total {children.length}</Total>
-        <Sort onClick={handleSortClick} active={showSortBox}>
+        <Sort onClick={handleSortClick} $active={showSortBox}>
           <p>{sortType}</p>
           <img src={sort} alt="sort" />
           {showSortBox && (

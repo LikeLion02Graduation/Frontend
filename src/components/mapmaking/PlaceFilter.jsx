@@ -132,11 +132,11 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       <Filters>
         <MetroFilter
           onClick={handleMetroFilterClick}
-          active={MetroFilterActive}
+          $active={MetroFilterActive}
         >
           광역시 및 특별시
         </MetroFilter>
-        <DoFilter onClick={handleDoFilterClick} active={doFilterActive}>
+        <DoFilter onClick={handleDoFilterClick} $active={doFilterActive}>
           도 및 특별자치도
         </DoFilter>
       </Filters>
@@ -214,7 +214,7 @@ const Filters = styled.div`
   width: 100%;
   color: var(--black2);
   text-align: center;
-  font-family: Apple SD Gothic Neo;
+  font-family: "Apple SD Gothic Neo";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -224,7 +224,7 @@ const Filters = styled.div`
 
 const FilterStyle = styled.div`
   cursor: pointer;
-  background-color: ${(props) => (props.active ? "var(--yellow)" : "none")};
+  background-color: ${(props) => (props.$active ? "var(--yellow)" : "none")};
 `;
 
 const MetroFilter = styled(FilterStyle)`

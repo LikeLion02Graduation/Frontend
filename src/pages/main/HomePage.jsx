@@ -86,12 +86,12 @@ const HomePage = () => {
       />
       <Wrapper>
         <Filters>
-          <MyFilter onClick={handleMyFilterClick} active={myFilterActive}>
+          <MyFilter onClick={handleMyFilterClick} $active={myFilterActive}>
             MY
           </MyFilter>
           <OthersFilter
             onClick={handleOthersFilterClick}
-            active={othersFilterActive}
+            $active={othersFilterActive}
           >
             Others
           </OthersFilter>
@@ -126,7 +126,7 @@ const Filters = styled.div`
 
 const FilterStyle = styled.div`
   cursor: pointer;
-  background-color: ${(props) => (props.active ? "var(--yellow)" : "none")};
+  background-color: ${(props) => (props.$active ? "var(--yellow)" : "none")};
 `;
 
 const MyFilter = styled(FilterStyle)`

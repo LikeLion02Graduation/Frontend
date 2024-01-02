@@ -69,10 +69,10 @@ const MyPage = () => {
       <TopBar navBtnOn={true} titleText="My Page" />
       <Wrapper>
         <Filters>
-          <MyBtn onClick={handleMyBtnClick} active={MyBtnActive}>
+          <MyBtn onClick={handleMyBtnClick} $active={MyBtnActive}>
             My
           </MyBtn>
-          <NoticeBtn onClick={handleNoticeBtnClick} active={NoticeBtnActive}>
+          <NoticeBtn onClick={handleNoticeBtnClick} $active={NoticeBtnActive}>
             Notify
           </NoticeBtn>
         </Filters>
@@ -115,7 +115,7 @@ const Filters = styled.div`
 
 const FilterStyle = styled.div`
   cursor: pointer;
-  background-color: ${(props) => (props.active ? "var(--yellow)" : "none")};
+  background-color: ${(props) => (props.$active ? "var(--yellow)" : "none")};
   width: 100%;
   height: 61px;
   gap: 11px;
