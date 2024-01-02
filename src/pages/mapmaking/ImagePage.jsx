@@ -18,6 +18,7 @@ const ImagePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mapName = useSelector((state) => state.mapmaking.name);
+
   const [isImageSelected, setIsImageSelected] = useState(false);
 
   const handleImgChange = (selectedImg) => {

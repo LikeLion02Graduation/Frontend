@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setName } from "../../redux/mapmakingSlice";
 import { persistor } from "../../index";
 
@@ -19,7 +19,9 @@ const NamePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [inputValue, setInputValue] = useState({ name: "" });
+  const name = useSelector((state) => state.mapmaking.name);
+
+  const [inputValue, setInputValue] = useState({ name: name || "" });
 
   const handleInputChange = (e) => {
     setInputValue({

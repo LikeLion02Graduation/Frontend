@@ -21,10 +21,13 @@ const DonePage = () => {
   const [inputValue, setInputValue] = useState({ description: "" });
 
   const handleInputChange = (e) => {
-    setInputValue({
-      ...inputValue,
-      description: e.target.value,
-    });
+    const newDescription = e.target.value;
+    if (newDescription.length <= 110) {
+      setInputValue({
+        ...inputValue,
+        description: newDescription,
+      });
+    }
   };
 
   const saveData = () => {
@@ -39,7 +42,6 @@ const DonePage = () => {
   };
 
   const mapLocation = useSelector((state) => state.mapmaking.location);
-  console.log("mapLocation from Redux:", mapLocation);
   const mapName = useSelector((state) => state.mapmaking.name);
   const mapImg = useSelector((state) => state.mapmaking.img);
   const mapHashtag = useSelector((state) => state.mapmaking.hashtag);
