@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { initSignUp } from "../../redux/signupSlice";
+
 import kakaologo from "../../assets/images/kakao-logo.svg";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //아이디/비밀번호 입력
   const [formData, setFormData] = useState({
@@ -36,6 +40,7 @@ const LoginPage = () => {
 
   //회원가입 하러 가기
   const signup = () => {
+    dispatch(initSignUp());
     navigate("/auth/signup");
   };
 

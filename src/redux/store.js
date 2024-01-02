@@ -7,10 +7,12 @@ import { persistReducer } from "redux-persist";
 
 import recommendReducer from "./recommendSlice";
 import mapmakingReducer from "./mapmakingSlice";
+import signupReducer from "./signupSlice";
 
 const rootReducer = combineReducers({
   recommend: recommendReducer,
   mapmaking: mapmakingReducer,
+  signup: signupReducer,
 });
 
 const persistConfig = {

@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
 const ProfileUpload = () => {
   const navigate = useNavigate();
+
+  const signupInfo = useSelector((state) => state.signup);
 
   //프로필 사진 설정
   const [selectedImg, setSelectedImg] = useState(null);

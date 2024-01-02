@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { initSignUp, setSignUp } from "../../redux/signupSlice";
+
+//components
 import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //아이디/비밀번호 입력
   const [formData, setFormData] = useState({
@@ -30,6 +35,7 @@ const SignUpPage = () => {
     } else if (formData.password !== formData.confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
+      dispatch(setSignUp({ user_id: formData.userid, password: formData.password }));
       navigate("/auth/profile");
     }
   };
