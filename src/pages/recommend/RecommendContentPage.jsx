@@ -3,8 +3,7 @@ import { styled } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setRecomInfo } from "../../redux/recommendSlice";
-import { persistor } from "../../index";
+import { initRecommend, setRecomInfo } from "../../redux/recommendSlice";
 
 import TopBar from "../../components/_common/TopBar";
 import { MainWebBox, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
@@ -41,9 +40,7 @@ const RecommendContentPage = () => {
     } else {
       dispatch(setRecomInfo({ map_id: mapId, user_id: 1, title: trimmedTitle, content: trimmedContent }));
 
-      setTimeout(async () => {
-        await persistor.purge();
-      }, 200);
+      dispatch(initRecommend());
 
       navigate(`/map/${mapId}/1`); //recom_id 데이터 받아서 넣기
     }
