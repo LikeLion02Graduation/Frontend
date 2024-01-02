@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setName } from "../../redux/mapmakingSlice";
+import { persistor } from "../../index";
 
 import TopBar from "../../components/_common/TopBar";
 import {
@@ -34,6 +35,7 @@ const NamePage = () => {
       alert("이름을 작성해주세요");
     } else {
       dispatch(setName({ name: trimmedName }));
+
       navigate(`/mapmaking/image`);
     }
   };

@@ -15,12 +15,14 @@ const PlacePage = () => {
 
   const handlePlaceSelect = (selectedPlace) => {
     setSelectedPlace(selectedPlace);
-    // dispatch(setLocation(selectedPlace));
   };
 
   const handleNextBtn = () => {
     if (selectedPlace) {
+      console.log("Selected Place:", selectedPlace);
       dispatch(setLocation(selectedPlace));
+      console.log("Dispatched action:", setLocation(selectedPlace));
+
       navigate(`/mapmaking/theme`);
     } else {
       alert("장소를 선택해주세요");
@@ -34,11 +36,7 @@ const PlacePage = () => {
         <WhiteBox text={"Q. 어디로 가시나요? 또는 어디에 관심이 있으신가요?"} />
         <PlaceFilter onPlaceSelect={handlePlaceSelect} />
         <div id="temporary" />
-        <NextBtnBlack
-          addClickHandler={handleNextBtn}
-          //where={"/mapmaking/theme"}
-          text={"Next"}
-        />
+        <NextBtnBlack addClickHandler={handleNextBtn} />
       </Wrapper>
     </>
   );

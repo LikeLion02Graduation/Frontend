@@ -88,7 +88,12 @@ const Sort = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  cursor: pointer;
+  p {
+    cursor: pointer;
+  }
+  img {
+    cursor: pointer;
+  }
 `;
 
 const SortOptions = styled.div`

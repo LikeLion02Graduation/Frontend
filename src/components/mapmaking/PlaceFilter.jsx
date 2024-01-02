@@ -102,7 +102,9 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       setSelectedBtn(location);
       //getSiLoc(location);
       setSelectedDo(siLoc[location]);
-      onPlaceSelect(location);
+      if (!siLoc[location]) {
+        onPlaceSelect(location);
+      }
     }
   };
 
@@ -116,6 +118,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       if (selectedBtn === location) {
         console.log("선택 취소: ", location);
         setSelectedBtn(null);
+        onPlaceSelect(null);
       } else {
         console.log("새로운 선택: ", location);
         setSelectedBtn(location);
