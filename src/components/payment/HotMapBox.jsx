@@ -5,11 +5,11 @@ import { useNavigate } from "react-router";
 
 import gofront from "../../assets/images/go-front.svg";
 
-const HotMapBox = ({ children }) => {
+const HotMapBox = ({ children, location }) => {
   const navigate = useNavigate();
 
   const handleClickBox = (item) => {
-    navigate(`/payment/${item.id}/preview`);
+    navigate(`/payment/${location}/${item.id}`);
   };
 
   return (

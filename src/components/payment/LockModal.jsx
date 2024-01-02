@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
 const LockModal = () => {
-  const { mapId } = useParams();
+  const { location, mapId } = useParams();
   const navigate = useNavigate();
 
   const goPayment = () => {
-    navigate(`/payment/${mapId}/pay`);
+    navigate(`/payment/${location}/${mapId}/pay`);
   };
 
   const goBack = () => {

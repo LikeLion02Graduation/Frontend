@@ -4,10 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 const NoRecommendModal = ({ location }) => {
   const navigate = useNavigate();
+
+  const goHotMap = () => {
+    navigate(`/hotmap/${location}`);
+  };
+
   return (
     <>
       <GrayBox>{location}에 대한 더 많은 정보는 ?</GrayBox>
-      <YellowBox onClick={() => navigate("/payment/hotmap")}>추천 콘텐츠 보러 가기</YellowBox>
+      <YellowBox onClick={goHotMap}>추천 콘텐츠 보러 가기</YellowBox>
     </>
   );
 };
@@ -27,7 +32,6 @@ const GrayBox = styled.div`
   border: 1.5px solid var(--black1);
   background: var(--gray);
   transform: rotate(8.527deg);
-  cursor: pointer;
 
   color: var(--black3);
   text-align: center;
@@ -50,6 +54,7 @@ const YellowBox = styled.div`
   align-items: center;
   border: 1.5px solid var(--black1);
   background: var(--yellow);
+  cursor: pointer;
 
   color: var(--black3);
   text-align: center;
