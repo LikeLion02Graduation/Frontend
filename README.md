@@ -1,14 +1,13 @@
 <div align="center">
 
-# 🗺️ 내친만지도(가제) 🗺️
+# 🗺️ 내친만지도 🗺️
 
-**내 친구가 알려주는 믿을 만한 숨은 맛집, 내친만지도(가제)**
+내 친구가 알려주는 믿을 만한 숨은 맛집
 
 <br />
 </div>
 
 ## 👩🏻‍💻 Developers
-
 <table align="center">
     <tr align="center">
         <td style="min-width: 150px;">
@@ -34,50 +33,43 @@
             진규빈<br />
         </td>
     </tr>
+     <tr align="center">
+        <td>
+            로그인/회원가입 페이지<br />
+            지도/추천 상세 페이지<br />
+            지도 추천 남기기<br />
+            추천 반응 남기기<br />
+            인스타그램 공유 페이지<br />
+            결제 페이지
+        </td>
+        <td>
+            홈 페이지<br />
+            마이페이지<br />
+            지도 생성하기<br />
+            추천 콘텐츠 페이지<br />
+        </td>
+    </tr>
 </table>
 
 ## 📚 Tech Stack
-
-### Environment
+#### Environment
   <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
-  
-### Development 
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">
+#### Development 
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxPersist-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">
 
 ## 📦 Project Structure
-
-
 ```
 📂 public
-⎪   └─  index.html
+⎪  └─  index.html
 📂 src
-├─ 📂 api
-⎪  ⎪   └─  http.js                      ▶︎ BaseURL, Token 설정
-⎪  ⎪   └─  user.js                      ▶︎ 로그인/회원가입
-├─ 📂 components
-⎪  ⎪   └─ 📂 _common                     ▶︎ 공통 컴포넌트 
-⎪  ⎪   └─ 📂 recommend                   ▶︎ 프로세스 별로 파일 정리
-├─ 📂 pages                              
-⎪  ⎪   └─ 📂 recommend                   ▶︎ 프로세스 별로 파일 정리
-⎪  ⎪      └─ RecommendMainPage.jsx
-⎪  ⎪      └─ RecommendResultPage.jsx
-⎪  ⎪      └─ RecommendSearchPage.jsx
-⎪  ⎪      └─ RecommendKeywordPage.jsx
-⎪  ⎪   └─ 📂 mapmaking                    
-⎪  ⎪      └─ DonePage.jsx
-⎪  ⎪      └─ ImagePage.jsx
-⎪  ⎪      └─ NamePage.jsx
-⎪  ⎪      └─ PlacePage.jsx
-⎪  ⎪      └─ SharePage.jsx
-⎪  ⎪      └─ ThemePage.jsx
-⎪  ⎪   └─ 📂 mymap                    
-⎪  ⎪      └─ MapMainPage              
-├─ 📂 assets
-⎪  ⎪   └─ 📂 fonts                      ▶︎ 폰트
-⎪  ⎪   └─ 📂 images                     ▶︎ 아이콘/이미지
-├─   App.js                    
-└─   index.js
+⎪  ├─ 📂 api ▶︎ API 관련 파일
+⎪  ├─ 📂 assets ▶︎ 폰트, 아이콘, 이미지 파일
+⎪  ├─ 📂 components ▶︎ 컴포넌트
+⎪  ├─ 📂 pages ▶︎ 페이지
+⎪  └─ 📂 redux ▶︎ Redux 관련 파일
+├─ App.js
+├─ index.js
 ├─ .gitignore
 ├─ package.json
-├─ README.md
+└─ README.md
 ```
