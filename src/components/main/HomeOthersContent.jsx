@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { useNavigate } from "react-router";
 import sort from "../../assets/images/sort.svg";
+import HomeBuyingModal from "./HomeBuyingModal";
 
 const HomeOthersContent = ({ children }) => {
   const navigate = useNavigate();
