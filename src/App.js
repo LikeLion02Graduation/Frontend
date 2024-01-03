@@ -8,6 +8,7 @@ import SignUpProfilePage from "./pages/auth/SignUpProfilePage";
 import SocialProfilePage from "./pages/auth/SocialProfilePage";
 
 import HomePage from "./pages/main/HomePage";
+import HomeBuyingPage from "./pages/main/HomeBuyingPage";
 import MyPage from "./pages/main/MyPage";
 
 import RecommendMainPage from "./pages/recommend/RecommendMainPage";
@@ -45,21 +46,40 @@ function App() {
 
         {/* main */}
         <Route path={"/"} element={<HomePage />} />
+        <Route path={"/homebuying"} element={<HomeBuyingPage />} />
         <Route path={"/my"} element={<MyPage />} />
 
         {/* recommend */}
         <Route path={"/map/:mapId/r/main"} element={<RecommendMainPage />} />
-        <Route path={"/map/:mapId/r/search"} element={<RecommendSearchPage />} />
-        <Route path={"/map/:mapId/r/keyword"} element={<RecommendKeywordPage />} />
-        <Route path={"/map/:mapId/r/content"} element={<RecommendContentPage />} />
+        <Route
+          path={"/map/:mapId/r/search"}
+          element={<RecommendSearchPage />}
+        />
+        <Route
+          path={"/map/:mapId/r/keyword"}
+          element={<RecommendKeywordPage />}
+        />
+        <Route
+          path={"/map/:mapId/r/content"}
+          element={<RecommendContentPage />}
+        />
 
         {/* mymap */}
         <Route path={"/map/:mapId"} element={<MapMainPage />} />
         <Route path={"/map/:mapId/:recomId"} element={<MapRecommendPage />} />
-        <Route path={"/map/:mapId/:recomId/commend"} element={<MapCommendPage />} />
-        <Route path={"/map/:mapId/:recomId/commend/w"} element={<MapCommendWritePage />} />
+        <Route
+          path={"/map/:mapId/:recomId/commend"}
+          element={<MapCommendPage />}
+        />
+        <Route
+          path={"/map/:mapId/:recomId/commend/w"}
+          element={<MapCommendWritePage />}
+        />
         <Route path={"/map/:mapId/share"} element={<MapSharePage />} />
-        <Route path={"/map/:mapId/:recomId/share"} element={<MapRecommendSharePage />} />
+        <Route
+          path={"/map/:mapId/:recomId/share"}
+          element={<MapRecommendSharePage />}
+        />
 
         {/* mapmaking */}
         <Route path={"/mapmaking/main"} element={<PlacePage />} />
@@ -72,7 +92,10 @@ function App() {
         {/* payment */}
         <Route path={"/hotmap/:location"} element={<HotMapPage />} />
         <Route path={"/payment/:location/:mapId"} element={<PreviewPage />} />
-        <Route path={"/payment/:location/:mapId/pay"} element={<PaymentPage />} />
+        <Route
+          path={"/payment/:location/:mapId/pay"}
+          element={<PaymentPage />}
+        />
       </Routes>
     </Router>
   );

@@ -8,7 +8,7 @@ import PlaceFilter from "../../components/mapmaking/PlaceFilter";
 import TopBar from "../../components/_common/TopBar";
 import { WhiteBox, NextBtnBlack } from "../../components/_common/CommonExport";
 
-const PlacePage = () => {
+const HomeBuyingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -23,7 +23,7 @@ const PlacePage = () => {
       dispatch(setLocation(selectedPlace));
       console.log("Dispatched action:", setLocation(selectedPlace));
 
-      navigate(`/mapmaking/theme`);
+      navigate(`/hotmap/:location`);
     } else {
       alert("장소를 선택해주세요");
     }
@@ -45,7 +45,7 @@ const PlacePage = () => {
   );
 };
 
-export default PlacePage;
+export default HomeBuyingPage;
 
 const Wrapper = styled.div`
   display: flex;

@@ -32,22 +32,39 @@ const FeedBackModal = ({ onClose }) => {
         {isSubmitted ? (
           // 제출 완료 후 보여질 새로운 화면
           <>
-            <YellowBox style={{ transform: "rotate(15deg)" }}>내친만에 직접 작성해주신 피드백을 전송했어요</YellowBox>
+            <YellowBox style={{ transform: "rotate(15deg)" }}>
+              내친만에 직접 작성해주신 피드백을 전송했어요
+            </YellowBox>
             <YellowBox style={{ transform: "rotate(-15deg)" }}>
               검토 후 빠른 시일 내에 반영하도록 하겠습니다 ^^
             </YellowBox>
-            <YellowBox onClick={onClose} style={{ width: "393px", marginTop: "20vh" }}>
+            <YellowBox
+              onClick={onClose}
+              style={{ width: "393px", marginTop: "20vh" }}
+            >
               Ok
             </YellowBox>
           </>
         ) : (
           <>
-            <GrayBox style={{ marginTop: "8vh", transform: "rotate(15deg)" }}>원하는 태그를 찾지 못했나요?</GrayBox>
-            <GrayBox style={{ marginTop: "15vh" }}>내친만에 직접 원하는 태그 추가 요청을 피드백 해보세요!</GrayBox>
+            <GrayBox style={{ marginTop: "8vh", transform: "rotate(15deg)" }}>
+              원하는 태그를 찾지 못했나요?
+            </GrayBox>
+            <GrayBox style={{ marginTop: "15vh" }}>
+              내친만에 직접 원하는 태그 추가 요청을 피드백 해보세요!
+            </GrayBox>
 
-            <InputBox placeholder="요기에 입력 !" type="text" value={inputValue} onChange={handleInputChange} />
+            <InputBox
+              placeholder="요기에 입력 !"
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+            />
             <BtnContainer>
-              <Btn onClick={handleSubmit} style={{ background: "var(--yellow)" }}>
+              <Btn
+                onClick={handleSubmit}
+                style={{ background: "var(--yellow)" }}
+              >
                 Submit
               </Btn>
               <Btn onClick={onClose} style={{ background: "var(--gray)" }}>
@@ -77,7 +94,7 @@ const FeedBack = styled.div`
 
   color: var(--black3);
   text-align: center;
-  font-family: Apple SD Gothic Neo SB;
+  font-family: "Apple SD Gothic Neo SB";
   font-size: 14px;
   line-height: 145%;
   letter-spacing: 1.4px;
@@ -114,7 +131,7 @@ const YellowBox = styled.div`
 
   color: var(--black3);
   text-align: center;
-  font-family: Apple SD Gothic Neo;
+  font-family: "Apple SD Gothic Neo";
   font-size: 14px;
   font-weight: 600;
   line-height: 145%;
@@ -133,7 +150,7 @@ const GrayBox = styled.div`
 
   color: var(--black3);
   text-align: center;
-  font-family: Apple SD Gothic Neo;
+  font-family: "Apple SD Gothic Neo";
   font-size: 14px;
   font-weight: 600;
   line-height: 145%;
