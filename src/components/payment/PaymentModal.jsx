@@ -21,7 +21,7 @@ const PaymentModal = () => {
       <Modal>
         <Box style={{ transform: "rotate(15deg)" }}>성공적으로 구매가 완료되었습니다 !</Box>
         <Box style={{ transform: "rotate(-15deg)", cursor: "pointer" }} onClick={goMain}>
-          내 지도에서 확인하기
+          OK(목록에서 확인하기)
         </Box>
         <Box
           style={{
