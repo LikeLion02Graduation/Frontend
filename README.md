@@ -7,7 +7,13 @@
 <br />
 </div>
 
-## 👩🏻‍💻 Developers
+## 🔉 프로젝트 소개 
+> 이화여대 멋쟁이사자처럼 11기 졸업 프로젝트 2팀
+
+(추후 내용 추가 예정)
+<br />
+
+## 👩🏻‍💻 팀원 소개
 <table align="center">
     <tr align="center">
         <td style="min-width: 150px;">
@@ -44,20 +50,20 @@
         </td>
         <td>
             홈 페이지<br />
-            마이페이지<br />
+            알림/마이 페이지<br />
             지도 생성하기<br />
             추천 콘텐츠 페이지<br />
         </td>
     </tr>
 </table>
 
-## 📚 Tech Stack
+## 📚 기술 스택
 #### Environment
   <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
 #### Development 
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxPersist-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">
 
-## 📦 Project Structure
+## 📦 폴더 구조
 ```
 📂 public
 ⎪  └─  index.html
