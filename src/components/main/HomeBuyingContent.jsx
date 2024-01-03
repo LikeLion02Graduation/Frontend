@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
 
-const HomeBuyingModal = ({ onClose }) => {
+const HomeBuyingContent = () => {
   const navigate = useNavigate();
 
   const handleHotMap = () => {
@@ -11,37 +11,24 @@ const HomeBuyingModal = ({ onClose }) => {
   };
 
   return (
-    <>
-      <Overlay />
-      <Wrapper>
-        <GreyBox style={{ transform: "rotate(15deg)" }}>
-          아직 구매한 지도가 없네요..🥺
-        </GreyBox>
-        <GreyBox style={{ transform: "rotate(-15deg)" }}>
-          더 많은 정보를 얻고 싶다면..
-        </GreyBox>
-        <YellowBox
-          onClick={handleHotMap}
-          style={{ width: "393px", marginTop: "20vh" }}
-        >
-          여기를 눌러 추천 콘텐츠를 받아보세요!
-        </YellowBox>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <GreyBox style={{ transform: "rotate(15deg)" }}>
+        아직 구매한 지도가 없네요..🥺
+      </GreyBox>
+      <GreyBox style={{ transform: "rotate(-15deg)" }}>
+        더 많은 정보를 얻고 싶다면..
+      </GreyBox>
+      <YellowBox
+        onClick={handleHotMap}
+        style={{ width: "393px", marginTop: "20vh" }}
+      >
+        여기를 눌러 추천 콘텐츠를 받아보세요!
+      </YellowBox>
+    </Wrapper>
   );
 };
 
-export default HomeBuyingModal;
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 1;
-`;
+export default HomeBuyingContent;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -84,7 +71,7 @@ const YellowBox = styled.div`
 
   color: var(--black3);
   text-align: center;
-  font-family: "Apple SD Gothic Neo";
+  font-family: "Hack Regular";
   font-size: 14px;
   font-weight: 600;
   line-height: 145%;

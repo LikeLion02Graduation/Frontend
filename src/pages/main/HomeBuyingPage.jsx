@@ -39,7 +39,6 @@ const HomeBuyingPage = () => {
       <Wrapper>
         <WhiteBox text={"Q. 어디로 가시나요? 또는 어디에 관심이 있으신가요?"} />
         <PlaceFilter onPlaceSelect={handlePlaceSelect} />
-        <div id="temporary" />
         <NextBtnBlack addClickHandler={handleNextBtn} />
       </Wrapper>
     </>

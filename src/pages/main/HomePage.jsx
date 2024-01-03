@@ -7,6 +7,7 @@ import { Wrapper } from "../../components/_common/CommonExport";
 
 import HomeMyContent from "../../components/main/HomeMyContent";
 import HomeOthersContent from "../../components/main/HomeOthersContent";
+import HomeBuyingContent from "../../components/main/HomeBuyingContent";
 
 import monkey_1 from "../../assets/images/monkey-1.png";
 import monkey_2 from "../../assets/images/monkey-2.png";
