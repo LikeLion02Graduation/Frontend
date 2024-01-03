@@ -55,6 +55,7 @@ const NamePage = () => {
             name="name"
             value={inputValue.name}
             onChange={handleInputChange}
+            maxLength={18}
           />
         </InputBox>
         <Line1 />
