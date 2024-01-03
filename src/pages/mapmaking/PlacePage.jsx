@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setLocation } from "../../redux/mapmakingSlice";
+import { useDispatch } from "react-redux";
+import { initMapmaking, setLocation } from "../../redux/mapmakingSlice";
 
 import PlaceFilter from "../../components/mapmaking/PlaceFilter";
 import TopBar from "../../components/_common/TopBar";
@@ -29,9 +29,13 @@ const PlacePage = () => {
     }
   };
 
+  const handleInit = () => {
+    dispatch(initMapmaking());
+  };
+
   return (
     <>
-      <TopBar navBtnOn={true} titleText="Making" />
+      <TopBar navBtnOn={true} titleText="Making" addClickHandler={handleInit} />
       <Wrapper>
         <WhiteBox text={"Q. 어디로 가시나요? 또는 어디에 관심이 있으신가요?"} />
         <PlaceFilter onPlaceSelect={handlePlaceSelect} />

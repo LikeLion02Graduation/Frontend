@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-// import axios from "axios";
+import axios from "axios";
 
 const PlaceFilter = ({ onPlaceSelect }) => {
   const [MetroFilterActive, setMetroFilterActive] = useState(true);
   const [doFilterActive, setDoFilterActive] = useState(false);
   const [selectedBtn, setSelectedBtn] = useState(null);
-  //const [siLoc, setSiLoc] = useState(null);
+  const [siLoc, setSiLoc] = useState(null);
   const [selectedDo, setSelectedDo] = useState(null);
-
+  const [doLoc, setDoLoc] = useState([
+    "경기도",
+    "경상북도",
+    "경상남도",
+    "충청북도",
+    "충청남도",
+    "전라북도",
+    "전라남도",
+    "강원도",
+    "제주",
+  ]);
   const metroLoc = [
     "서울",
     "부산",
@@ -19,62 +29,25 @@ const PlaceFilter = ({ onPlaceSelect }) => {
     "대전",
     "세종",
   ];
-  const doLoc = [
-    "경기도",
-    "경상북도",
-    "경상남도",
-    "충청북도",
-    "충청남도",
-    "전라북도",
-    "전라남도",
-    "강원도",
-    "제주",
-  ];
 
-  const siLoc = {
-    경기도: [
-      "경기도",
-      "고양시",
-      "용인시",
-      "과천시",
-      "광명시",
-      "광주시",
-      "구리시",
-      "군포시",
-      "김포시",
-      "남양주시",
-      "동두천시",
-      "부천시",
-    ],
-    경상북도: [
-      "경상북도",
-      "포항시",
-      "경주시",
-      "김천시",
-      "안동시",
-      "구미시",
-      "영주시",
-    ],
-    경상남도: ["경상남도", "고양시", "용인시", "과천시", "광명시"],
-    충청북도: ["충청북도", "고양시", "용인시", "과천시", "광명시", "광주시"],
-    충청남도: ["충청남도", "고양시", "용인시", "과천시", "광명시"],
-    전라북도: ["전라북도", "고양시", "용인시", "과천시"],
-    전라남도: ["전라남도", "고양시", "용인시", "과천시", "광명시"],
-    강원도: ["강원도", "고양시", "용인시"],
-    제주: ["제주", "고양시", "용인시", "과천시"],
-  };
+  useEffect(() => {
+    const getSiLoc = async () => {
+      try {
+        const response = await axios.get(`http://nae-chin-man.link/map/city/`, {
+          params: { city: selectedBtn },
+        });
+        console.log(response.data.data.cities);
+        setSiLoc(response.data.data.cities);
+        setSelectedDo(response.data.data.cities);
+      } catch (error) {
+        console.error(`siLoc 데이터를 가져오는 중 에러 발생: ${error}`);
+      }
+    };
 
-  // 백 연동 관련 임시 코드
-  {
-    /* const getSiLoc = async () => {
-    try {
-      //const response = await axios.get(`${BASE_URL}/`);
-      //setSiLoc(response.data);
-    } catch (error) {
-      console.error("데이터 받아오기 실패", error);
+    if (selectedBtn && doLoc.includes(selectedBtn)) {
+      getSiLoc();
     }
-  }; */
-  }
+  }, [selectedBtn]);
 
   const handleMetroFilterClick = () => {
     setMetroFilterActive(true);
@@ -87,7 +60,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
     setMetroFilterActive(false);
     setSelectedBtn(null);
     //setSiLoc(null);
-    setSelectedDo(null);
+    //setSelectedDo(null);
   };
 
   const handleBtnClick = (location) => {
@@ -95,14 +68,14 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       console.log("선택 취소: ", location);
       setSelectedBtn(null);
       //setSiLoc(null);
-      setSelectedDo(null);
+      //setSelectedDo(null);
       onPlaceSelect(null);
     } else {
       console.log("새로운 선택: ", location);
       setSelectedBtn(location);
       //getSiLoc(location);
-      setSelectedDo(siLoc[location]);
-      if (!siLoc[location]) {
+      //setSelectedDo(siLoc[location]);
+      if (!siLoc) {
         onPlaceSelect(location);
       }
     }
@@ -132,11 +105,11 @@ const PlaceFilter = ({ onPlaceSelect }) => {
       <Filters>
         <MetroFilter
           onClick={handleMetroFilterClick}
-          active={MetroFilterActive}
+          $active={MetroFilterActive}
         >
           광역시 및 특별시
         </MetroFilter>
-        <DoFilter onClick={handleDoFilterClick} active={doFilterActive}>
+        <DoFilter onClick={handleDoFilterClick} $active={doFilterActive}>
           도 및 특별자치도
         </DoFilter>
       </Filters>
@@ -162,22 +135,24 @@ const PlaceFilter = ({ onPlaceSelect }) => {
             {selectedDo ? (
               <SiContent>
                 {selectedDo &&
-                  selectedDo.map((location, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleSiLocBtnClick(location, index)}
-                      style={{
-                        backgroundColor:
-                          index === 0
-                            ? "var(--yellow)"
-                            : selectedBtn === location
-                            ? "#D9D9D9"
-                            : "var(--white)",
-                      }}
-                    >
-                      {location}
-                    </button>
-                  ))}
+                  siLoc.map((location, index) => {
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => handleSiLocBtnClick(location, index)}
+                        style={{
+                          backgroundColor:
+                            index === 0
+                              ? "var(--yellow)"
+                              : selectedBtn === location
+                              ? "#D9D9D9"
+                              : "var(--white)",
+                        }}
+                      >
+                        {location}
+                      </button>
+                    );
+                  })}
               </SiContent>
             ) : (
               <DoContent>
@@ -214,7 +189,7 @@ const Filters = styled.div`
   width: 100%;
   color: var(--black2);
   text-align: center;
-  font-family: Apple SD Gothic Neo;
+  font-family: "Apple SD Gothic Neo";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -224,7 +199,7 @@ const Filters = styled.div`
 
 const FilterStyle = styled.div`
   cursor: pointer;
-  background-color: ${(props) => (props.active ? "var(--yellow)" : "none")};
+  background-color: ${(props) => (props.$active ? "var(--yellow)" : "none")};
 `;
 
 const MetroFilter = styled(FilterStyle)`

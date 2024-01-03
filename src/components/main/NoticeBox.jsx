@@ -13,8 +13,8 @@ const NoticeBox = ({ children, onDelete }) => {
   return (
     <Wrapper>
       {children.map((item) => (
-        <BoxContainer>
-          <Box key={item.id}>
+        <BoxContainer key={item.id}>
+          <Box>
             <Box2>
               <MapImg src={item.profile} alt={item.name} />
               <Content>

@@ -13,6 +13,13 @@ export const mapmakingSlice = createSlice({
   name: "mapmakingSlice",
   initialState,
   reducers: {
+    initMapmaking: (state) => {
+      state.location = initialState.location;
+      state.hashtag = initialState.hashtag;
+      state.name = initialState.name;
+      state.img = initialState.img;
+      state.description = initialState.description;
+    },
     setLocation: (state, action) => {
       state.location = action.payload;
     },
@@ -42,6 +49,7 @@ export const mapmakingSlice = createSlice({
 });
 
 export const {
+  initMapmaking,
   setLocation,
   addTheme,
   deleteTheme,

@@ -18,6 +18,7 @@ const ImagePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mapName = useSelector((state) => state.mapmaking.name);
+
   const [isImageSelected, setIsImageSelected] = useState(false);
 
   const handleImgChange = (selectedImg) => {
@@ -69,4 +70,5 @@ const MapName = styled.div`
   line-height: normal;
   letter-spacing: 1.425px;
   text-align: left;
+  margin-top: 21.21px;
 `;
