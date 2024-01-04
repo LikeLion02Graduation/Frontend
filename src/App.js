@@ -42,7 +42,7 @@ function App() {
         <Route path={"/auth/login"} element={<LoginPage />} />
         <Route path={"/auth/signup"} element={<SignUpPage />} />
         <Route path={"/auth/profile"} element={<SignUpProfilePage />} />
-        <Route path={"/auth/social"} element={<SocialProfilePage />} />
+        <Route path={"/accounts/kakao/callback/"} element={<SocialProfilePage />} />
 
         {/* main */}
         <Route path={"/"} element={<HomePage />} />
