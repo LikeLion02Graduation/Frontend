@@ -92,7 +92,7 @@ const HotMapPage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText="추천 콘텐츠" />
+      <TopBar navBtnOn={true} titleText="Contents" />
       <Wrapper>
         <WhiteBox>
           <span>🔔 요즘 인기있는 {location} 지도</span>
