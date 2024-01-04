@@ -9,7 +9,7 @@ import { initSignUp } from "../../redux/signupSlice";
 import kakaologo from "../../assets/images/kakao-logo.svg";
 
 //api
-import { PostLogin } from "../../api/user";
+import { PostLogin, KAKAO_AUTH_URL } from "../../api/user";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -50,6 +50,10 @@ const LoginPage = () => {
     navigate("/auth/signup");
   };
 
+  const loginWithKakao = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
+
   return (
     <Wrapper>
       <Main>
@@ -78,7 +82,7 @@ const LoginPage = () => {
       </LongBtn>
       <OR>OR</OR>
       <LongBtn onClick={signup}>회원 가입</LongBtn>
-      <Kakao src={kakaologo} alt="kakao login" />
+      <Kakao src={kakaologo} alt="kakao login" onClick={loginWithKakao} />
     </Wrapper>
   );
 };

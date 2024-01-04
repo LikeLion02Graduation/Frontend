@@ -27,6 +27,19 @@ export const PostLogin = async (user_id, password) => {
   }
 };
 
+// 카카오 로그인
+export const KAKAO_AUTH_URL = `${process.env.REACT_APP_API_URL}/accounts/kakao`;
+
+export const KakaoLogin = async (url) => {
+  try {
+    const response = await http.get(url);
+    console.log(response.data);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    throw error;
+  }
+};
+
 // 로그아웃
 export const Logout = () => {
   persistor.purge();
