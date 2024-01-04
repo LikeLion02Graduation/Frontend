@@ -8,7 +8,7 @@ import SignUpProfilePage from "./pages/auth/SignUpProfilePage";
 import SocialProfilePage from "./pages/auth/SocialProfilePage";
 
 import HomePage from "./pages/main/HomePage";
-import HomeBuyingPage from "./pages/main/HomeBuyingPage";
+import BuyingPlacePage from "./pages/payment/BuyingPlacePage";
 import MyPage from "./pages/main/MyPage";
 
 import RecommendMainPage from "./pages/recommend/RecommendMainPage";
@@ -46,7 +46,6 @@ function App() {
 
         {/* main */}
         <Route path={"/"} element={<HomePage />} />
-        <Route path={"/homebuying"} element={<HomeBuyingPage />} />
         <Route path={"/my"} element={<MyPage />} />
 
         {/* recommend */}
@@ -90,6 +89,7 @@ function App() {
         <Route path={"/mapmaking/share"} element={<SharePage />} />
 
         {/* payment */}
+        <Route path={"/buyingplace"} element={<BuyingPlacePage />} />
         <Route path={"/hotmap/:location"} element={<HotMapPage />} />
         <Route path={"/payment/:location/:mapId"} element={<PreviewPage />} />
         <Route

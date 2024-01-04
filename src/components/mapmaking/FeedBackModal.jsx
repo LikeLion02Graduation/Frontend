@@ -98,6 +98,8 @@ const FeedBack = styled.div`
   font-size: 14px;
   line-height: 145%;
   letter-spacing: 1.4px;
+
+  cursor: pointer;
 `;
 
 const Overlay = styled.div`

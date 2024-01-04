@@ -18,6 +18,8 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [myFilterActive, setMyFilterActive] = useState(true);
   const [othersFilterActive, setOthersFilterActive] = useState(false);
+  const [buyingFilterActive, setBuyingFilterActive] = useState(false);
+  const [paymentInfo, setPaymentInfo] = useState(false);
 
   const MapData1 = [
     { id: 1, img: monkey_1, name: "부산에 가자", created_at: "23.11.19 03:06" },
@@ -70,11 +72,19 @@ const HomePage = () => {
   const handleMyFilterClick = () => {
     setMyFilterActive(true);
     setOthersFilterActive(false);
+    setBuyingFilterActive(false);
   };
 
   const handleOthersFilterClick = () => {
-    setOthersFilterActive(true);
-    setMyFilterActive(false);
+    if (paymentInfo) {
+      setOthersFilterActive(true);
+      setMyFilterActive(false);
+      setBuyingFilterActive(false);
+    } else {
+      setBuyingFilterActive(true);
+      setMyFilterActive(false);
+      setOthersFilterActive(false);
+    }
   };
 
   return (
@@ -90,16 +100,18 @@ const HomePage = () => {
           <MyFilter onClick={handleMyFilterClick} $active={myFilterActive}>
             MY
           </MyFilter>
+          {/*결제 정보에 따라 텍스트 다르게*/}
           <OthersFilter
             onClick={handleOthersFilterClick}
-            $active={othersFilterActive}
+            $active={buyingFilterActive || othersFilterActive}
           >
-            Others
+            {paymentInfo ? "Others" : "Buying"}
           </OthersFilter>
         </Filters>
         <Content>
           {myFilterActive && <HomeMyContent children={MapData1} />}
           {othersFilterActive && <HomeOthersContent children={MapData2} />}
+          {buyingFilterActive && <HomeBuyingContent />}
         </Content>
       </Wrapper>
     </>
