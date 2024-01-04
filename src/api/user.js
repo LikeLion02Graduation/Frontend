@@ -16,14 +16,14 @@ export const PostLogin = async (user_id, password) => {
     localStorage.setItem("token", response.data.data.access_token);
 
     console.log(response.data.data);
-    return response.data.data;
+    return Promise.resolve(response.data.data);
   } catch (error) {
     if (error.response && error.response.status === 401) {
       // 토큰이 만료된 경우, 로그아웃 처리
       Logout();
     }
     console.error("로그인 실패 ", error.response);
-    throw error;
+    return Promise.reject(error);
   }
 };
 
@@ -45,6 +45,7 @@ export const Logout = () => {
   persistor.purge();
   window.localStorage.removeItem("userId");
   window.localStorage.removeItem("token");
+  window.location.replace("/auth/login");
 };
 
 // POST : 회원가입
@@ -62,7 +63,17 @@ export const PostSignup = async (user_id, password, username, profile) => {
     if (error.response && error.response.status === 400) {
       alert("이미 존재하는 아이디 입니다.");
     }
-    throw error;
+    return Promise.reject(error);
+  }
+};
+
+// 토큰 만료 처리
+export const isTokenExpired = async (error) => {
+  if (error.response.data.detail === "Given token not valid for any token type") {
+    window.location.reload();
+
+    alert("세션 만료. 다시 로그인해주세요.");
+    Logout();
   }
 };
 

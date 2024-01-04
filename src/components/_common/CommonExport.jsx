@@ -9,12 +9,8 @@ const WhiteBox = ({ text }) => {
   );
 };
 
-const MapNameBox = ({ place, user }) => {
-  return (
-    <Box>
-      <span>{`<${place}에 가는 ${user}의 지도>`}</span>
-    </Box>
-  );
+const MapNameBox = ({ loading, place, user }) => {
+  return <Box>{loading ? <span></span> : <span>{`<${place}에 가는 ${user}의 지도>`}</span>}</Box>;
 };
 
 const YellowBox = ({ text, font, weight }) => {
@@ -113,18 +109,7 @@ const Wrapper = styled.div`
   font-family: "Hack Regular";
 `;
 
-export {
-  WhiteBox,
-  MapNameBox,
-  YellowBox,
-  Line1,
-  Line2,
-  NextBtnBlack,
-  NextBtnWhite,
-  LongBtnBlack,
-  MainWebBox,
-  Wrapper,
-};
+export { WhiteBox, MapNameBox, YellowBox, Line1, Line2, NextBtnBlack, NextBtnWhite, LongBtnBlack, MainWebBox, Wrapper };
 
 const Box = styled.div`
   display: flex;

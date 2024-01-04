@@ -8,7 +8,7 @@ const MapTitleText = ({ mapData }) => {
         <BlackBackGround>{mapData.location}</BlackBackGround>에 가는
       </div>
       <div>
-        <BlackBackGround>{mapData.user.nickname}</BlackBackGround>의 지도
+        <BlackBackGround>{mapData.user?.nickname}</BlackBackGround>의 지도
       </div>
     </TitleText>
   );

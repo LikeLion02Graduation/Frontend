@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+//api
+import { PostNewTag } from "../../api/map";
+
 const FeedBackBtn = (props) => {
   const { isModalOpen, setIsModalOpen } = props;
   return (
@@ -21,7 +24,12 @@ const FeedBackModal = ({ onClose }) => {
 
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
-      setIsSubmitted(true);
+      PostNewTag(inputValue)
+        .then(() => {
+          setIsSubmitted(true);
+          setInputValue("");
+        })
+        .catch();
     } else alert("피드백을 작성해주세요!");
   };
 

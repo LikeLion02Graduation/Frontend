@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
+//components
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, MapNameBox, NextBtnBlack, Wrapper } from "../../components/_common/CommonExport";
 import { MapTitleText } from "../../components/mymap/MapTitleText";
@@ -9,33 +10,30 @@ import Postit from "../../components/mymap/Postit";
 import { LinkContainer } from "../../components/mymap/LinkContainer";
 import NoRecommendModal from "../../components/mymap/NoRecommendModal";
 
+//api
+import { GetMapMain } from "../../api/map";
+
 const MapMainPage = () => {
   const { mapId } = useParams();
   const navigate = useNavigate();
 
-  const [mapData, setMapData] = useState({
-    id: 1, // MAP 아이디
-    name: "부산 갈거야",
-    location: "부산",
-    img: "[이미지url]",
-    description: "2023 12 30 떠난다 추천 부탁해~~",
-    created_at: "2023-11-11 12:12:11",
-    hashtag: [
-      {
-        tagname: "맛집",
-      },
-      {
-        tagname: "명소",
-      },
-    ],
-    user: {
-      id: 1,
-      nickname: "서연",
-    },
-    map_mine: true,
-    do_buy: false,
-    recommend: [],
-  });
+  const [loading, setLoading] = useState(true);
+  const [mapData, setMapData] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const response = await GetMapMain(mapId);
+        setLoading(false);
+        setMapData(response);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, [mapId]);
 
   const addPostit = () => {
     navigate(`/map/${mapId}/r/main`);
@@ -45,20 +43,22 @@ const MapMainPage = () => {
     <>
       <TopBar navBtnOn={true} where={"/"} titleText={"Map"} />
       <Wrapper>
-        <MapNameBox place={mapData.location} user={"시은이"} />
+        <MapNameBox loading={loading} place={mapData.location} user={mapData.user?.nickname} />
         <Line2 />
 
         <TitleContainer>
-          <TitleBox>
-            <MapTitleText mapData={mapData} />
-            <LinkContainer mapId={mapId} />
-          </TitleBox>
+          {!loading && (
+            <TitleBox>
+              <MapTitleText loading={loading} mapData={mapData} />
+              <LinkContainer mapId={mapId} />
+            </TitleBox>
+          )}
           <MapNameText>{mapData.name}</MapNameText>
         </TitleContainer>
 
         <TagContainer>
           <div>
-            {mapData.hashtag.map((tag) => (
+            {mapData.hashtag?.map((tag) => (
               <span key={tag.tagname}>#{tag.tagname}</span>
             ))}
           </div>
@@ -69,17 +69,17 @@ const MapMainPage = () => {
         </Description>
         <Line1 />
 
-        <GridTitle>지도 위 포스트잇 총 {mapData.recommend.length}개</GridTitle>
+        <GridTitle>지도 위 포스트잇 총 {mapData.recommend?.length}개</GridTitle>
         <GridContainer>
           <AddPostit onClick={addPostit}>+</AddPostit>
-          {mapData.recommend.map((item) => (
+          {mapData.recommend?.map((item) => (
             <Postit key={item.id} mapData={mapData} item={item} />
           ))}
         </GridContainer>
         {!mapData.map_mine ? (
           <NextBtnBlack addClickHandler={addPostit} text={"giving"} number={"28px"} />
         ) : (
-          mapData.recommend.length === 0 && <NoRecommendModal location={mapData.location} />
+          mapData.recommend?.length === 0 && <NoRecommendModal location={mapData.location} />
         )}
       </Wrapper>
     </>
