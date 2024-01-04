@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const LoginInfo = () => {
+  const [isEdit, setIsEdit] = useState(false);
+  const [nickname, setNickname] = useState("이시은입니다람쥐");
+
+  const handleEditClick = () => {
+    setIsEdit(!isEdit);
+  };
+
+  const handleNicknameChange = (e) => {
+    setNickname(e.target.value);
+  };
+
   return (
     <Wrapper>
       <Profile>프로필 사진</Profile>
@@ -29,8 +40,16 @@ const LoginInfo = () => {
           </Title>
           <UserName>
             <TextBox>
-              <div className="left">이시은입니다람쥐</div>
-              <div className="right">수정</div>
+              <div className="left">
+                {isEdit ? (
+                  <input value={nickname} onChange={handleNicknameChange} />
+                ) : (
+                  <div>{nickname}</div>
+                )}
+              </div>
+              <div className="right" onClick={handleEditClick}>
+                {isEdit ? "완료" : "수정"}
+              </div>
             </TextBox>
           </UserName>
         </Box>
@@ -111,6 +130,7 @@ const Title = styled.div`
   justify-content: center;
   flex-shrink: 0;
 `;
+
 const TextBox = styled.div`
   width: 393px;
   padding-left: 28px;
@@ -131,6 +151,20 @@ const TextBox = styled.div`
 
   .left {
     color: var(--black3);
+    display: flex;
+    align-items: center;
+  }
+
+  input {
+    color: var(--black3);
+    background: transparent;
+    font-family: "Hack Regular";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 145%;
+    letter-spacing: 1.4px;
+    opacity: 40%;
+    padding-top: 3px; //중앙정렬 안 먹어서 임시로...
   }
 
   .right {
