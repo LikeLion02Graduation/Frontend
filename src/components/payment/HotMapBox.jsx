@@ -40,7 +40,7 @@ const HotMapBox = ({ children, location }) => {
               </div>
               <Theme>
                 {item.hashtag.map((tag, index) => (
-                  <HashTag key={index}>#{tag}</HashTag>
+                  <HashTag key={index}>#{tag.tagname}</HashTag>
                 ))}
               </Theme>
             </Content>

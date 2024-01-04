@@ -45,7 +45,7 @@ const HomeOthersContent = ({ children }) => {
             </Img>
             <Name>{box.name}</Name>
             <Time>{box.created_at} up</Time>
-            <User>{box.user}님의 지도</User>
+            <User>{box.location}의 지도</User>
           </Box>
         ))}
       </BoxGrid>
