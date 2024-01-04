@@ -26,9 +26,7 @@ const LoginPage = () => {
   };
 
   //로그인 함수
-  const login = (event) => {
-    event.preventDefault();
-
+  const login = () => {
     if (formData.userid.trim() === "") {
       alert("아이디를 입력해주세요.");
     } else if (formData.password.trim() === "") {
@@ -38,6 +36,7 @@ const LoginPage = () => {
         PostLogin(formData.userid, formData.password);
         alert("로그인에 성공했습니다!");
         navigate("/");
+        window.location.reload();
       } catch (error) {
         console.error("로그인 실패 ", error);
       }

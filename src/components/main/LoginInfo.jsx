@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
+//api
+import { Logout } from "../../api/user";
+
 const LoginInfo = () => {
   return (
     <Wrapper>
@@ -37,7 +40,9 @@ const LoginInfo = () => {
         <LogOutBtn>
           <TextBox>
             <div className="left">로그아웃..</div>
-            <div className="right">탭</div>
+            <div className="right" onClick={Logout}>
+              탭
+            </div>
           </TextBox>
         </LogOutBtn>
       </Container>
