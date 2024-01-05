@@ -32,14 +32,7 @@ const LoginPage = () => {
     } else if (formData.password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
     } else {
-      try {
-        PostLogin(formData.userid, formData.password);
-        alert("로그인에 성공했습니다!");
-        navigate("/");
-        window.location.reload();
-      } catch (error) {
-        console.error("로그인 실패 ", error);
-      }
+      PostLogin(formData.userid, formData.password, navigate);
     }
   };
 

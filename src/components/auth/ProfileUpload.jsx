@@ -42,14 +42,7 @@ const ProfileUpload = () => {
     if (username.trim() === "") {
       alert("닉네임을 입력해주세요.");
     } else {
-      try {
-        PostSignup(signupInfo.user_id, signupInfo.password, username, imgUrl);
-        alert("가입이 완료되었습니다.");
-        navigate("/auth/login");
-      } catch (error) {
-        console.error("회원가입 실패 ", error);
-        // 오류 처리
-      }
+      PostSignup(signupInfo.user_id, signupInfo.password, username, imgUrl, navigate);
     }
   };
 
