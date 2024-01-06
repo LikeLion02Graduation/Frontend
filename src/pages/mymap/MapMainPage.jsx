@@ -22,14 +22,9 @@ const MapMainPage = () => {
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        setLoading(true);
-        const response = await GetMapMain(mapId);
-        setLoading(false);
-        setMapData(response);
-      } catch (error) {
-        setLoading(false);
-      }
+      const response = await GetMapMain(mapId);
+      setMapData(response);
+      setLoading(false);
     };
 
     getData();
@@ -187,12 +182,11 @@ const GridTitle = styled.div`
 
 const GridContainer = styled.div`
   margin-top: 12px;
-  margin-bottom: auto;
+  margin-bottom: 120px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 36.84px;
   column-gap: 23.42px;
-  min-height: 200px;
 `;
 
 const AddPostit = styled.div`

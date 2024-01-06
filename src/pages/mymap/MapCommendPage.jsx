@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
 
+//components
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
+
+//api
+import { GetRecomReact } from "../../api/map";
 
 const MapCommendPage = () => {
   const { mapId, recomId } = useParams();
   const previousUrl = `/map/${mapId}/${recomId}`;
   const nextUrl = `/map/${mapId}/${recomId}/commend/w`;
-  const currentUserId = 1; //임시
 
-  const [reactData, setReactData] = useState({
-    mapuserid: 1,
-    emoji: 1,
-    content: "여기 너무 가고 싶었던 곳!!! 추천해줘서 고마워~",
-  });
+  const [reactData, setReactData] = useState({});
   const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await GetRecomReact(recomId);
+      setReactData(response);
+      setIsSaved("emoji" in response);
+    };
+
+    getData();
+  }, [recomId]);
 
   const emojis = ["🥰", "😔", "😢", "😭"];
 
@@ -32,16 +41,16 @@ const MapCommendPage = () => {
 
         {isSaved ? (
           <>
-            <Commend>아..... 진짜 너무 맛있고 눈물만 나는 엄청난 맛입니다.</Commend>
+            <Commend>{reactData.content}</Commend>
             <Line1 />
             <Emoji>{emojis[reactData.emoji]}</Emoji>
-            {reactData.mapuserid === currentUserId && <NextBtnWhite where={nextUrl} text={"edit"} number={"96px"} />}
+            {reactData.mine && <NextBtnWhite where={nextUrl} text={"edit"} number={"96px"} />}
           </>
         ) : (
           <>
             <Commend style={{ opacity: "0.3", paddingLeft: "47px" }}>아직 남겨진 반응이...</Commend>
             <Line1 />
-            {reactData.mapuserid === currentUserId && <NextBtnWhite where={nextUrl} text={"writing"} number={"96px"} />}
+            {reactData.mine && <NextBtnWhite where={nextUrl} text={"writing"} number={"96px"} />}
           </>
         )}
         <NextBtnBlack where={previousUrl} text={"back"} number={"28px"} />

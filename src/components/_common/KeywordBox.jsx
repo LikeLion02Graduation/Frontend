@@ -5,8 +5,8 @@ const KeywordBox = ({ keywords, type }) => {
   return (
     <TagContainer>
       {type === "tagname"
-        ? keywords.map((tag) => <span key={tag.tagname}>#{tag.tagname}</span>)
-        : keywords.map((tag, index) => <span key={index}>#{tag}</span>)}
+        ? keywords?.map((tag) => <span key={tag.tagname}>#{tag.tagname}</span>)
+        : keywords?.map((tag, index) => <span key={index}>#{tag}</span>)}
     </TagContainer>
   );
 };

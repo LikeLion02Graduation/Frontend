@@ -46,32 +46,39 @@ const SignUpPage = () => {
       <Wrapper>
         <Container style={{ marginTop: "99px" }}>
           <span>사용하실 아이디를 입력해주세요.</span>
-          <input
-            type="text"
-            placeholder="아이디를 입력하세요.."
-            name="userid"
-            value={formData.userid}
-            onChange={handleInputChange}
-            autocomplete="off"
-          />
+          <div>
+            <input
+              type="text"
+              placeholder="아이디를 입력하세요.."
+              name="userid"
+              value={formData.userid}
+              onChange={handleInputChange}
+              autocomplete="off"
+              style={{ width: window.innerWidth <= 393 ? "calc(100vw - 112px)" : "281px" }}
+            />
+            <div>중복확인</div>
+          </div>
         </Container>
         <Container style={{ marginTop: "73px" }}>
           <span>사용하실 비밀번호를 입력해주세요.</span>
-          <input
-            type="password"
-            placeholder="비밀번호 입력"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-          <input
-            type="password"
-            placeholder="비밀번호 재입력"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleInputChange}
-            style={{ marginTop: "10px" }}
-          />
+          <div>
+            <input
+              type="password"
+              placeholder="비밀번호 입력"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div style={{ marginTop: "10px" }}>
+            <input
+              type="password"
+              placeholder="비밀번호 재입력"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+            />
+          </div>
         </Container>
         <LongBtn onClick={handleSubmit}>다음으로</LongBtn>
       </Wrapper>
@@ -102,7 +109,10 @@ const Container = styled.div`
     }
   }
 
-  input {
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     width: 100%;
     height: 61px;
     flex-shrink: 0;
@@ -110,16 +120,39 @@ const Container = styled.div`
     border-bottom: 1.5px solid var(--black1);
     background: var(--gray);
 
-    color: var(--black3);
-    text-align: center;
-    font-family: "Hack Regular";
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 145%; /* 20.3px */
-    letter-spacing: 1.4px;
+    input {
+      width: 393px;
+      padding-left: 28px;
+      box-sizing: border-box;
+      background: var(--gray);
+      flex-shrink: 0;
 
-    &::placeholder {
-      opacity: 0.4;
+      color: var(--black3);
+      font-family: "Hack Regular";
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 145%; /* 20.3px */
+      letter-spacing: 1.4px;
+
+      &::placeholder {
+        opacity: 0.4;
+      }
+
+      @media (max-width: 393px) {
+        width: 100vw;
+      }
+    }
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 112px;
+      border: none;
+      border-left: 1.5px solid var(--black1);
+
+      color: var(--black1);
+      font-weight: 700;
     }
   }
 `;

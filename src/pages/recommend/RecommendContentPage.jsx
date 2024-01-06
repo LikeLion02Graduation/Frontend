@@ -3,19 +3,26 @@ import { styled } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { initRecommend, setRecomInfo } from "../../redux/recommendSlice";
+import { initRecommend } from "../../redux/recommendSlice";
 
+//components
 import TopBar from "../../components/_common/TopBar";
 import { MainWebBox, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 
+//images
 import triangle from "../../assets/images/triangle.svg";
 import KeywordBox from "../../components/_common/KeywordBox";
+
+//api
+import { PostRecom } from "../../api/map";
 
 const RecommendContentPage = () => {
   const { mapId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userId = localStorage.getItem("userId");
+  const nickname = localStorage.getItem("nickname");
   const recommendData = useSelector((state) => state.recommend);
 
   const [inputValue, setInputValue] = useState({ title: "", content: "" });
@@ -38,11 +45,8 @@ const RecommendContentPage = () => {
     } else if (trimmedContent === "") {
       alert("내용을 작성해주세요");
     } else {
-      dispatch(setRecomInfo({ map_id: mapId, user_id: 1, title: trimmedTitle, content: trimmedContent }));
-
+      PostRecom(mapId, trimmedTitle, trimmedContent, userId, recommendData.place, recommendData.hashtag, navigate);
       dispatch(initRecommend());
-
-      navigate(`/map/${mapId}/1`); //recom_id 데이터 받아서 넣기
     }
   };
 
@@ -55,7 +59,7 @@ const RecommendContentPage = () => {
 
         <MainWebBox>
           <TitleContainer>
-            <RecommendTitleText username={"예원이"} />
+            <RecommendTitleText username={nickname} />
           </TitleContainer>
         </MainWebBox>
 
