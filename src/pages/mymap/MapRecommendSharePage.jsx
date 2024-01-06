@@ -1,38 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
 
+//components
 import TopBar from "../../components/_common/TopBar";
 import { Line2, MainWebBox, WhiteBox, Wrapper } from "../../components/_common/CommonExport";
 import ShareModal from "../../components/mymap/ShareModal";
 
+//images
 import triangle from "../../assets/images/triangle.svg";
 import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 
+//api
+import { GetRecomMain } from "../../api/map";
+
 const MapRecommendSharePage = () => {
-  const { mapId } = useParams();
-  const [recommendData, setRecommendData] = useState({
-    id: "1",
-    title: "여기 안가면 평생 후회할 것입니다..",
-    content:
-      "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
-    username: "혜지",
-    hashtag: ["카페"],
-    place: [
-      {
-        id: 23,
-        name: "수원왕족발",
-        address: "경기도 수원시 어쩌구",
-        link: "[카카오 url]",
-      },
-    ],
-    react: {
-      id: 12,
-      emoji: 2,
-      content: "와 너무 고마워!! 진짜 맛있더라",
-      user: 1,
-    },
-  });
+  const { mapId, recomId } = useParams();
+  const [recommendData, setRecommendData] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await GetRecomMain(recomId);
+      setRecommendData(response);
+    };
+
+    getData();
+  }, [recomId]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -49,17 +42,17 @@ const MapRecommendSharePage = () => {
 
         <MainWebBox>
           <TitleContainer>
-            <RecommendTitleText username={recommendData.username} />
+            <RecommendTitleText username={recommendData.nickname} />
             <MapNameText>{recommendData.title}</MapNameText>
           </TitleContainer>
           <TagContainer>
-            {recommendData.hashtag.map((item) => (
-              <span key={item}>#{item}</span>
+            {recommendData.hashtag?.map((item) => (
+              <span key={item.tagname}>#{item.tagname}</span>
             ))}
           </TagContainer>
           <Description>{recommendData.content}</Description>
           <SelectedPlaces>
-            {recommendData.place.map((item) => (
+            {recommendData.place?.map((item) => (
               <div key={item}>
                 <img src={triangle} alt="place" />
                 <span>{item.name}</span>

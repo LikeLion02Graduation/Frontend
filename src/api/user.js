@@ -13,6 +13,7 @@ export const PostLogin = async (user_id, password, navigate) => {
     });
 
     localStorage.setItem("userId", response.data.data.id);
+    localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
 
     console.log(response.data.data);
@@ -35,6 +36,11 @@ export const KakaoLogin = async (url) => {
   try {
     const response = await http.get(url);
     console.log(response.data);
+
+    localStorage.setItem("userId", response.data.data.id);
+    localStorage.setItem("nickname", response.data.data.nickname);
+    localStorage.setItem("token", response.data.data.access_token);
+
     return Promise.resolve(response.data);
   } catch (error) {
     throw error;
@@ -89,9 +95,9 @@ export const PostSignup = async (
 //isLogin + AuthRoute
 const isLogin = () => !!localStorage.getItem("token");
 
-export default function AuthRoute({ component: Component }) {
+export default function AuthRoute({ children }) {
   if (isLogin()) {
-    return <Component />;
+    return children;
   } else {
     alert("로그인이 필요합니다:(");
     return <Navigate to="/auth/login" />;

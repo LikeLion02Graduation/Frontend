@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -12,11 +12,30 @@ import xBtn1 from "../../assets/images/x-btn-1.svg";
 import xBtn2 from "../../assets/images/x-btn-2.svg";
 import triangle from "../../assets/images/triangle.svg";
 
+import { GetMapMain } from "../../api/map";
+
 const RecommendMainPage = () => {
   const { mapId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const savedPlaces = useSelector((state) => state.recommend?.place);
+
+  const [mapData, setMapData] = useState({
+    location: "",
+    name: "",
+    user: {
+      nickname: "",
+    },
+  });
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await GetMapMain(mapId);
+      setMapData(response);
+    };
+
+    getData();
+  }, [mapId]);
 
   const handleDelete = (index) => {
     dispatch(deletePlace(index));
@@ -34,9 +53,9 @@ const RecommendMainPage = () => {
     <>
       <TopBar navBtnOn={true} addClickHandler={handleInit} where={`/map/${mapId}`} titleText="giving" />
       <Wrapper>
-        <MapNameBox place="부산" user="시은" />
+        <MapNameBox place={mapData.location} user={mapData.user?.nickname} />
         <Line2 />
-        <YellowBox text=". .에 남기는 나의 추천은 ? ! !" />
+        <YellowBox text={`${mapData.name}에 남기는 나의 추천은 ? ! !`} />
 
         {savedPlaces?.length > 0 ? (
           <ListContainer>

@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-//import AuthRoute from "./api/user";
+import AuthRoute from "./api/user";
 
 //pages
 import LoginPage from "./pages/auth/LoginPage";
@@ -44,18 +44,29 @@ function App() {
         <Route path={"/auth/signup"} element={<SignUpPage />} />
         <Route path={"/auth/profile"} element={<SignUpProfilePage />} />
         <Route
-          path={"/accounts/kakao/callback/"}
+          path={"/accounts/kakao/callback"}
           element={<SocialProfilePage />}
         />
 
         {/* main */}
         <Route path={"/"} element={<HomePage />} />
-        <Route path={"/my"} element={<MyPage />} />
+        <Route
+          path={"/my"}
+          element={
+            <AuthRoute>
+              <MyPage />
+            </AuthRoute>
+          }
+        />
 
         {/* recommend */}
         <Route
           path={"/map/:mapId/r/main"}
-          //element={<AuthRoute component={<RecommendMainPage />} />}
+          element={
+            <AuthRoute>
+              <RecommendMainPage />
+            </AuthRoute>
+          }
         />
         <Route
           path={"/map/:mapId/r/search"}
@@ -90,9 +101,11 @@ function App() {
         {/* mapmaking */}
         <Route
           path={"/mapmaking/main"}
-          element={<PlacePage />}
-          //path={"/mapmaking/main"}
-          //element={<AuthRoute component={<PlacePage />} />}
+          element={
+            <AuthRoute>
+              <PlacePage />
+            </AuthRoute>
+          }
         />
         <Route path={"/mapmaking/theme"} element={<ThemePage />} />
         <Route path={"/mapmaking/name"} element={<NamePage />} />

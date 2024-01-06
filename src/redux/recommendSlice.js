@@ -2,10 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
 const initialState = {
-  map_id: 0,
-  title: "",
-  content: "",
-  user_id: 0,
   place: [],
   hashtag: [],
 };
@@ -15,18 +11,8 @@ export const recommendSlice = createSlice({
   initialState,
   reducers: {
     initRecommend: (state) => {
-      state.map_id = initialState.map_id;
-      state.title = initialState.title;
-      state.content = initialState.content;
-      state.user_id = initialState.user_id;
       state.place = initialState.place;
       state.hashtag = initialState.hashtag;
-    },
-    setRecomInfo: (state, action) => {
-      state.map_id = action.payload.map_id;
-      state.title = action.payload.title;
-      state.content = action.payload.content;
-      state.user_id = initialState.user_id;
     },
     addPlace: (state, action) => {
       state.place.push(action.payload);
@@ -51,6 +37,6 @@ export const recommendSlice = createSlice({
   },
 });
 
-export const { initRecommend, setRecomInfo, addPlace, deletePlace, addKeyword, deleteKeyword } = recommendSlice.actions;
+export const { initRecommend, addPlace, deletePlace, addKeyword, deleteKeyword } = recommendSlice.actions;
 
 export default recommendSlice.reducer;
