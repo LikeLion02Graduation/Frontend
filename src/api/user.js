@@ -50,7 +50,13 @@ export const Logout = () => {
 };
 
 // POST : 회원가입
-export const PostSignup = async (user_id, password, username, profile, navigate) => {
+export const PostSignup = async (
+  user_id,
+  password,
+  username,
+  profile,
+  navigate
+) => {
   try {
     const response = await http.post("/accounts/signup/", {
       username: user_id,
@@ -91,3 +97,26 @@ export default function AuthRoute({ component: Component }) {
     return <Navigate to="/auth/login" />;
   }
 }
+
+// 회원 탈퇴
+export const DeleteAccount = async () => {
+  try {
+    const response = await http.delete(`/accounts/del/`);
+    console.log("message: ", response);
+    window.localStorage.removeItem("token");
+    window.location.replace("/auth/login");
+  } catch (error) {
+    console.error("회원 탈퇴 실패", error.response);
+  }
+};
+
+// GET : 마이페이지 로그인 정보
+export const GetLoginInfo = async () => {
+  try {
+    const response = await http.get(`/accounts/kakao/edit/`);
+    console.log("응답 결과: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("로그인 정보 get 실패", error.response);
+  }
+};

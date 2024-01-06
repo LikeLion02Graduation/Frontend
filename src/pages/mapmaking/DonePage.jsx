@@ -10,7 +10,6 @@ import { PostMapData } from "../../api/map";
 import TopBar from "../../components/_common/TopBar";
 import {
   MapNameBox,
-  NextBtnWhite,
   Line2,
   Wrapper,
 } from "../../components/_common/CommonExport";
@@ -88,7 +87,7 @@ const DonePage = () => {
         </InputBox>
         <WhiteBtn>
           <div onClick={saveData}>Next</div>
-          <div onClick={() => navigate("/mapmaking/share")}>Skip</div>
+          <div onClick={saveData}>Skip</div>
         </WhiteBtn>
       </Wrapper>
     </>

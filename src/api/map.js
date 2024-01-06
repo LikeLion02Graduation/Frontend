@@ -70,6 +70,11 @@ export const PostMapData = async (
 
 // GET : 내 지도 리스트 정렬
 export const GetMyMapList = async (order) => {
-  const response = await http.get(`/map/?order=${order}`);
-  return response.data;
+  try {
+    const response = await http.get(`/map/?order=${order}`);
+    console.log("응답 결과: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("지도 정렬 실패", error.response);
+  }
 };
