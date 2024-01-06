@@ -8,4 +8,6 @@ http.defaults.withCredentials = true;
 
 const token = localStorage.getItem("token") ?? false;
 
-http.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : null;
+http.defaults.headers.common["Authorization"] = token
+  ? `Bearer ${token}`
+  : null;

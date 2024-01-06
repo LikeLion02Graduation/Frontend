@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 //api
+import { GetLoginInfo } from "../../api/user";
 import { Logout } from "../../api/user";
+import { DeleteAccount } from "../../api/user";
 
 const LoginInfo = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [nickname, setNickname] = useState("이시은입니다람쥐");
+  const [loading, setLoading] = useState(true);
+  const [loginData, setLoginData] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const response = await GetLoginInfo();
+        setLoginData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, []);
 
   const handleEditClick = () => {
     setIsEdit(!isEdit);
@@ -18,7 +37,7 @@ const LoginInfo = () => {
 
   return (
     <Wrapper>
-      <Profile>프로필 사진</Profile>
+      <Profile>{loginData.profile}</Profile>
       <Container>
         <Box>
           <Title>
@@ -29,7 +48,7 @@ const LoginInfo = () => {
           </Title>
           <UserId>
             <TextBox>
-              <div className="left"> tldms545</div>
+              <div className="left">{loginData.username}</div>
               <div />
             </TextBox>
           </UserId>
@@ -37,7 +56,9 @@ const LoginInfo = () => {
         <Box>
           <Title>
             <TextBox>
-              <span>사용중인 닉네임</span>
+              <span>
+                사용중인 닉네임{`(`}바로 탭해서 수정할 수 있어요~{`)`}
+              </span>
               <div />
             </TextBox>
           </Title>
@@ -45,9 +66,12 @@ const LoginInfo = () => {
             <TextBox>
               <div className="left">
                 {isEdit ? (
-                  <input value={nickname} onChange={handleNicknameChange} />
+                  <input
+                    value={loginData.nickname}
+                    onChange={handleNicknameChange}
+                  />
                 ) : (
-                  <div>{nickname}</div>
+                  <div>{loginData.nickname}</div>
                 )}
               </div>
               <div className="right" onClick={handleEditClick}>
@@ -64,6 +88,14 @@ const LoginInfo = () => {
             </div>
           </TextBox>
         </LogOutBtn>
+        <DeleteAccountBtn>
+          <TextBox>
+            <div className="left">탈퇴</div>
+            <div className="right" onClick={DeleteAccount}>
+              탭
+            </div>
+          </TextBox>
+        </DeleteAccountBtn>
       </Container>
     </Wrapper>
   );
@@ -91,12 +123,6 @@ const Profile = styled.div`
   border-radius: 50%;
   border: 1px solid var(--black1);
   background: var(--gray);
-
-  color: var(--black1);
-  text-align: center;
-  font-family: "Hack Regular";
-  font-size: 12px;
-  font-weight: 400;
 `;
 
 const Container = styled.div`
@@ -192,7 +218,17 @@ const UserName = styled.div`
 `;
 
 const LogOutBtn = styled.div`
-  margin-bottom: 81px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 61px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--black1);
+  background: var(--gray);
+`;
+
+const DeleteAccountBtn = styled.div`
+  margin-bottom: 34px;
   display: flex;
   justify-content: center;
   width: 100%;

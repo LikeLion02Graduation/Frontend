@@ -1,13 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router";
 import sort from "../../assets/images/sort.svg";
+import { GetMyMapList } from "../../api/map";
 
-const HomeMyContent = ({ children }) => {
+const HomeMyContent = () => {
   const navigate = useNavigate();
   const [showSortBox, setShowSortBox] = useState(false);
   const [sortType, setSortType] = useState("Earliest");
+  const [mapList, setMapList] = useState([]);
+  const [mapCount, setMapCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const order = sortType === "Earliest" ? "최신순" : "오래된순";
+        const response = await GetMyMapList(order);
+        setMapList(response.data);
+        //setMapCount(data.count);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+    getData();
+  }, [sortType]);
+
+  useEffect(() => {
+    console.log("mapList 데이터: ", mapList);
+  }, [mapList]);
 
   const handleSortClick = () => {
     setShowSortBox(!showSortBox);
@@ -21,7 +45,7 @@ const HomeMyContent = ({ children }) => {
   return (
     <>
       <TotalSort>
-        <Total>Total {children.length}</Total>
+        <Total>Total {mapList.count}</Total>
         <Sort onClick={handleSortClick} $active={showSortBox}>
           <p>{sortType}</p>
           <img src={sort} alt="sort" />
@@ -38,15 +62,18 @@ const HomeMyContent = ({ children }) => {
         </Sort>
       </TotalSort>
       <BoxGrid>
-        {children.map((box) => (
-          <Box key={box.id} onClick={() => navigate(`/map/${box.id}`)}>
-            <Img>
-              <img src={box.img} alt={box.name} />
-            </Img>
-            <Name>{box.name}</Name>
-            <Time>{box.created_at} up</Time>
-          </Box>
-        ))}
+        {mapList &&
+          mapList.map((map) => (
+            <Box key={map.id} onClick={() => navigate(`/map/${map.id}`)}>
+              {map.img && (
+                <ImgBox>
+                  <Img src={map.img} alt={map.name} />
+                </ImgBox>
+              )}
+              <Name>{map.name}</Name>
+              <Time>{map.created_at} up</Time>
+            </Box>
+          ))}
       </BoxGrid>
     </>
   );
@@ -129,16 +156,18 @@ const Box = styled.div`
   width: 156.787px;
 `;
 
-const Img = styled.div`
+const ImgBox = styled.div`
   width: 100%;
   height: 156.787px;
   flex-shrink: 0;
   border: 1.527px solid var(--black1);
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+`;
+
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: ${(props) => (props.src ? "block" : "none")};
 `;
 
 const Name = styled.div`

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import { GetSiLoc } from "../../api/map";
 
 const PlaceFilter = ({ onPlaceSelect }) => {
   const [MetroFilterActive, setMetroFilterActive] = useState(true);
@@ -31,22 +31,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
   ];
 
   useEffect(() => {
-    const getSiLoc = async () => {
-      try {
-        const response = await axios.get(`http://nae-chin-man.link/map/city/`, {
-          params: { city: selectedBtn },
-        });
-        console.log(response.data.data.cities);
-        setSiLoc(response.data.data.cities);
-        setSelectedDo(response.data.data.cities);
-      } catch (error) {
-        console.error(`siLoc 데이터를 가져오는 중 에러 발생: ${error}`);
-      }
-    };
-
-    if (selectedBtn && doLoc.includes(selectedBtn)) {
-      getSiLoc();
-    }
+    GetSiLoc(selectedBtn, doLoc, setSiLoc, setSelectedDo);
   }, [selectedBtn]);
 
   const handleMetroFilterClick = () => {
