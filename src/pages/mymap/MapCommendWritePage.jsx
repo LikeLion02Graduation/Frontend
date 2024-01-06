@@ -1,22 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
+//components
 import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 import CommendModal from "../../components/mymap/CommendModal";
+import EmojiContainer from "../../components/mymap/EmojiContainer";
+
+//api
+import { GetRecomReact, PatchRecomReact, PostRecomReact } from "../../api/map";
 
 const MapCommendWritePage = () => {
+  const { recomId } = useParams();
   const navigate = useNavigate();
 
+  const [isSaved, setIsSaved] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [savedEmoji, setSavedEmoji] = useState(null);
 
-  //이모지 선택
-  const selectEmoji = (index) => {
-    setSelectedEmoji((prevSelectedEmoji) => (prevSelectedEmoji === index ? null : index));
-  };
+  useEffect(() => {
+    const getData = async () => {
+      const response = await GetRecomReact(recomId);
+      setIsSaved("emoji" in response);
+
+      if ("emoji" in response) {
+        setInputValue(response.content);
+        setSelectedEmoji(response.emoji);
+      } else {
+        setInputValue("");
+        setSelectedEmoji(null);
+      }
+    };
+
+    getData();
+  });
 
   //반응 남기기 함수
   const saveInputValue = () => {
@@ -28,15 +47,14 @@ const MapCommendWritePage = () => {
       alert("이모지를 선택해주세요.");
     } else {
       console.log("Data saved:", trimmedInputValue);
+
+      if (isSaved) {
+        PatchRecomReact(recomId, selectedEmoji, trimmedInputValue);
+      } else {
+        PostRecomReact(recomId, selectedEmoji, trimmedInputValue);
+      }
       setSavedEmoji(selectedEmoji);
     }
-  };
-
-  //이모지 배경 색 설정
-  const emojiColor = (index) => {
-    if (savedEmoji === index) return "black";
-    else if (selectedEmoji === index) return "yellow";
-    else return "white";
   };
 
   //모달 닫기
@@ -44,9 +62,6 @@ const MapCommendWritePage = () => {
     setSavedEmoji(null);
     navigate(-1);
   };
-
-  console.log(selectedEmoji, savedEmoji);
-  const emojis = ["🥰", "😔", "😢", "😭"];
 
   return (
     <>
@@ -65,13 +80,7 @@ const MapCommendWritePage = () => {
         />
         <Line1 />
 
-        <EmojiContainer>
-          {emojis.map((emoji, index) => (
-            <EmojiButton key={index} style={{ backgroundColor: emojiColor(index) }} onClick={() => selectEmoji(index)}>
-              {emoji}
-            </EmojiButton>
-          ))}
-        </EmojiContainer>
+        <EmojiContainer {...{ selectedEmoji, setSelectedEmoji, savedEmoji }} />
 
         <NextBtnWhite addClickHandler={saveInputValue} text={"반응 남기기 완료 !"} number={"96px"} />
       </Wrapper>
@@ -121,34 +130,5 @@ const InputBox = styled.input`
 
   @media (max-width: 393px) {
     width: 100%;
-  }
-`;
-
-const EmojiContainer = styled.div`
-  margin-top: 34px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 331px;
-  gap: 17px;
-`;
-
-const EmojiButton = styled.button`
-  width: 70px;
-  height: 70px;
-  flex-shrink: 0;
-  border: 1px solid var(--black1);
-  border-radius: 50%;
-  cursor: pointer;
-
-  text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Apple SD Gothic Neo;
-  font-size: 30.732px;
-  font-weight: 500;
-
-  @media (max-width: 330px) {
-    width: 60px;
-    height: 60px;
   }
 `;

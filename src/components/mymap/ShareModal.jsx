@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const ShareModal = ({ onClose, mapId, recomId }) => {
+  const domain = "https://naechinman.swygbro.com";
   const mapURL = () => {
-    if (recomId) return `/map/${mapId}/${recomId}`;
-    else return `/map/${mapId}`;
+    if (recomId) return `${domain}/map/${mapId}/${recomId}`;
+    else return `${domain}/map/${mapId}`;
   };
 
   const copyURL = async () => {

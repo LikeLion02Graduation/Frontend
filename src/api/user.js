@@ -13,6 +13,7 @@ export const PostLogin = async (user_id, password, navigate) => {
     });
 
     localStorage.setItem("userId", response.data.data.id);
+    localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
 
     console.log(response.data.data);
@@ -37,10 +38,9 @@ export const KakaoLogin = async (url) => {
     console.log(response.data);
 
     localStorage.setItem("userId", response.data.data.id);
+    localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
 
-    alert("로그인에 성공했습니다!");
-    // navigate("/");
     return Promise.resolve(response.data);
   } catch (error) {
     throw error;

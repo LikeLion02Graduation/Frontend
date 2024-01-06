@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
+//components
 import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
 import { WTagContainer } from "../../components/mymap/LinkContainer";
@@ -9,39 +10,23 @@ import KeywordBox from "../../components/_common/KeywordBox";
 import UnderlinedContent from "../../components/mymap/UnderlinedContent";
 import PlaceContainer from "../../components/mymap/PlaceContainer";
 
+//api
+import { GetRecomMain } from "../../api/map";
+
 const MapRecommendPage = () => {
   const { mapId, recomId } = useParams();
   const navigate = useNavigate();
 
-  const [recommendData, setRecommendData] = useState({
-    id: "1",
-    title: "여기 안가면 평생 후회할 것입니다...",
-    content:
-      "수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 수변국밥? 이걸 먹은 뒤로 내 인생이 바뀌었음!!!",
-    username: "혜지",
-    hashtag: [
-      {
-        tagname: "카페",
-      },
-      {
-        tagname: "비건",
-      },
-    ],
-    place: [
-      {
-        id: 23,
-        name: "수원왕족발",
-        address: "경기도 수원시 어쩌구",
-        link: "[카카오 url]",
-      },
-    ],
-    react: {
-      id: 12,
-      emoji: 2,
-      content: "와 너무 고마워!! 진짜 맛있더라",
-      user: 1,
-    },
-  });
+  const [recommendData, setRecommendData] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await GetRecomMain(recomId);
+      setRecommendData(response);
+    };
+
+    getData();
+  }, [recomId]);
 
   return (
     <>
@@ -53,17 +38,17 @@ const MapRecommendPage = () => {
             <Title>
               <div>{recommendData.title}</div>
             </Title>
-            <From>From.{recommendData.username}</From>
+            <From>From.{recommendData.nickname}</From>
             <WTagContainer mapId={mapId} recomId={recomId} />
           </Col>
           <Col>
-            <MapProfile />
-            <SubTitle>부산에 가자</SubTitle>
+            <MapProfile src={recommendData.img} />
+            <SubTitle>{recommendData.mapname}</SubTitle>
           </Col>
         </TitleContainer>
 
         <UnderlinedContent recommendData={recommendData} />
-        {recommendData.place.map((item) => (
+        {recommendData.place?.map((item) => (
           <PlaceContainer key={item} item={item} />
         ))}
 
@@ -114,7 +99,7 @@ const From = styled.div`
   letter-spacing: 5px;
 `;
 
-const MapProfile = styled.div`
+const MapProfile = styled.img`
   width: 156.787px;
   height: 156.787px;
   flex-shrink: 0;
