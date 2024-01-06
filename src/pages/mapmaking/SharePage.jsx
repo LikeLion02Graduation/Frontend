@@ -1,33 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
-import { useSelector } from "react-redux";
+import { GetMapMain } from "../../api/map";
 
 import TopBar from "../../components/_common/TopBar";
-import { WhiteBox, MainWebBox, Line2, Wrapper } from "../../components/_common/CommonExport";
+import {
+  WhiteBox,
+  MainWebBox,
+  Line2,
+  Wrapper,
+} from "../../components/_common/CommonExport";
 import { MapTitleText } from "../../components/mymap/MapTitleText";
 import ShareModal from "../../components/mymap/ShareModal";
+import { useParams } from "react-router-dom";
 
 const SharePage = () => {
   const navigate = useNavigate();
-  // const mapData = useSelector((state) => state.mapmaking);
+  const { mapId } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [mapData, setMapData] = useState({});
 
-  const [mapData, setMapData] = useState({
-    id: 1, // MAP 아이디
-    name: "부산 갈거야",
-    location: "부산",
-    img: "[이미지url]",
-    description: "2023 12 30 떠난다 추천 부탁해~~",
-    created_at: "2023-11-11 12:12:11",
-    hashtag: ["카페", "국밥"],
-    user: {
-      id: 1,
-      nickname: "서연",
-    },
-    do_buy: true,
-    recommend: [],
-  });
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const response = await GetMapMain(mapId);
+        setMapData(response);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, [mapId]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -39,17 +45,18 @@ const SharePage = () => {
     <>
       <TopBar navBtnOn={true} titleText={"Making"} />
       <Wrapper>
-        <WhiteBox text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"} />
+        <WhiteBox
+          text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"}
+        />
         <Line2 />
-
         <MainWebBox>
           <TitleContainer>
-            <MapTitleText mapData={mapData} />
+            <MapTitleText loading={loading} mapData={mapData} />
             <MapNameText>{mapData.name}</MapNameText>
           </TitleContainer>
           <TagContainer>
-            {mapData.hashtag.map((item) => (
-              <span key={item}>#{item}</span>
+            {mapData.hashtag?.map((item) => (
+              <span key={item.tagname}>#{item.tagname}</span>
             ))}
           </TagContainer>
           <Description>
@@ -61,7 +68,9 @@ const SharePage = () => {
           <div onClick={() => navigate("/")}>Skip</div>
         </WhiteBtn>
       </Wrapper>
-      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapData.id} />}
+      {isModalOpen && (
+        <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapId} />
+      )}
     </>
   );
 };

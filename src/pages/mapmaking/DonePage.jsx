@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setDescription, initMapmaking } from "../../redux/mapmakingSlice";
 import { persistor } from "../../index";
+import { PostMapData } from "../../api/map";
 
 import TopBar from "../../components/_common/TopBar";
 import {
@@ -37,7 +38,14 @@ const DonePage = () => {
       alert("내용을 작성해주세요");
     } else {
       dispatch(setDescription({ description: trimmedContent }));
-      navigate(`/mapmaking/share`);
+      PostMapData(mapLocation, mapName, mapImg, mapHashtag, trimmedContent)
+        .then((mapId) => {
+          handleInit();
+          navigate(`/mapmaking/share/${mapId}`);
+        })
+        .catch((error) => {
+          console.error("Error posting map data: ", error);
+        });
     }
   };
 

@@ -37,7 +37,9 @@ const LoginInfo = () => {
         <Box>
           <Title>
             <TextBox>
-              <span>사용중인 닉네임</span>
+              <span>
+                사용중인 닉네임{`(`}바로 탭해서 수정할 수 있어요~{`)`}
+              </span>
               <div />
             </TextBox>
           </Title>
@@ -64,6 +66,14 @@ const LoginInfo = () => {
             </div>
           </TextBox>
         </LogOutBtn>
+        <DeleteAccountBtn>
+          <TextBox>
+            <div className="left">탈퇴</div>
+            <div className="right" onClick={Logout}>
+              탭
+            </div>
+          </TextBox>
+        </DeleteAccountBtn>
       </Container>
     </Wrapper>
   );
@@ -192,7 +202,17 @@ const UserName = styled.div`
 `;
 
 const LogOutBtn = styled.div`
-  margin-bottom: 81px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 61px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--black1);
+  background: var(--gray);
+`;
+
+const DeleteAccountBtn = styled.div`
+  margin-bottom: 34px;
   display: flex;
   justify-content: center;
   width: 100%;

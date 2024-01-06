@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router";
 import sort from "../../assets/images/sort.svg";
+import { GetMyMapList } from "../../api/map";
 
 const HomeMyContent = ({ children }) => {
   const navigate = useNavigate();
   const [showSortBox, setShowSortBox] = useState(false);
   const [sortType, setSortType] = useState("Earliest");
+  const [mapList, setMapList] = useState([]);
+
+  useEffect(() => {
+    const fetchMapList = async () => {
+      const order = sortType === "Earliest" ? "최신순" : "오래된순";
+      const data = await GetMyMapList(order);
+      setMapList(data);
+    };
+    fetchMapList();
+  }, [sortType]);
 
   const handleSortClick = () => {
     setShowSortBox(!showSortBox);

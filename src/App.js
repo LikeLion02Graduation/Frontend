@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AuthRoute from "./api/user";
+//import AuthRoute from "./api/user";
 
 //pages
 import LoginPage from "./pages/auth/LoginPage";
@@ -43,39 +43,71 @@ function App() {
         <Route path={"/auth/login"} element={<LoginPage />} />
         <Route path={"/auth/signup"} element={<SignUpPage />} />
         <Route path={"/auth/profile"} element={<SignUpProfilePage />} />
-        <Route path={"/accounts/kakao/callback/"} element={<SocialProfilePage />} />
+        <Route
+          path={"/accounts/kakao/callback/"}
+          element={<SocialProfilePage />}
+        />
 
         {/* main */}
         <Route path={"/"} element={<HomePage />} />
         <Route path={"/my"} element={<MyPage />} />
 
         {/* recommend */}
-        <Route path={"/map/:mapId/r/main"} element={<AuthRoute component={<RecommendMainPage />} />} />
-        <Route path={"/map/:mapId/r/search"} element={<RecommendSearchPage />} />
-        <Route path={"/map/:mapId/r/keyword"} element={<RecommendKeywordPage />} />
-        <Route path={"/map/:mapId/r/content"} element={<RecommendContentPage />} />
+        <Route
+          path={"/map/:mapId/r/main"}
+          //element={<AuthRoute component={<RecommendMainPage />} />}
+        />
+        <Route
+          path={"/map/:mapId/r/search"}
+          element={<RecommendSearchPage />}
+        />
+        <Route
+          path={"/map/:mapId/r/keyword"}
+          element={<RecommendKeywordPage />}
+        />
+        <Route
+          path={"/map/:mapId/r/content"}
+          element={<RecommendContentPage />}
+        />
 
         {/* mymap */}
         <Route path={"/map/:mapId"} element={<MapMainPage />} />
         <Route path={"/map/:mapId/:recomId"} element={<MapRecommendPage />} />
-        <Route path={"/map/:mapId/:recomId/commend"} element={<MapCommendPage />} />
-        <Route path={"/map/:mapId/:recomId/commend/w"} element={<MapCommendWritePage />} />
+        <Route
+          path={"/map/:mapId/:recomId/commend"}
+          element={<MapCommendPage />}
+        />
+        <Route
+          path={"/map/:mapId/:recomId/commend/w"}
+          element={<MapCommendWritePage />}
+        />
         <Route path={"/map/:mapId/share"} element={<MapSharePage />} />
-        <Route path={"/map/:mapId/:recomId/share"} element={<MapRecommendSharePage />} />
+        <Route
+          path={"/map/:mapId/:recomId/share"}
+          element={<MapRecommendSharePage />}
+        />
 
         {/* mapmaking */}
-        <Route path={"/mapmaking/main"} element={<AuthRoute component={<PlacePage />} />} />
+        <Route
+          path={"/mapmaking/main"}
+          element={<PlacePage />}
+          //path={"/mapmaking/main"}
+          //element={<AuthRoute component={<PlacePage />} />}
+        />
         <Route path={"/mapmaking/theme"} element={<ThemePage />} />
         <Route path={"/mapmaking/name"} element={<NamePage />} />
         <Route path={"/mapmaking/image"} element={<ImagePage />} />
         <Route path={"/mapmaking/done"} element={<DonePage />} />
-        <Route path={"/mapmaking/share"} element={<SharePage />} />
+        <Route path={"/mapmaking/share/:mapId"} element={<SharePage />} />
 
         {/* payment */}
         <Route path={"/buyingplace"} element={<BuyingPlacePage />} />
         <Route path={"/hotmap/:location"} element={<HotMapPage />} />
         <Route path={"/payment/:location/:mapId"} element={<PreviewPage />} />
-        <Route path={"/payment/:location/:mapId/pay"} element={<PaymentPage />} />
+        <Route
+          path={"/payment/:location/:mapId/pay"}
+          element={<PaymentPage />}
+        />
       </Routes>
     </Router>
   );
