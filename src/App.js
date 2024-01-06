@@ -43,14 +43,28 @@ function App() {
         <Route path={"/auth/login"} element={<LoginPage />} />
         <Route path={"/auth/signup"} element={<SignUpPage />} />
         <Route path={"/auth/profile"} element={<SignUpProfilePage />} />
-        <Route path={"/accounts/kakao/callback/"} element={<SocialProfilePage />} />
+        <Route path={"/accounts/kakao/callback"} element={<SocialProfilePage />} />
 
         {/* main */}
         <Route path={"/"} element={<HomePage />} />
-        <Route path={"/my"} element={<MyPage />} />
+        <Route
+          path={"/my"}
+          element={
+            <AuthRoute>
+              <MyPage />
+            </AuthRoute>
+          }
+        />
 
         {/* recommend */}
-        <Route path={"/map/:mapId/r/main"} element={<AuthRoute component={<RecommendMainPage />} />} />
+        <Route
+          path={"/map/:mapId/r/main"}
+          element={
+            <AuthRoute>
+              <RecommendMainPage />
+            </AuthRoute>
+          }
+        />
         <Route path={"/map/:mapId/r/search"} element={<RecommendSearchPage />} />
         <Route path={"/map/:mapId/r/keyword"} element={<RecommendKeywordPage />} />
         <Route path={"/map/:mapId/r/content"} element={<RecommendContentPage />} />
@@ -64,7 +78,14 @@ function App() {
         <Route path={"/map/:mapId/:recomId/share"} element={<MapRecommendSharePage />} />
 
         {/* mapmaking */}
-        <Route path={"/mapmaking/main"} element={<AuthRoute component={<PlacePage />} />} />
+        <Route
+          path={"/mapmaking/main"}
+          element={
+            <AuthRoute>
+              <PlacePage />
+            </AuthRoute>
+          }
+        />
         <Route path={"/mapmaking/theme"} element={<ThemePage />} />
         <Route path={"/mapmaking/name"} element={<NamePage />} />
         <Route path={"/mapmaking/image"} element={<ImagePage />} />
