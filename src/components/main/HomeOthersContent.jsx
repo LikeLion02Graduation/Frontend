@@ -5,24 +5,17 @@ import { useNavigate } from "react-router";
 import sort from "../../assets/images/sort.svg";
 import { GetOthersMapList } from "../../api/map";
 
-const HomeOthersContent = ({ children }) => {
+const HomeOthersContent = () => {
   const navigate = useNavigate();
   const [showSortBox, setShowSortBox] = useState(false);
   const [sortType, setSortType] = useState("Earliest");
   const [mapList, setMapList] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        setLoading(true);
-        const order = sortType === "Earliest" ? "최신순" : "오래된순";
-        const response = await GetOthersMapList(order);
-        setMapList(response.data);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
+      const order = sortType === "Earliest" ? "최신순" : "오래된순";
+      const response = await GetOthersMapList(order);
+      setMapList(response.data);
     };
     getData();
   }, [sortType]);

@@ -10,19 +10,12 @@ const HomeMyContent = () => {
   const [showSortBox, setShowSortBox] = useState(false);
   const [sortType, setSortType] = useState("Earliest");
   const [mapList, setMapList] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        setLoading(true);
-        const order = sortType === "Earliest" ? "최신순" : "오래된순";
-        const response = await GetMyMapList(order);
-        setMapList(response.data);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
+      const order = sortType === "Earliest" ? "최신순" : "오래된순";
+      const response = await GetMyMapList(order);
+      setMapList(response.data);
     };
     getData();
   }, [sortType]);

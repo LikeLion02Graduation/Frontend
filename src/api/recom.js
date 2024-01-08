@@ -1,4 +1,3 @@
-import { async } from "q";
 import { http } from "../api/http";
 // import { isTokenExpired } from "./user";
 

@@ -1,4 +1,3 @@
-import { async } from "q";
 import { http } from "../api/http";
 // import { isTokenExpired } from "./user";
 
@@ -28,15 +27,7 @@ export const GetRecomMain = async (id) => {
 };
 
 // POST : 추천 작성하기
-export const PostRecom = async (
-  mapId,
-  mapTitle,
-  mapContent,
-  userId,
-  mapPlace,
-  mapHashtag,
-  navigate
-) => {
+export const PostRecom = async (mapId, mapTitle, mapContent, userId, mapPlace, mapHashtag, navigate) => {
   try {
     const response = await http.post("/recom/", {
       map_id: mapId,
@@ -129,13 +120,7 @@ export const GetSiLoc = async (selectedBtn, doLoc, setSiLoc, setSelectedDo) => {
 };
 
 // POST : 지도 만들기
-export const PostMapData = async (
-  location,
-  name,
-  img,
-  hashtag,
-  description
-) => {
+export const PostMapData = async (location, name, img, hashtag, description) => {
   try {
     const response = await http.post(`/map/`, {
       location,
