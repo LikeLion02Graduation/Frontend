@@ -72,30 +72,21 @@ const HomePage = () => {
 
   return (
     <>
-      <TopBar
-        navBtnOn={false}
-        myPageBtnOn={true}
-        newMapBtnOn={true}
-        titleText="Main"
-      />
+      <TopBar navBtnOn={false} myPageBtnOn={true} newMapBtnOn={true} titleText="Main" />
       <Wrapper>
         <Filters>
           <MyFilter onClick={handleMyFilterClick} $active={myFilterActive}>
             MY
           </MyFilter>
           {/*결제 정보에 따라 텍스트 다르게*/}
-          <OthersFilter
-            onClick={handleOthersFilterClick}
-            $active={buyingFilterActive || othersFilterActive}
-          >
+          <OthersFilter onClick={handleOthersFilterClick} $active={buyingFilterActive || othersFilterActive}>
             {paymentInfo ? "Others" : "Buying"}
           </OthersFilter>
         </Filters>
-        <Content>
-          {myFilterActive && <HomeMyContent />}
-          {othersFilterActive && <HomeOthersContent children={MapData2} />}
-          {buyingFilterActive && <HomeBuyingContent />}
-        </Content>
+
+        {myFilterActive && <HomeMyContent />}
+        {othersFilterActive && <HomeOthersContent children={MapData2} />}
+        {buyingFilterActive && <HomeBuyingContent />}
       </Wrapper>
     </>
   );
@@ -146,8 +137,4 @@ const OthersFilter = styled(FilterStyle)`
   justify-content: flex-start;
   align-items: center;
   padding-left: 8%;
-`;
-
-const Content = styled.div`
-  margin-bottom: 100px;
 `;

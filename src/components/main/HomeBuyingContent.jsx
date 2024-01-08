@@ -3,8 +3,6 @@ import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
 
-import { Wrapper } from "../../components/_common/CommonExport";
-
 const HomeBuyingContent = () => {
   const navigate = useNavigate();
 
@@ -14,12 +12,8 @@ const HomeBuyingContent = () => {
 
   return (
     <Wrapper>
-      <GrayBox style={{ transform: "rotate(15deg)" }}>
-        아직 구매한 지도가 없네요..🥺
-      </GrayBox>
-      <GrayBox style={{ transform: "rotate(-15deg)" }}>
-        더 많은 정보를 얻고 싶다면..
-      </GrayBox>
+      <GrayBox style={{ transform: "rotate(15deg)" }}>아직 구매한 지도가 없네요..🥺</GrayBox>
+      <GrayBox style={{ transform: "rotate(-15deg)" }}>더 많은 정보를 얻고 싶다면..</GrayBox>
       <YellowBox onClick={handleHotMap} style={{ marginTop: "20vh" }}>
         여기를 눌러 추천 콘텐츠를 받아보세요!
       </YellowBox>
@@ -28,6 +22,17 @@ const HomeBuyingContent = () => {
 };
 
 export default HomeBuyingContent;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--white);
+  font-family: "Hack Regular";
+`;
 
 const GrayBox = styled.div`
   margin-top: 15vh;

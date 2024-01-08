@@ -19,16 +19,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
     "강원도",
     "제주",
   ]);
-  const metroLoc = [
-    "서울",
-    "부산",
-    "인천",
-    "대구",
-    "광주",
-    "울산",
-    "대전",
-    "세종",
-  ];
+  const metroLoc = ["서울", "부산", "인천", "대구", "광주", "울산", "대전", "세종"];
 
   useEffect(() => {
     GetSiLoc(selectedBtn, doLoc, setSiLoc, setSelectedDo);
@@ -88,10 +79,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
   return (
     <>
       <Filters>
-        <MetroFilter
-          onClick={handleMetroFilterClick}
-          $active={MetroFilterActive}
-        >
+        <MetroFilter onClick={handleMetroFilterClick} $active={MetroFilterActive}>
           광역시 및 특별시
         </MetroFilter>
         <DoFilter onClick={handleDoFilterClick} $active={doFilterActive}>
@@ -106,8 +94,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
                 key={index}
                 onClick={() => handleBtnClick(location)}
                 style={{
-                  backgroundColor:
-                    selectedBtn === location ? "var(--yellow)" : "var(--white)",
+                  backgroundColor: selectedBtn === location ? "var(--yellow)" : "var(--white)",
                 }}
               >
                 {location}
@@ -127,11 +114,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
                         onClick={() => handleSiLocBtnClick(location, index)}
                         style={{
                           backgroundColor:
-                            index === 0
-                              ? "var(--yellow)"
-                              : selectedBtn === location
-                              ? "#D9D9D9"
-                              : "var(--white)",
+                            index === 0 ? "var(--yellow)" : selectedBtn === location ? "#D9D9D9" : "var(--white)",
                         }}
                       >
                         {location}
@@ -146,10 +129,7 @@ const PlaceFilter = ({ onPlaceSelect }) => {
                     key={index}
                     onClick={() => handleBtnClick(location)}
                     style={{
-                      backgroundColor:
-                        selectedBtn === location
-                          ? "var(--yellow)"
-                          : "var(--white)",
+                      backgroundColor: selectedBtn === location ? "var(--yellow)" : "var(--white)",
                     }}
                   >
                     {location}
@@ -211,6 +191,7 @@ const DoFilter = styled(FilterStyle)`
 
 const Contents = styled.div`
   padding: 40px 23px 0px 23px;
+  margin-bottom: 30%;
 
   button {
     width: 103px;
