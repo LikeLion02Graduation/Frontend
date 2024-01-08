@@ -11,7 +11,7 @@ import UnderlinedContent from "../../components/mymap/UnderlinedContent";
 import PlaceContainer from "../../components/mymap/PlaceContainer";
 
 //api
-import { GetRecomMain } from "../../api/map";
+import { GetRecomMain } from "../../api/recom";
 
 const MapRecommendPage = () => {
   const { mapId, recomId } = useParams();

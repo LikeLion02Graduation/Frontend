@@ -7,7 +7,7 @@ import TopBar from "../../components/_common/TopBar";
 import { Line1, Line2, NextBtnBlack, NextBtnWhite, Wrapper } from "../../components/_common/CommonExport";
 
 //api
-import { GetRecomReact } from "../../api/map";
+import { GetRecomReact } from "../../api/recom";
 
 const MapCommendPage = () => {
   const { mapId, recomId } = useParams();
