@@ -9,45 +9,10 @@ import {
 } from "../../components/_common/CommonExport";
 import LoginInfo from "../../components/main/LoginInfo";
 import NoticeBox from "../../components/main/NoticeBox";
-import monkey_1 from "../../assets/images/monkey-1.png"; //임시이미지
 
 const MyPage = () => {
   const [MyBtnActive, setMyBtnActive] = useState(true);
   const [NoticeBtnActive, setNoticeBtnActive] = useState(false);
-  // 임시 목데이터
-  const [MockData, setMockData] = useState([
-    {
-      id: 1,
-      type: "recommendation",
-      profile: monkey_1,
-      nickname: "허파게티",
-      name: "부산맛집추천받음",
-      created_at: "23.11.19 03:06",
-    },
-    {
-      id: 2,
-      type: "recommendation",
-      profile: monkey_1,
-      nickname: "홍길동",
-      name: "세종에서 뭐하지",
-      created_at: "23.11.19 03:06",
-    },
-    {
-      id: 3,
-      profile: monkey_1,
-      nickname: "핑핑이",
-      name: "",
-      created_at: "23.11.19 03:06",
-    },
-    {
-      id: 4,
-      type: "recommendation",
-      profile: monkey_1,
-      nickname: "징징이",
-      name: "아니근데진짜",
-      created_at: "23.11.19 03:06",
-    },
-  ]);
 
   const handleMyBtnClick = () => {
     setMyBtnActive(true);
@@ -57,11 +22,6 @@ const MyPage = () => {
   const handleNoticeBtnClick = () => {
     setNoticeBtnActive(true);
     setMyBtnActive(false);
-  };
-
-  const handleDeleteItem = (itemId) => {
-    const updatedData = MockData.filter((item) => item.id !== itemId);
-    setMockData(updatedData);
   };
 
   return (
@@ -86,9 +46,7 @@ const MyPage = () => {
         <Line2 />
         <Content>
           {MyBtnActive && <LoginInfo />}
-          {NoticeBtnActive && (
-            <NoticeBox children={MockData} onDelete={handleDeleteItem} />
-          )}
+          {NoticeBtnActive && <NoticeBox />}
         </Content>
       </Wrapper>
     </>

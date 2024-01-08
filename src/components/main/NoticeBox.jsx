@@ -1,56 +1,85 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import gofront from "../../assets/images/go-front.svg";
 import xbtn1 from "../../assets/images/x-btn-1.svg";
 import xbtn2 from "../../assets/images/x-btn-2.svg";
 
-const NoticeBox = ({ children, onDelete }) => {
-  const handleDeleteClick = (itemId) => {
-    onDelete(itemId);
+import { GetNoticeList } from "../../api/recom";
+import { DeleteNotice } from "../../api/recom";
+
+const NoticeBox = () => {
+  const [noticeList, setNoticeList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // 알림 조회
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const response = await GetNoticeList();
+        setNoticeList(response.data);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    console.log("NoticeList 데이터: ", noticeList);
+  }, [noticeList]);
+
+  // 알림 삭제
+  const handleDeleteClick = (id) => {
+    DeleteNotice(id).then(() => {
+      setNoticeList(noticeList.filter((item) => item.alert_id !== id));
+    });
   };
 
   return (
     <Wrapper>
-      {children.map((item) => (
-        <BoxContainer key={item.id}>
-          <Box>
-            <Box2>
-              <MapImg src={item.profile} alt={item.name} />
-              <Content>
-                <User>{item.nickname} 님께서</User>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: "4px",
-                    marginBottom: "7px",
-                    gap: "3px",
-                  }}
-                >
-                  <MapName>
-                    {item.type === "recommendation"
-                      ? `${item.name}에 추천을 남겼어요`
-                      : "남겨주신 추천에 반응을 남겼어요"}
-                  </MapName>
-                  <img
-                    src={gofront}
-                    style={{ width: "15px", height: "15px" }}
-                  />
-                </div>
-                <Time>{item.created_at}</Time>
-              </Content>
-            </Box2>
-            <DeleteBtnContainer>
-              <DeleteBtn onClick={() => handleDeleteClick(item.id)}>
-                <img src={xbtn1} />
-                <img src={xbtn2} />
-              </DeleteBtn>
-            </DeleteBtnContainer>
-          </Box>
-        </BoxContainer>
-      ))}
+      {noticeList &&
+        noticeList.map((item) => (
+          <BoxContainer key={item.alert_id}>
+            <Box>
+              <Box2>
+                <MapImg src={item.user.profile} alt={item.map.name} />
+                <Content>
+                  <User>{item.user.nickname} 님께서</User>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginTop: "4px",
+                      marginBottom: "7px",
+                      gap: "3px",
+                    }}
+                  >
+                    <MapName>
+                      {item.type === "추천"
+                        ? `${item.map.name}에 추천을 남겼어요`
+                        : "남겨주신 추천에 반응을 남겼어요"}
+                    </MapName>
+                    <img
+                      src={gofront}
+                      style={{ width: "15px", height: "15px" }}
+                    />
+                  </div>
+                  <Time>{item.created_at}</Time>
+                </Content>
+              </Box2>
+              <DeleteBtnContainer>
+                <DeleteBtn onClick={() => handleDeleteClick(item.alert_id)}>
+                  <img src={xbtn1} />
+                  <img src={xbtn2} />
+                </DeleteBtn>
+              </DeleteBtnContainer>
+            </Box>
+          </BoxContainer>
+        ))}
     </Wrapper>
   );
 };

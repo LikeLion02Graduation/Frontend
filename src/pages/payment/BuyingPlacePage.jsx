@@ -23,7 +23,7 @@ const HomeBuyingPage = () => {
       dispatch(setLocation(selectedPlace));
       console.log("Dispatched action:", setLocation(selectedPlace));
 
-      navigate(`/hotmap/:location`);
+      navigate(`/hotmap/${selectedPlace}`);
     } else {
       alert("장소를 선택해주세요");
     }

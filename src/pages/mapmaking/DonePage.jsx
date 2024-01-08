@@ -30,22 +30,32 @@ const DonePage = () => {
     }
   };
 
-  const saveData = () => {
+  const saveData = (content) => {
+    dispatch(setDescription({ description: content }));
+    PostMapData(mapLocation, mapName, mapImg, mapHashtag, content)
+      .then((mapId) => {
+        handleInit();
+        navigate(`/mapmaking/share/${mapId}`);
+      })
+      .catch((error) => {
+        console.error("Error posting map data: ", error);
+      });
+  };
+
+  // Next 버튼 클릭하는 경우
+  const saveAndNext = () => {
     const trimmedContent = inputValue.description.trim();
 
     if (trimmedContent === "") {
       alert("내용을 작성해주세요");
     } else {
-      dispatch(setDescription({ description: trimmedContent }));
-      PostMapData(mapLocation, mapName, mapImg, mapHashtag, trimmedContent)
-        .then((mapId) => {
-          handleInit();
-          navigate(`/mapmaking/share/${mapId}`);
-        })
-        .catch((error) => {
-          console.error("Error posting map data: ", error);
-        });
+      saveData(trimmedContent);
     }
+  };
+
+  // Skip 버튼 클릭하는 경우
+  const saveAndSkip = () => {
+    saveData(inputValue.description.trim());
   };
 
   const mapLocation = useSelector((state) => state.mapmaking.location);
@@ -86,8 +96,8 @@ const DonePage = () => {
           />
         </InputBox>
         <WhiteBtn>
-          <div onClick={saveData}>Next</div>
-          <div onClick={saveData}>Skip</div>
+          <div onClick={saveAndNext}>Next</div>
+          <div onClick={saveAndSkip}>Skip</div>
         </WhiteBtn>
       </Wrapper>
     </>
