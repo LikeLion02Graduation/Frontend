@@ -192,7 +192,7 @@ const InputBox = styled.div`
     font-weight: 400;
     line-height: 145%;
     letter-spacing: 1.4px;
-    opacity: 0.3;
+    //opacity: 0.3;
     white-space: pre-line;
 
     &::-webkit-scrollbar {

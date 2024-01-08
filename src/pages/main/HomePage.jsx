@@ -9,48 +9,12 @@ import HomeMyContent from "../../components/main/HomeMyContent";
 import HomeOthersContent from "../../components/main/HomeOthersContent";
 import HomeBuyingContent from "../../components/main/HomeBuyingContent";
 
-import monkey_1 from "../../assets/images/monkey-1.png";
-import monkey_2 from "../../assets/images/monkey-2.png";
-import monkey_3 from "../../assets/images/monkey-3.png";
-import monkey_4 from "../../assets/images/monkey-4.png";
-
 const HomePage = () => {
   const navigate = useNavigate();
   const [myFilterActive, setMyFilterActive] = useState(true);
   const [othersFilterActive, setOthersFilterActive] = useState(false);
   const [buyingFilterActive, setBuyingFilterActive] = useState(false);
   const [paymentInfo, setPaymentInfo] = useState(false);
-
-  const MapData2 = [
-    {
-      id: 1,
-      img: monkey_1,
-      name: "부산에 가자",
-      created_at: "23.11.19 03:06",
-      location: "부산",
-    },
-    {
-      id: 2,
-      img: monkey_2,
-      name: "서울에 가자",
-      created_at: "23.11.19 03:06",
-      location: "대전",
-    },
-    {
-      id: 3,
-      img: monkey_3,
-      name: "국밥 추천 받습니다",
-      created_at: "23.11.19 03:06",
-      location: "서울",
-    },
-    {
-      id: 4,
-      img: monkey_4,
-      name: "저는 비빔면이 땡겨요",
-      created_at: "23.11.19 03:06",
-      location: "고양시",
-    },
-  ];
 
   const handleMyFilterClick = () => {
     setMyFilterActive(true);
@@ -93,7 +57,7 @@ const HomePage = () => {
         </Filters>
         <Content>
           {myFilterActive && <HomeMyContent />}
-          {othersFilterActive && <HomeOthersContent children={MapData2} />}
+          {othersFilterActive && <HomeOthersContent />}
           {buyingFilterActive && <HomeBuyingContent />}
         </Content>
       </Wrapper>
