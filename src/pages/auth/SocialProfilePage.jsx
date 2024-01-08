@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
@@ -12,7 +12,18 @@ const SocialProfilePage = () => {
   console.log(fullURL);
   console.log(code);
 
-  KakaoLogin(code);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await KakaoLogin(code);
+      setUserData(response);
+
+      console.log(userData);
+    };
+
+    getData();
+  }, []);
 
   return (
     <>

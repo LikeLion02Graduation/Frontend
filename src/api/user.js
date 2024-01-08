@@ -35,8 +35,6 @@ export const KAKAO_AUTH_URL = `${process.env.REACT_APP_API_URL}/accounts/kakao`;
 export const KakaoLogin = async (url) => {
   try {
     const response = await http.get(url);
-    console.log(response.data);
-
     localStorage.setItem("userId", response.data.data.id);
     localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
@@ -44,6 +42,20 @@ export const KakaoLogin = async (url) => {
     return Promise.resolve(response.data);
   } catch (error) {
     throw error;
+  }
+};
+
+// Patch : 이름/프로필 이미지 변경
+export const PatchUserInfo = async (nickname, profile) => {
+  try {
+    const response = await http.patch(`/accounts/kakao/edit/`, {
+      nickname: nickname,
+      profile: profile,
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("이름/프로필 이미지 변경 실패", error.response);
   }
 };
 
@@ -55,24 +67,42 @@ export const Logout = () => {
   window.location.replace("/auth/login");
 };
 
-// POST : 회원가입
-export const PostSignup = async (
-  user_id,
-  password,
-  username,
-  profile,
-  navigate
-) => {
+// GET : 아이디 중복 확인
+export const GetDuplicate = async (user) => {
   try {
-    const response = await http.post("/accounts/signup/", {
-      username: user_id,
-      password: password,
-      nickname: username,
-      profile: profile,
+    const response = await http.get(`/accounts/duplicate/`, {
+      params: {
+        username: user,
+      },
     });
+
+    console.log(response);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    console.error("아이디 중복 확인 실패", error.response);
+  }
+};
+
+// POST : 회원가입
+export const PostSignup = async (user_id, password, username, profile) => {
+  try {
+    const formData = new FormData();
+    formData.append("username", user_id);
+    formData.append("password", password);
+    formData.append("nickname", username);
+    formData.append("profile", profile);
+
+    console.log(formData);
+
+    const response = await http.post("/accounts/signup/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
     console.log(response.data);
     alert("가입이 완료되었습니다.");
-    navigate("/auth/login");
+    window.location.replace("/auth/login");
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {

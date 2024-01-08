@@ -34,7 +34,7 @@ const MapCommendPage = () => {
       <TopBar navBtnOn={true} where={previousUrl} titleText="recommend" />
       <Wrapper>
         <Title>
-          <span>여기 안가면 평생 후회할 것입니다.</span>
+          <span>{reactData.map_name}</span>
           <span>에 대한 반응</span>
         </Title>
         <Line2 />
@@ -80,7 +80,7 @@ const Title = styled.div`
 
   span:nth-child(1) {
     display: -webkit-box;
-    width: 144px;
+    max-width: 144px;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;

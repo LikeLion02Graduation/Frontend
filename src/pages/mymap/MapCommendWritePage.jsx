@@ -35,7 +35,7 @@ const MapCommendWritePage = () => {
     };
 
     getData();
-  });
+  }, [recomId]);
 
   //반응 남기기 함수
   const saveInputValue = () => {
@@ -85,7 +85,7 @@ const MapCommendWritePage = () => {
         <NextBtnWhite addClickHandler={saveInputValue} text={"반응 남기기 완료 !"} number={"96px"} />
       </Wrapper>
 
-      {savedEmoji && <CommendModal onClose={closeModal} />}
+      {savedEmoji !== null && <CommendModal onClose={closeModal} />}
     </>
   );
 };

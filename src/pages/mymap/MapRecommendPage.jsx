@@ -42,7 +42,7 @@ const MapRecommendPage = () => {
             <WTagContainer mapId={mapId} recomId={recomId} />
           </Col>
           <Col>
-            <MapProfile src={recommendData.img} />
+            <MapProfile src={recommendData.mapimg} />
             <SubTitle>{recommendData.mapname}</SubTitle>
           </Col>
         </TitleContainer>
