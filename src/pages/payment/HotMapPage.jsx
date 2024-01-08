@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
@@ -8,132 +8,41 @@ import HotMapBox from "../../components/payment/HotMapBox";
 
 import goback from "../../assets/images/go-back.svg";
 import gofront from "../../assets/images/go-front.svg";
-import monkey_1 from "../../assets/images/monkey-1.png"; //임시이미지
+import { GetHotMapList } from "../../api/recom";
 
 const HotMapPage = () => {
   const { location } = useParams();
-
+  const [page, setPage] = useState(1);
+  const [hotMapData, setHotMapData] = useState([]);
   const [BackBtnActive, setBackBtnActive] = useState(true);
   const [FrontBtnActive, setFrontBtnActive] = useState(false);
+
+  const itemsPerPage = 6;
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await GetHotMapList(location);
+      setHotMapData(data);
+    };
+
+    getData();
+  }, []);
 
   const handleBackBtnClick = () => {
     setBackBtnActive(true);
     setFrontBtnActive(false);
+    setPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
   const handleFrontBtnClick = () => {
     setFrontBtnActive(true);
     setBackBtnActive(false);
+    setPage((prevPage) => prevPage + 1);
   };
 
-  // 임시 목데이터
-  const HotMapData = [
-    {
-      id: 1,
-      img: monkey_1,
-      user: {
-        nickname: "허파게티",
-      },
-      name: "부산맛집추천받음",
-      recom_num: 20,
-      hashtag: [
-        {
-          tagname: "카페",
-        },
-        {
-          tagname: "비건",
-        },
-      ],
-    },
-    {
-      id: 2,
-      img: monkey_1,
-      user: {
-        nickname: "허파게티",
-      },
-      name: "부산에 가자2",
-      recom_num: 20,
-      hashtag: [
-        {
-          tagname: "카페",
-        },
-        {
-          tagname: "맛집",
-        },
-        {
-          tagname: "자연",
-        },
-      ],
-    },
-    {
-      id: 3,
-      img: monkey_1,
-      user: {
-        nickname: "허파게티",
-      },
-      name: "힐링하러 갑니다 부산에서의 행복...",
-      recom_num: 20,
-      hashtag: [
-        {
-          tagname: "카페",
-        },
-        {
-          tagname: "비건",
-        },
-      ],
-    },
-    {
-      id: 4,
-      img: monkey_1,
-      user: {
-        nickname: "허파게티",
-      },
-      name: "빵순이 부산에 가다",
-      recom_num: 20,
-      hashtag: [
-        {
-          tagname: "카페",
-        },
-        {
-          tagname: "비건",
-        },
-      ],
-    },
-    {
-      id: 5,
-      img: monkey_1,
-      user: {
-        nickname: "허파게티",
-      },
-      name: "빵순이 부산에 가다",
-      recom_num: 20,
-      hashtag: [
-        {
-          tagname: "명소",
-        },
-        {
-          tagname: "빵",
-        },
-      ],
-    },
-    {
-      id: 6,
-      img: monkey_1,
-      user: {
-        nickname: "허파게티",
-      },
-      name: "빵순이 부산에 가다",
-      recom_num: 20,
-      hashtag: [
-        {
-          tagname: "카페",
-        },
-        {
-          tagname: "브런치",
-        },
-      ],
-    },
-  ];
+  const nowHotMapData = hotMapData
+    ? hotMapData.slice((page - 1) * itemsPerPage, page * itemsPerPage)
+    : [];
 
   return (
     <>
@@ -152,7 +61,7 @@ const HotMapPage = () => {
             <img src={gofront} />
           </FrontBtn>
         </Filters>
-        <HotMapBox children={HotMapData} location={location} />
+        <HotMapBox children={nowHotMapData} location={location} />
       </Wrapper>
     </>
   );
@@ -171,7 +80,7 @@ const WhiteBox = styled.div`
   span {
     color: var(--Black2);
     text-align: center;
-    font-family: "Apple SD Gothic Neo";
+    font-family: Apple SD Gothic Neo;
     font-size: 14px;
     font-weight: 600;
     line-height: 145%; /* 20.3px */
@@ -187,7 +96,7 @@ const Filters = styled.div`
   width: 100%;
   color: var(--black2);
   text-align: center;
-  font-family: "Apple SD Gothic Neo";
+  font-family: Apple SD Gothic Neo;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -215,7 +124,6 @@ const FrontBtn = styled(FilterStyle)`
   border: 1.5px solid var(--black2);
   border-left: none;
   border-right: none;
-
   display: flex;
   justify-content: flex-start;
   align-items: center;
