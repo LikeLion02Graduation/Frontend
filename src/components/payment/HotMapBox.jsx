@@ -96,25 +96,21 @@ const Content = styled.div`
 `;
 const User = styled.div`
   color: var(--black2);
-  font-family: "Apple SD Gothic Neo";
+  font-family: Apple SD Gothic Neo;
   font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
   line-height: 145%;
   letter-spacing: 1.4px;
 `;
 const MapName = styled.div`
   color: var(--black2);
-  font-family: "Apple SD Gothic Neo";
+  font-family: Apple SD Gothic Neo;
   font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 3px; /* 21.429% */
+  line-height: 3px;
   letter-spacing: 1.4px;
 `;
 const RecomNum = styled.div`
   color: var(--black2);
-  font-family: "Apple SD Gothic Neo";
+  font-family: Apple SD Gothic Neo;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

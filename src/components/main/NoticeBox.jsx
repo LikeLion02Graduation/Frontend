@@ -138,7 +138,7 @@ const Content = styled.div`
 `;
 const User = styled.div`
   color: var(--black2);
-  font-family: "Apple SD Gothic Neo";
+  font-family: "Pretendard-Regular";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -147,7 +147,7 @@ const User = styled.div`
 `;
 const MapName = styled.div`
   color: var(--black2);
-  font-family: "Apple SD Gothic Neo";
+  font-family: "Pretendard-Regular";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

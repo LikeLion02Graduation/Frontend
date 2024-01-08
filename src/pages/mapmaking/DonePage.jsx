@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setDescription, initMapmaking } from "../../redux/mapmakingSlice";
-import { persistor } from "../../index";
 import { PostMapData } from "../../api/map";
 
 import TopBar from "../../components/_common/TopBar";
@@ -126,7 +125,7 @@ const StyledImg = styled.img`
 
 const MapName = styled.div`
   color: var(--black2);
-  font-family: "Apple SD Gothic Neo";
+  font-family: Apple SD Gothic Neo;
   font-size: 14.253px;
   font-style: normal;
   font-weight: 600;
@@ -160,7 +159,7 @@ const ThemeBox = styled.div`
 const HashTag = styled.div`
   color: var(--black2);
   text-align: center;
-  font-family: "Apple SD Gothic Neo";
+  font-family: Apple SD Gothic Neo;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

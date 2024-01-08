@@ -31,7 +31,11 @@ const ThemePage = () => {
       <TopBar navBtnOn={true} titleText="Making" />
       <Wrapper>
         <WhiteBox text="Q. 당신의 지도는 어떤 테마인가요?(최대 5개!!)" />
-        <KeywordGrid {...{ selectedKeywords, setSelectedKeywords }} addReducer={addTheme} deleteReducer={deleteTheme} />
+        <KeywordGrid
+          {...{ selectedKeywords, setSelectedKeywords }}
+          addReducer={addTheme}
+          deleteReducer={deleteTheme}
+        />
         <FeedBackBtn {...{ isModalOpen, setIsModalOpen }} />
         <BoxB onClick={handleNextBtn}>Next</BoxB>
       </Wrapper>
