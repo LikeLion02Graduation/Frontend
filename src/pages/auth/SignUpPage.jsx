@@ -8,6 +8,7 @@ import { setSignUp } from "../../redux/signupSlice";
 //components
 import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
+import { GetDuplicate } from "../../api/user";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -20,8 +21,19 @@ const SignUpPage = () => {
     confirmPassword: "",
   });
 
+  const [isDuplicate, setIsDuplicate] = useState(false);
+
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const handleDuplicate = async () => {
+    if (formData.userid.trim() === "") {
+      alert("아이디를 입력해주세요.");
+    } else {
+      const response = await GetDuplicate(formData.userid);
+      setIsDuplicate(response);
+    }
   };
 
   //아이디/비밀번호 조건 검사 후 페이지 이동 함수
@@ -53,10 +65,12 @@ const SignUpPage = () => {
               name="userid"
               value={formData.userid}
               onChange={handleInputChange}
-              autocomplete="off"
+              autoComplete="off"
               style={{ width: window.innerWidth <= 393 ? "calc(100vw - 112px)" : "281px" }}
             />
-            <div>중복확인</div>
+            <div style={{ cursor: "pointer" }} onClick={handleDuplicate}>
+              중복확인
+            </div>
           </div>
         </Container>
         <Container style={{ marginTop: "73px" }}>
@@ -150,6 +164,7 @@ const Container = styled.div`
       width: 112px;
       border: none;
       border-left: 1.5px solid var(--black1);
+      border-right: 1.5px solid var(--black1);
 
       color: var(--black1);
       font-weight: 700;

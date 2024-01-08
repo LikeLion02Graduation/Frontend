@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
@@ -8,32 +7,18 @@ import { useSelector } from "react-redux";
 import { PostSignup } from "../../api/user";
 
 const ProfileUpload = () => {
-  const navigate = useNavigate();
-
   const signupInfo = useSelector((state) => state.signup);
 
   //프로필 사진 설정
+  const [imgURL, setImgURL] = useState("");
   const [selectedImg, setSelectedImg] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
 
-  const handleImgChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedImg(file);
-    setImgUrl(URL.createObjectURL(file));
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setSelectedImg(imageFile);
+    setImgURL(URL.createObjectURL(imageFile));
+    console.log("Selected Image content:", imageFile);
   };
-
-  const handleUpload = () => {
-    if (!selectedImg) {
-      console.log("No image selected");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("image", selectedImg);
-
-    handleImgChange(formData);
-  };
-
   //닉네임 설정
   const [username, setUsername] = useState("");
 
@@ -42,17 +27,22 @@ const ProfileUpload = () => {
     if (username.trim() === "") {
       alert("닉네임을 입력해주세요.");
     } else {
-      PostSignup(signupInfo.user_id, signupInfo.password, username, imgUrl, navigate);
+      PostSignup(signupInfo.user_id, signupInfo.password, username, selectedImg);
     }
   };
 
   return (
     <>
-      {imgUrl ? (
-        <ProfileImg src={imgUrl} alt="Preview" />
+      {imgURL ? (
+        <ProfileImg src={imgURL} alt="Preview" />
       ) : (
         <Profile>
-          <input type="file" onChange={handleImgChange} onClick={handleUpload} style={{ display: "none" }} />
+          <input
+            type="file"
+            accept="image/jpg, image/jpeg, image/png"
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+          />
           <div>
             클릭해서 <br />
             프로필 사진 수정
@@ -66,7 +56,7 @@ const ProfileUpload = () => {
           placeholder="닉네임 입력"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          autocomplete="off"
+          autoComplete="off"
         />
       </Container>
       <LongBtn onClick={signup}>가입 완료</LongBtn>

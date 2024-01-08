@@ -1,13 +1,11 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "http://nae-chin-man.link",
 });
 
 http.defaults.withCredentials = true;
 
 const token = localStorage.getItem("token") ?? false;
 
-http.defaults.headers.common["Authorization"] = token
-  ? `Bearer ${token}`
-  : null;
+http.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : null;
