@@ -9,7 +9,7 @@ import CommendModal from "../../components/mymap/CommendModal";
 import EmojiContainer from "../../components/mymap/EmojiContainer";
 
 //api
-import { GetRecomReact, PatchRecomReact, PostRecomReact } from "../../api/map";
+import { GetRecomReact, PatchRecomReact, PostRecomReact } from "../../api/recom";
 
 const MapCommendWritePage = () => {
   const { recomId } = useParams();

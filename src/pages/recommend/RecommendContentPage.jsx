@@ -15,7 +15,7 @@ import triangle from "../../assets/images/triangle.svg";
 import KeywordBox from "../../components/_common/KeywordBox";
 
 //api
-import { PostRecom } from "../../api/map";
+import { PostRecom } from "../../api/recom";
 
 const RecommendContentPage = () => {
   const { mapId } = useParams();

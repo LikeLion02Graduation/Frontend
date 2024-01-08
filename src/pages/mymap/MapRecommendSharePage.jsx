@@ -12,7 +12,7 @@ import triangle from "../../assets/images/triangle.svg";
 import { RecommendTitleText } from "../../components/mymap/MapTitleText";
 
 //api
-import { GetRecomMain } from "../../api/map";
+import { GetRecomMain } from "../../api/recom";
 
 const MapRecommendSharePage = () => {
   const { mapId, recomId } = useParams();

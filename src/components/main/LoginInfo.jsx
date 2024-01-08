@@ -10,24 +10,17 @@ import { DeleteAccount } from "../../api/user";
 const LoginInfo = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [nickname, setNickname] = useState("");
-  const [loading, setLoading] = useState(true);
   const [loginData, setLoginData] = useState({});
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        setLoading(true);
-        const response = await GetLoginInfo();
-        setLoginData(response.data);
-        setNickname(response.data.nickname);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
+      const response = await GetLoginInfo();
+      setLoginData(response.data);
+      setNickname(response.data.nickname);
     };
 
     getData();
-  }, []);
+  }, [isEdit]);
 
   const handleEditClick = async () => {
     if (isEdit) {
@@ -51,7 +44,7 @@ const LoginInfo = () => {
 
   return (
     <Wrapper>
-      <Profile>{loginData.profile}</Profile>
+      {loginData.profile && <Profile src={loginData.profile} alt="profile" />}
       <Container>
         <Box>
           <Title>
@@ -80,11 +73,7 @@ const LoginInfo = () => {
             <TextBox>
               <div className="left">
                 {isEdit ? (
-                  <input
-                    value={nickname}
-                    onChange={handleNicknameChange}
-                    placeholder=""
-                  />
+                  <input value={nickname} onChange={handleNicknameChange} placeholder="" />
                 ) : (
                   <div>{loginData.nickname}</div>
                 )}
@@ -127,7 +116,7 @@ const Wrapper = styled.div`
   background: var(--white);
 `;
 
-const Profile = styled.div`
+const Profile = styled.img`
   margin-top: 42px;
   display: flex;
   align-items: center;
@@ -137,7 +126,6 @@ const Profile = styled.div`
   flex-shrink: 0;
   border-radius: 50%;
   border: 1px solid var(--black1);
-  background: var(--gray);
 `;
 
 const Container = styled.div`

@@ -5,24 +5,17 @@ import { useNavigate } from "react-router";
 import sort from "../../assets/images/sort.svg";
 import { GetOthersMapList } from "../../api/map";
 
-const HomeOthersContent = ({ children }) => {
+const HomeOthersContent = () => {
   const navigate = useNavigate();
   const [showSortBox, setShowSortBox] = useState(false);
   const [sortType, setSortType] = useState("Earliest");
   const [mapList, setMapList] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        setLoading(true);
-        const order = sortType === "Earliest" ? "최신순" : "오래된순";
-        const response = await GetOthersMapList(order);
-        setMapList(response.data);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
+      const order = sortType === "Earliest" ? "최신순" : "오래된순";
+      const response = await GetOthersMapList(order);
+      setMapList(response.data);
     };
     getData();
   }, [sortType]);
@@ -49,12 +42,8 @@ const HomeOthersContent = ({ children }) => {
           <img src={sort} alt="sort" />
           {showSortBox && (
             <SortOptions>
-              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>
-                Earliest
-              </SortOption>
-              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>
-                Oldest
-              </SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>Earliest</SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>Oldest</SortOption>
             </SortOptions>
           )}
         </Sort>
@@ -142,6 +131,7 @@ const SortOption = styled.div`
 `;
 
 const BoxGrid = styled.div`
+  margin-bottom: 50px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 21.21px;

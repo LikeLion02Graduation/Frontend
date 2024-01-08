@@ -40,9 +40,7 @@ const HotMapPage = () => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const nowHotMapData = hotMapData
-    ? hotMapData.slice((page - 1) * itemsPerPage, page * itemsPerPage)
-    : [];
+  const nowHotMapData = hotMapData ? hotMapData.slice((page - 1) * itemsPerPage, page * itemsPerPage) : [];
 
   return (
     <>
@@ -53,12 +51,12 @@ const HotMapPage = () => {
         </WhiteBox>
         <Filters>
           <BackBtn onClick={handleBackBtnClick} $active={BackBtnActive}>
-            <img src={goback} />
+            <img src={goback} alt="goback" />
             <p>이전 거 볼래요</p>
           </BackBtn>
           <FrontBtn onClick={handleFrontBtnClick} $active={FrontBtnActive}>
             <p>다른 거 볼래요</p>
-            <img src={gofront} />
+            <img src={gofront} alt="gofront" />
           </FrontBtn>
         </Filters>
         <HotMapBox children={nowHotMapData} location={location} />

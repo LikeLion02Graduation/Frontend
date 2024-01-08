@@ -36,7 +36,7 @@ const HotMapBox = ({ children, location }) => {
                   {item.recom_num}
                   {")"}
                 </RecomNum>
-                <img src={gofront} style={{ width: "15px", height: "15px" }} />
+                <img src={gofront} alt="gofront" style={{ width: "15px", height: "15px" }} />
               </div>
               <Theme>
                 {item.hashtag.map((tag, index) => (
