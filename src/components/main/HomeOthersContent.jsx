@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router";
 import sort from "../../assets/images/sort.svg";
+import { GetOthersMapList } from "../../api/map";
 
 const HomeOthersContent = ({ children }) => {
   const navigate = useNavigate();
   const [showSortBox, setShowSortBox] = useState(false);
   const [sortType, setSortType] = useState("Earliest");
+  const [mapList, setMapList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const order = sortType === "Earliest" ? "최신순" : "오래된순";
+        const response = await GetOthersMapList(order);
+        setMapList(response.data);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+    getData();
+  }, [sortType]);
+
+  useEffect(() => {
+    console.log("mapList 데이터: ", mapList);
+  }, [mapList]);
 
   const handleSortClick = () => {
     setShowSortBox(!showSortBox);
@@ -21,7 +43,7 @@ const HomeOthersContent = ({ children }) => {
   return (
     <>
       <TotalSort>
-        <Total>Total {children.length}</Total>
+        <Total>Total {mapList.length}</Total>
         <Sort onClick={handleSortClick} $active={showSortBox}>
           <p>{sortType}</p>
           <img src={sort} alt="sort" />
@@ -34,7 +56,7 @@ const HomeOthersContent = ({ children }) => {
         </Sort>
       </TotalSort>
       <BoxGrid>
-        {children.map((box) => (
+        {mapList.map((box) => (
           <Box key={box.id} onClick={() => navigate(`/map/${box.id}`)}>
             <Img>
               <img src={box.img} alt={box.name} />

@@ -3,12 +3,13 @@ import styled from "styled-components";
 
 //api
 import { GetLoginInfo } from "../../api/user";
+import { PatchNickname } from "../../api/user";
 import { Logout } from "../../api/user";
 import { DeleteAccount } from "../../api/user";
 
 const LoginInfo = () => {
   const [isEdit, setIsEdit] = useState(false);
-  const [nickname, setNickname] = useState("이시은입니다람쥐");
+  const [nickname, setNickname] = useState("");
   const [loading, setLoading] = useState(true);
   const [loginData, setLoginData] = useState({});
 
@@ -18,6 +19,7 @@ const LoginInfo = () => {
         setLoading(true);
         const response = await GetLoginInfo();
         setLoginData(response.data);
+        setNickname(response.data.nickname);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -27,7 +29,19 @@ const LoginInfo = () => {
     getData();
   }, []);
 
-  const handleEditClick = () => {
+  const handleEditClick = async () => {
+    if (isEdit) {
+      try {
+        const updatedData = await PatchNickname(nickname);
+        setLoginData((prevData) => ({
+          ...prevData,
+          nickname: updatedData.nickname,
+        }));
+        setNickname(updatedData.nickname);
+      } catch (error) {
+        console.error("닉네임 수정에 실패했습니다.", error);
+      }
+    }
     setIsEdit(!isEdit);
   };
 
@@ -67,8 +81,9 @@ const LoginInfo = () => {
               <div className="left">
                 {isEdit ? (
                   <input
-                    value={loginData.nickname}
+                    value={nickname}
                     onChange={handleNicknameChange}
+                    placeholder=""
                   />
                 ) : (
                   <div>{loginData.nickname}</div>

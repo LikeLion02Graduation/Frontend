@@ -156,3 +156,16 @@ export const GetLoginInfo = async () => {
     console.error("로그인 정보 get 실패", error.response);
   }
 };
+
+// PATCH : 마이페이지 닉네임 수정
+export const PatchNickname = async (nickname) => {
+  try {
+    const response = await http.patch(`/accounts/kakao/edit/`, {
+      nickname,
+    });
+    console.log("응답 결과: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("닉네임 수정 실패", error.response);
+  }
+};

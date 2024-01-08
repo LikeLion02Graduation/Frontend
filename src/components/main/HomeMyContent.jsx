@@ -10,7 +10,6 @@ const HomeMyContent = () => {
   const [showSortBox, setShowSortBox] = useState(false);
   const [sortType, setSortType] = useState("Earliest");
   const [mapList, setMapList] = useState([]);
-  const [mapCount, setMapCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -20,7 +19,6 @@ const HomeMyContent = () => {
         const order = sortType === "Earliest" ? "최신순" : "오래된순";
         const response = await GetMyMapList(order);
         setMapList(response.data);
-        //setMapCount(data.count);
       } catch (error) {
         console.error(error);
         setLoading(false);
@@ -45,7 +43,7 @@ const HomeMyContent = () => {
   return (
     <>
       <TotalSort>
-        <Total>Total {mapList.count}</Total>
+        <Total>Total {mapList.length}</Total>
         <Sort onClick={handleSortClick} $active={showSortBox}>
           <p>{sortType}</p>
           <img src={sort} alt="sort" />
@@ -59,15 +57,12 @@ const HomeMyContent = () => {
       </TotalSort>
       <BoxGrid>
         {mapList &&
-          mapList.map((map) => (
-            <Box key={map.id} onClick={() => navigate(`/map/${map.id}`)}>
-              {map.img && (
-                <ImgBox>
-                  <Img src={map.img} alt={map.name} />
-                </ImgBox>
-              )}
-              <Name>{map.name}</Name>
-              <Time>{map.created_at} up</Time>
+          mapList.map((box) => (
+            <Box key={box.id} onClick={() => navigate(`/map/${box.id}`)}>
+              <ImgBox>{box.img && <Img src={box.img} alt={box.name} />}</ImgBox>
+
+              <Name>{box.name}</Name>
+              <Time>{box.created_at} up</Time>
             </Box>
           ))}
       </BoxGrid>
@@ -164,7 +159,6 @@ const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: ${(props) => (props.src ? "block" : "none")};
 `;
 
 const Name = styled.div`

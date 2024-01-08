@@ -35,22 +35,17 @@ const PlaceFilter = ({ onPlaceSelect }) => {
     setDoFilterActive(true);
     setMetroFilterActive(false);
     setSelectedBtn(null);
-    //setSiLoc(null);
-    //setSelectedDo(null);
   };
 
   const handleBtnClick = (location) => {
     if (selectedBtn === location) {
       console.log("선택 취소: ", location);
       setSelectedBtn(null);
-      //setSiLoc(null);
-      //setSelectedDo(null);
       onPlaceSelect(null);
     } else {
       console.log("새로운 선택: ", location);
       setSelectedBtn(location);
-      //getSiLoc(location);
-      //setSelectedDo(siLoc[location]);
+
       if (!siLoc) {
         onPlaceSelect(location);
       }
@@ -154,10 +149,10 @@ const Filters = styled.div`
   width: 100%;
   color: var(--black2);
   text-align: center;
-  font-family: "Apple SD Gothic Neo";
-  font-size: 14px;
+  font-family: Apple SD Gothic Neo;
   font-style: normal;
   font-weight: 500;
+  font-size: 14px;
   line-height: 145%;
   letter-spacing: 1.4px;
 `;
@@ -198,6 +193,14 @@ const Contents = styled.div`
     height: 55px;
     border: 1.5px solid var(--black2);
     background: none;
+    color: var(--black3);
+    font-family: Apple SD Gothic Neo;
+    text-align: center;
+    font-size: 14.961px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 145%; /* 21.694px */
+    letter-spacing: 1.496px;
     cursor: pointer;
   }
 `;

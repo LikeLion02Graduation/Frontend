@@ -47,7 +47,7 @@ const GrayBox = styled.div`
 
   color: var(--black3);
   text-align: center;
-  font-family: "Apple SD Gothic Neo";
+  font-family: Apple SD Gothic Neo;
   font-size: 14px;
   font-weight: 600;
   line-height: 145%;
