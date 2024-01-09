@@ -10,19 +10,12 @@ import { DeleteNotice } from "../../api/recom";
 
 const NoticeBox = () => {
   const [noticeList, setNoticeList] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   // 알림 조회
   useEffect(() => {
     const getData = async () => {
-      try {
-        setLoading(true);
-        const response = await GetNoticeList();
-        setNoticeList(response.data);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
+      const response = await GetNoticeList();
+      setNoticeList(response.data);
     };
     getData();
   }, []);
@@ -59,22 +52,17 @@ const NoticeBox = () => {
                     }}
                   >
                     <MapName>
-                      {item.type === "추천"
-                        ? `${item.map.name}에 추천을 남겼어요`
-                        : "남겨주신 추천에 반응을 남겼어요"}
+                      {item.type === "추천" ? `${item.map.name}에 추천을 남겼어요` : "남겨주신 추천에 반응을 남겼어요"}
                     </MapName>
-                    <img
-                      src={gofront}
-                      style={{ width: "15px", height: "15px" }}
-                    />
+                    <img src={gofront} alt="gofront" style={{ width: "15px", height: "15px" }} />
                   </div>
                   <Time>{item.created_at}</Time>
                 </Content>
               </Box2>
               <DeleteBtnContainer>
                 <DeleteBtn onClick={() => handleDeleteClick(item.alert_id)}>
-                  <img src={xbtn1} />
-                  <img src={xbtn2} />
+                  <img src={xbtn1} alt="x btn" />
+                  <img src={xbtn2} alt="x btn" />
                 </DeleteBtn>
               </DeleteBtnContainer>
             </Box>
