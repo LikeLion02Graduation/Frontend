@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: "http://nae-chin-man.link",
+  baseURL: "https://api.nae-chin-man.link",
 });
 
 http.defaults.withCredentials = true;
