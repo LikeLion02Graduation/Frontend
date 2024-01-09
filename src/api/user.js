@@ -30,16 +30,15 @@ export const PostLogin = async (user_id, password, navigate) => {
 };
 
 // 카카오 로그인
-export const KAKAO_AUTH_URL = `${process.env.REACT_APP_API_URL}/accounts/kakao`;
-
-export const KakaoLogin = async (url) => {
+export const KakaoLogin = async (code) => {
   try {
-    const response = await http.get(url);
+    const response = await http.get(`/accounts/kakao/callback/?code=${code}`);
     localStorage.setItem("userId", response.data.data.id);
     localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
 
-    return Promise.resolve(response.data);
+    console.log(response.data.data);
+    return Promise.resolve(response.data.data);
   } catch (error) {
     throw error;
   }
@@ -63,6 +62,7 @@ export const PatchUserInfo = async (nickname, profile) => {
 export const Logout = () => {
   persistor.purge();
   window.localStorage.removeItem("userId");
+  window.localStorage.removeItem("nickname");
   window.localStorage.removeItem("token");
   window.location.replace("/auth/login");
 };
@@ -71,9 +71,7 @@ export const Logout = () => {
 export const GetDuplicate = async (user) => {
   try {
     const response = await http.get(`/accounts/duplicate/`, {
-      params: {
-        username: user,
-      },
+      username: user,
     });
 
     console.log(response);
@@ -139,8 +137,7 @@ export const DeleteAccount = async () => {
   try {
     const response = await http.delete(`/accounts/del/`);
     console.log("message: ", response);
-    window.localStorage.removeItem("token");
-    window.location.replace("/auth/login");
+    Logout();
   } catch (error) {
     console.error("회원 탈퇴 실패", error.response);
   }
@@ -167,5 +164,37 @@ export const PatchNickname = async (nickname) => {
     return response.data;
   } catch (error) {
     console.error("닉네임 수정 실패", error.response);
+  }
+};
+
+// PATCH : 소셜로그인 프로필 수정
+export const PatchSocialProfile = async (nickname, profile, token) => {
+  try {
+    const headers = {
+      Authorization: token ? `Bearer ${token}` : null,
+    };
+
+    // const formData = new FormData();
+    // formData.append("nickname", nickname);
+    // formData.append("profile", profile);
+
+    // const response = await http.patch(`/accounts/kakao/edit/`, formData, { headers });
+
+    const response = await http.patch(
+      `/accounts/kakao/edit/`,
+      {
+        nickname: nickname,
+        profile: profile,
+      },
+      { headers }
+    );
+
+    localStorage.setItem("nickname", response.data.data.nickname);
+
+    console.log(response);
+    window.location.replace("/");
+    return response.data;
+  } catch (error) {
+    console.error("소셜 로그인 프로필 수정 실패", error.response);
   }
 };
