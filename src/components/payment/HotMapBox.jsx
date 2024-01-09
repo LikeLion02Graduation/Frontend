@@ -1,12 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
+import { GetHotMapList } from "../../api/recom";
 
 import gofront from "../../assets/images/go-front.svg";
 
-const HotMapBox = ({ children, location }) => {
+const HotMapBox = ({ location, page }) => {
   const navigate = useNavigate();
+  const [hotMapData, setHotMapData] = useState([]);
+  const [nowHotMapData, setNowHotMapData] = useState([]);
+
+  const itemsPerPage = 6;
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await GetHotMapList(location);
+      if (response && Array.isArray(response.data.data)) {
+        setHotMapData(response.data.data);
+      } else {
+        console.error("Data is not an array: ", response);
+      }
+    };
+
+    getData();
+  }, [location]);
+
+  useEffect(() => {
+    const updatedNowHotMapData = hotMapData.slice(
+      (page - 1) * itemsPerPage,
+      page * itemsPerPage
+    );
+    setNowHotMapData(updatedNowHotMapData);
+  }, [hotMapData, page, itemsPerPage]);
+  console.log("nowHotMapData: ", nowHotMapData);
 
   const handleClickBox = (item) => {
     navigate(`/payment/${location}/${item.id}`);
@@ -14,7 +41,7 @@ const HotMapBox = ({ children, location }) => {
 
   return (
     <BoxContainer>
-      {children.map((item) => (
+      {nowHotMapData.map((item) => (
         <Box key={item.id}>
           <Box2 onClick={() => handleClickBox(item)}>
             <MapImg src={item.img} alt={item.name} />
@@ -36,7 +63,11 @@ const HotMapBox = ({ children, location }) => {
                   {item.recom_num}
                   {")"}
                 </RecomNum>
-                <img src={gofront} alt="gofront" style={{ width: "15px", height: "15px" }} />
+                <img
+                  src={gofront}
+                  alt="gofront"
+                  style={{ width: "15px", height: "15px" }}
+                />
               </div>
               <Theme>
                 {item.hashtag.map((tag, index) => (

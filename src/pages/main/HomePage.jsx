@@ -34,14 +34,22 @@ const HomePage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={false} myPageBtnOn={true} newMapBtnOn={true} titleText="Main" />
+      <TopBar
+        navBtnOn={false}
+        myPageBtnOn={true}
+        newMapBtnOn={true}
+        titleText="Main"
+      />
       <Wrapper>
         <Filters>
           <MyFilter onClick={handleMyFilterClick} $active={myFilterActive}>
             <span>MY</span>
           </MyFilter>
           {/*결제 정보에 따라 텍스트 다르게*/}
-          <OthersFilter onClick={handleOthersFilterClick} $active={buyingFilterActive || othersFilterActive}>
+          <OthersFilter
+            onClick={handleOthersFilterClick}
+            $active={buyingFilterActive || othersFilterActive}
+          >
             <span>{paymentInfo ? "Others" : "Buying"}</span>
           </OthersFilter>
         </Filters>

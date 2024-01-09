@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router";
 import sort from "../../assets/images/sort.svg";
 import { GetMyMapList } from "../../api/map";
+import basicMap from "../../assets/images/basic-map.svg";
 
 const HomeMyContent = () => {
   const navigate = useNavigate();
@@ -42,8 +43,12 @@ const HomeMyContent = () => {
           <img src={sort} alt="sort" />
           {showSortBox && (
             <SortOptions>
-              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>Earliest</SortOption>
-              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>Oldest</SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>
+                Earliest
+              </SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>
+                Oldest
+              </SortOption>
             </SortOptions>
           )}
         </Sort>
@@ -52,8 +57,17 @@ const HomeMyContent = () => {
         {mapList &&
           mapList.map((box) => (
             <Box key={box.id} onClick={() => navigate(`/map/${box.id}`)}>
-              <ImgBox>{box.img && <Img src={box.img} alt={box.name} />}</ImgBox>
-
+              <ImgBox
+                style={{
+                  backgroundColor: box.img ? "transparent" : "var(--black1)",
+                }}
+              >
+                {box.img ? (
+                  <Img src={box.img} alt={box.name} />
+                ) : (
+                  <Img src={basicMap} alt="basic map" />
+                )}
+              </ImgBox>
               <Name>{box.name}</Name>
               <Time>{box.created_at} up</Time>
             </Box>
@@ -151,7 +165,7 @@ const ImgBox = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  //object-fit: cover;
 `;
 
 const Name = styled.div`

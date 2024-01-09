@@ -14,7 +14,15 @@ export const GetRecomMain = async (id) => {
 };
 
 // POST : 추천 작성하기
-export const PostRecom = async (mapId, mapTitle, mapContent, userId, mapPlace, mapHashtag, navigate) => {
+export const PostRecom = async (
+  mapId,
+  mapTitle,
+  mapContent,
+  userId,
+  mapPlace,
+  mapHashtag,
+  navigate
+) => {
   try {
     const response = await http.post("/recom/", {
       map_id: mapId,
@@ -108,7 +116,9 @@ export const GetHotMapList = async (loc) => {
       key: loc,
     });
     console.log("message: ", response);
+    return Promise.resolve(response);
   } catch (error) {
-    console.error("알림 삭제 실패", error.response);
+    console.error("리스트 반환 실패", error.response);
+    return Promise.reject(error);
   }
 };
