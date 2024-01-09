@@ -8,25 +8,13 @@ import HotMapBox from "../../components/payment/HotMapBox";
 
 import goback from "../../assets/images/go-back.svg";
 import gofront from "../../assets/images/go-front.svg";
-import { GetHotMapList } from "../../api/recom";
+//import { GetHotMapList } from "../../api/recom";
 
 const HotMapPage = () => {
   const { location } = useParams();
   const [page, setPage] = useState(1);
-  const [hotMapData, setHotMapData] = useState([]);
   const [BackBtnActive, setBackBtnActive] = useState(true);
   const [FrontBtnActive, setFrontBtnActive] = useState(false);
-
-  const itemsPerPage = 6;
-
-  useEffect(() => {
-    const getData = async () => {
-      const data = await GetHotMapList(location);
-      setHotMapData(data);
-    };
-
-    getData();
-  }, []);
 
   const handleBackBtnClick = () => {
     setBackBtnActive(true);
@@ -39,8 +27,6 @@ const HotMapPage = () => {
     setBackBtnActive(false);
     setPage((prevPage) => prevPage + 1);
   };
-
-  const nowHotMapData = hotMapData ? hotMapData.slice((page - 1) * itemsPerPage, page * itemsPerPage) : [];
 
   return (
     <>
@@ -59,7 +45,7 @@ const HotMapPage = () => {
             <img src={gofront} alt="gofront" />
           </FrontBtn>
         </Filters>
-        <HotMapBox children={nowHotMapData} location={location} />
+        <HotMapBox location={location} page={page} />
       </Wrapper>
     </>
   );
