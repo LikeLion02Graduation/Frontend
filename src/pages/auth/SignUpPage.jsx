@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
 import { setSignUp } from "../../redux/signupSlice";
 
@@ -21,19 +20,21 @@ const SignUpPage = () => {
     confirmPassword: "",
   });
 
-  const [isDuplicate, setIsDuplicate] = useState(false);
-
-  const handleInputChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
+  const [isDuplicate, setIsDuplicate] = useState(true);
 
   const handleDuplicate = async () => {
     if (formData.userid.trim() === "") {
       alert("아이디를 입력해주세요.");
     } else {
       const response = await GetDuplicate(formData.userid);
-      setIsDuplicate(response);
+      setIsDuplicate(response.duplicate);
     }
+  };
+
+  const handleInputChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+
+    if (event.target.name === "userid") setIsDuplicate(true);
   };
 
   //아이디/비밀번호 조건 검사 후 페이지 이동 함수
@@ -42,6 +43,8 @@ const SignUpPage = () => {
 
     if (formData.userid.trim() === "") {
       alert("아이디를 입력해주세요.");
+    } else if (isDuplicate) {
+      alert("아이디 중복확인을 완료해주세요.");
     } else if (formData.password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
     } else if (formData.password !== formData.confirmPassword) {
@@ -66,9 +69,16 @@ const SignUpPage = () => {
               value={formData.userid}
               onChange={handleInputChange}
               autoComplete="off"
-              style={{ width: window.innerWidth <= 393 ? "calc(100vw - 112px)" : "281px" }}
+              style={{
+                width: window.innerWidth <= 393 ? "calc(100vw - 112px)" : "281px",
+                color: isDuplicate ? "var(--black1)" : "#277DFF",
+                fontWeight: isDuplicate ? "400" : "700",
+              }}
             />
-            <div style={{ cursor: "pointer" }} onClick={handleDuplicate}>
+            <div
+              style={{ cursor: "pointer", color: isDuplicate ? "var(--black1)" : "#277DFF" }}
+              onClick={handleDuplicate}
+            >
               중복확인
             </div>
           </div>
@@ -144,7 +154,6 @@ const Container = styled.div`
       color: var(--black3);
       font-family: "Hack Regular";
       font-size: 14px;
-      font-weight: 400;
       line-height: 145%; /* 20.3px */
       letter-spacing: 1.4px;
 

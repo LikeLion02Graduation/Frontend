@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
 import { initSignUp } from "../../redux/signupSlice";
 
@@ -9,7 +8,8 @@ import { initSignUp } from "../../redux/signupSlice";
 import kakaologo from "../../assets/images/kakao-logo.svg";
 
 //api
-import { PostLogin, KAKAO_AUTH_URL } from "../../api/user";
+import { PostLogin } from "../../api/user";
+import { KAKAO_AUTH_URL } from "../../api/http";
 
 const LoginPage = () => {
   const navigate = useNavigate();
