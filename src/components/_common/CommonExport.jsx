@@ -34,7 +34,6 @@ const NextBtnBlack = ({ addClickHandler, where, text, number }) => {
 
   const handleClick = () => {
     if (where) {
-      console.log("버튼 클릭 시 어디로:", where);
       navigate(where);
     }
 
@@ -55,7 +54,6 @@ const NextBtnWhite = ({ addClickHandler, where, text, number }) => {
 
   const handleClick = () => {
     if (where) {
-      console.log("버튼 클릭 시 어디로:", where);
       navigate(where);
     }
 
@@ -76,7 +74,6 @@ const LongBtnBlack = ({ where, text }) => {
   return (
     <LongBtnB
       onClick={() => {
-        console.log("버튼 클릭 시 어디로:", where);
         navigate(where);
       }}
     >

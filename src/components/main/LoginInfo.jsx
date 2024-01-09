@@ -49,7 +49,7 @@ const LoginInfo = () => {
         <Box>
           <Title>
             <TextBox>
-              <span>사용중인 아이디</span>
+              <span>사용 중인 아이디</span>
               <div />
             </TextBox>
           </Title>
@@ -64,7 +64,7 @@ const LoginInfo = () => {
           <Title>
             <TextBox>
               <span>
-                사용중인 닉네임{`(`}바로 탭해서 수정할 수 있어요~{`)`}
+                사용 중인 닉네임{`(`}바로 탭해서 수정할 수 있어요~{`)`}
               </span>
               <div />
             </TextBox>

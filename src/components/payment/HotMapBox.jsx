@@ -27,13 +27,9 @@ const HotMapBox = ({ location, page }) => {
   }, [location]);
 
   useEffect(() => {
-    const updatedNowHotMapData = hotMapData.slice(
-      (page - 1) * itemsPerPage,
-      page * itemsPerPage
-    );
+    const updatedNowHotMapData = hotMapData.slice((page - 1) * itemsPerPage, page * itemsPerPage);
     setNowHotMapData(updatedNowHotMapData);
   }, [hotMapData, page, itemsPerPage]);
-  console.log("nowHotMapData: ", nowHotMapData);
 
   const handleClickBox = (item) => {
     navigate(`/payment/${location}/${item.id}`);
@@ -63,11 +59,7 @@ const HotMapBox = ({ location, page }) => {
                   {item.recom_num}
                   {")"}
                 </RecomNum>
-                <img
-                  src={gofront}
-                  alt="gofront"
-                  style={{ width: "15px", height: "15px" }}
-                />
+                <img src={gofront} alt="gofront" style={{ width: "15px", height: "15px" }} />
               </div>
               <Theme>
                 {item.hashtag.map((tag, index) => (
