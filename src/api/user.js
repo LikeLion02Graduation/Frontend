@@ -70,11 +70,7 @@ export const Logout = () => {
 // GET : 아이디 중복 확인
 export const GetDuplicate = async (user) => {
   try {
-    const response = await http.get(`/accounts/duplicate/`, {
-      username: user,
-    });
-
-    console.log(response);
+    const response = await http.get(`/accounts/duplicate/?username=${user}`);
     return Promise.resolve(response.data);
   } catch (error) {
     console.error("아이디 중복 확인 실패", error.response);
@@ -91,15 +87,12 @@ export const PostSignup = async (user_id, password, username, profile) => {
     formData.append("nickname", username);
     formData.append("profile", profile);
 
-    console.log(formData);
-
     const response = await http.post("/accounts/signup/", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
 
-    console.log(response.data);
     alert("가입이 완료되었습니다.");
     window.location.replace("/auth/login");
     return Promise.resolve(response.data);
