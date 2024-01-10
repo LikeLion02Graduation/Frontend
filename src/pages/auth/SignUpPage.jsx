@@ -28,6 +28,7 @@ const SignUpPage = () => {
     } else {
       const response = await GetDuplicate(formData.userid);
       setIsDuplicate(response.duplicate);
+      if (response.duplicate) alert("이미 사용 중인 아이디입니다.");
     }
   };
 
