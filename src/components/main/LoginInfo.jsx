@@ -73,7 +73,11 @@ const LoginInfo = () => {
             <TextBox>
               <div className="left">
                 {isEdit ? (
-                  <input value={nickname} onChange={handleNicknameChange} placeholder="" />
+                  <input
+                    value={nickname}
+                    onChange={handleNicknameChange}
+                    placeholder=""
+                  />
                 ) : (
                   <div>{loginData.nickname}</div>
                 )}

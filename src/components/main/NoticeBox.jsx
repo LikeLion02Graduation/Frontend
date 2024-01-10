@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import gofront from "../../assets/images/go-front.svg";
@@ -9,6 +10,7 @@ import { GetNoticeList } from "../../api/recom";
 import { DeleteNotice } from "../../api/recom";
 
 const NoticeBox = () => {
+  const navigate = useNavigate();
   const [noticeList, setNoticeList] = useState([]);
 
   // 알림 조회
@@ -31,6 +33,14 @@ const NoticeBox = () => {
     });
   };
 
+  const handleNoticeClick = (item) => {
+    if (item.type === "추천") {
+      navigate(`/map/${item.map.id}`);
+    } else {
+      navigate(`/map/${item.map.id}/${item.recom_id}/commend`);
+    }
+  };
+
   return (
     <Wrapper>
       {noticeList &&
@@ -39,7 +49,7 @@ const NoticeBox = () => {
             <Box>
               <Box2>
                 <MapImg src={item.user.profile} alt={item.map.name} />
-                <Content>
+                <Content onClick={() => handleNoticeClick(item)}>
                   <User>{item.user.nickname} 님께서</User>
                   <div
                     style={{
@@ -52,9 +62,15 @@ const NoticeBox = () => {
                     }}
                   >
                     <MapName>
-                      {item.type === "추천" ? `${item.map.name}에 추천을 남겼어요` : "남겨주신 추천에 반응을 남겼어요"}
+                      {item.type === "추천"
+                        ? `${item.map.name}에 추천을 남겼어요`
+                        : "남겨주신 추천에 반응을 남겼어요"}
                     </MapName>
-                    <img src={gofront} alt="gofront" style={{ width: "15px", height: "15px" }} />
+                    <img
+                      src={gofront}
+                      alt="gofront"
+                      style={{ width: "15px", height: "15px" }}
+                    />
                   </div>
                   <Time>{item.created_at}</Time>
                 </Content>
@@ -123,6 +139,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  cursor: pointer;
 `;
 const User = styled.div`
   color: var(--black2);
