@@ -44,14 +44,19 @@ const RecommendResultPage = ({ searchText, setSearchText, mapId }) => {
   useEffect(() => {
     if (mapState.selectedPlace) {
       const container = document.getElementById("myMap");
-      const options = {
-        center: new kakao.maps.LatLng(mapState.selectedPlace.y, mapState.selectedPlace.x),
-        level: 3,
-      };
-      const map = new kakao.maps.Map(container, options);
-      const newInfowindow = new kakao.maps.InfoWindow();
+      try {
+        const options = {
+          center: new kakao.maps.LatLng(mapState.selectedPlace.y, mapState.selectedPlace.x),
+          level: 3,
+        };
 
-      displayMarker(mapState.selectedPlace, map, newInfowindow);
+        const map = new kakao.maps.Map(container, options);
+        const newInfowindow = new kakao.maps.InfoWindow();
+
+        displayMarker(mapState.selectedPlace, map, newInfowindow);
+      } catch {
+        alert("카카오 지도를 불러오던 중 오류가 발생했습니다.");
+      }
 
       // return () => {
       //   infowindow.close();

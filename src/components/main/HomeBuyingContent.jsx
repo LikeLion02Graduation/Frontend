@@ -82,9 +82,6 @@ const HomeBuyingContent = () => {
               </Box>
             ))}
           </BoxGrid>
-          <YellowBox onClick={handleHotMap} style={{ marginTop: "20vh" }}>
-            여기를 눌러 추천 콘텐츠를 받아보세요!
-          </YellowBox>
         </>
       )}
     </Wrapper>

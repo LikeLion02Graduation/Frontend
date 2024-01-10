@@ -4,16 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setName } from "../../redux/mapmakingSlice";
-import { persistor } from "../../index";
 
 import TopBar from "../../components/_common/TopBar";
-import {
-  WhiteBox,
-  NextBtnWhite,
-  Line1,
-  Line2,
-  Wrapper,
-} from "../../components/_common/CommonExport";
+import { WhiteBox, NextBtnWhite, Line1, Line2, Wrapper } from "../../components/_common/CommonExport";
 
 const NamePage = () => {
   const navigate = useNavigate();
@@ -59,11 +52,7 @@ const NamePage = () => {
           />
         </InputBox>
         <Line1 />
-        <NextBtnWhite
-          text={"Next"}
-          number={"96px"}
-          addClickHandler={saveData}
-        />
+        <NextBtnWhite text={"Next"} number={"96px"} addClickHandler={saveData} />
       </Wrapper>
     </>
   );

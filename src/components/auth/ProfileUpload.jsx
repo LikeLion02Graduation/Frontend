@@ -15,9 +15,17 @@ const ProfileUpload = () => {
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
-    setSelectedImg(imageFile);
-    setImgURL(URL.createObjectURL(imageFile));
-    console.log("Selected Image content:", imageFile);
+
+    if (imageFile) {
+      try {
+        const imageUrl = URL.createObjectURL(imageFile);
+        setSelectedImg(imageFile);
+        setImgURL(imageUrl);
+        console.log("Selected Image content:", imageFile);
+      } catch (error) {
+        console.error("Error creating object URL:", error);
+      }
+    }
   };
   //닉네임 설정
   const [username, setUsername] = useState("");
@@ -33,22 +41,22 @@ const ProfileUpload = () => {
 
   return (
     <>
-      {imgURL ? (
-        <ProfileImg src={imgURL} alt="Preview" />
-      ) : (
-        <Profile>
-          <input
-            type="file"
-            accept="image/jpg, image/jpeg, image/png"
-            onChange={handleImageChange}
-            style={{ display: "none" }}
-          />
+      <Profile>
+        <input
+          type="file"
+          accept="image/jpg, image/jpeg, image/png"
+          onChange={handleImageChange}
+          style={{ display: "none" }}
+        />
+        {imgURL ? (
+          <ProfileImg src={imgURL} alt="Preview" />
+        ) : (
           <div>
             클릭해서 <br />
             프로필 사진 수정
           </div>
-        </Profile>
-      )}
+        )}
+      </Profile>
       <Container>
         <span>사용할 닉네임을 입력하세요.</span>
         <input
@@ -129,7 +137,6 @@ const Profile = styled.label`
 `;
 
 const ProfileImg = styled.img`
-  margin-top: 44px;
   display: flex;
   align-items: center;
   justify-content: center;

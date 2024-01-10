@@ -45,7 +45,13 @@ export const GetSiLoc = async (selectedBtn, doLoc, setSiLoc, setSelectedDo) => {
 };
 
 // POST : 지도 만들기
-export const PostMapData = async (location, name, img, hashtag, description) => {
+export const PostMapData = async (
+  location,
+  name,
+  img,
+  hashtag,
+  description
+) => {
   try {
     const response = await http.post(`/map/`, {
       location,
@@ -65,7 +71,6 @@ export const PostMapData = async (location, name, img, hashtag, description) => 
 export const GetMyMapList = async (order) => {
   try {
     const response = await http.get(`/map/?order=${order}`);
-    console.log("응답 결과: ", response.data);
     return response.data;
   } catch (error) {
     console.error("지도 정렬 실패", error.response);
@@ -76,7 +81,6 @@ export const GetMyMapList = async (order) => {
 export const GetOthersMapList = async (order) => {
   try {
     const response = await http.get(`/map/others/?order=${order}`);
-    console.log("응답 결과: ", response.data);
     return response.data;
   } catch (error) {
     console.error("지도 정렬 실패", error.response);
