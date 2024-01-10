@@ -12,7 +12,11 @@ const ImgUpload = ({ imgUrl, setImgUrl, setSelectedImg }) => {
     <Wrapper>
       <label>
         <input type="file" onChange={handleImgChange} />
-        {imgUrl ? <StyledImg src={imgUrl} alt="Preview" /> : "Tap to add photo!"}
+        {imgUrl ? (
+          <StyledImg src={imgUrl} alt="Preview" />
+        ) : (
+          "Tap to add photo!"
+        )}
       </label>
     </Wrapper>
   );
@@ -47,5 +51,6 @@ const Wrapper = styled.div`
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
   object-fit: cover;
 `;

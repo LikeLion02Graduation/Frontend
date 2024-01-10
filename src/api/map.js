@@ -62,7 +62,13 @@ export const PostMapImg = async (img) => {
 };
 
 // POST : 지도 만들기 - 전체 다
-export const PostMapData = async (location, name, img, hashtag, description) => {
+export const PostMapData = async (
+  location,
+  name,
+  img,
+  hashtag,
+  description
+) => {
   try {
     const response = await http.post(`/map/new/`, {
       name,

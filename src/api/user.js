@@ -95,6 +95,7 @@ export const PostSignup = async (user_id, password, username, profile) => {
 
     alert("가입이 완료되었습니다.");
     window.location.replace("/auth/login");
+
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -141,7 +142,12 @@ export const PatchNickname = async (nickname) => {
 };
 
 // PATCH : 소셜로그인 프로필 수정
-export const PatchSocialProfile = async (nickname, profile, token, isImgChanged) => {
+export const PatchSocialProfile = async (
+  nickname,
+  profile,
+  token,
+  isImgChanged
+) => {
   try {
     const headers = {
       Authorization: token ? `Bearer ${token}` : null,
@@ -152,7 +158,9 @@ export const PatchSocialProfile = async (nickname, profile, token, isImgChanged)
     formData.append("nickname", nickname);
     if (isImgChanged) formData.append("profile", profile);
 
-    const response = await http.patch(`/accounts/kakao/edit/`, formData, { headers });
+    const response = await http.patch(`/accounts/kakao/edit/`, formData, {
+      headers,
+    });
 
     localStorage.setItem("nickname", response.data.data.nickname);
 

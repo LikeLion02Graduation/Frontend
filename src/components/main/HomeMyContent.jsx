@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router";
 
 import sort from "../../assets/images/sort.svg";
-import basicMap from "../../assets/images/basic-map.svg";
 
 import { GetMyMapList } from "../../api/map";
 
@@ -40,8 +39,12 @@ const HomeMyContent = () => {
           <img src={sort} alt="sort" />
           {showSortBox && (
             <SortOptions>
-              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>Earliest</SortOption>
-              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>Oldest</SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>
+                Earliest
+              </SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>
+                Oldest
+              </SortOption>
             </SortOptions>
           )}
         </Sort>
@@ -55,7 +58,7 @@ const HomeMyContent = () => {
                   backgroundColor: box.img ? "transparent" : "var(--black1)",
                 }}
               >
-                {box.img ? <Img src={box.img} alt={box.name} /> : <Img src={basicMap} alt="basic map" />}
+                <Img src={box.img} alt={box.name} />
               </ImgBox>
               <Name>{box.name}</Name>
               <Time>{box.created_at} up</Time>

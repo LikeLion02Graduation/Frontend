@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { initMapmaking } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import { MapNameBox, Line2, Wrapper } from "../../components/_common/CommonExport";
+import {
+  MapNameBox,
+  Line2,
+  Wrapper,
+} from "../../components/_common/CommonExport";
 
 import { PostMapData } from "../../api/map";
 
@@ -31,7 +35,13 @@ const DonePage = () => {
   const mapHashtag = useSelector((state) => state.mapmaking.hashtag);
 
   const saveData = async (content) => {
-    const response = await PostMapData(mapLocation, mapName, mapImg, mapHashtag, content);
+    const response = await PostMapData(
+      mapLocation,
+      mapName,
+      mapImg,
+      mapHashtag,
+      content
+    );
     handleInit();
     navigate(`/mapmaking/share/${response}`);
   };
