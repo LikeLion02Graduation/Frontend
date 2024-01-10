@@ -24,16 +24,12 @@ const LoginInfo = () => {
 
   const handleEditClick = async () => {
     if (isEdit) {
-      try {
-        const updatedData = await PatchNickname(nickname);
-        setLoginData((prevData) => ({
-          ...prevData,
-          nickname: updatedData.nickname,
-        }));
-        setNickname(updatedData.nickname);
-      } catch (error) {
-        console.error("닉네임 수정에 실패했습니다.", error);
-      }
+      const updatedData = await PatchNickname(nickname);
+      setLoginData((prevData) => ({
+        ...prevData,
+        nickname: updatedData.nickname,
+      }));
+      setNickname(updatedData.nickname);
     }
     setIsEdit(!isEdit);
   };
@@ -73,11 +69,7 @@ const LoginInfo = () => {
             <TextBox>
               <div className="left">
                 {isEdit ? (
-                  <input
-                    value={nickname}
-                    onChange={handleNicknameChange}
-                    placeholder=""
-                  />
+                  <input value={nickname} onChange={handleNicknameChange} placeholder="" />
                 ) : (
                   <div>{loginData.nickname}</div>
                 )}

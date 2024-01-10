@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import { useNavigate } from "react-router";
+
 import sort from "../../assets/images/sort.svg";
-import { GetMyMapList } from "../../api/map";
 import basicMap from "../../assets/images/basic-map.svg";
+
+import { GetMyMapList } from "../../api/map";
 
 const HomeMyContent = () => {
   const navigate = useNavigate();
@@ -20,10 +21,6 @@ const HomeMyContent = () => {
     };
     getData();
   }, [sortType]);
-
-  useEffect(() => {
-    console.log("mapList 데이터: ", mapList);
-  }, [mapList]);
 
   const handleSortClick = () => {
     setShowSortBox(!showSortBox);
@@ -43,12 +40,8 @@ const HomeMyContent = () => {
           <img src={sort} alt="sort" />
           {showSortBox && (
             <SortOptions>
-              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>
-                Earliest
-              </SortOption>
-              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>
-                Oldest
-              </SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>Earliest</SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>Oldest</SortOption>
             </SortOptions>
           )}
         </Sort>
@@ -62,11 +55,7 @@ const HomeMyContent = () => {
                   backgroundColor: box.img ? "transparent" : "var(--black1)",
                 }}
               >
-                {box.img ? (
-                  <Img src={box.img} alt={box.name} />
-                ) : (
-                  <Img src={basicMap} alt="basic map" />
-                )}
+                {box.img ? <Img src={box.img} alt={box.name} /> : <Img src={basicMap} alt="basic map" />}
               </ImgBox>
               <Name>{box.name}</Name>
               <Time>{box.created_at} up</Time>
@@ -92,9 +81,7 @@ const Total = styled.div`
   color: var(--black2);
   font-family: "Hack Regular";
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   letter-spacing: 0.7px;
 `;
 
@@ -109,9 +96,7 @@ const Sort = styled.div`
   color: var(--black2);
   font-family: "Hack Regular";
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   p {
     cursor: pointer;
   }
@@ -165,16 +150,14 @@ const ImgBox = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  //object-fit: cover;
+  object-fit: cover;
 `;
 
 const Name = styled.div`
   color: var(--black2);
   font-family: Apple SD Gothic Neo;
   font-size: 14.253px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
   letter-spacing: 1.425px;
   margin-top: 12.2px;
   margin-bottom: 7.47px;
@@ -184,7 +167,5 @@ const Time = styled.div`
   color: var(--black2);
   font-family: "Hack Regular";
   font-size: 12.217px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 `;

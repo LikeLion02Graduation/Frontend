@@ -20,10 +20,6 @@ const HomeBuyingContent = () => {
     getData();
   }, [sortType]);
 
-  useEffect(() => {
-    console.log("mapList 데이터: ", mapList);
-  }, [mapList]);
-
   const handleSortClick = () => {
     setShowSortBox(!showSortBox);
   };
@@ -46,24 +42,16 @@ const HomeBuyingContent = () => {
           <img src={sort} alt="sort" />
           {showSortBox && (
             <SortOptions>
-              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>
-                Earliest
-              </SortOption>
-              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>
-                Oldest
-              </SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>Earliest</SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>Oldest</SortOption>
             </SortOptions>
           )}
         </Sort>
       </TotalSort>
       {mapList.length === 0 ? (
         <>
-          <GrayBox style={{ transform: "rotate(15deg)" }}>
-            아직 구매한 지도가 없네요..🥺
-          </GrayBox>
-          <GrayBox style={{ transform: "rotate(-15deg)" }}>
-            더 많은 정보를 얻고 싶다면..
-          </GrayBox>
+          <GrayBox style={{ transform: "rotate(15deg)" }}>아직 구매한 지도가 없네요..🥺</GrayBox>
+          <GrayBox style={{ transform: "rotate(-15deg)" }}>더 많은 정보를 얻고 싶다면..</GrayBox>
           <YellowBox onClick={handleHotMap} style={{ marginTop: "20vh" }}>
             여기를 눌러 추천 콘텐츠를 받아보세요!
           </YellowBox>

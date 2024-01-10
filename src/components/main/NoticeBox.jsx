@@ -22,10 +22,6 @@ const NoticeBox = () => {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log("NoticeList 데이터: ", noticeList);
-  }, [noticeList]);
-
   // 알림 삭제
   const handleDeleteClick = (id) => {
     DeleteNotice(id).then(() => {
@@ -61,15 +57,9 @@ const NoticeBox = () => {
                   }}
                 >
                   <MapName>
-                    {item.type === "추천"
-                      ? `${item.map.name}에 추천을 남겼어요`
-                      : "남겨주신 추천에 반응을 남겼어요"}
+                    {item.type === "추천" ? `${item.map.name}에 추천을 남겼어요` : "남겨주신 추천에 반응을 남겼어요"}
                   </MapName>
-                  <img
-                    src={gofront}
-                    alt="gofront"
-                    style={{ width: "15px", height: "15px" }}
-                  />
+                  <img src={gofront} alt="gofront" style={{ width: "15px", height: "15px" }} />
                 </div>
                 <Time>{item.created_at}</Time>
               </Content>

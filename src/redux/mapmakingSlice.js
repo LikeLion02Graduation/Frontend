@@ -5,8 +5,7 @@ const initialState = {
   location: "",
   hashtag: [],
   name: "",
-  img: "",
-  description: "",
+  img: null,
 };
 
 export const mapmakingSlice = createSlice({
@@ -18,7 +17,7 @@ export const mapmakingSlice = createSlice({
       state.hashtag = initialState.hashtag;
       state.name = initialState.name;
       state.img = initialState.img;
-      state.description = initialState.description;
+      state.imgURL = initialState.imgURL;
     },
     setLocation: (state, action) => {
       state.location = action.payload;
@@ -39,23 +38,12 @@ export const mapmakingSlice = createSlice({
     setImage: (state, action) => {
       state.img = action.payload.img;
     },
-    setDescription: (state, action) => {
-      state.description = action.payload.description;
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(PURGE, () => initialState);
   },
 });
 
-export const {
-  initMapmaking,
-  setLocation,
-  addTheme,
-  deleteTheme,
-  setName,
-  setImage,
-  setDescription,
-} = mapmakingSlice.actions;
+export const { initMapmaking, setLocation, addTheme, deleteTheme, setName, setImage } = mapmakingSlice.actions;
 
 export default mapmakingSlice.reducer;

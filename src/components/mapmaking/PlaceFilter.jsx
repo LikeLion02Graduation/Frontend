@@ -52,17 +52,14 @@ const PlaceFilter = ({ onPlaceSelect }) => {
 
   const handleSiLocBtnClick = (location, index) => {
     if (index === 0) {
-      console.log("뒤로 가기 선택: ", location);
       setSelectedBtn(null);
       setSelectedDo(null);
       onPlaceSelect(null);
     } else {
       if (selectedBtn === location) {
-        console.log("선택 취소: ", location);
         setSelectedBtn(null);
         onPlaceSelect(null);
       } else {
-        console.log("새로운 선택: ", location);
         setSelectedBtn(location);
         onPlaceSelect(location);
       }
