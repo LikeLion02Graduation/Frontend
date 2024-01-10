@@ -34,7 +34,7 @@ const MapCommendPage = () => {
       <TopBar navBtnOn={true} where={previousUrl} titleText="recommend" />
       <Wrapper>
         <Title>
-          <span>{reactData.map_name}</span>
+          <span>{reactData.recom_name}</span>
           <span>에 대한 반응</span>
         </Title>
         <Line2 />
