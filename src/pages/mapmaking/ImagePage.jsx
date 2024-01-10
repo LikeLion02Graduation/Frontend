@@ -13,17 +13,25 @@ import {
   Wrapper,
 } from "../../components/_common/CommonExport";
 import ImgUpload from "../../components/mapmaking/ImgUpload";
+import { PostMapImg } from "../../api/map";
 
 const ImagePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mapName = useSelector((state) => state.mapmaking.name);
 
-  const [isImageSelected, setIsImageSelected] = useState(false);
+  const [isImageSelected, setIsImageSelected] = useState(null);
 
-  const handleImgChange = (selectedImg) => {
-    setIsImageSelected(selectedImg !== null);
-    dispatch(setImage({ img: selectedImg }));
+  const handleImgChange = async (selectedImg) => {
+    try {
+      const response = await PostMapImg(selectedImg);
+      const imageUrl = response.data.data;
+      dispatch(setImage({ img: imageUrl }));
+      setIsImageSelected(true);
+    } catch (error) {
+      console.error("이미지 업로드 실패", error);
+      setIsImageSelected(false);
+    }
   };
 
   const handlePostImg = () => {

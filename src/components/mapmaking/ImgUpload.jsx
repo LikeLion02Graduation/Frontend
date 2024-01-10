@@ -9,26 +9,13 @@ const ImgUpload = ({ onImageUpload }) => {
     const file = e.target.files[0];
     setSelectedImg(file);
     setImgUrl(URL.createObjectURL(file));
-    onImageUpload(URL.createObjectURL(file));
-  };
-
-  const handleUpload = () => {
-    if (!selectedImg) {
-      console.log("No image selected");
-
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("image", selectedImg);
-
-    onImageUpload(formData);
+    onImageUpload(file);
   };
 
   return (
     <Wrapper>
       <label>
-        <input type="file" onChange={handleImgChange} onClick={handleUpload} />
+        <input type="file" onChange={handleImgChange} />
         {imgUrl ? (
           <StyledImg src={imgUrl} alt="Preview" />
         ) : (
@@ -70,5 +57,5 @@ const Wrapper = styled.div`
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
-  //object-fit: cover;
+  object-fit: cover;
 `;

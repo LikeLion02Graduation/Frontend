@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router";
 import sort from "../../assets/images/sort.svg";
 import { GetMyMapList } from "../../api/map";
-import basicMap from "../../assets/images/basic-map.svg";
 
 const HomeMyContent = () => {
   const navigate = useNavigate();
@@ -62,11 +61,7 @@ const HomeMyContent = () => {
                   backgroundColor: box.img ? "transparent" : "var(--black1)",
                 }}
               >
-                {box.img ? (
-                  <Img src={box.img} alt={box.name} />
-                ) : (
-                  <Img src={basicMap} alt="basic map" />
-                )}
+                <Img src={box.img} alt={box.name} />
               </ImgBox>
               <Name>{box.name}</Name>
               <Time>{box.created_at} up</Time>
@@ -165,7 +160,7 @@ const ImgBox = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  //object-fit: cover;
+  object-fit: cover;
 `;
 
 const Name = styled.div`

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setDescription, initMapmaking } from "../../redux/mapmakingSlice";
+import { PostMapImg } from "../../api/map";
 import { PostMapData } from "../../api/map";
 
 import TopBar from "../../components/_common/TopBar";
