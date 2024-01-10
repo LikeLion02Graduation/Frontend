@@ -21,10 +21,6 @@ const HomeMyContent = () => {
     getData();
   }, [sortType]);
 
-  useEffect(() => {
-    console.log("mapList 데이터: ", mapList);
-  }, [mapList]);
-
   const handleSortClick = () => {
     setShowSortBox(!showSortBox);
   };
@@ -43,12 +39,8 @@ const HomeMyContent = () => {
           <img src={sort} alt="sort" />
           {showSortBox && (
             <SortOptions>
-              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>
-                Earliest
-              </SortOption>
-              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>
-                Oldest
-              </SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Earliest")}>Earliest</SortOption>
+              <SortOption onClick={() => handleSortTypeSelect("Oldest")}>Oldest</SortOption>
             </SortOptions>
           )}
         </Sort>
@@ -62,11 +54,7 @@ const HomeMyContent = () => {
                   backgroundColor: box.img ? "transparent" : "var(--black1)",
                 }}
               >
-                {box.img ? (
-                  <Img src={box.img} alt={box.name} />
-                ) : (
-                  <Img src={basicMap} alt="basic map" />
-                )}
+                {box.img ? <Img src={box.img} alt={box.name} /> : <Img src={basicMap} alt="basic map" />}
               </ImgBox>
               <Name>{box.name}</Name>
               <Time>{box.created_at} up</Time>
