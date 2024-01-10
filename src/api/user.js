@@ -29,7 +29,7 @@ export const PostLogin = async (user_id, password, navigate) => {
   }
 };
 
-// 카카오 로그인
+// GET : 카카오 로그인
 export const KakaoLogin = async (code) => {
   try {
     const response = await http.get(`/accounts/kakao/callback/?code=${code}`);
@@ -105,29 +105,7 @@ export const PostSignup = async (user_id, password, username, profile) => {
   }
 };
 
-// 토큰 만료 처리
-// export const isTokenExpired = async (error) => {
-//   if (error.response.data.detail === "Given token not valid for any token type") {
-//     window.location.reload();
-
-//     alert("세션 만료. 다시 로그인해주세요.");
-//     Logout();
-//   }
-// };
-
-//isLogin + AuthRoute
-const isLogin = () => !!localStorage.getItem("token");
-
-export default function AuthRoute({ children }) {
-  if (isLogin()) {
-    return children;
-  } else {
-    alert("로그인이 필요합니다:(");
-    return <Navigate to="/auth/login" />;
-  }
-}
-
-// 회원 탈퇴
+// DELETE : 회원 탈퇴
 export const DeleteAccount = async () => {
   try {
     const response = await http.delete(`/accounts/del/`);
@@ -142,7 +120,7 @@ export const DeleteAccount = async () => {
 export const GetLoginInfo = async () => {
   try {
     const response = await http.get(`/accounts/kakao/edit/`);
-    console.log("응답 결과: ", response.data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("로그인 정보 get 실패", error.response);
@@ -155,7 +133,8 @@ export const PatchNickname = async (nickname) => {
     const response = await http.patch(`/accounts/kakao/edit/`, {
       nickname,
     });
-    console.log("응답 결과: ", response.data);
+    console.log(response.data);
+    localStorage.setItem("nickname", nickname);
     return response.data;
   } catch (error) {
     console.error("닉네임 수정 실패", error.response);
@@ -192,3 +171,15 @@ export const PatchSocialProfile = async (
     console.error("소셜 로그인 프로필 수정 실패", error.response);
   }
 };
+
+//isLogin + AuthRoute
+const isLogin = () => !!localStorage.getItem("token");
+
+export default function AuthRoute({ children }) {
+  if (isLogin()) {
+    return children;
+  } else {
+    alert("로그인이 필요합니다:(");
+    return <Navigate to="/auth/login" />;
+  }
+}

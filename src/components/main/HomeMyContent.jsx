@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import { useNavigate } from "react-router";
+
 import sort from "../../assets/images/sort.svg";
+
 import { GetMyMapList } from "../../api/map";
 
 const HomeMyContent = () => {
@@ -19,10 +20,6 @@ const HomeMyContent = () => {
     };
     getData();
   }, [sortType]);
-
-  useEffect(() => {
-    console.log("mapList 데이터: ", mapList);
-  }, [mapList]);
 
   const handleSortClick = () => {
     setShowSortBox(!showSortBox);
@@ -87,9 +84,7 @@ const Total = styled.div`
   color: var(--black2);
   font-family: "Hack Regular";
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   letter-spacing: 0.7px;
 `;
 
@@ -104,9 +99,7 @@ const Sort = styled.div`
   color: var(--black2);
   font-family: "Hack Regular";
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   p {
     cursor: pointer;
   }
@@ -167,9 +160,7 @@ const Name = styled.div`
   color: var(--black2);
   font-family: Apple SD Gothic Neo;
   font-size: 14.253px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
   letter-spacing: 1.425px;
   margin-top: 12.2px;
   margin-bottom: 7.47px;
@@ -179,7 +170,5 @@ const Time = styled.div`
   color: var(--black2);
   font-family: "Hack Regular";
   font-size: 12.217px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 `;

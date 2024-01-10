@@ -1,11 +1,10 @@
 import { http } from "../api/http";
-// import { isTokenExpired } from "./user";
 
 // GET : 추천 상세 조회
 export const GetRecomMain = async (id) => {
   try {
     const response = await http.get(`/recom/${id}`);
-    console.log("추천 상세 조회", response.data.data);
+    console.log(response.data.data);
     return Promise.resolve(response.data.data);
   } catch (error) {
     console.error("추천 상세 조회 실패", error);
@@ -25,7 +24,6 @@ export const PostRecom = async (mapId, mapTitle, mapContent, userId, mapPlace, m
       hashtag: mapHashtag,
     });
     console.log(response.data);
-    console.log(response.data.data.id);
     navigate(`/map/${mapId}/${response.data.data.id}`);
     return Promise.resolve(response);
   } catch (error) {
@@ -38,7 +36,7 @@ export const PostRecom = async (mapId, mapTitle, mapContent, userId, mapPlace, m
 export const GetRecomReact = async (id) => {
   try {
     const response = await http.get(`/recom/react/${id}`);
-    console.log("추천 반응 조회", response.data.data);
+    console.log(response.data.data);
     return Promise.resolve(response.data.data);
   } catch (error) {
     console.error("추천 반응 조회 실패", error);
@@ -80,6 +78,7 @@ export const PatchRecomReact = async (id, emoji, input) => {
 export const GetNoticeList = async () => {
   try {
     const response = await http.get(`/recom/notice/`);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("알림 조회 실패", error.response);
@@ -92,7 +91,7 @@ export const DeleteNotice = async (id) => {
     const response = await http.delete(`/recom/notice/${id}`, {
       pk: id,
     });
-    console.log("message: ", response.data);
+    console.log(response.data);
     return Promise.resolve(response);
   } catch (error) {
     console.error("알림 삭제 실패", error.response);
@@ -106,10 +105,10 @@ export const GetHotMapList = async (loc) => {
     const response = await http.get(`/recom/content/?key=${loc}`, {
       key: loc,
     });
-    console.log("message: ", response.data);
+    console.log(response.data);
     return Promise.resolve(response);
   } catch (error) {
-    console.error("리스트 반환 실패", error.response);
+    console.error("추천 콘텐츠 리스트 반환 실패", error.response);
     return Promise.reject(error);
   }
 };

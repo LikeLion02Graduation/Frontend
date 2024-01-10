@@ -19,10 +19,7 @@ const PlacePage = () => {
 
   const handleNextBtn = () => {
     if (selectedPlace) {
-      console.log("Selected Place:", selectedPlace);
       dispatch(setLocation(selectedPlace));
-      console.log("Dispatched action:", setLocation(selectedPlace));
-
       navigate(`/mapmaking/theme`);
     } else {
       alert("장소를 선택해주세요");

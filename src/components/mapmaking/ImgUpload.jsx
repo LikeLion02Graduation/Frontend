@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "styled-components";
 
-const ImgUpload = ({ onImageUpload }) => {
-  const [selectedImg, setSelectedImg] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
-
+const ImgUpload = ({ imgUrl, setImgUrl, setSelectedImg }) => {
   const handleImgChange = (e) => {
     const file = e.target.files[0];
     setSelectedImg(file);
     setImgUrl(URL.createObjectURL(file));
-    onImageUpload(file);
   };
 
   return (
@@ -42,9 +38,7 @@ const Wrapper = styled.div`
     text-align: center;
     font-family: "Hack Regular";
     font-size: 14.253px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
     letter-spacing: 2.138px;
     cursor: pointer;
   }
@@ -57,5 +51,6 @@ const Wrapper = styled.div`
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
   object-fit: cover;
 `;

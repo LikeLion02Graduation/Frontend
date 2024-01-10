@@ -1,14 +1,12 @@
 import { http } from "../api/http";
-// import { isTokenExpired } from "./user";
 
 // GET : 지도 메인 화면
 export const GetMapMain = async (id) => {
   try {
     const response = await http.get(`/map/detail/${id}/`);
-    console.log("지도 메인 화면", response.data.data);
+    console.log(response.data.data);
     return Promise.resolve(response.data.data);
   } catch (error) {
-    // isTokenExpired(error);
     console.error("지도 메인 화면 조회 실패", error);
     return Promise.reject(error);
   }
@@ -35,11 +33,10 @@ export const GetSiLoc = async (selectedBtn, doLoc, setSiLoc, setSelectedDo) => {
       const response = await http.get(`/map/city/`, {
         params: { city: selectedBtn },
       });
-      console.log(response.data.data.cities);
       setSiLoc(response.data.data.cities);
       setSelectedDo(response.data.data.cities);
     } catch (error) {
-      console.error(`siLoc 데이터를 가져오는 중 에러 발생: ${error}`);
+      console.error(`도시 데이터를 가져오는 중 에러 발생: ${error}`);
     }
   }
 };
@@ -55,7 +52,9 @@ export const PostMapImg = async (img) => {
         "Content-Type": "multipart/form-data",
       },
     });
-    return Promise.resolve(response);
+
+    console.log(response.data);
+    return Promise.resolve(response.data.data);
   } catch (error) {
     console.error("지도 데이터 전송 실패", error.response);
     return Promise.reject(error);
@@ -72,8 +71,8 @@ export const PostMapData = async (
 ) => {
   try {
     const response = await http.post(`/map/new/`, {
-      location,
       name,
+      location,
       img,
       hashtag,
       description,
@@ -89,6 +88,7 @@ export const PostMapData = async (
 export const GetMyMapList = async (order) => {
   try {
     const response = await http.get(`/map/?order=${order}`);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("지도 정렬 실패", error.response);
@@ -99,6 +99,7 @@ export const GetMyMapList = async (order) => {
 export const GetOthersMapList = async (order) => {
   try {
     const response = await http.get(`/map/others/?order=${order}`);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("지도 정렬 실패", error.response);

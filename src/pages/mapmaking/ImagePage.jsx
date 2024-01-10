@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import { setImage } from "../../redux/mapmakingSlice";
 
@@ -13,6 +12,7 @@ import {
   Wrapper,
 } from "../../components/_common/CommonExport";
 import ImgUpload from "../../components/mapmaking/ImgUpload";
+
 import { PostMapImg } from "../../api/map";
 
 const ImagePage = () => {
@@ -20,25 +20,21 @@ const ImagePage = () => {
   const dispatch = useDispatch();
   const mapName = useSelector((state) => state.mapmaking.name);
 
-  const [isImageSelected, setIsImageSelected] = useState(null);
+  const [selectedImg, setSelectedImg] = useState(null);
+  const [imgUrl, setImgUrl] = useState(null);
 
-  const handleImgChange = async (selectedImg) => {
-    try {
-      const response = await PostMapImg(selectedImg);
-      const imageUrl = response.data.data;
-      dispatch(setImage({ img: imageUrl }));
-      setIsImageSelected(true);
-    } catch (error) {
-      console.error("이미지 업로드 실패", error);
-      setIsImageSelected(false);
-    }
-  };
-
-  const handlePostImg = () => {
-    if (!isImageSelected) {
+  const handlePostImg = async () => {
+    if (!selectedImg) {
       alert("이미지를 업로드해주세요");
     } else {
-      navigate(`/mapmaking/done`);
+      PostMapImg(selectedImg)
+        .then((res) => {
+          dispatch(setImage({ img: res }));
+          navigate(`/mapmaking/done`);
+        })
+        .catch((error) => {
+          console.error("Error posting map data: ", error);
+        });
     }
   };
 
@@ -49,7 +45,11 @@ const ImagePage = () => {
         <WhiteBox text={"Q. 지도에 들어갈 대표 이미지를 업로드 해보세요"} />
         <Line2 />
         <MapProfile>
-          <ImgUpload onImageUpload={handleImgChange} />
+          <ImgUpload
+            imgUrl={imgUrl}
+            setImgUrl={setImgUrl}
+            setSelectedImg={setSelectedImg}
+          />
           <MapName>{mapName}</MapName>
         </MapProfile>
         <NextBtnWhite
