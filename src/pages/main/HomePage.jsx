@@ -5,49 +5,44 @@ import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
 
 import HomeMyContent from "../../components/main/HomeMyContent";
-import HomeOthersContent from "../../components/main/HomeOthersContent";
 import HomeBuyingContent from "../../components/main/HomeBuyingContent";
 
 const HomePage = () => {
   const [myFilterActive, setMyFilterActive] = useState(true);
-  const [othersFilterActive, setOthersFilterActive] = useState(false);
   const [buyingFilterActive, setBuyingFilterActive] = useState(false);
-  const [paymentInfo, setPaymentInfo] = useState(false);
 
   const handleMyFilterClick = () => {
     setMyFilterActive(true);
-    setOthersFilterActive(false);
     setBuyingFilterActive(false);
   };
 
-  const handleOthersFilterClick = () => {
-    if (paymentInfo) {
-      setOthersFilterActive(true);
-      setMyFilterActive(false);
-      setBuyingFilterActive(false);
-    } else {
-      setBuyingFilterActive(true);
-      setMyFilterActive(false);
-      setOthersFilterActive(false);
-    }
+  const handleBuyingFilterClick = () => {
+    setMyFilterActive(false);
+    setBuyingFilterActive(true);
   };
 
   return (
     <>
-      <TopBar navBtnOn={false} myPageBtnOn={true} newMapBtnOn={true} titleText="Main" />
+      <TopBar
+        navBtnOn={false}
+        myPageBtnOn={true}
+        newMapBtnOn={true}
+        titleText="Main"
+      />
       <Wrapper>
         <Filters>
           <MyFilter onClick={handleMyFilterClick} $active={myFilterActive}>
             <span>MY</span>
           </MyFilter>
           {/*결제 정보에 따라 텍스트 다르게*/}
-          <OthersFilter onClick={handleOthersFilterClick} $active={buyingFilterActive || othersFilterActive}>
-            <span>{paymentInfo ? "Others" : "Buying"}</span>
-          </OthersFilter>
+          <BuyingFilter
+            onClick={handleBuyingFilterClick}
+            $active={buyingFilterActive}
+          >
+            <span>Buying</span>
+          </BuyingFilter>
         </Filters>
-
         {myFilterActive && <HomeMyContent />}
-        {othersFilterActive && <HomeOthersContent />}
         {buyingFilterActive && <HomeBuyingContent />}
       </Wrapper>
     </>
@@ -97,7 +92,7 @@ const MyFilter = styled(FilterStyle)`
   }
 `;
 
-const OthersFilter = styled(FilterStyle)`
+const BuyingFilter = styled(FilterStyle)`
   border-left: none;
   border-right: none;
   display: flex;

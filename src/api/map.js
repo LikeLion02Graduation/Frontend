@@ -45,7 +45,13 @@ export const GetSiLoc = async (selectedBtn, doLoc, setSiLoc, setSelectedDo) => {
 };
 
 // POST : 지도 만들기
-export const PostMapData = async (location, name, img, hashtag, description) => {
+export const PostMapData = async (
+  location,
+  name,
+  img,
+  hashtag,
+  description
+) => {
   try {
     const response = await http.post(`/map/`, {
       location,
