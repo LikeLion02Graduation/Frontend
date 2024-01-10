@@ -8,6 +8,8 @@ const SocialProfile = ({ userData }) => {
   //닉네임 설정
   const [username, setUsername] = useState("");
 
+  const [isImgChanged, setIsImgChanged] = useState(false);
+
   useEffect(() => {
     if (userData) {
       setUsername(userData.nickname);
@@ -27,6 +29,7 @@ const SocialProfile = ({ userData }) => {
         const imageUrl = URL.createObjectURL(imageFile);
         setSelectedImg(imageFile);
         setImgURL(imageUrl);
+        setIsImgChanged(true);
         console.log("Selected Image content:", imageFile);
       } catch (error) {
         console.error("Error creating object URL:", error);
@@ -36,7 +39,7 @@ const SocialProfile = ({ userData }) => {
 
   //가입 완료 함수
   const signup = () => {
-    PatchSocialProfile(username, selectedImg, userData.access_token);
+    PatchSocialProfile(username, selectedImg, userData.access_token, isImgChanged);
   };
 
   return (
