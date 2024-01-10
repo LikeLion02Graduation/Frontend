@@ -169,7 +169,7 @@ export const PatchNickname = async (nickname) => {
 };
 
 // PATCH : 소셜로그인 프로필 수정
-export const PatchSocialProfile = async (nickname, profile, token) => {
+export const PatchSocialProfile = async (nickname, profile, token, isImgChanged) => {
   try {
     const headers = {
       Authorization: token ? `Bearer ${token}` : null,
@@ -178,7 +178,7 @@ export const PatchSocialProfile = async (nickname, profile, token) => {
 
     const formData = new FormData();
     formData.append("nickname", nickname);
-    formData.append("profile", profile);
+    if (isImgChanged) formData.append("profile", profile);
 
     const response = await http.patch(`/accounts/kakao/edit/`, formData, { headers });
 
