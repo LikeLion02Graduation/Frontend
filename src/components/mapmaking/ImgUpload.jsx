@@ -1,39 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "styled-components";
 
-const ImgUpload = ({ onImageUpload }) => {
-  const [selectedImg, setSelectedImg] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
-
+const ImgUpload = ({ imgUrl, setImgUrl, setSelectedImg }) => {
   const handleImgChange = (e) => {
     const file = e.target.files[0];
     setSelectedImg(file);
     setImgUrl(URL.createObjectURL(file));
-    onImageUpload(URL.createObjectURL(file));
-  };
-
-  const handleUpload = () => {
-    if (!selectedImg) {
-      console.log("No image selected");
-
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("image", selectedImg);
-
-    onImageUpload(formData);
   };
 
   return (
     <Wrapper>
       <label>
-        <input type="file" onChange={handleImgChange} onClick={handleUpload} />
-        {imgUrl ? (
-          <StyledImg src={imgUrl} alt="Preview" />
-        ) : (
-          "Tap to add photo!"
-        )}
+        <input type="file" onChange={handleImgChange} />
+        {imgUrl ? <StyledImg src={imgUrl} alt="Preview" /> : "Tap to add photo!"}
       </label>
     </Wrapper>
   );
@@ -55,9 +34,7 @@ const Wrapper = styled.div`
     text-align: center;
     font-family: "Hack Regular";
     font-size: 14.253px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
     letter-spacing: 2.138px;
     cursor: pointer;
   }
@@ -70,5 +47,5 @@ const Wrapper = styled.div`
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
-  //object-fit: cover;
+  object-fit: cover;
 `;

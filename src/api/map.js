@@ -41,12 +41,32 @@ export const GetSiLoc = async (selectedBtn, doLoc, setSiLoc, setSelectedDo) => {
   }
 };
 
-// POST : 지도 만들기
+// POST : 지도 만들기 - 이미지만
+export const PostMapImg = async (img) => {
+  try {
+    const formData = new FormData();
+    formData.append("img", img);
+
+    const response = await http.post(`/map/imgpost/`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log(response.data);
+    return Promise.resolve(response.data.data);
+  } catch (error) {
+    console.error("지도 데이터 전송 실패", error.response);
+    return Promise.reject(error);
+  }
+};
+
+// POST : 지도 만들기 - 전체 다
 export const PostMapData = async (location, name, img, hashtag, description) => {
   try {
-    const response = await http.post(`/map/`, {
-      location,
+    const response = await http.post(`/map/new/`, {
       name,
+      location,
       img,
       hashtag,
       description,

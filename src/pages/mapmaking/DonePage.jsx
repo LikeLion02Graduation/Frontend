@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-import { setDescription, initMapmaking } from "../../redux/mapmakingSlice";
-import { PostMapData } from "../../api/map";
+import { initMapmaking } from "../../redux/mapmakingSlice";
 
 import TopBar from "../../components/_common/TopBar";
-import {
-  MapNameBox,
-  Line2,
-  Wrapper,
-} from "../../components/_common/CommonExport";
+import { MapNameBox, Line2, Wrapper } from "../../components/_common/CommonExport";
+
+import { PostMapData } from "../../api/map";
 
 const DonePage = () => {
   const navigate = useNavigate();
@@ -29,16 +25,15 @@ const DonePage = () => {
     }
   };
 
-  const saveData = (content) => {
-    dispatch(setDescription({ description: content }));
-    PostMapData(mapLocation, mapName, mapImg, mapHashtag, content)
-      .then((mapId) => {
-        handleInit();
-        navigate(`/mapmaking/share/${mapId}`);
-      })
-      .catch((error) => {
-        console.error("Error posting map data: ", error);
-      });
+  const mapLocation = useSelector((state) => state.mapmaking.location);
+  const mapName = useSelector((state) => state.mapmaking.name);
+  const mapImg = useSelector((state) => state.mapmaking.img);
+  const mapHashtag = useSelector((state) => state.mapmaking.hashtag);
+
+  const saveData = async (content) => {
+    const response = await PostMapData(mapLocation, mapName, mapImg, mapHashtag, content);
+    handleInit();
+    navigate(`/mapmaking/share/${response}`);
   };
 
   // Next 버튼 클릭하는 경우
@@ -56,11 +51,6 @@ const DonePage = () => {
   const saveAndSkip = () => {
     saveData(inputValue.description.trim());
   };
-
-  const mapLocation = useSelector((state) => state.mapmaking.location);
-  const mapName = useSelector((state) => state.mapmaking.name);
-  const mapImg = useSelector((state) => state.mapmaking.img);
-  const mapHashtag = useSelector((state) => state.mapmaking.hashtag);
 
   const handleInit = () => {
     dispatch(initMapmaking());
