@@ -25,7 +25,9 @@ const SocialProfilePage = () => {
   }, []);
 
   if (userData && userData.signup === false) {
+    alert("로그인에 성공했습니다!");
     navigate("/");
+    window.location.reload();
   }
 
   return (
