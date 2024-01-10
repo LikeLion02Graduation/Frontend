@@ -27,7 +27,6 @@ const SocialProfile = ({ userData }) => {
 
   //가입 완료 함수
   const signup = () => {
-    console.log(username);
     PatchSocialProfile(username, selectedImg, userData.access_token);
   };
 
