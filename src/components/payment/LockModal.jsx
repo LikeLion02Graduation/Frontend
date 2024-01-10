@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
-const LockModal = () => {
+const LockModal = ({ mapData }) => {
   const { location, mapId } = useParams();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const LockModal = () => {
       <Background />
       <Modal>
         <Box style={{ transform: "rotate(15deg)", background: "var(--gray)" }}>
-          <span>부산에 가다2</span>가 탐나신다면 ..
+          <span>{mapData.name}</span>가 탐나신다면 ..
         </Box>
         <Box onClick={goPayment} style={{ transform: "rotate(-15deg)", cursor: "pointer" }}>
           결제하고 자세히 보기..🫶

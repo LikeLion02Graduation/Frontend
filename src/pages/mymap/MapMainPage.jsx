@@ -31,7 +31,7 @@ const MapMainPage = () => {
   }, [mapId]);
 
   const addPostit = () => {
-    navigate(`/map/${mapId}/r/main`);
+    if (!mapData.map_mine) navigate(`/map/${mapId}/r/main`);
   };
 
   return (

@@ -9,7 +9,6 @@ const TopBar = ({ navBtnOn = false, newMapBtnOn = false, myPageBtnOn = false, ad
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    console.log("이전 페이지로");
     if (where) navigate(where);
     else navigate(-1);
 
@@ -30,7 +29,7 @@ const TopBar = ({ navBtnOn = false, newMapBtnOn = false, myPageBtnOn = false, ad
     <Wrapper>
       <div>
         {navBtnOn && <img onClick={handleBackClick} src={arrow} alt="go to previous page" />}
-        {myPageBtnOn && <img src={ham} onClick={handleMyPageClick} style={{ width: "25px" }} />}
+        {myPageBtnOn && <img onClick={handleMyPageClick} src={ham} alt="go to my page" style={{ width: "25px" }} />}
         <Title>{titleText}</Title>
         {newMapBtnOn && <button onClick={handleNewMapClick}>새 지도</button>}
       </div>

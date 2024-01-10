@@ -4,12 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GetMapMain } from "../../api/map";
 
 import TopBar from "../../components/_common/TopBar";
-import {
-  WhiteBox,
-  MainWebBox,
-  Line2,
-  Wrapper,
-} from "../../components/_common/CommonExport";
+import { WhiteBox, MainWebBox, Line2, Wrapper } from "../../components/_common/CommonExport";
 import { MapTitleText } from "../../components/mymap/MapTitleText";
 import ShareModal from "../../components/mymap/ShareModal";
 import { useParams } from "react-router-dom";
@@ -43,11 +38,9 @@ const SharePage = () => {
 
   return (
     <>
-      <TopBar navBtnOn={true} titleText={"Making"} />
+      <TopBar navBtnOn={true} where="/" titleText={"Making"} />
       <Wrapper>
-        <WhiteBox
-          text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"}
-        />
+        <WhiteBox text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"} />
         <Line2 />
         <MainWebBox>
           <TitleContainer>
@@ -68,9 +61,7 @@ const SharePage = () => {
           <div onClick={() => navigate("/")}>Skip</div>
         </WhiteBtn>
       </Wrapper>
-      {isModalOpen && (
-        <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapId} />
-      )}
+      {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapId} />}
     </>
   );
 };

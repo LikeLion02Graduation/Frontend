@@ -39,11 +39,9 @@ const PlaceFilter = ({ onPlaceSelect }) => {
 
   const handleBtnClick = (location) => {
     if (selectedBtn === location) {
-      console.log("선택 취소: ", location);
       setSelectedBtn(null);
       onPlaceSelect(null);
     } else {
-      console.log("새로운 선택: ", location);
       setSelectedBtn(location);
 
       if (!siLoc) {

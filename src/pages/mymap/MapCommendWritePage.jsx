@@ -46,8 +46,6 @@ const MapCommendWritePage = () => {
     } else if (selectedEmoji === null) {
       alert("이모지를 선택해주세요.");
     } else {
-      console.log("Data saved:", trimmedInputValue);
-
       if (isSaved) {
         PatchRecomReact(recomId, selectedEmoji, trimmedInputValue);
       } else {

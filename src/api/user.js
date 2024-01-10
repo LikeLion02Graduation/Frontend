@@ -78,6 +78,7 @@ export const GetDuplicate = async (user) => {
     return Promise.resolve(response.data);
   } catch (error) {
     console.error("아이디 중복 확인 실패", error.response);
+    return Promise.reject(error);
   }
 };
 
@@ -172,22 +173,14 @@ export const PatchSocialProfile = async (nickname, profile, token) => {
   try {
     const headers = {
       Authorization: token ? `Bearer ${token}` : null,
+      "Content-Type": "multipart/form-data",
     };
 
-    // const formData = new FormData();
-    // formData.append("nickname", nickname);
-    // formData.append("profile", profile);
+    const formData = new FormData();
+    formData.append("nickname", nickname);
+    formData.append("profile", profile);
 
-    // const response = await http.patch(`/accounts/kakao/edit/`, formData, { headers });
-
-    const response = await http.patch(
-      `/accounts/kakao/edit/`,
-      {
-        nickname: nickname,
-        profile: profile,
-      },
-      { headers }
-    );
+    const response = await http.patch(`/accounts/kakao/edit/`, formData, { headers });
 
     localStorage.setItem("nickname", response.data.data.nickname);
 
