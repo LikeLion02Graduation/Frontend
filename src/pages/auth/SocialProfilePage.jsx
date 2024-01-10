@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../../components/_common/TopBar";
 import { Wrapper } from "../../components/_common/CommonExport";
@@ -7,6 +8,8 @@ import SocialProfile from "../../components/auth/SocialProfile";
 import { KakaoLogin } from "../../api/user";
 
 const SocialProfilePage = () => {
+  const navigate = useNavigate();
+
   const urlParams = new URL(window.location.toString()).searchParams;
   const AUTHORIZATION_CODE = urlParams.get("code");
 
@@ -20,6 +23,10 @@ const SocialProfilePage = () => {
 
     getData();
   }, []);
+
+  if (userData && userData.signup === false) {
+    navigate("/");
+  }
 
   return (
     <>

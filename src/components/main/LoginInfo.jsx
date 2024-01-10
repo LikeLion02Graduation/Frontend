@@ -126,6 +126,7 @@ const Profile = styled.img`
   flex-shrink: 0;
   border-radius: 50%;
   border: 1px solid var(--black1);
+  object-fit: cover;
 `;
 
 const Container = styled.div`

@@ -11,6 +11,7 @@ const SocialProfile = ({ userData }) => {
   useEffect(() => {
     if (userData) {
       setUsername(userData.nickname);
+      setImgURL(userData.profile);
     }
   }, [userData]);
 
@@ -33,10 +34,11 @@ const SocialProfile = ({ userData }) => {
   return (
     <>
       {imgURL ? (
-        <ProfileImg src={imgURL} alt="Preview" />
+        <ProfileImg src={imgURL} alt="Preview" onClick={() => document.getElementById("fileInput").click()} />
       ) : (
         <Profile>
           <input
+            id="fileInput"
             type="file"
             accept="image/jpg, image/jpeg, image/png"
             onChange={handleImageChange}
