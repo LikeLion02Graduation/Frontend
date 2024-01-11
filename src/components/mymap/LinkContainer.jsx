@@ -17,7 +17,6 @@ const LinkContainer = ({ mapId }) => {
   const copyURL = async () => {
     try {
       await navigator.clipboard.writeText(currentURL);
-      console.log("복사된 링크 :", currentURL);
       setModalOpen(true);
     } catch (err) {
       console.log(err);
