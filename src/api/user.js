@@ -85,7 +85,9 @@ export const PostSignup = async (user_id, password, username, profile) => {
     formData.append("username", user_id);
     formData.append("password", password);
     formData.append("nickname", username);
-    formData.append("profile", profile);
+    if (profile) {
+      formData.append("profile", profile);
+    }
 
     const response = await http.post("/accounts/signup/", formData, {
       headers: {
