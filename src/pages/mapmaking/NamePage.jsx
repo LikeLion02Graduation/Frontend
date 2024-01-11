@@ -49,6 +49,7 @@ const NamePage = () => {
             value={inputValue.name}
             onChange={handleInputChange}
             maxLength={18}
+            autoComplete="off"
           />
         </InputBox>
         <Line1 />

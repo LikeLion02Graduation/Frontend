@@ -85,7 +85,9 @@ export const PostSignup = async (user_id, password, username, profile) => {
     formData.append("username", user_id);
     formData.append("password", password);
     formData.append("nickname", username);
-    formData.append("profile", profile);
+    if (profile) {
+      formData.append("profile", profile);
+    }
 
     const response = await http.post("/accounts/signup/", formData, {
       headers: {
@@ -123,7 +125,8 @@ export const GetLoginInfo = async () => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error("로그인 정보 get 실패", error.response);
+    isTokenExpired(error);
+    console.error("로그인 정보 조회 실패", error.response);
   }
 };
 
@@ -142,12 +145,7 @@ export const PatchNickname = async (nickname) => {
 };
 
 // PATCH : 소셜로그인 프로필 수정
-export const PatchSocialProfile = async (
-  nickname,
-  profile,
-  token,
-  isImgChanged
-) => {
+export const PatchSocialProfile = async (nickname, profile, token, isImgChanged) => {
   try {
     const headers = {
       Authorization: token ? `Bearer ${token}` : null,
@@ -183,3 +181,11 @@ export default function AuthRoute({ children }) {
     return <Navigate to="/auth/login" />;
   }
 }
+
+// 토큰 만료 처리
+export const isTokenExpired = async (error) => {
+  if (error.response.data.code === "token_not_valid") {
+    alert("세션 만료. 다시 로그인해주세요.");
+    Logout();
+  }
+};

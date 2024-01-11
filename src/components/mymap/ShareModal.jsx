@@ -11,7 +11,6 @@ const ShareModal = ({ onClose, mapId, recomId }) => {
   const copyURL = async () => {
     try {
       await navigator.clipboard.writeText(mapURL());
-      console.log("복사된 링크 :", mapURL());
       alert("링크가 복사되었습니다!");
     } catch (err) {
       console.log(err);
