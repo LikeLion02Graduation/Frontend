@@ -5,7 +5,7 @@ import { http } from "../api/http";
 import { persistor } from "../index";
 
 // POST : 로그인
-export const PostLogin = async (user_id, password, navigate) => {
+export const PostLogin = async (user_id, password, navigate, from) => {
   try {
     const response = await http.post("/accounts/signin/", {
       username: user_id,
@@ -18,8 +18,8 @@ export const PostLogin = async (user_id, password, navigate) => {
 
     console.log(response.data.data);
     alert("로그인에 성공했습니다!");
-    navigate("/");
-    window.location.reload();
+    window.location.replace(from);
+
     return Promise.resolve(response.data.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -178,7 +178,7 @@ export default function AuthRoute({ children }) {
     return children;
   } else {
     alert("로그인이 필요합니다:(");
-    return <Navigate to="/auth/login" />;
+    return <Navigate to="/auth/login" state={{ from: window.location.pathname }} />;
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { initSignUp } from "../../redux/signupSlice";
 
@@ -25,6 +25,9 @@ const LoginPage = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+
   //로그인 함수
   const login = () => {
     if (formData.userid.trim() === "") {
@@ -32,7 +35,7 @@ const LoginPage = () => {
     } else if (formData.password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
     } else {
-      PostLogin(formData.userid, formData.password, navigate);
+      PostLogin(formData.userid, formData.password, navigate, from);
     }
   };
 
