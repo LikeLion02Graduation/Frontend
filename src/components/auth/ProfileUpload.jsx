@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 //api
 import { PostSignup } from "../../api/user";
 
 const ProfileUpload = () => {
+  const navigate = useNavigate();
   const signupInfo = useSelector((state) => state.signup);
 
   //프로필 사진 설정
@@ -35,7 +36,7 @@ const ProfileUpload = () => {
     if (username.trim() === "") {
       alert("닉네임을 입력해주세요.");
     } else {
-      PostSignup(signupInfo.user_id, signupInfo.password, username, selectedImg);
+      PostSignup(signupInfo.user_id, signupInfo.password, username, selectedImg, navigate);
     }
   };
 

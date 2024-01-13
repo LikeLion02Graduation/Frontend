@@ -11,3 +11,12 @@ http.defaults.withCredentials = true;
 const token = localStorage.getItem("token") ?? false;
 
 http.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : null;
+
+function getAuthorizationHeader() {
+  const token = localStorage.getItem("token") ?? false;
+  return token ? `Bearer ${token}` : null;
+}
+
+export function refreshAuthorizationHeader() {
+  http.defaults.headers.common["Authorization"] = getAuthorizationHeader();
+}

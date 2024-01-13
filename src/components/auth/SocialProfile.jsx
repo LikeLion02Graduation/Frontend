@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 //api
 import { PatchSocialProfile } from "../../api/user";
 
 const SocialProfile = ({ userData }) => {
+  const navigate = useNavigate();
+
   //닉네임 설정
   const [username, setUsername] = useState("");
 
@@ -39,7 +42,7 @@ const SocialProfile = ({ userData }) => {
 
   //가입 완료 함수
   const signup = () => {
-    PatchSocialProfile(username, selectedImg, userData.access_token, isImgChanged);
+    PatchSocialProfile(username, selectedImg, isImgChanged, navigate);
   };
 
   return (
