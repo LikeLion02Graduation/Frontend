@@ -25,6 +25,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
+  font-family: Apple SD Gothic Neo;
 `;
 
 const PlaceInfo = styled.div`
@@ -44,6 +45,7 @@ const PlaceInfo = styled.div`
 
   .roadaddress {
     color: #0c0404;
+    font-family: "Hack Regular";
     font-size: 12.79px;
     font-weight: 400;
     letter-spacing: 1.279px;
@@ -63,6 +65,7 @@ const PlaceGoBtn = styled.div`
 
   span {
     text-align: center;
+    font-family: "Hack Regular";
     font-size: 7.574px;
     font-weight: 700;
   }

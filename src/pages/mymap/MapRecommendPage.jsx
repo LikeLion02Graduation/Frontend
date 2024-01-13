@@ -84,6 +84,7 @@ const Title = styled.div`
     -webkit-box-orient: vertical; /*box의 배열 방향을 정함*/
     font-feature-settings: "clig" off, "liga" off;
     text-overflow: ellipsis;
+    font-family: Apple SD Gothic Neo;
     font-size: 40px;
     font-weight: 700;
     letter-spacing: 5px;
@@ -94,6 +95,7 @@ const From = styled.div`
   margin-top: 5px;
   margin-bottom: 13px;
   font-feature-settings: "clig" off, "liga" off;
+  font-family: "Hack Regular";
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 5px;
