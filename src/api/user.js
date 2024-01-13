@@ -1,11 +1,11 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-import { http } from "../api/http";
+import { http, refreshAuthorizationHeader } from "../api/http";
 import { persistor } from "../index";
 
 // POST : 로그인
-export const PostLogin = async (user_id, password, navigate, from) => {
+export const PostLogin = async (user_id, password, navigate) => {
   try {
     const response = await http.post("/accounts/signin/", {
       username: user_id,
@@ -18,7 +18,11 @@ export const PostLogin = async (user_id, password, navigate, from) => {
 
     console.log(response.data.data);
     alert("로그인에 성공했습니다!");
-    window.location.replace(from);
+    refreshAuthorizationHeader();
+
+    const from = sessionStorage.getItem("from");
+    navigate(from || "/");
+    window.sessionStorage.removeItem("from");
 
     return Promise.resolve(response.data.data);
   } catch (error) {
@@ -36,6 +40,8 @@ export const KakaoLogin = async (code) => {
     localStorage.setItem("userId", response.data.data.id);
     localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
+
+    refreshAuthorizationHeader();
 
     console.log(response.data.data);
     return Promise.resolve(response.data.data);
@@ -64,6 +70,7 @@ export const Logout = () => {
   window.localStorage.removeItem("userId");
   window.localStorage.removeItem("nickname");
   window.localStorage.removeItem("token");
+  window.sessionStorage.removeItem("from");
   window.location.replace("/auth/login");
 };
 
@@ -79,7 +86,7 @@ export const GetDuplicate = async (user) => {
 };
 
 // POST : 회원가입
-export const PostSignup = async (user_id, password, username, profile) => {
+export const PostSignup = async (user_id, password, username, profile, navigate) => {
   try {
     const formData = new FormData();
     formData.append("username", user_id);
@@ -96,7 +103,7 @@ export const PostSignup = async (user_id, password, username, profile) => {
     });
 
     alert("가입이 완료되었습니다.");
-    window.location.replace("/auth/login");
+    navigate("/auth/login");
 
     return Promise.resolve(response.data);
   } catch (error) {
@@ -145,25 +152,25 @@ export const PatchNickname = async (nickname) => {
 };
 
 // PATCH : 소셜로그인 프로필 수정
-export const PatchSocialProfile = async (nickname, profile, token, isImgChanged) => {
+export const PatchSocialProfile = async (nickname, profile, isImgChanged, navigate) => {
   try {
-    const headers = {
-      Authorization: token ? `Bearer ${token}` : null,
-      "Content-Type": "multipart/form-data",
-    };
-
     const formData = new FormData();
     formData.append("nickname", nickname);
     if (isImgChanged) formData.append("profile", profile);
 
     const response = await http.patch(`/accounts/kakao/edit/`, formData, {
-      headers,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
 
     localStorage.setItem("nickname", response.data.data.nickname);
-
     console.log(response);
-    window.location.replace("/");
+
+    const from = sessionStorage.getItem("from");
+    navigate(from || "/");
+    window.sessionStorage.removeItem("from");
+
     return response.data;
   } catch (error) {
     console.error("소셜 로그인 프로필 수정 실패", error.response);
@@ -178,7 +185,8 @@ export default function AuthRoute({ children }) {
     return children;
   } else {
     alert("로그인이 필요합니다:(");
-    return <Navigate to="/auth/login" state={{ from: window.location.pathname }} />;
+    sessionStorage.setItem("from", window.location.pathname);
+    return <Navigate to="/auth/login" />;
   }
 }
 
