@@ -117,6 +117,7 @@ const WTag = styled.div`
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      font-family: "Hack Regular";
       font-size: 8.967px;
       font-weight: 700;
       letter-spacing: 0.897px;
