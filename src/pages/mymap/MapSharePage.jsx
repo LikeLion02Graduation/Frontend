@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
+import html2canvas from "html2canvas";
 
 //components
 import TopBar from "../../components/_common/TopBar";
@@ -29,18 +30,31 @@ const MapSharePage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleShareBtnClick = () => {
-    setIsModalOpen(true);
+  // const handleShareBtnClick = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  const saveAsImage = () => {
+    const component = document.getElementById("myComponent");
+    if (!component) return;
+
+    html2canvas(component).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "myComponent.png";
+      link.click();
+    });
   };
 
   return (
     <>
       <TopBar navBtnOn={true} titleText={"instagram"} />
       <Wrapper>
-        <WhiteBox text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"} />
+        <WhiteBox text={"Q. 스토리로 공유로 더 많은 추천을 받아보는 건 어때요"} onClick={saveAsImage} />
         <Line2 />
 
-        <MainWebBox>
+        <MainWebBox id={"myComponent"}>
           <TitleContainer>
             <MapTitleText loading={loading} mapData={mapData} />
             <MapNameText>{mapData.name}</MapNameText>
@@ -55,7 +69,7 @@ const MapSharePage = () => {
           </Description>
         </MainWebBox>
 
-        <BoxW onClick={handleShareBtnClick}>Share to Instagram</BoxW>
+        <BoxW onClick={saveAsImage}>Share to Instagram</BoxW>
       </Wrapper>
       {isModalOpen && <ShareModal onClose={() => setIsModalOpen(false)} mapId={mapData.id} />}
     </>
