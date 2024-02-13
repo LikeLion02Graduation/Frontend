@@ -82,9 +82,9 @@ const LongBtnBlack = ({ where, text }) => {
   );
 };
 
-const MainWebBox = ({ children }) => {
+const MainWebBox = ({ children, id }) => {
   return (
-    <MainBox>
+    <MainBox id={id}>
       <TopBlackBar>
         <WhiteSmallBox />
         <WhiteSmallBox />
