@@ -3,7 +3,6 @@
 <p align="center">
  <img src="https://github.com/LikeLion02Graduation/frontend/assets/127864650/eb46a95b-64a4-4375-8739-527a30441bbf"/>
 </p>
-<br/>
 
 # 🗺️ 내친만지도 🗺️
 
