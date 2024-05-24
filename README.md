@@ -1,5 +1,10 @@
 <div align="center">
 
+<p align="center">
+ <img src="https://github.com/LikeLion02Graduation/frontend/assets/127864650/eb46a95b-64a4-4375-8739-527a30441bbf"/>
+</p>
+<br/>
+
 # 🗺️ 내친만지도 🗺️
 
 내 친구가 알려주는 믿을 만한 숨은 맛집
